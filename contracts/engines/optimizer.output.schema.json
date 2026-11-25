@@ -1,0 +1,236 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/optimizer.output.schema.json",
+  "title": "OptimizerOutput",
+  "description": "Roster optimizer result: roster assignments (agent x shift x zone x date), vehicle assignments, and the gap or surplus per zone x 15-minute interval with its cause. Convention for gap_cells: delta = planned - required; delta < 0 is a gap, delta > 0 is a surplus, delta = 0 is balanced. cause is people, vehicles or geography for gap and surplus cells and null for balanced cells. INVARIANTS checked by validate-contracts: kind agrees with the sign of delta; balanced cells have cause null; every roster assignment agent_id appears once per shift per date.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "engine",
+    "model_version",
+    "generated_at",
+    "data_source",
+    "illustrative",
+    "roster_date",
+    "status",
+    "roster_assignments",
+    "vehicle_assignments",
+    "gap_cells"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "optimizer" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "model_version": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "illustrative": { "type": "boolean" },
+    "roster_date": { "type": "string", "format": "date" },
+    "status": {
+      "description": "feasible: every interval covered. partial: a roster was built but gaps remain. infeasible: no roster could satisfy the hard rules (see violations).",
+      "type": "string",
+      "enum": ["feasible", "partial", "infeasible"]
+    },
+    "solver_status": {
+      "description": "Optional. optimal: proven optimal within the time limit. feasible: best found, not proven. heuristic: a heuristic model, no proof.",
+      "type": "string",
+      "enum": ["optimal", "feasible", "heuristic"]
+    },
+    "run_seconds": { "type": "number", "minimum": 0 },
+    "roster_assignments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/OptimizerRosterAssignment" }
+    },
+    "vehicle_assignments": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/OptimizerVehicleAssignment" }
+    },
+    "gap_cells": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/GapCell" }
+    },
+    "break_cost": {
+      "description": "Optional. What breaks cost each zone in coverage.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zone_id", "breaks", "lost_agent_intervals", "max_concurrent_breaks"],
+        "properties": {
+          "zone_id": { "type": "string", "format": "uuid" },
+          "breaks": { "type": "integer", "minimum": 0 },
+          "lost_agent_intervals": { "type": "integer", "minimum": 0 },
+          "max_concurrent_breaks": { "type": "integer", "minimum": 0 }
+        }
+      }
+    },
+    "violations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "maxLength": 64 },
+          "message": { "type": "string", "maxLength": 500 },
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "agent_id": { "$ref": "#/$defs/Uuid" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] },
+    "OptimizerRosterAssignment": {
+      "title": "OptimizerRosterAssignment",
+      "description": "One agent on one shift in one zone on one date. Remote agents have zone_id null (remote pool).",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "agent_id",
+        "shift_pattern_id",
+        "zone_id",
+        "roster_date",
+        "start_at",
+        "end_at"
+      ],
+      "properties": {
+        "agent_id": { "$ref": "#/$defs/Uuid" },
+        "shift_pattern_id": { "$ref": "#/$defs/Uuid" },
+        "zone_id": { "type": ["string", "null"], "format": "uuid" },
+        "roster_date": { "type": "string", "format": "date" },
+        "start_at": { "type": "string", "format": "date-time" },
+        "end_at": { "type": "string", "format": "date-time" },
+        "break_start_at": { "type": ["string", "null"], "format": "date-time" },
+        "break_end_at": { "type": ["string", "null"], "format": "date-time" },
+        "standby_point_id": { "type": ["string", "null"], "format": "uuid" }
+      }
+    },
+    "OptimizerVehicleAssignment": {
+      "title": "OptimizerVehicleAssignment",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vehicle_id", "agent_id", "zone_id", "roster_date", "shift_pattern_id"],
+      "properties": {
+        "vehicle_id": { "$ref": "#/$defs/Uuid" },
+        "agent_id": { "$ref": "#/$defs/Uuid" },
+        "zone_id": { "$ref": "#/$defs/Uuid" },
+        "roster_date": { "type": "string", "format": "date" },
+        "shift_pattern_id": { "$ref": "#/$defs/Uuid" }
+      }
+    },
+    "GapCell": {
+      "title": "GapCell",
+      "description": "Gap or surplus for one zone and one 15-minute interval, in agents on duty.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "zone_id",
+        "interval_start",
+        "interval_index",
+        "required",
+        "planned",
+        "delta",
+        "kind",
+        "cause"
+      ],
+      "properties": {
+        "zone_id": { "$ref": "#/$defs/Uuid" },
+        "interval_start": { "type": "string", "format": "date-time" },
+        "interval_index": { "type": "integer", "minimum": 0, "maximum": 95 },
+        "required": { "type": "number", "minimum": 0 },
+        "planned": { "type": "number", "minimum": 0 },
+        "delta": { "type": "number" },
+        "kind": { "type": "string", "enum": ["gap", "surplus", "balanced"] },
+        "cause": {
+          "description": "people: too few or too many agents. vehicles: agents exist but vehicles do not. geography: total numbers are enough but standby positions leave sub-zones uncovered. Null when kind is balanced.",
+          "type": ["string", "null"],
+          "enum": ["people", "vehicles", "geography", null]
+        },
+        "cause_detail": { "type": "string", "maxLength": 300 },
+        "reach_share": {
+          "description": "Optional. Share of the interval's field demand, 0 to 1, whose sub-zone centre is within the service-level threshold of travel from a staffed standby point. Present only when the request had objective.service_level (optimizer) or the zone has sub-zones and standby points (api), and the interval has field demand.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000002",
+      "engine": { "name": "optimizer", "version": "0.1.0" },
+      "model_version": "feasibility-check-0.1",
+      "generated_at": "2026-09-13T06:00:20+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "illustrative": true,
+      "roster_date": "2026-09-14",
+      "status": "partial",
+      "run_seconds": 0.4,
+      "roster_assignments": [
+        {
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d1",
+          "shift_pattern_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000f1",
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "roster_date": "2026-09-14",
+          "start_at": "2026-09-14T06:00:00+03:00",
+          "end_at": "2026-09-14T14:00:00+03:00",
+          "break_start_at": "2026-09-14T11:15:00+03:00",
+          "break_end_at": "2026-09-14T11:45:00+03:00",
+          "standby_point_id": null
+        }
+      ],
+      "vehicle_assignments": [
+        {
+          "vehicle_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000e1",
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d1",
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "roster_date": "2026-09-14",
+          "shift_pattern_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000f1"
+        }
+      ],
+      "gap_cells": [
+        {
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "interval_start": "2026-09-14T07:00:00+03:00",
+          "interval_index": 28,
+          "required": 2,
+          "planned": 1,
+          "delta": -1,
+          "kind": "gap",
+          "cause": "people",
+          "cause_detail": "One agent short in the morning ramp."
+        },
+        {
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "interval_start": "2026-09-14T09:00:00+03:00",
+          "interval_index": 36,
+          "required": 1,
+          "planned": 1,
+          "delta": 0,
+          "kind": "balanced",
+          "cause": null
+        }
+      ]
+    }
+  ]
+}

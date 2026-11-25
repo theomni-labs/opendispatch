@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* A fade at the inline end says "scroll". */
+.cue {
+  min-inline-size: 0;
+}
+
+.cue [data-cue='more'] {
+  mask-image: linear-gradient(90deg, currentcolor calc(100% - var(--od-space-32)), transparent);
+}
+
+[dir='rtl'] .cue [data-cue='more'] {
+  mask-image: linear-gradient(270deg, currentcolor calc(100% - var(--od-space-32)), transparent);
+}

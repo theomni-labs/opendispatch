@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 440" width="720" height="440" role="img" aria-labelledby="t d" font-family="Arial, Helvetica, sans-serif">
+<title id="t">Cases per day, Sunday 6 to Saturday 12 September 2026</title>
+<desc id="d">Number of cases per weekday in the synthetic fixtures, with the calibration multipliers drawn over it.</desc>
+<rect x="0" y="0" width="720" height="440" fill="#ffffff"/>
+<text x="64" y="28" font-size="18" font-weight="bold" fill="#1f2933">Cases per day, Sunday 6 to Saturday 12 September 2026</text>
+<text x="64" y="48" font-size="12" fill="#52606d">Bars: the fixtures. Line: cases per day times the weekday multiplier. Check by eye: Wednesday,</text>
+<text x="64" y="63" font-size="12" fill="#52606d">Thursday and Friday higher, Sunday lowest.</text>
+<rect x="64" y="77" width="12" height="10" fill="#5b8fb9"/>
+<text x="86" y="86" font-size="12" fill="#323f4b">Fixtures, cases per day</text>
+<line x1="251.20000000000002" y1="82" x2="267.20000000000005" y2="82" stroke="#c2410c" stroke-width="2.5"/>
+<text x="273.20000000000005" y="86" font-size="12" fill="#323f4b">Calibration: mean x multiplier</text>
+<line x1="64" y1="376" x2="692" y2="376" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="380" font-size="11" text-anchor="end" fill="#52606d">0</text>
+<line x1="64" y1="322" x2="692" y2="322" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="326" font-size="11" text-anchor="end" fill="#52606d">400</text>
+<line x1="64" y1="268" x2="692" y2="268" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="272" font-size="11" text-anchor="end" fill="#52606d">800</text>
+<line x1="64" y1="214" x2="692" y2="214" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="218" font-size="11" text-anchor="end" fill="#52606d">1200</text>
+<line x1="64" y1="160" x2="692" y2="160" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="164" font-size="11" text-anchor="end" fill="#52606d">1600</text>
+<line x1="64" y1="106" x2="692" y2="106" stroke="#e4e7eb" stroke-width="1"/>
+<text x="56" y="110" font-size="11" text-anchor="end" fill="#52606d">2000</text>
+<text transform="translate(16 241) rotate(-90)" font-size="12" text-anchor="middle" fill="#52606d">cases per day</text>
+<rect x="73.87" y="193.75" width="69.98" height="182.25" fill="#5b8fb9"/>
+<rect x="163.58" y="185.65" width="69.98" height="190.35" fill="#5b8fb9"/>
+<rect x="253.3" y="177.55" width="69.98" height="198.45" fill="#5b8fb9"/>
+<rect x="343.01" y="165.4" width="69.98" height="210.6" fill="#5b8fb9"/>
+<rect x="432.73" y="149.2" width="69.98" height="226.8" fill="#5b8fb9"/>
+<rect x="522.44" y="161.35" width="69.98" height="214.65" fill="#5b8fb9"/>
+<rect x="612.15" y="181.6" width="69.98" height="194.4" fill="#5b8fb9"/>
+<path d="M108.86 193.75 L198.57 185.65 L288.29 177.55 L378 165.4 L467.71 149.2 L557.43 161.35 L647.14 181.6" fill="none" stroke="#c2410c" stroke-width="2.5" stroke-linejoin="round"/>
+<line x1="64" y1="376" x2="692" y2="376" stroke="#7b8794" stroke-width="1"/>
+<line x1="108.86" y1="376" x2="108.86" y2="380" stroke="#7b8794"/>
+<text x="108.86" y="394" font-size="11" text-anchor="middle" fill="#52606d">Sunday</text>
+<line x1="198.57" y1="376" x2="198.57" y2="380" stroke="#7b8794"/>
+<text x="198.57" y="394" font-size="11" text-anchor="middle" fill="#52606d">Monday</text>
+<line x1="288.29" y1="376" x2="288.29" y2="380" stroke="#7b8794"/>
+<text x="288.29" y="394" font-size="11" text-anchor="middle" fill="#52606d">Tuesday</text>
+<line x1="378" y1="376" x2="378" y2="380" stroke="#7b8794"/>
+<text x="378" y="394" font-size="11" text-anchor="middle" fill="#52606d">Wednesday</text>
+<line x1="467.71" y1="376" x2="467.71" y2="380" stroke="#7b8794"/>
+<text x="467.71" y="394" font-size="11" text-anchor="middle" fill="#52606d">Thursday</text>
+<line x1="557.43" y1="376" x2="557.43" y2="380" stroke="#7b8794"/>
+<text x="557.43" y="394" font-size="11" text-anchor="middle" fill="#52606d">Friday</text>
+<line x1="647.14" y1="376" x2="647.14" y2="380" stroke="#7b8794"/>
+<text x="647.14" y="394" font-size="11" text-anchor="middle" fill="#52606d">Saturday</text>
+<text x="692" y="428" font-size="11" text-anchor="end" fill="#7b8794">Synthetic data. Illustrative, never a measured result.</text>
+</svg>

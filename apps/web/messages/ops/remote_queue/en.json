@@ -1,0 +1,126 @@
+{
+  "sub": "Cases of {date}, as of {time}",
+  "assign": "Assign reviewer",
+  "assignShort": "Assign",
+  "need": {
+    "noWaiting": "No waiting cases"
+  },
+  "toast": {
+    "export": "Queue exported",
+    "assigned": "Reviewer assigned",
+    "assignedDesc": "{name} to case {no}"
+  },
+  "stat": {
+    "waiting": "Waiting",
+    "inReview": "In review",
+    "longest": "Longest wait",
+    "gap": "Peak gap",
+    "gapAt": "at {time}"
+  },
+  "unit": {
+    "h": "h",
+    "min": "min"
+  },
+  "staff": {
+    "title": "Reviewers per interval",
+    "step": "15 min",
+    "chart": "Planned and required reviewers",
+    "planned": "Planned",
+    "required": "Required"
+  },
+  "queue": {
+    "title": "Remote cases"
+  },
+  "tabs": {
+    "label": "Remote queue tabs"
+  },
+  "tab": {
+    "waiting": "Waiting",
+    "inReview": "In review",
+    "done": "Done"
+  },
+  "search": "Search cases",
+  "filter": {
+    "wait": "Waiting"
+  },
+  "wait": {
+    "1h": "Over 1 h",
+    "4h": "Over 4 h"
+  },
+  "col": {
+    "case": "Case",
+    "handling": "Handling",
+    "waiting": "Waiting",
+    "stage": "Stage",
+    "reviewer": "Reviewer"
+  },
+  "handling": {
+    "remote": "Remote"
+  },
+  "rule": {
+    "label": "rule:",
+    "default": "rule: default"
+  },
+  "parties": "{n, plural, one {{n} party} other {{n} parties}}",
+  "table": {
+    "caption": "Remote cases"
+  },
+  "rows": {
+    "empty": "No cases here"
+  },
+  "stage": {
+    "waiting": "Waiting",
+    "in_review": "In review",
+    "done": "Done"
+  },
+  "drawer": {
+    "title": "Assign reviewer",
+    "need": "Choose a reviewer",
+    "noCandidates": "No remote agent is available to assign."
+  },
+  "states": {
+    "empty": {
+      "title": "No remote cases",
+      "desc": "Remote cases appear here once the daytime queue opens."
+    },
+    "error": {
+      "desc": "The queue could not load."
+    }
+  },
+  "menu": {
+    "export": "Export queue"
+  },
+  "refresh": "Refresh",
+  "views": { "label": "Remote queue views" },
+  "view": { "queue": "Queue", "roster": "Roster", "performance": "Performance" },
+  "ro": {
+    "prev": "Previous day",
+    "next": "Next day",
+    "src": { "roster": "From roster", "home": "From home shifts" },
+    "stat": { "onShift": "On shift", "demand": "Demand", "util": "Utilization", "gap": "Gap" },
+    "of": "of {n}",
+    "title": "Remote roster",
+    "pool": "Pool",
+    "gap": "Gap",
+    "gapCount": "{n, plural, one {{n} interval} other {{n} intervals}}",
+    "break": "Break {from} to {to}",
+    "empty": "No remote roster for this day",
+    "leave": "On leave"
+  },
+  "sh": {
+    "title": "Shifts",
+    "outside": "Outside shifts",
+    "col": { "shift": "Shift", "hours": "Hours", "scheduled": "Scheduled", "demand": "Demand h", "capacity": "Capacity h", "util": "Utilization", "gap": "Gap h" }
+  },
+  "wk": { "title": "Next 7 days", "noRoster": "No roster", "total": "Total", "col": { "day": "Day", "worst": "Largest gap" } },
+  "pf": {
+    "days": "Last 7 days",
+    "stat": { "handled": "Handled", "wait": "Median wait", "complete": "Time to complete", "util": "Utilization" },
+    "util": { "none": "No available hours" },
+    "hr": { "title": "Queue by hour", "per": "Cases per day", "chart": "Received and handled cases per hour", "received": "Received", "handled": "Handled" },
+    "ct": { "title": "By case type" },
+    "col": { "type": "Case type", "cases": "Cases", "mean": "Mean complete", "median": "Median complete", "r2c": "Receipt to close", "admin": "Post-close admin" },
+    "notSupplied": "Not supplied",
+    "rv": { "title": "By reviewer", "empty": "No reviewer recorded" }
+  }
+}

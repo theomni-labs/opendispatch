@@ -1,0 +1,9 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The page pattern of the mockups (page): sections in a 24px column. The shell's <main> carries the page padding. */
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-24);
+  min-inline-size: 0;
+}

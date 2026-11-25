@@ -1,0 +1,70 @@
+# Dedicated: our environment, the customer's own namespace and database.
+# Example addresses only.
+global:
+  installMode: dedicated
+  publicUrl: https://customer.opendispatch.example
+  imageRegistry: registry.opendispatch.example/opendispatch
+  imagePullPolicy: IfNotPresent
+  # a real customer install
+  recordDataSource: LIVE
+
+tenants:
+  - id: 00000000-0000-4000-8000-000000000002
+
+images:
+  api: { repository: opendispatch-api, tag: "0.0.0-dev" }
+  worker: { repository: opendispatch-worker, tag: "0.0.0-dev" }
+  web: { repository: opendispatch-web, tag: "0.0.0-dev" }
+  engines: { repository: opendispatch-engines, tag: "0.0.0-dev" }
+
+# Our managed Postgres, one database per customer (bundled CloudNativePG deferred
+database:
+  mode: external
+  existingSecret: opendispatch-database
+
+objectStorage:
+  endpoint: s3.opendispatch.example
+  port: 443
+  bucket: opendispatch-imports-customer
+  useSSL: true
+  existingSecret: opendispatch-object-storage
+
+auth:
+  mode: oidc
+  clientId: opendispatch-web
+
+# One realm per install
+keycloak:
+  enabled: true
+  realm: opendispatch
+  database:
+    jdbcUrl: jdbc:postgresql://postgres.opendispatch.example:5432/keycloak_customer?sslmode=require
+    existingSecret: opendispatch-keycloak-database
+
+api:
+  replicas: 2
+  dispatchSource: replay
+  resources:
+    requests: { cpu: 250m, memory: 512Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+web:
+  replicas: 2
+
+firstRun:
+  enabled: true
+
+routing:
+  type: gateway
+  gateway:
+    parentRefs:
+      - name: opendispatch-gateway
+        namespace: gateway-system
+        sectionName: https
+
+networkPolicy:
+  enabled: true
+  routerPeers:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: gateway-system

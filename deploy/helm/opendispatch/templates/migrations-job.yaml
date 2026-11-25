@@ -1,0 +1,39 @@
+{{- /* Owner role only here; runs before the app */ -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-migrate
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: migrate
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: {{ .Values.migrations.activeDeadlineSeconds }}
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" (dict "root" . "component" "migrate") | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      restartPolicy: Never
+      containers:
+        - name: migrate
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.api "name" "api") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["/app/migrate"]
+          env:
+            - name: OPENDISPATCH_OWNER_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret }}
+                  key: owner-url
+            - name: OPENDISPATCH_MIGRATE_TIMEOUT_SECONDS
+              value: {{ .Values.migrations.activeDeadlineSeconds | quote }}
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          resources:
+            {{- toYaml .Values.migrations.resources | nindent 12 }}

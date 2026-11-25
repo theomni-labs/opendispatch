@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's illustrative: a small outlined label right after a placeholder number. */
+.label {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  block-size: 18px;
+  padding-inline: var(--od-space-6);
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-xs);
+  background: var(--od-color-bg-subtle);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-11);
+  font-weight: var(--od-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+}

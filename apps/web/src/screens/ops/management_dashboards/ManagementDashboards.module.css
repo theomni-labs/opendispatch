@@ -1,0 +1,144 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Mockup: ops-management-dashboards.html. */
+
+/* Tokens and logical properties only. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.scopeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-12);
+}
+
+.headGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .headGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* The reading pair needs a full row: narrow
+     sub-columns clip "From assignment" in half. */
+  .readCard {
+    grid-column: 1 / -1;
+  }
+}
+
+.readCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.readTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.readTags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.readTitle {
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+.readHint {
+  margin: 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.chartGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 767px) {
+  .chartGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cardHeadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  margin-block-end: var(--od-space-12);
+}
+
+.cardTitle {
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.tableHeadRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding: var(--od-space-16);
+  padding-block-end: 0;
+}
+
+.cellStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+}
+
+.cellMain {
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.stageCell {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-6);
+}
+
+.stageIcon {
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+  flex: none;
+}
+
+.headText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  min-inline-size: 0;
+}
+
+.cardSub {
+  margin: 0;
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+}

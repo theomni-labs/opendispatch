@@ -1,0 +1,82 @@
+# Shared tier: our environment, row-level security, many customers.
+# Example addresses only.
+# One Keycloak realm for all; the customer is (issuer, organisation).
+# Until the host platform ships platform.tenants, the api reads the tenants list below.
+global:
+  installMode: shared
+  publicUrl: https://app.opendispatch.example
+  imageRegistry: registry.opendispatch.example/opendispatch
+  imagePullPolicy: IfNotPresent
+  # a real customer install
+  recordDataSource: LIVE
+
+# One worker per customer (worker takes one OPENDISPATCH_TENANT_ID)
+# organization: the customer's Keycloak organisation alias (unique);
+# organizationId: its id, printed by the shared-realm Job (optional, stricter)
+tenants:
+  - id: 00000000-0000-4000-8000-000000000003
+    organization: customer
+
+images:
+  api: { repository: opendispatch-api, tag: "0.0.0-dev" }
+  worker: { repository: opendispatch-worker, tag: "0.0.0-dev" }
+  web: { repository: opendispatch-web, tag: "0.0.0-dev" }
+  engines: { repository: opendispatch-engines, tag: "0.0.0-dev" }
+
+database:
+  mode: external
+  existingSecret: opendispatch-database
+
+objectStorage:
+  endpoint: s3.opendispatch.example
+  port: 443
+  bucket: opendispatch-imports-shared
+  useSSL: true
+  existingSecret: opendispatch-object-storage
+
+auth:
+  mode: oidc
+  clientId: opendispatch-web
+  # Our Keycloak, one realm with an organisation per customer
+  issuer: https://id.opendispatch.example/realms/opendispatch-shared
+
+keycloak:
+  enabled: false
+
+# Our realm: Organizations on, one organisation per tenant above, the
+# organization scope and claim (with ids) on auth.clientId. Idempotent; adds
+# no members (we add each customer's people to its organisation).
+sharedRealm:
+  enabled: true
+  server: https://id.opendispatch.example
+  realm: opendispatch-shared
+  # keys username and password; a master-realm administrator
+  adminSecret: opendispatch-shared-realm-admin
+
+firstRun:
+  enabled: false
+
+api:
+  replicas: 3
+  dispatchSource: replay
+  resources:
+    requests: { cpu: 500m, memory: 1Gi }
+    limits: { cpu: "2", memory: 2Gi }
+
+web:
+  replicas: 3
+
+routing:
+  type: gateway
+  gateway:
+    parentRefs:
+      - name: opendispatch-gateway
+        namespace: gateway-system
+        sectionName: https
+
+networkPolicy:
+  enabled: true
+  routerPeers:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: gateway-system

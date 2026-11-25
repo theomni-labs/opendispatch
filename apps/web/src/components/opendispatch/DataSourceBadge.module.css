@@ -1,0 +1,58 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* A category-coloured badge with an icon and the name of the
+   data source. Colour is the category (synthetic gold, Imported sample magenta, Live data green, mixed and none gray),
+   and the name and icon always say the same thing, so colour is never the only signal. */
+.root {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.badge {
+  --cat-bg: var(--od-cat-gray-bg);
+  --cat-fg: var(--od-cat-gray-fg);
+
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  gap: var(--od-space-4);
+  block-size: 22px;
+  padding-block: 0;
+  padding-inline: var(--od-space-6) var(--od-space-8);
+  border-radius: var(--od-radius-sm);
+  background: var(--cat-bg);
+  color: var(--cat-fg);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  vertical-align: middle;
+}
+
+.icon {
+  flex: none;
+  inline-size: 12px;
+  block-size: 12px;
+}
+
+.synthetic {
+  --cat-bg: var(--od-cat-gold-bg);
+  --cat-fg: var(--od-cat-gold-fg);
+}
+
+.sample {
+  --cat-bg: var(--od-cat-magenta-bg);
+  --cat-fg: var(--od-cat-magenta-fg);
+}
+
+.live {
+  --cat-bg: var(--od-cat-green-bg);
+  --cat-fg: var(--od-cat-green-fg);
+}
+
+.mixed {
+  --cat-bg: var(--od-cat-gray-bg);
+  --cat-fg: var(--od-cat-gray-fg);
+}

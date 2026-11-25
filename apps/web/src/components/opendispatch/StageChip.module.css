@@ -1,0 +1,54 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's chip stage: a zone code and its live-assignment stage (shadow, recommend, automatic), shown read only.
+   The stage is a per-zone setting; the chip only says what it is. Tone follows the stage. */
+.chip {
+  --tone-bg: var(--od-color-neutral-bg);
+  --tone-solid: var(--od-color-neutral);
+
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-6);
+  block-size: 24px;
+  padding-block: 0;
+  padding-inline: var(--od-space-6) var(--od-space-8);
+  border-radius: var(--od-radius-sm);
+  background: var(--tone-bg);
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.shadow {
+  --tone-bg: var(--od-color-neutral-bg);
+  --tone-solid: var(--od-color-neutral);
+}
+
+.recommend {
+  --tone-bg: var(--od-color-info-bg);
+  --tone-solid: var(--od-color-info);
+}
+
+.automatic {
+  --tone-bg: var(--od-color-primary-bg);
+  --tone-solid: var(--od-color-primary);
+}
+
+.icon {
+  flex: none;
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+  color: var(--tone-solid);
+}
+
+.zone {
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--od-weight-semibold);
+}
+
+.stage {
+  color: var(--od-color-text-label);
+  font-weight: var(--od-weight-regular);
+}

@@ -1,0 +1,14 @@
+kind,code,parent_code,name_en,name_ar,latitude,longitude,coverage_radius_m,sub_zone_code
+city,SC,,Sample City,,,,,
+zone,SC-N,SC,Sample North,,21.664097,39.599757,,
+sub_zone,SC-N-01,SC-N,Coral Heights,,21.670882,39.615695,,
+sub_zone,SC-N-02,SC-N,Quartz Fields,,21.675378,39.575016,,
+sub_zone,SC-N-03,SC-N,Nova Crossing,,21.664298,39.615943,,
+standby_point,SC-N-SP1,SC-N,Coral Heights standby,,21.665792,39.621893,3500,SC-N-01
+standby_point,SC-N-SP2,SC-N,Quartz Fields standby,,21.679437,39.574246,3000,SC-N-02
+zone,SC-S,SC,Sample South,,21.417520,39.573571,,
+sub_zone,SC-S-01,SC-S,Amber Row,,21.438972,39.552141,,
+sub_zone,SC-S-02,SC-S,Zephyr Heights,,21.428601,39.596860,,
+sub_zone,SC-S-03,SC-S,Palm Court,,21.408488,39.559199,,
+standby_point,SC-S-SP1,SC-S,Amber Row standby,,21.432202,39.556754,5000,SC-S-01
+standby_point,SC-S-SP2,SC-S,Zephyr Heights standby,,21.431781,39.601600,5000,SC-S-02

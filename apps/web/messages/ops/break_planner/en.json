@@ -1,0 +1,86 @@
+{
+  "generate": "Generate plan",
+  "empty": {
+    "action": "Open Field Planner"
+  },
+  "need": {
+    "noRoster": "No roster for this zone and day",
+    "notEditable": "The roster's breaks can no longer be changed"
+  },
+  "picker": {
+    "zone": "Zone",
+    "prevDay": "Previous day",
+    "nextDay": "Next day"
+  },
+  "stat": {
+    "breaks": "Breaks",
+    "conflicts": "Prayer conflicts",
+    "holds": "Holding a prayer",
+    "peak": "Most away at once"
+  },
+  "pr": {
+    "title": "Prayer windows",
+    "window": "30 min after the adhan",
+    "rule": "30 min break after 5 h",
+    "windowN": "{n} min after the adhan"
+  },
+  "slots": {
+    "title": "Break slots",
+    "cost": "Coverage cost {n} cases"
+  },
+  "tab": {
+    "timeline": "Timeline",
+    "conflicts": "Conflicts"
+  },
+  "col": {
+    "shift": "Shift",
+    "break": "Break",
+    "prayer": "Prayer",
+    "overlap": "Overlap"
+  },
+  "adjust": "Adjust",
+  "adj": {
+    "title": "Adjust break",
+    "window": "Allowed start",
+    "earlier": "Earlier",
+    "later": "Later",
+    "cuts": "Cuts {p}, {min} min",
+    "holds": "Holds all of {p}",
+    "clear": "No prayer in the slot"
+  },
+  "fix": "Move to free slot",
+  "rows": {
+    "empty": "No prayer conflicts"
+  },
+  "prayer": {
+    "fajr": "Fajr",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
+  },
+  "toast": {
+    "generated": "Break plan generated",
+    "generatedDesc": "{n} breaks, {c} cutting through a prayer",
+    "export": "Plan exported",
+    "moved": "Break moved",
+    "movedDesc": "{name} at {time}",
+    "fixed": "{n} breaks moved"
+  },
+  "states": {
+    "empty": {
+      "title": "No roster for this zone and day",
+      "desc": "Build a roster in Field Planner, then generate its break plan."
+    },
+    "error": {
+      "desc": "The break plan could not load."
+    }
+  },
+  "leg": {
+    "prayer": "Prayer window"
+  },
+  "policy": {
+    "clear_of_prayer": "Breaks: clear of prayer",
+    "lined_up_with_prayer": "Breaks: lined up with prayer"
+  }
+}

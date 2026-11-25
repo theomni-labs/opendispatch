@@ -1,0 +1,9 @@
+OpenDispatch ({{ .Values.global.installMode }}) installed with the reference chart.
+
+Console: {{ .Values.global.publicUrl }}
+{{- if and .Values.keycloak.enabled .Values.firstRun.enabled }}
+First Administrator: {{ .Values.keycloak.firstAdmin.username }} in realm {{ .Values.keycloak.realm }}, group
+{{ .Values.keycloak.firstAdmin.group }}, which the first-run bootstrap maps to the OpenDispatch Administrator role.
+The one-time password is in Secret {{ include "opendispatch.generatedSecret" . }}, key first-admin-password.
+It is not printed here; it must be changed, and an authenticator added, at first sign-in.
+{{- end }}

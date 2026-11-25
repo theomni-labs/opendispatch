@@ -1,0 +1,103 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.heading {
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-secondary);
+}
+
+.customer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4) var(--od-space-8);
+}
+
+.customerName {
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.legend {
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-label);
+}
+
+.legendNote {
+  margin-inline-start: var(--od-space-8);
+  font-weight: var(--od-weight-regular);
+  color: var(--od-color-text-secondary);
+}
+
+.zones {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-8) var(--od-space-16);
+}
+
+/* A zone list that does not apply to the chosen role: shown, dimmed by the checkbox itself, and not clickable. */
+.group[data-disabled='true'] .zones {
+  cursor: not-allowed;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+/* The demo start page: roomier. The roles fill a grid and the zones take as many columns as fit. */
+.form[data-variant='page'] .roles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+  gap: var(--od-space-12) var(--od-space-16);
+}
+
+.form[data-variant='page'] .zones {
+  grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr));
+}
+
+.form[data-variant='page'] .actions {
+  justify-content: flex-start;
+}
+
+/* The Demo pop-over: the form carries the padding (the pop-over has none, see DemoSwitcher), and the buttons stay in view
+   while the panel scrolls: the sticky bar takes the padding back so it runs from edge to edge. */
+.form[data-variant='panel'] {
+  padding: var(--od-space-12);
+}
+
+.form[data-variant='panel'] .actions {
+  position: sticky;
+  inset-block-end: 0;
+  margin-inline: calc(var(--od-space-12) * -1);
+  margin-block-end: calc(var(--od-space-12) * -1);
+  padding-block: var(--od-space-12);
+  padding-inline: var(--od-space-12);
+  background: var(--od-color-bg-elevated);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+@media (width < 600px) {
+  .form[data-variant='page'] .actions > button {
+    flex: 1;
+  }
+}

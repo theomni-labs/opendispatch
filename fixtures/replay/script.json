@@ -1,0 +1,12 @@
+{
+"replay_date": "2026-09-13",
+"default_start_at": "2026-09-13T07:00:00+03:00",
+"total_cases": 839,
+"data_source": "SYNTHETIC",
+"note": "Cases carry the operator's actual agent (agent_id) and times for shadow-mode comparison; reveal them only as the replay clock passes them. Agent positions come from agentStateAt(seed, agentId, isoTimestamp) in scripts/synthetic/positions.ts.",
+"events": [
+{"at":"2026-09-13T11:09:49+03:00","kind":"reassignment","case_id":"e478fee7-4ab1-4404-b312-637eb56def7e","case_number":"RD-260913-00239","from_agent_id":"3d397fd8-25b6-4eb0-9f72-e6f38d2c5942","request":{"agent_id":"083bc287-51e3-441a-91bf-9ee8e5df2bd4","reason_code":"closer_agent_known","note":null}},
+{"at":"2026-09-13T15:20:00+03:00","kind":"feed_outage","request":{"feed":"case_feed","active":true}},
+{"at":"2026-09-13T15:32:00+03:00","kind":"feed_outage","request":{"feed":"case_feed","active":false}}
+]
+}

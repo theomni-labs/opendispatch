@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/reposition.input.schema.json",
+  "title": "RepositionInput",
+  "description": "Where the idle field agents of one zone should wait, given the expected demand of the look-ahead window. Advisory: no case is assigned or reassigned.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "requested_at",
+    "data_source",
+    "now",
+    "zone_id",
+    "idle_agents",
+    "demand_cells"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "$ref": "#/$defs/Uuid"
+    },
+    "requested_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_source": {
+      "$ref": "#/$defs/DataSource"
+    },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/DataSource"
+      }
+    },
+    "now": {
+      "description": "The decision clock; in a replay, the replay time.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "zone_id": {
+      "$ref": "#/$defs/Uuid"
+    },
+    "settings": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "min_move_km": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 50
+        },
+        "max_move_km": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "maximum": 50
+        },
+        "look_ahead_hours": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 6
+        }
+      }
+    },
+    "idle_agents": {
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "agent_id",
+          "latitude",
+          "longitude"
+        ],
+        "properties": {
+          "agent_id": {
+            "$ref": "#/$defs/Uuid"
+          },
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          }
+        }
+      }
+    },
+    "demand_cells": {
+      "description": "Expected field cases per micro-cell over the look-ahead window, from the forecaster's sub-zone intervals and micro-cell shares.",
+      "type": "array",
+      "maxItems": 20000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "latitude",
+          "longitude",
+          "expected_cases"
+        ],
+        "properties": {
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "expected_cases": {
+            "type": "number",
+            "minimum": 0
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "DataSource": {
+      "type": "string",
+      "enum": [
+        "SYNTHETIC",
+        "IMPORTED",
+        "LIVE"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "7d0f7b9e-1c2a-4f3e-9b8a-0a1b2c3d4e5f",
+      "requested_at": "2026-09-13T09:00:00+03:00",
+      "data_source": "SYNTHETIC",
+      "now": "2026-09-13T09:00:00+03:00",
+      "zone_id": "5b8c1a2d-3e4f-4a5b-8c6d-7e8f9a0b1c2d",
+      "settings": {
+        "min_move_km": 2,
+        "max_move_km": 5,
+        "look_ahead_hours": 1
+      },
+      "idle_agents": [
+        {
+          "agent_id": "0a1b2c3d-4e5f-4a6b-8c7d-8e9f0a1b2c3d",
+          "latitude": 24.71,
+          "longitude": 46.67
+        }
+      ],
+      "demand_cells": [
+        {
+          "latitude": 24.74,
+          "longitude": 46.69,
+          "expected_cases": 1.4
+        },
+        {
+          "latitude": 24.7,
+          "longitude": 46.65,
+          "expected_cases": 0.3
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* A directional icon that points the other way in RTL. */
+[dir='rtl'] .mirror {
+  transform: scaleX(-1);
+}

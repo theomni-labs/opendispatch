@@ -1,0 +1,218 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Shift and Break Policies screen. Tokens and logical properties only. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.cardHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.padded {
+  padding: var(--od-space-16) var(--od-space-16) 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.summary {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- the week strip ------------------------------------------------------------------------------------------------- */
+.week {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: var(--od-space-8);
+}
+
+@media (width <= 1023px) {
+  .week {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (width <= 639px) {
+  .week {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  padding: var(--od-space-12);
+  border: 1px solid var(--od-color-border-secondary);
+  border-radius: var(--od-radius-md);
+  background: var(--od-color-bg-subtle);
+}
+
+.dayName {
+  font-weight: var(--od-weight-semibold);
+}
+
+.dayMeta {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.ribbons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.ribbonLabel {
+  display: block;
+  margin-block-end: var(--od-space-4);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+/* --- the legend ------------------------------------------------------------------------------------------------------ */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-4) var(--od-space-16);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  font-size: var(--od-font-size-12);
+}
+
+.swatch {
+  inline-size: var(--od-space-8);
+  block-size: var(--od-space-8);
+  border-radius: var(--od-radius-sm);
+  background: var(--od-chart-1);
+}
+
+.sw2 {
+  background: var(--od-chart-2);
+}
+
+.sw3 {
+  background: var(--od-chart-3);
+}
+
+.sw4 {
+  background: var(--od-chart-4);
+}
+
+.sw5 {
+  background: var(--od-chart-5);
+}
+
+.sw6 {
+  background: var(--od-chart-6);
+}
+
+/* --- the break rule and Ramadan cards --------------------------------------------------------------------------------- */
+.two {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.kv {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.kvLabel {
+  color: var(--od-color-text-secondary);
+}
+
+.kvValue {
+  font-weight: var(--od-weight-medium);
+}
+
+.switchRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+/* --- drawer and dialog ------------------------------------------------------------------------------------------------ */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+.hoursHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.label {
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}

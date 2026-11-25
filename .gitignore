@@ -1,0 +1,42 @@
+# dependencies and build output
+node_modules/
+.next/
+.next-*/
+out/
+dist/
+coverage/
+*.tsbuildinfo
+next-env.d.ts
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+/apps/api-go/bin/
+/apps/api-go/api
+
+# map tiles are fetched at build time (scripts/fetch-map.sh), never committed
+/apps/web/public/maps/*.pmtiles
+
+# secrets and local environment
+.env
+.env.*
+!.env.example
+
+# real data never enters this repository. Root anchored: an unanchored
+# "data/" would also ignore apps/web/src/lib/data/.
+/data/
+.demo-state/
+*.xlsx
+*.csv
+!/fixtures/**/*.csv
+!/apps/web/public/samples/*.csv
+!/docs/examples/*.csv
+
+# test output
+playwright-report/
+test-results/
+/e2e-output/
+
+# local notes
+.DS_Store
+HANDOFF.md

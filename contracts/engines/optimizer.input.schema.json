@@ -1,0 +1,423 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/optimizer.input.schema.json",
+  "title": "OptimizerInput",
+  "description": "Input to the roster optimizer: build a roster for one or more zones for one date, from a forecast, the people and vehicles available, shift patterns, break rules and prayer times. Also used by Scenario Lab, with scenario_adjustments applied on top of the base data. No tenant, customer or role appears here. additionalProperties is false so worker and fixture typos fail validation.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "requested_at",
+    "data_source",
+    "roster_date",
+    "zone_ids",
+    "planning_level",
+    "calendar_mode",
+    "forecast",
+    "agents",
+    "vehicles",
+    "shift_patterns",
+    "break_rules"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "requested_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "roster_date": { "type": "string", "format": "date" },
+    "zone_ids": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/Uuid" }
+    },
+    "planning_level": {
+      "description": "Level at which gaps and surpluses are reported. Setting, default zone. Assumption: city and sub_zone are the other levels; a different level needs a location import, not a rebuild.",
+      "type": "string",
+      "enum": ["zone", "sub_zone", "city"],
+      "default": "zone"
+    },
+    "calendar_mode": {
+      "description": "Selects the normal or Ramadan hours of every shift pattern.",
+      "type": "string",
+      "enum": ["normal", "ramadan"]
+    },
+    "objective": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "demand_quantile": {
+          "description": "Which forecast value the roster must cover.",
+          "type": "string",
+          "enum": ["low", "expected", "high"],
+          "default": "expected"
+        },
+        "cases_per_agent_per_interval": {
+          "description": "Capacity assumption: field cases one agent can handle in a 15-minute interval.",
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "max_run_seconds": { "type": "integer", "minimum": 1, "maximum": 3600 },
+        "max_deploy_distance_km": {
+          "description": "Optional. An agent is deployed only within this distance of the home dispatch center. Absent: home zone only, as before.",
+          "type": "number", "exclusiveMinimum": 0, "maximum": 500
+        },
+        "model_version": {
+          "description": "Optional optimizer model, e.g. greedy-ls-0.2 or cpsat-1. Absent: greedy-ls-0.1, or greedy-ls-0.2 when service_level is sent. Unknown or unavailable: the default runs with warning MODEL_UNAVAILABLE.",
+          "type": "string", "minLength": 1, "maxLength": 64
+        },
+        "seed": { "type": "integer" },
+        "skill_requirements": {
+          "description": "Optional. Per zone and interval, ceil(field demand x share / cases_per_agent_per_interval) on-duty field agents must hold the skill. Shares of the same zone and skill add up (case types are disjoint), capped at 1, and never above the field requirement. zone_id absent: every zone. case_type_id only names where the share came from. A shortfall is a violation SKILL_COVERAGE_GAP per zone and skill. Absent: skills are not constrained, as before.",
+          "type": "array",
+          "maxItems": 200,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["skill", "share"],
+            "properties": {
+              "skill": { "type": "string", "minLength": 1, "maxLength": 64 },
+              "share": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+              "zone_id": { "$ref": "#/$defs/Uuid" },
+              "case_type_id": { "$ref": "#/$defs/Uuid" }
+            }
+          }
+        },
+        "service_level": {
+          "description": "Optional. Per interval, the share of field demand whose sub-zone centre is within threshold_seconds of travel (travel_model) from a staffed standby point should reach target_share. Standby choice then maximises that share; a shortfall is a violation SERVICE_LEVEL_REACH and gap cells with cause geography. Absent: standby points are chosen to minimise overlap, as before.",
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["threshold_seconds", "target_share"],
+          "properties": {
+            "threshold_seconds": { "type": "integer", "minimum": 1, "maximum": 7200 },
+            "target_share": { "type": "number", "exclusiveMinimum": 0, "maximum": 1 },
+            "sub_zone_centres": {
+              "description": "Where each sub-zone's demand is placed. A sub-zone with forecast demand but no centre here is counted as not reached.",
+              "type": "array",
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["sub_zone_id", "zone_id", "latitude", "longitude"],
+                "properties": {
+                  "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+                  "zone_id": { "$ref": "#/$defs/Uuid" },
+                  "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+                  "longitude": { "type": "number", "minimum": -180, "maximum": 180 }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "prayer_window_minutes": {
+      "description": "Optional. How long a prayer blocks work after each adhan time, for break placement. Absent: 30.",
+      "type": "integer", "minimum": 5, "maximum": 90
+    },
+    "dispatch_centres": {
+      "description": "Optional. Home point of each zone, for max_deploy_distance_km.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zone_id", "latitude", "longitude"],
+        "properties": {
+          "zone_id": { "type": "string", "format": "uuid" },
+          "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+          "longitude": { "type": "number", "minimum": -180, "maximum": 180 }
+        }
+      }
+    },
+    "travel_model": {
+      "description": "Optional. Straight-line distance times detour_factor at average_speed_kmh, the same model the simulator uses. Defaults 40 km/h and 1.3.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "average_speed_kmh": { "type": "number", "exclusiveMinimum": 0, "maximum": 200 },
+        "detour_factor": { "type": "number", "minimum": 1, "maximum": 3 }
+      }
+    },
+    "forecast": {
+      "description": "Demand to cover, zone x sub-zone x 15-minute interval, same shape as ForecasterOutput values.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["forecast_run_ref", "values"],
+      "properties": {
+        "forecast_run_ref": {
+          "description": "Identifier of the stored forecast run these values came from.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "zone_id",
+              "sub_zone_id",
+              "interval_start",
+              "low",
+              "expected",
+              "high",
+              "field_expected",
+              "remote_inferred_expected"
+            ],
+            "properties": {
+              "zone_id": { "$ref": "#/$defs/Uuid" },
+              "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+              "interval_start": { "type": "string", "format": "date-time" },
+              "low": { "type": "number", "minimum": 0 },
+              "expected": { "type": "number", "minimum": 0 },
+              "high": { "type": "number", "minimum": 0 },
+              "field_expected": { "type": "number", "minimum": 0 },
+              "remote_inferred_expected": { "type": "number", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "agents": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["agent_id", "kind", "skills", "available"],
+        "properties": {
+          "agent_id": { "$ref": "#/$defs/Uuid" },
+          "kind": { "type": "string", "enum": ["field", "remote"] },
+          "home_zone_id": {
+            "description": "Null for remote agents, who belong to the remote pool rather than a zone (assumption).",
+            "type": ["string", "null"],
+            "format": "uuid"
+          },
+          "skills": { "type": "array", "uniqueItems": true, "items": { "type": "string", "maxLength": 64 } },
+          "default_vehicle_id": { "type": ["string", "null"], "format": "uuid" },
+          "available": {
+            "description": "False when the agent is on approved leave or otherwise unavailable on roster_date.",
+            "type": "boolean"
+          },
+          "unavailable_reason": { "type": "string", "maxLength": 200 },
+          "eligible_shift_pattern_ids": {
+            "description": "Omit to allow every shift pattern of the agent's kind.",
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/Uuid" }
+          }
+        }
+      }
+    },
+    "vehicles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["vehicle_id", "zone_id", "available"],
+        "properties": {
+          "vehicle_id": { "$ref": "#/$defs/Uuid" },
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "available": { "type": "boolean" }
+        }
+      }
+    },
+    "shift_patterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["shift_pattern_id", "code", "kind", "normal", "ramadan", "break_rule_id"],
+        "properties": {
+          "shift_pattern_id": { "$ref": "#/$defs/Uuid" },
+          "code": { "type": "string", "maxLength": 32 },
+          "kind": { "type": "string", "enum": ["field", "remote"] },
+          "normal": { "$ref": "#/$defs/ShiftHours" },
+          "ramadan": { "$ref": "#/$defs/ShiftHours" },
+          "break_rule_id": { "$ref": "#/$defs/Uuid" }
+        }
+      }
+    },
+    "break_rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["break_rule_id", "break_minutes", "after_consecutive_hours"],
+        "properties": {
+          "break_rule_id": { "$ref": "#/$defs/Uuid" },
+          "break_minutes": { "type": "integer", "minimum": 1, "maximum": 180 },
+          "after_consecutive_hours": { "type": "number", "exclusiveMinimum": 0, "maximum": 12 }
+        }
+      }
+    },
+    "prayer_times": {
+      "description": "Prayer times for roster_date (Asia/Riyadh), used to place breaks.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fajr", "dhuhr", "asr", "maghrib", "isha"],
+      "properties": {
+        "fajr": { "$ref": "#/$defs/LocalTime" },
+        "dhuhr": { "$ref": "#/$defs/LocalTime" },
+        "asr": { "$ref": "#/$defs/LocalTime" },
+        "maghrib": { "$ref": "#/$defs/LocalTime" },
+        "isha": { "$ref": "#/$defs/LocalTime" }
+      }
+    },
+    "standby_points": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["standby_point_id", "zone_id", "latitude", "longitude"],
+        "properties": {
+          "standby_point_id": { "$ref": "#/$defs/Uuid" },
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+          "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+          "coverage_radius_m": { "type": "integer", "minimum": 100 }
+        }
+      }
+    },
+    "fixed_assignments": {
+      "description": "Approved overrides the optimizer must keep.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["agent_id", "shift_pattern_id", "zone_id"],
+        "properties": {
+          "agent_id": { "$ref": "#/$defs/Uuid" },
+          "shift_pattern_id": { "$ref": "#/$defs/Uuid" },
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "vehicle_id": { "type": ["string", "null"], "format": "uuid" }
+        }
+      }
+    },
+    "scenario_adjustments": {
+      "description": "Present only for Scenario Lab runs.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "headcount_delta": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["zone_id"],
+            "properties": {
+              "zone_id": { "$ref": "#/$defs/Uuid" },
+              "field_agents": { "type": "integer" },
+              "remote_agents": { "type": "integer" },
+              "vehicles": { "type": "integer" }
+            }
+          }
+        },
+        "shift_pattern_ids": {
+          "description": "Restrict the run to these shift patterns.",
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/Uuid" }
+        },
+        "remote_share": {
+          "description": "Override the share of cases handled remotely, 0 to 1.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "LocalTime": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] },
+    "ShiftHours": {
+      "description": "Local start and end time. end_time 00:00 means midnight at the end of the shift; a start later than the end means the shift crosses midnight.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["applies"],
+      "properties": {
+        "applies": { "type": "boolean" },
+        "start_time": { "$ref": "#/$defs/LocalTime" },
+        "end_time": { "$ref": "#/$defs/LocalTime" }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000002",
+      "requested_at": "2026-09-13T06:00:00+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "roster_date": "2026-09-14",
+      "zone_ids": ["3f6f1b1e-7a55-4c27-9d0a-0000000000a1"],
+      "planning_level": "zone",
+      "calendar_mode": "normal",
+      "objective": { "demand_quantile": "expected", "max_run_seconds": 60, "seed": 42 },
+      "forecast": {
+        "forecast_run_ref": "run-0001",
+        "values": [
+          {
+            "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+            "sub_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000b1",
+            "interval_start": "2026-09-14T07:00:00+03:00",
+            "low": 2.1,
+            "expected": 3.4,
+            "high": 5.2,
+            "field_expected": 2.2,
+            "remote_inferred_expected": 1.2
+          }
+        ]
+      },
+      "agents": [
+        {
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d1",
+          "kind": "field",
+          "home_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "skills": ["general"],
+          "default_vehicle_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000e1",
+          "available": true
+        }
+      ],
+      "vehicles": [
+        {
+          "vehicle_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000e1",
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "available": true
+        }
+      ],
+      "shift_patterns": [
+        {
+          "shift_pattern_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000f1",
+          "code": "DAY_A",
+          "kind": "field",
+          "normal": { "applies": true, "start_time": "06:00", "end_time": "14:00" },
+          "ramadan": { "applies": true, "start_time": "06:00", "end_time": "12:00" },
+          "break_rule_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000f9"
+        }
+      ],
+      "break_rules": [
+        {
+          "break_rule_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000f9",
+          "break_minutes": 30,
+          "after_consecutive_hours": 5
+        }
+      ],
+      "prayer_times": {
+        "fajr": "04:35",
+        "dhuhr": "11:50",
+        "asr": "15:15",
+        "maghrib": "17:55",
+        "isha": "19:25"
+      }
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "mapping_id": "traffic_v1",
+  "format_version": 1,
+  "status": "draft",
+  "description": "Daily traffic congestion per city for the forecaster. Column names only: this file holds no data. The file itself is read at runtime from OPENDISPATCH_TRAFFIC_FILE with OPENDISPATCH_TRAFFIC_SOURCE=file and never stored in the repository. Until the customer or a provider supplies one, OPENDISPATCH_TRAFFIC_SOURCE=synthetic gives a SYNTHETIC series (demonstrations only).",
+  "source": {
+    "file_type": "csv",
+    "header_row": true,
+    "encoding": "UTF-8, a byte order mark is allowed",
+    "max_bytes": 33554432
+  },
+  "columns": [
+    { "column": "city", "type": "string", "required": true, "note": "The city's case code (RD) or English name (Riyadh); capitals do not matter." },
+    { "column": "date", "type": "date", "required": true, "note": "YYYY-MM-DD, the local day in Asia/Riyadh." },
+    { "column": "congestion_index", "type": "number", "required": true, "range": [0, 5], "note": "The day's congestion against a typical day for that city: 1.0 is typical, 1.2 or more is a heavy day (the forecaster's traffic_heavy flag). A provider's travel-time index or delay ratio fits once divided by its typical value." },
+    { "column": "source", "type": "string", "required": false, "note": "A label for the provider, at most 64 characters; empty means file." }
+  ],
+  "validation": [
+    { "when": "a required column is missing from the header", "action": "the whole file is refused; the forecast goes without traffic" },
+    { "when": "a row has an empty city, a date that is not YYYY-MM-DD, or an index outside 0 to 5", "action": "the row is skipped and listed as an issue" },
+    { "when": "a city and date appear twice", "action": "the first row is used, the later one is an issue" },
+    { "when": "a city matches no city in Admin > Locations", "action": "the row is skipped; the forecast run logs how many" }
+  ],
+  "example": "city,date,congestion_index,source\nRD,2026-09-14,1.31,provider-x\nJeddah,2026-09-14,0.94,"
+}

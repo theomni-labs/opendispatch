@@ -1,0 +1,134 @@
+{{- $sel := dict "root" . "component" "api" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-api
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: http
+      port: 8081
+      targetPort: http
+  selector:
+    {{- include "opendispatch.selector" $sel | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-api
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: api
+spec:
+  replicas: {{ .Values.api.replicas }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      {{- include "opendispatch.selector" $sel | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" $sel | nindent 8 }}
+      annotations:
+        checksum/oidc: {{ include (print $.Template.BasePath "/configmaps.yaml") . | sha256sum }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      containers:
+        - name: api
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.api "name" "api") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: 8081
+          env:
+            - name: OPENDISPATCH_AUTH_MODE
+              value: oidc
+            - name: OPENDISPATCH_MIGRATE_ON_START
+              value: "0"
+            - name: OPENDISPATCH_APP_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret }}
+                  key: app-url
+            - name: OPENDISPATCH_OIDC_TENANTS_FILE
+              value: /etc/opendispatch/oidc/tenants.json
+            - name: OPENDISPATCH_OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: oidc-client-secret
+            {{- if .Values.keycloak.enabled }}
+            - name: OPENDISPATCH_KEYCLOAK_ADMIN_URL
+              value: http://{{ include "opendispatch.fullname" . }}-keycloak:8080{{ .Values.keycloak.relativePath }}
+            - name: OPENDISPATCH_KEYCLOAK_REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: OPENDISPATCH_KEYCLOAK_ADMIN_CLIENT_ID
+              value: {{ .Values.keycloak.idpAdmin.clientId | quote }}
+            - name: OPENDISPATCH_KEYCLOAK_ADMIN_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: keycloak-idp-admin-secret
+            {{- end }}
+            - name: OPENDISPATCH_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: auth-secret
+            - name: OPENDISPATCH_COOKIE_SECURE
+              value: {{ ternary "1" "0" (hasPrefix "https://" .Values.global.publicUrl) | quote }}
+            - name: OPENDISPATCH_DISPATCH_SOURCE
+              value: {{ .Values.api.dispatchSource | quote }}
+            {{- include "opendispatch.recordSourceEnv" . | nindent 12 }}
+            - name: OPENDISPATCH_S3_ENDPOINT
+              value: {{ .Values.objectStorage.endpoint | quote }}
+            - name: OPENDISPATCH_S3_PORT
+              value: {{ .Values.objectStorage.port | quote }}
+            - name: OPENDISPATCH_S3_BUCKET
+              value: {{ .Values.objectStorage.bucket | quote }}
+            - name: OPENDISPATCH_S3_USE_SSL
+              value: {{ .Values.objectStorage.useSSL | quote }}
+            - name: OPENDISPATCH_S3_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.objectStorage.existingSecret }}
+                  key: access-key
+            - name: OPENDISPATCH_S3_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.objectStorage.existingSecret }}
+                  key: secret-key
+            {{- include "opendispatch.engineEnv" . | nindent 12 }}
+            {{- range $k, $v := .Values.api.env }}
+            - name: {{ $k }}
+              value: {{ $v | quote }}
+            {{- end }}
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          startupProbe:
+            httpGet: { path: /livez, port: http }
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: { path: /livez, port: http }
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /ready, port: http }
+            periodSeconds: 5
+            timeoutSeconds: 4
+          volumeMounts:
+            - name: oidc
+              mountPath: /etc/opendispatch/oidc
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.api.resources | nindent 12 }}
+      volumes:
+        - name: oidc
+          configMap:
+            name: {{ include "opendispatch.fullname" . }}-oidc
+        {{- include "opendispatch.tmpVolume" . | nindent 8 }}

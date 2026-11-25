@@ -1,0 +1,57 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-24);
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* Map (2fr) beside the 10-minute reading (1fr); the kit's detail grid. */
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width < 1080px) {
+  .detailGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.mapHead {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-block-size: 52px;
+  padding-block: var(--od-space-12);
+  padding-inline: var(--od-space-16);
+}
+
+.cardBody {
+  padding: var(--od-space-16);
+  padding-block-start: 0;
+  min-inline-size: 0;
+}
+
+.mapLegend {
+  margin-inline-start: auto;
+}
+
+.cardTitle {
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}

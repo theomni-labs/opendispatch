@@ -1,0 +1,138 @@
+{
+  "sub": "Change the plan, compare the gap",
+  "new": "New scenario",
+  "menu": {
+    "export": "Export comparison"
+  },
+  "toast": {
+    "export": "Comparison exported",
+    "saved": "Scenario saved",
+    "ran": "Scenario run",
+    "ranDesc": "{g} gap and {s} surplus intervals",
+    "dup": "Scenario duplicated",
+    "deleted": "Scenario deleted"
+  },
+  "tpl": {
+    "people": {
+      "name": "More agents",
+      "meta": "+4 field, +2 vehicles"
+    },
+    "ramadan": {
+      "name": "Ramadan shifts",
+      "meta": "Four patterns, evening added"
+    },
+    "remote": {
+      "name": "Remote share",
+      "meta": "Share of cases handled remotely"
+    }
+  },
+  "ed": {
+    "title": "Scenario"
+  },
+  "untitled": "Untitled scenario",
+  "stale": "Out of date",
+  "status": {
+    "draft": "Draft",
+    "running": "Running",
+    "completed": "Completed",
+    "failed": "Failed"
+  },
+  "f": {
+    "name": "Name",
+    "date": "Base date",
+    "zones": "Zones",
+    "field": "Field agents",
+    "remote": "Remote agents",
+    "vehicles": "Vehicles",
+    "share": "Remote share",
+    "shifts": "Shift patterns",
+    "remoteZones": "Remote agents per zone"
+  },
+  "uom": {
+    "zone": "per zone",
+    "company": "company-wide",
+    "thisZone": "this zone"
+  },
+  "rmode": {
+    "company": "Company-wide",
+    "zone": "Per zone"
+  },
+  "remoteTotal": "Total {n}, company-wide",
+  "unchanged": "Unchanged, {p}%",
+  "lastRun": "Last run {at}",
+  "run": "Run scenario",
+  "needsSave": "Save the scenario first",
+  "res": {
+    "title": "Before and after",
+    "needsSave": "Save the scenario to see the comparison."
+  },
+  "gap": "Gap",
+  "balanced": "Balanced",
+  "surplus": "Surplus",
+  "before": "Before",
+  "after": "After",
+  "gapDelta": "Gaps",
+  "read": {
+    "fromAssignment": "From assignment",
+    "fromRegistration": "From registration",
+    "needsRun": "Run the scenario to see the service-level reading."
+  },
+  "heat": {
+    "title": "Staffing minus required, every 2 hours"
+  },
+  "list": {
+    "title": "Saved scenarios"
+  },
+  "col": {
+    "name": "Scenario",
+    "zones": "Zones",
+    "changes": "Changes",
+    "lastRun": "Last run"
+  },
+  "open": "Open",
+  "dup": "Duplicate",
+  "delete": "Delete",
+  "deleteConfirm": {
+    "title": "Delete \"{name}\"?",
+    "desc": "This cannot be undone."
+  },
+  "notice": {
+    "notFound": "That scenario could not be found."
+  },
+  "states": {
+    "empty": {
+      "desc": "No scenarios saved yet."
+    },
+    "error": {
+      "desc": "The scenarios could not load."
+    }
+  },
+  "shift": {
+    "DAY-A": "Day A",
+    "DAY-B": "Day B",
+    "EVENING": "Evening",
+    "NIGHT": "Night"
+  },
+  "chg": {
+    "field": "{n} field",
+    "remote": "{n} remote",
+    "veh": "{n} vehicles",
+    "share": "Remote {p}%"
+  },
+  "engine": "engine",
+  "unsup": {
+    "title": "Unsupported adjustment",
+    "body": "Not simulated: {list}. The optimizer plans it; the service-level reading ignores it."
+  },
+  "deleteMany": {
+    "title": "Delete {n, plural, one {# scenario} other {# scenarios}}?"
+  },
+  "ai": {
+    "title": "Describe the scenario",
+    "draft": "Draft",
+    "needText": "Describe the scenario first",
+    "applied": "Placed in the editor, not saved",
+    "unmapped": "Not in the editor",
+    "placeholder": "What if we add 5 agents in Jeddah on Thursday and move 10% of cases to remote?"
+  }
+}

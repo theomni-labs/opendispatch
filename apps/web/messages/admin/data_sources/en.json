@@ -1,0 +1,173 @@
+{
+  "testAll": "Test all",
+  "menu": {
+    "allShadow": "All zones to shadow"
+  },
+  "toast": {
+    "export": "Export started",
+    "connect": "Source setup opens here",
+    "stage": "{zone} is now {stage}",
+    "allShadow": "All zones set to shadow",
+    "signal": {
+      "title": "Fallback signal sent",
+      "desc": "{customer} dispatch assigns until resumed"
+    },
+    "resume": "Resume signal sent",
+    "off": "{feed} is switched off",
+    "slow": "{feed} answered slowly",
+    "ok": "{feed} answered in {ms} ms",
+    "all": {
+      "title": "Test finished",
+      "desc": "{ok} answered, {slow} slow"
+    },
+    "on": "{feed} switched on",
+    "offNow": "{feed} switched off",
+    "mntOn": {
+      "title": "Maintenance mode on",
+      "desc": "Case feed answers busy, retry. Fallback signal sent."
+    },
+    "mntOff": {
+      "title": "Maintenance mode off",
+      "desc": "Resume signal sent"
+    },
+    "fbSaved": "Fallback settings saved",
+    "down": "{feed} did not answer",
+    "sugSaved": "Dispatch suggestions saved"
+  },
+  "state": {
+    "label": "State",
+    "filled": "Filled",
+    "empty": "Empty",
+    "loading": "Loading",
+    "error": "Error"
+  },
+  "stat": {
+    "healthy": "Healthy",
+    "degraded": "Degraded",
+    "off": "Switched off",
+    "timeout": "Fallback timeout"
+  },
+  "uom": {
+    "s": "s",
+    "ms": "ms",
+    "km": "km"
+  },
+  "feeds": {
+    "title": "Feeds"
+  },
+  "latency": {
+    "tip": "Latency figures are placeholders",
+    "label": "Latency"
+  },
+  "live": {
+    "title": "Live assignment"
+  },
+  "stage": {
+    "title": "Stage per zone"
+  },
+  "col": {
+    "city": "City",
+    "set": "Set stage",
+    "updated": "Updated"
+  },
+  "fb": {
+    "title": "Fallback",
+    "timeout": "Timeout",
+    "deadline": "Decision deadline",
+    "signal": "Signal",
+    "last": "Last signal",
+    "send": "Send fallback signal",
+    "resume": "Resume OpenDispatch",
+    "inMaint": "Maintenance mode already hands cases to {customer} dispatch",
+    "state": {
+      "armed": "Fallback armed",
+      "active": "Fallback active",
+      "maintenance": "Maintenance mode"
+    },
+    "meta": {
+      "armed": "{customer} dispatch takes over after {s} s",
+      "active": "Since {time}: {reason}",
+      "maintenance": "Case feed answers busy, retry"
+    },
+    "sig": {
+      "none": "None sent",
+      "fallback": "Fallback",
+      "resume": "Resume"
+    },
+    "range": "Timeout: 1 to 300 s. Deadline: 50 to 30,000 ms",
+    "reason": {
+      "none": "No reason",
+      "feed_outage": "a feed is down",
+      "health_check_failed": "health check failed",
+      "maintenance": "maintenance mode",
+      "manual": "sent by hand",
+      "opendispatch_timeout": "OpenDispatch did not answer in time"
+    }
+  },
+  "less": "Less",
+  "more": "More",
+  "unsaved": "Unsaved changes",
+  "nochange": "Nothing to save",
+  "mnt": {
+    "title": "Maintenance mode",
+    "switch": "Case feed answers busy, retry"
+  },
+  "busy": "Busy, retry",
+  "states": {
+    "empty": {
+      "title": "No sources yet",
+      "desc": "Connect the case feed first."
+    },
+    "error": {
+      "desc": "The feeds could not load."
+    }
+  },
+  "connect": "Connect a source",
+  "feed": {
+    "case_feed": "Case feed",
+    "agent_feed": "Agent feed",
+    "assignment_channel": "Assignment channel",
+    "weather_feed": "Weather feed",
+    "routing_feed": "Road routing"
+  },
+  "dir": {
+    "inbound": "Inbound",
+    "outbound": "Outbound"
+  },
+  "simulated": "Simulated",
+  "health": {
+    "healthy": "Healthy",
+    "degraded": "Degraded",
+    "down": "Down",
+    "disabled": "Off",
+    "unknown": "Unknown"
+  },
+  "last": "Last event",
+  "test": "Test",
+  "err": {
+    "agent": "Positions over {s} s late for {n} agents"
+  },
+  "m": {
+    "autoWarn": "OpenDispatch assigns without a dispatcher. Fallback stays armed.",
+    "optional": "optional",
+    "need": "Add a reason",
+    "stage": "Set {zone} to {stage}?",
+    "all": "Set all zones to shadow?",
+    "allDesc": "{n} zones change",
+    "signal": "Send the fallback signal?",
+    "resume": "Resume OpenDispatch assignment?",
+    "guardrail": "The check for shadow results and a tested fallback is not enforced yet."
+  },
+  "shared": {
+    "stage": {
+      "label": "Stage"
+    }
+  },
+  "sug": {
+    "title": "Dispatch suggestions",
+    "spots": "Suggest waiting spots",
+    "maxKm": "Longest suggested drive",
+    "prayer": "Avoid arrivals in prayer time",
+    "range": "Enter a drive above 0 and up to 50 km"
+  }
+}

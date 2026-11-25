@@ -1,0 +1,621 @@
+{
+  "version": "Version",
+  "check": {
+    "label": "Check now",
+    "offline": "Offline mode: upload a file instead of checking"
+  },
+  "menu": {
+    "upload": "Upload update file",
+    "emergency": "Emergency override",
+    "fail": "Simulate a failed update",
+    "state": "State",
+    "failMigr": "Simulate a failed migration",
+    "allStates": "All states"
+  },
+  "state": {
+    "filled": "Update ready",
+    "awaiting": "Awaiting approval",
+    "approved": "Approved",
+    "empty": "Up to date",
+    "error": "Error",
+    "downloading": "Downloading",
+    "verifying": "Verifying",
+    "verify_failed": "Verification failed",
+    "needs_attention": "Needs attention",
+    "restore_requested": "Restore requested",
+    "restore_in_progress": "Restore in progress",
+    "restored": "Restored",
+    "resumed": "Resumed",
+    "offline_type": "File type rejected",
+    "offline_verified": "File verified",
+    "offline_failed": "File verification failed"
+  },
+  "tab": {
+    "overview": "Overview",
+    "connection": "Connection",
+    "windows": "Change windows",
+    "history": "History",
+    "settings": "Settings"
+  },
+  "rn": {
+    "100": "First install of OpenDispatch.",
+    "110": "Forecast Explorer likely range and faster roster grid.",
+    "title": "Release notes"
+  },
+  "rv": {
+    "title": "Version",
+    "install": "Install",
+    "managed": "OpenDispatch applies updates in this install."
+  },
+  "channel": "Channel",
+  "ch": {
+    "stable": "Stable",
+    "hotfix": "Hotfix"
+  },
+  "stat": {
+    "version": "Current version",
+    "mode": "Connection",
+    "check": "Last check"
+  },
+  "mode": {
+    "connected": "Connected",
+    "offline": "Offline"
+  },
+  "result": {
+    "found": "Update found",
+    "failed": "Check failed"
+  },
+  "rel": {
+    "title": "Release",
+    "ready": "Ready",
+    "notes": "Prayer-time-aware break planner and general fixes.",
+    "changes": "What changes",
+    "migration": "Adds prayer conflict columns to break plans.",
+    "downtime": "Downtime",
+    "none": "None",
+    "fallback": "Live assignment",
+    "fallbackNone": "Stays on OpenDispatch",
+    "rollback": "Rollback",
+    "rollbackAuto": "Automatic, no restore",
+    "checks": "Pre-flight",
+    "checksPassed": "{n} of 6 passed",
+    "signature": "Signature",
+    "verified": "Verified",
+    "next": "Next window",
+    "avail": "Available",
+    "discarded": "Discarded",
+    "notRun": "Not run",
+    "notChecked": "Not checked",
+    "checking": "Checking",
+    "checksSome": "{n} of 6 passed",
+    "noMigrations": "No database changes.",
+    "downtimeYes": "Yes",
+    "downtimeMin": "About {n} min",
+    "fallbackYes": "Switches to the {customer} fallback",
+    "rollbackRestore": "Needs a restore"
+  },
+  "schedule": "Schedule",
+  "apply": {
+    "label": "Apply",
+    "needs": "Schedule it and get approval first",
+    "title": "Apply {v}",
+    "from": "{a} to {b}"
+  },
+  "skip": {
+    "label": "Skip",
+    "title": "Skip this release",
+    "need": "Write a reason"
+  },
+  "await": {
+    "title": "Awaiting approval",
+    "body": "Requested by {name}",
+    "self": "Nobody approves their own request",
+    "notListed": "You are not one of the listed approvers.",
+    "decided": "You have already decided on this update."
+  },
+  "unschedule": "Cancel schedule",
+  "appr": {
+    "title": "Approved",
+    "body": "Approved by {name}",
+    "auto": "Approved on scheduling: no approver is listed"
+  },
+  "applyNow": "Apply now",
+  "nw": {
+    "title": "Next window",
+    "when": "When",
+    "rule": "Recurring",
+    "tz": "Time zone",
+    "tzLine": "Riyadh time"
+  },
+  "win": {
+    "open": "Open",
+    "rule": "Sunday to Thursday, 03:00 to 05:00",
+    "title": "Recurring windows",
+    "edit": "Edit",
+    "date": "Date",
+    "time": "Time",
+    "days": "Days",
+    "needDay": "Choose at least one day",
+    "range": "{a} to {b}",
+    "blocked": "Blocked",
+    "sep": ", ",
+    "status": "Status",
+    "needTime": "Enter the times as HH:MM"
+  },
+  "ap": {
+    "title": "Approval",
+    "approver": "Approver",
+    "second": "Second approver",
+    "notRequired": "Not required",
+    "secondRequired": "Second approver required",
+    "none": "No approver is listed",
+    "required": "Required"
+  },
+  "states": {
+    "empty": {
+      "title": "You are up to date",
+      "desc": "No release is waiting."
+    },
+    "error": {
+      "desc": "The update status could not load."
+    }
+  },
+  "conn": {
+    "mode": "Connection mode",
+    "lastContact": "Last contact",
+    "ok": "OK",
+    "validUntil": "Release index valid until",
+    "allow": "Allow in the firewall",
+    "copyAll": "Copy all",
+    "host": "Hostname",
+    "port": "Port",
+    "purpose": "Purpose",
+    "copy": "Copy",
+    "p1": "Release index and manifests",
+    "p2": "Signed release images",
+    "failed": "Failed"
+  },
+  "off": {
+    "drop": "Drop the update file or",
+    "browse": "browse",
+    "checks": "Signature checks",
+    "verified": "Verified",
+    "use": "Use this file",
+    "portal": "Customer portal",
+    "s1": "Sign in to the customer portal.",
+    "s2": "Download the file for your channel.",
+    "s3": "Upload it here.",
+    "open": "Open the portal",
+    "c1": "Signature is valid",
+    "c2": "Image digests match",
+    "c3": "Signing key is not revoked",
+    "c4": "Not older than the installed version",
+    "c5": "Release index expiry",
+    "notEnforced": "Not enforced offline",
+    "refused": "Refused",
+    "failedT": "File discarded",
+    "failedB": "The signature or an image digest does not match.",
+    "alertRaised": "An alert was raised.",
+    "hintLimit": "Signed update file, up to {max} characters in this demo",
+    "tooBig": "{name} is too large for this demo."
+  },
+  "proxy": {
+    "title": "Proxy",
+    "use": "Use a proxy",
+    "address": "Address",
+    "user": "Username",
+    "pass": "Password",
+    "cert": "Proxy certificate",
+    "upload": "Upload certificate",
+    "needAddress": "Enter the proxy address",
+    "passSet": "A password is stored. Leave empty to keep it.",
+    "certBig": "The certificate file is too large.",
+    "certSet": "A certificate is stored."
+  },
+  "optional": "Optional",
+  "test": {
+    "title": "Test connection",
+    "button": "Test connection",
+    "proxy": {
+      "label": "Proxy reachable",
+      "none": "No proxy in use"
+    },
+    "dns": "Hostname resolves",
+    "tcp": "Port 443 reachable",
+    "tls": "Secure handshake succeeded",
+    "sig": "Release index signature is valid"
+  },
+  "bo": {
+    "title": "Blackout periods",
+    "add": "Add blackout",
+    "label": "Label",
+    "dates": "Dates",
+    "entered": "Entered as",
+    "enterAs": "Enter dates as",
+    "gregorian": "Gregorian",
+    "hijri": "Hijri",
+    "day": "Day",
+    "preview": "Same dates in the other calendar",
+    "needLabel": "Write a label",
+    "needDate": "Enter valid dates",
+    "needOrder": "The end is before the start",
+    "remove": "Remove",
+    "none": "No blackout periods.",
+    "month": "Month",
+    "year": "Year",
+    "sameDay": "Same day: {date}",
+    "noReference": "The calendar reference data has no months to choose from."
+  },
+  "actions": "Actions",
+  "from": "From",
+  "to": "To",
+  "em": {
+    "needs": "Two approvers and a written reason"
+  },
+  "emg": {
+    "desc": "Outside a window. Audited.",
+    "release": "Release",
+    "first": "First approver",
+    "second": "Second approver",
+    "min": "characters at least",
+    "need": "Write at least {n} characters",
+    "off": "The change policy switches the emergency override off",
+    "noRelease": "Download and verify a release first",
+    "noApprover": "No active Change Approver to name as the second approver"
+  },
+  "h": {
+    "version": "Version",
+    "kind": "Kind",
+    "result": "Result",
+    "approved": "Approved by",
+    "window": "Window",
+    "started": "Started",
+    "from": "from",
+    "outside": "Outside a window",
+    "n0": "Initial install.",
+    "n1": "Applied in the change window. Health checks passed.",
+    "n2": "Applied in the change window. Health checks passed.",
+    "nEmg": "Emergency override outside a window.",
+    "nSkip": "Skipped.",
+    "nFail": "The health check failed. Rolled back by itself.",
+    "nFailMig": "A migration failed partway. Maintenance stays on.",
+    "nResume": "Resumed after the fixed release. Health checks passed.",
+    "nRollback": "Rolled back to the previous version.",
+    "nRestore": "Restored from the backup.",
+    "nCancelled": "Cancelled before it was applied.",
+    "none": "No updates yet."
+  },
+  "k": {
+    "update": "Update",
+    "rollback": "Rollback",
+    "resume": "Resume",
+    "restore": "Restore",
+    "skip": "Skip",
+    "emergency_override": "Emergency"
+  },
+  "r": {
+    "succeeded": "Succeeded",
+    "failed": "Failed",
+    "rolled_back": "Rolled back",
+    "skipped": "Skipped",
+    "cancelled": "Cancelled"
+  },
+  "set": {
+    "interval": "Check interval",
+    "h1": "Every hour",
+    "h6": "Every 6 hours",
+    "h12": "Every 12 hours",
+    "h24": "Every day",
+    "download": "Download",
+    "auto": "Download automatically",
+    "notify": "Notify only",
+    "notifyDesc": "Your own pipeline applies the release.",
+    "hN": "Every {n} hours",
+    "unsaved": "Unsaved changes"
+  },
+  "pf": {
+    "title": "Pre-flight checks",
+    "passed": "Passed",
+    "disk": "Disk and registry space",
+    "diskM": "Enough space.",
+    "db": "Database reachable",
+    "dbM": "Reachable.",
+    "backup": "Recent backup",
+    "backupM": "Confirmed by {name}.",
+    "path": "Upgrade path",
+    "pathM": "{a} to {b} is allowed.",
+    "health": "System health",
+    "healthM": "Healthy.",
+    "migr": "Migration rehearsal",
+    "migrM": "1 migration rehearsed, about 45 s.",
+    "needs": "Needs confirmation",
+    "backupAsk": "Confirm that a fresh backup exists",
+    "backupDone": "A recent backup is confirmed.",
+    "migr0": "No migrations to rehearse.",
+    "migrN": "{n, plural, one {{n} migration} other {{n} migrations}} rehearsed, about {s} s."
+  },
+  "run": {
+    "title": "Applying",
+    "done": "Update applied",
+    "health": "Health checks passed."
+  },
+  "done": "Done",
+  "st": {
+    "rev": "Record current revisions",
+    "backup": "Confirm backup",
+    "fallback": "Fallback and maintenance on",
+    "plat": "Platform migrations",
+    "opendispatch": "OpenDispatch migrations",
+    "helm": "Upgrade the release",
+    "smoke": "Smoke tests",
+    "maint": "Maintenance off",
+    "report": "Report to the Audit Log",
+    "wait": "Waiting",
+    "run": "Running",
+    "done": "Done",
+    "skipped": "Skipped",
+    "failed": "Failed"
+  },
+  "sched": {
+    "title": "Schedule the update",
+    "desc": "Pick an open window.",
+    "needs": "Needs approval from Saad Al-Nabari",
+    "needsNames": "Needs approval from {names}",
+    "needsSecond": "Needs approval",
+    "noApproval": "No approver is listed: it is approved when scheduled",
+    "noWindow": "There is no open change window"
+  },
+  "range": "{from} to {to}",
+  "toast": {
+    "found": "Update found: {v}",
+    "uptodate": "You are up to date",
+    "scheduled": "Update scheduled",
+    "unscheduled": "Schedule cancelled",
+    "approved": "Update approved",
+    "rejected": "Update rejected",
+    "skipped": "{v} skipped",
+    "applied": "{v} applied",
+    "rolledBack": {
+      "title": "Update {v} failed its health check and rolled back to {from}",
+      "desc": "The system returned by itself. No restore is needed."
+    },
+    "emergency": {
+      "title": "{v} applied by emergency override",
+      "desc": "Flagged in the Audit Log"
+    },
+    "copied": "Copied",
+    "testOk": "Connection test passed",
+    "fileOk": {
+      "title": "Release {v} added",
+      "desc": "Next: pre-flight checks"
+    },
+    "portal": "Opens the customer portal (demo)",
+    "proxy": "Proxy settings saved",
+    "windows": "Change windows saved",
+    "secondOn": "A second approver is now required",
+    "secondOff": "A second approver is no longer required",
+    "blackout": "Blackout period added",
+    "blackoutGone": "Blackout period removed",
+    "settings": "Update settings saved",
+    "dlDone": {
+      "title": "Release {v} downloaded and verified",
+      "desc": "Next: pre-flight checks"
+    },
+    "preflight": {
+      "title": "Pre-flight checks passed",
+      "desc": "Ready to schedule"
+    },
+    "resumed": "Update {v} resumed and finished",
+    "restoreReq": {
+      "title": "Restore requested",
+      "desc": "Your database team carries it out."
+    },
+    "restored": "Restored: OpenDispatch runs {v} again",
+    "needsAttention": {
+      "desc": "A migration failed partway. Maintenance stays on."
+    },
+    "modeOffline": "Offline mode on",
+    "modeConnected": "Connected mode on",
+    "testFailed": "Connection test failed",
+    "dlFailed": "Release {v} failed verification and was discarded",
+    "preflightWait": "Pre-flight ran: confirm the backup",
+    "backup": "Backup confirmed",
+    "checkFailed": "The check failed"
+  },
+  "hm": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-awwal",
+    "4": "Rabi' al-thani",
+    "5": "Jumada al-awwal",
+    "6": "Jumada al-thani",
+    "7": "Rajab",
+    "8": "Sha'ban",
+    "9": "Ramadan",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "demo": {
+    "title": "All states",
+    "desc": "For review. Changes this screen only.",
+    "g": {
+      "release": "Release",
+      "download": "Download and checks",
+      "recovery": "Recovery",
+      "offline": "Offline file"
+    }
+  },
+  "download": "Download",
+  "avail": {
+    "hint": "Downloaded and checked before anything changes"
+  },
+  "unit": {
+    "mb": "MB"
+  },
+  "dl": {
+    "title": "Downloading",
+    "of": "{done} of {total}",
+    "wait": "Schedule and Apply wait until it is verified",
+    "offline": "Offline mode: upload the update file instead"
+  },
+  "img": {
+    "pending": "Waiting",
+    "downloading": "Downloading",
+    "pulled": "Pulled",
+    "pushed": "In registry"
+  },
+  "vf": {
+    "title": "Checking the release",
+    "done": "Downloaded",
+    "failedT": "Verification failed",
+    "failedB": "The release was discarded. Nothing was installed.",
+    "reasonDigest": "An image digest does not match the signed manifest.",
+    "reasonSig": "The signature is not valid.",
+    "reasonKey": "The signing key has been revoked.",
+    "reasonOlder": "The release is not newer than the installed version.",
+    "reasonIndex": "The release index is past its valid-until date."
+  },
+  "v": {
+    "sig": "Signature valid",
+    "digest": "Image digests match",
+    "key": "Signing key not revoked",
+    "newer": "Newer than installed",
+    "index": "Release index still valid",
+    "digestBad": "does not match",
+    "until": "Valid until"
+  },
+  "preflight": "Run pre-flight checks",
+  "na": {
+    "title": "Update {v} needs attention",
+    "failedLead": "What failed:",
+    "failed": "A database migration stopped partway",
+    "safeLead": "What is safe:",
+    "safe": "Live assignment is on the {customer} fallback. The backup from before the update is intact.",
+    "nextLead": "What next:",
+    "next": "Resume once the fixed release is in, or restore that backup.",
+    "roleView": "View only for this role. The Administrator resumes or restores."
+  },
+  "resume": "Resume",
+  "restore": "Restore",
+  "rz": {
+    "title": "Update {v} resumed and finished",
+    "body": "Health checks passed. Maintenance is off and live assignment is back on OpenDispatch."
+  },
+  "rb": {
+    "title": "Update {v} rolled back to {from}",
+    "why": "The health check failed after the upgrade.",
+    "history": "View history"
+  },
+  "rt": {
+    "title": "Restored to the backup from before {v}",
+    "body": "OpenDispatch runs {from} again. Maintenance is off and live assignment is back on OpenDispatch.",
+    "cases": "Cases that arrived meanwhile were assigned by the {customer} fallback and are loaded into OpenDispatch."
+  },
+  "rq": {
+    "title": "Restore request",
+    "s1": "Requested",
+    "s2": "In progress",
+    "s3": "Completed",
+    "by": "Requested by",
+    "at": "When",
+    "backup": "Backup",
+    "doer": "Carried out by",
+    "team": "Your database team",
+    "locked": "A restore is requested. Your database team carries it out."
+  },
+  "sys": {
+    "title": "Live system",
+    "version": "Running version",
+    "maint": "Maintenance",
+    "fallback": "{customer} fallback",
+    "opendispatch": "OpenDispatch"
+  },
+  "rc": {
+    "title": "Update run"
+  },
+  "rm": {
+    "rev": "Revisions and image digests recorded.",
+    "backup": "Backup confirmed.",
+    "fallbackOn": "Live assignment on the {customer} fallback, maintenance page on.",
+    "fallbackSkip": "No downtime needed.",
+    "plat": "Platform migrations applied.",
+    "opendispatchFail": "A migration that cannot run in a transaction failed partway. Maintenance stays on.",
+    "opendispatchOk": "OpenDispatch migrations applied.",
+    "opendispatchResumed": "Resumed after the fixed release.",
+    "wait": "Waiting for recovery.",
+    "helm": "Release upgraded.",
+    "smokeFail": "Readiness check failed after the upgrade.",
+    "smokeOk": "Smoke tests passed.",
+    "maintRb": "Rolled back to the recorded revision.",
+    "maintOff": "Maintenance off, live assignment back on OpenDispatch.",
+    "reportOk": "Result recorded in the Audit Log.",
+    "reportRb": "Rolled back by itself. Result recorded in the Audit Log.",
+    "origin": "Done in the original run.",
+    "noMigr": "No OpenDispatch migrations.",
+    "maintNone": "Maintenance was not on."
+  },
+  "res": {
+    "title": "Resume update {v}?",
+    "desc": "Continues from the failed migration.",
+    "from": "From",
+    "to": "To",
+    "maintV": "Off when it finishes",
+    "hint": "Use it once the fixed release is in"
+  },
+  "rst": {
+    "title": "Restore the backup from before {v}?",
+    "desc": "Goes back to the database as it was before the update.",
+    "warnT": "This undoes update {v}",
+    "warnB": "No user changes are lost: nobody could write while maintenance was on.",
+    "what": "Restores",
+    "taken": "Taken",
+    "back": "Runs again as",
+    "after": "Then",
+    "afterV": "Maintenance turns off and live assignment returns to OpenDispatch",
+    "go": "Request restore"
+  },
+  "shared": {
+    "access": {
+      "viewOnlyReason": "View only for this role"
+    }
+  },
+  "day": {
+    "short": {
+      "0": "Sun",
+      "1": "Mon",
+      "2": "Tue",
+      "3": "Wed",
+      "4": "Thu",
+      "5": "Fri",
+      "6": "Sat"
+    },
+    "long": {
+      "0": "Sunday",
+      "1": "Monday",
+      "2": "Tuesday",
+      "3": "Wednesday",
+      "4": "Thursday",
+      "5": "Friday",
+      "6": "Saturday"
+    }
+  },
+  "rs": {
+    "available": "Available",
+    "downloading": "Downloading",
+    "verified": "Verified",
+    "ready": "Ready",
+    "scheduled": "Scheduled",
+    "withdrawn": "Discarded"
+  },
+  "others": {
+    "title": "Other releases",
+    "published": "Published"
+  },
+  "backup": {
+    "confirm": "Confirm backup"
+  },
+  "tabs": {
+    "label": "Update sections"
+  }
+}

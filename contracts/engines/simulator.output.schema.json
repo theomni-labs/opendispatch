@@ -1,0 +1,204 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/simulator.output.schema.json",
+  "title": "SimulatorOutput",
+  "description": "Replay of cases against a roster, with service-level results. Every result carries BOTH readings of the 10-minute target: from_registration (registered_at to arrived_at) and from_assignment (assigned_at to arrived_at). primary_clock_start says which is the headline, per the setting (default assignment); a screen never shows only one reading until the customer confirms when the clock starts. Results are reported overall (overall), per zone (zones) and per 15-minute interval of registration (intervals). INVARIANTS checked by validate-contracts: within_count <= case_count; share = within_count / case_count when case_count > 0, else null; assigned_to_arrived and registered_to_arrived populate only for field cases. Simulated figures on synthetic data are illustrative: illustrative must be true unless data_source is LIVE or IMPORTED and the roster and cases are real.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "engine",
+    "model_version",
+    "generated_at",
+    "data_source",
+    "illustrative",
+    "roster_ref",
+    "primary_clock_start",
+    "threshold_seconds",
+    "overall"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "simulator" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "model_version": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "illustrative": { "type": "boolean" },
+    "roster_ref": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "assignment_policy": { "type": "string", "enum": ["nearest", "scorer", "replay_actual"] },
+    "primary_clock_start": { "type": "string", "enum": ["assignment", "registration"] },
+    "threshold_seconds": { "type": "integer", "minimum": 1 },
+    "overall": { "$ref": "#/$defs/SimulatedServiceLevel" },
+    "zones": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zone_id", "service_level"],
+        "properties": {
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "service_level": { "$ref": "#/$defs/SimulatedServiceLevel" }
+        }
+      }
+    },
+    "intervals": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zone_id", "interval_start", "interval_index", "service_level"],
+        "properties": {
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "interval_start": { "type": "string", "format": "date-time" },
+          "interval_index": { "type": "integer", "minimum": 0, "maximum": 95 },
+          "service_level": { "$ref": "#/$defs/SimulatedServiceLevel" }
+        }
+      }
+    },
+    "unserved_cases": {
+      "description": "Field cases with no agent available in the simulation.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["code", "message"],
+        "properties": {
+          "code": { "type": "string", "maxLength": 64 },
+          "message": { "type": "string", "maxLength": 500 }
+        }
+      }
+    },
+    "case_outcomes": {
+      "description": "Present only when the input asked for include_case_outcomes.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/SimulatedCaseOutcome" }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] },
+    "TenMinuteReadingResult": {
+      "title": "TenMinuteReadingResult",
+      "description": "Share of field cases with an agent on scene within the threshold, for one clock start.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["within_count", "case_count", "share"],
+      "properties": {
+        "within_count": { "type": "integer", "minimum": 0 },
+        "case_count": { "type": "integer", "minimum": 0 },
+        "share": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    },
+    "SimulatedPercentiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["median_seconds", "p90_seconds"],
+      "properties": {
+        "median_seconds": { "type": ["number", "null"], "minimum": 0 },
+        "p90_seconds": { "type": ["number", "null"], "minimum": 0 }
+      }
+    },
+    "SimulatedServiceLevel": {
+      "title": "SimulatedServiceLevel",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_count",
+        "field_case_count",
+        "from_registration",
+        "from_assignment"
+      ],
+      "properties": {
+        "case_count": { "type": "integer", "minimum": 0 },
+        "field_case_count": { "type": "integer", "minimum": 0 },
+        "remote_case_count": { "type": "integer", "minimum": 0 },
+        "from_registration": { "$ref": "#/$defs/TenMinuteReadingResult" },
+        "from_assignment": { "$ref": "#/$defs/TenMinuteReadingResult" },
+        "registered_to_assigned": { "$ref": "#/$defs/SimulatedPercentiles" },
+        "assigned_to_arrived": { "$ref": "#/$defs/SimulatedPercentiles" },
+        "registered_to_arrived": { "$ref": "#/$defs/SimulatedPercentiles" },
+        "agent_utilisation": {
+          "description": "Share of on-duty time agents spent travelling or on scene, 0 to 1.",
+          "type": ["number", "null"],
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "SimulatedCaseOutcome": {
+      "title": "SimulatedCaseOutcome",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "served"],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/Uuid" },
+        "served": { "type": "boolean" },
+        "agent_id": { "type": ["string", "null"], "format": "uuid" },
+        "assigned_at": { "type": ["string", "null"], "format": "date-time" },
+        "arrived_at": { "type": ["string", "null"], "format": "date-time" },
+        "registered_to_arrived_seconds": { "type": ["integer", "null"] },
+        "assigned_to_arrived_seconds": { "type": ["integer", "null"] },
+        "within_from_registration": { "type": ["boolean", "null"] },
+        "within_from_assignment": { "type": ["boolean", "null"] }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000003",
+      "engine": { "name": "simulator", "version": "0.1.0" },
+      "model_version": "nearest-baseline-0.1",
+      "generated_at": "2026-09-13T07:00:30+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "illustrative": true,
+      "roster_ref": "roster-0001",
+      "assignment_policy": "nearest",
+      "primary_clock_start": "assignment",
+      "threshold_seconds": 600,
+      "overall": {
+        "case_count": 10,
+        "field_case_count": 8,
+        "remote_case_count": 2,
+        "from_registration": { "within_count": 3, "case_count": 8, "share": 0.375 },
+        "from_assignment": { "within_count": 6, "case_count": 8, "share": 0.75 },
+        "registered_to_assigned": { "median_seconds": 150, "p90_seconds": 900 },
+        "assigned_to_arrived": { "median_seconds": 480, "p90_seconds": 840 },
+        "registered_to_arrived": { "median_seconds": 700, "p90_seconds": 1500 },
+        "agent_utilisation": 0.42
+      },
+      "zones": [
+        {
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "service_level": {
+            "case_count": 10,
+            "field_case_count": 8,
+            "from_registration": { "within_count": 3, "case_count": 8, "share": 0.375 },
+            "from_assignment": { "within_count": 6, "case_count": 8, "share": 0.75 }
+          }
+        }
+      ],
+      "unserved_cases": 0
+    }
+  ]
+}

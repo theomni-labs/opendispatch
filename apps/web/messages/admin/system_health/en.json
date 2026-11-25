@@ -1,0 +1,207 @@
+{
+  "version": "Version",
+  "refresh": "Refresh",
+  "toast": {
+    "refreshed": "Status refreshed",
+    "backup": "Backup confirmed",
+    "diag": "Diagnostics file created"
+  },
+  "tab": {
+    "overview": "Overview",
+    "jobs": "Job runs",
+    "storage": "Storage and backups"
+  },
+  "stat": {
+    "overall": "Overall",
+    "services": "Services up",
+    "failed": "Failed jobs",
+    "storage": "Storage used"
+  },
+  "hl": {
+    "healthy": "Healthy",
+    "degraded": "Degraded",
+    "down": "Down",
+    "disabled": "Off",
+    "unknown": "Unknown"
+  },
+  "svc": {
+    "title": "Service status",
+    "web": "Web app",
+    "api": "API",
+    "worker": "Worker",
+    "engines": "Engines",
+    "database": "Database",
+    "keycloak": "Sign-in service",
+    "object_storage": "Object storage",
+    "update_agent": "Update agent",
+    "st": {
+      "ok": "OK",
+      "unknown": "Unknown",
+      "down": "Down",
+      "degraded": "Degraded"
+    },
+    "d": {
+      "version": "Version",
+      "responding": "Responding",
+      "jobs": "Jobs running",
+      "fixture": "Fixture models",
+      "enginesOn": "{n} of {m} engines on",
+      "reachable": "Reachable",
+      "demo": "Demo sign-in",
+      "vendor": "Run by OpenDispatch"
+    }
+  },
+  "asOf": "As of",
+  "feeds": {
+    "title": "Feeds",
+    "open": "Data sources"
+  },
+  "col": {
+    "feed": "Feed",
+    "direction": "Direction",
+    "health": "Health",
+    "lastSuccess": "Last success",
+    "job": "Job",
+    "kind": "Kind",
+    "started": "Started",
+    "duration": "Duration"
+  },
+  "feed": {
+    "case": "{customer} case feed (simulator)",
+    "agent": {
+      "label": "Agent status and location feed (simulator)",
+      "err": "Position updates delayed by more than 60 seconds for 4 agents."
+    },
+    "assignment": "Assignment channel to the {customer} agent app (simulator)",
+    "weather": "Weather feed",
+    "routing": "Road routing service"
+  },
+  "wx": {
+    "stored": "Stored weather to {date}",
+    "feed": "Configured feed"
+  },
+  "dir": {
+    "in": "Inbound",
+    "out": "Outbound"
+  },
+  "kind": {
+    "forecast": "Forecast",
+    "rollup": "Rollup",
+    "roster": "Roster",
+    "import": "Import",
+    "assignment": "Assignment",
+    "retention": "Retention",
+    "other": "Other"
+  },
+  "st": {
+    "succeeded": "Succeeded",
+    "failed": "Failed"
+  },
+  "job": {
+    "m1": "Validated with 3 errors and 1 warning.",
+    "m2": "The file header is missing required columns."
+  },
+  "jobs": {
+    "search": "Search jobs"
+  },
+  "any": "Any",
+  "none": "No matching jobs",
+  "sto": {
+    "title": "Storage",
+    "used": "Used",
+    "other": "Other",
+    "backups": "Backups",
+    "imports": "Import files",
+    "exports": "Exports"
+  },
+  "bk": {
+    "title": "Backups",
+    "overdue": "Overdue",
+    "confirmed": "Confirmed",
+    "own": "Your own backups. Confirm before updates.",
+    "managed": "OpenDispatch runs a nightly export for you.",
+    "last": "Last confirmed",
+    "by": "Confirmed by",
+    "source": "Source",
+    "customer": "Customer reported",
+    "drill": "Restore drill due",
+    "confirm": "Confirm backup",
+    "src": {
+      "automatic": "Automatic",
+      "none": "None"
+    }
+  },
+  "ver": {
+    "title": "Version",
+    "channel": "Channel",
+    "stable": "Stable",
+    "install": "Install",
+    "agent": "Update agent",
+    "open": "Open Updates"
+  },
+  "diag": {
+    "button": "Download diagnostics",
+    "title": "Diagnostics file",
+    "sub": "What the file contains",
+    "inc1": "Settings, health, job runs",
+    "inc2": "Case and personal data removed",
+    "inc3": "Nothing is sent automatically",
+    "preview": "Preview",
+    "healthPrev": "Status of {services} services and {feeds} feeds",
+    "jobsPrev": "The {n} latest job runs, without case data",
+    "readmePrev": "A note that nothing is sent automatically",
+    "create": "Create and download"
+  },
+  "states": {
+    "empty": {
+      "title": "No health data yet",
+      "desc": "Checks appear after the first run."
+    },
+    "error": {
+      "desc": "The health checks could not load."
+    }
+  },
+  "tabs": {
+    "label": "Sections"
+  },
+  "eng": {
+    "title": "Engines",
+    "stale": "Stale",
+    "col": {
+      "engine": "Engine",
+      "status": "Status",
+      "model": "Model version",
+      "calls": "Calls",
+      "fixture": "Answered from fixture",
+      "lastFail": "Last failure"
+    },
+    "forecaster": "Forecaster",
+    "optimizer": "Optimizer",
+    "simulator": "Simulator",
+    "assignment": "Assignment",
+    "mode": {
+      "fixture": "Fixture"
+    },
+    "hl": {
+      "healthy": "Healthy",
+      "degraded": "Degraded",
+      "down": "Down"
+    },
+    "brk": {
+      "closed": "Closed",
+      "half_open": "Half-open",
+      "open": "Open"
+    },
+    "sub": "{f} failed, {o} timed out",
+    "d": {
+      "failed": "Failures",
+      "timeouts": "Timeouts",
+      "rejected": "Rejected calls",
+      "breaker": "Circuit breaker",
+      "opens": "Breaker opens",
+      "model": "Model version"
+    },
+    "empty": "No engines reported",
+    "error": "Engine status could not load"
+  }
+}

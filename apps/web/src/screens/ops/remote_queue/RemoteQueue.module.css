@@ -1,0 +1,83 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Remote Queue and Scheduling. Tokens and logical properties only. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-24);
+}
+
+.queueHeader {
+  padding: var(--od-space-16);
+}
+
+.cardHeadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.cardTitle {
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.dateRow {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding: var(--od-space-16);
+}
+
+.dayNav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.gridHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding: var(--od-space-16);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}

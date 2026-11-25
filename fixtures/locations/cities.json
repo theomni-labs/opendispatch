@@ -1,0 +1,5 @@
+[
+{"id":"c602613f-ca37-49ae-b617-7e2c29fc2a84","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"101","case_code":"RD","name_en":"Riyadh","name_ar":null,"is_active":true,"extra":{}},
+{"id":"79cd66f3-4fbf-4f73-b7cb-37929b4d5cf0","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"102","case_code":"JD","name_en":"Jeddah","name_ar":null,"is_active":true,"extra":{}},
+{"id":"ba39397e-167d-43c7-9cb1-e923097c8c1f","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"103","case_code":"DM","name_en":"Dammam","name_ar":null,"is_active":true,"extra":{}}
+]

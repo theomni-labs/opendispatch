@@ -1,0 +1,174 @@
+{
+  "run": {
+    "tip": "Forecast run of {date}"
+  },
+  "toast": {
+    "export": "Exported in the plan export format"
+  },
+  "pick": "Zone and day",
+  "city": "City",
+  "subzone": "Sub-zone",
+  "allsubs": "All sub-zones",
+  "day": "Day",
+  "stat": {
+    "expected": "Expected cases",
+    "peak": "Peak interval",
+    "range": "Likely range at peak",
+    "rangeCov": "{pct}% of intervals",
+    "field": "Field share"
+  },
+  "perInterval": "per 15 min",
+  "range": {
+    "v": "{lo} to {hi}"
+  },
+  "inferred": "inferred",
+  "map": {
+    "title": "Sub-zone demand",
+    "summary": "Sub-zones shown: {count}"
+  },
+  "time": "Time",
+  "peak": "Peak",
+  "ramp": {
+    "low": "Low",
+    "high": "High"
+  },
+  "split": {
+    "title": "Field or remote"
+  },
+  "rules": {
+    "label": "Rule set",
+    "active": "Active rules",
+    "draft": "With draft",
+    "draftUnavailable": "No draft rule to preview",
+    "nActive": "{n} active",
+    "nDraft": "{n} draft, not applied"
+  },
+  "ruleset": "Rule set",
+  "draft": {
+    "note": "is a draft: preview only"
+  },
+  "view": {
+    "label": "Show",
+    "total": "Total",
+    "field": "Field",
+    "remote": "Remote"
+  },
+  "top": {
+    "title": "Busiest sub-zones"
+  },
+  "tl": {
+    "title": "15-minute timeline",
+    "unit": "Cases per 15 minutes"
+  },
+  "series": {
+    "expected": "Expected",
+    "field": "Field",
+    "remote": "Remote, inferred"
+  },
+  "prayer": {
+    "title": "Prayer times",
+    "fajr": "Fajr",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha"
+  },
+  "states": {
+    "empty": {
+      "title": "No forecast for this day",
+      "desc": "The next run adds it."
+    },
+    "error": {
+      "desc": "The forecast could not load."
+    }
+  },
+  "empty": {
+    "action": "Show another day"
+  },
+  "plan": {
+    "zone": "Zone",
+    "noteSegments": "Segments are by day of week (Sunday to Wednesday, Thursday, Friday, Saturday); school periods are not split out in this export.",
+    "noteStaff": "Needed staff is the average rounded up (one case per agent per half hour), from expected values. The high estimate is approximate: expected plus the sub-zone ranges combined as if independent.",
+    "noteWindows": "Windows run 06:00 to 05:30 next day; 00:00 to 05:30 belong to the previous planning day. Averages cover {days} full planning days of the forecast horizon.",
+    "noteIllustrative": "Illustrative: synthetic data, forecast model {model}, generated {date}",
+    "empty": "No full planning day in the forecast horizon."
+  },
+  "cells": {
+    "label": "Cells",
+    "pick": "Pick a sub-zone first",
+    "share": "Cell share",
+    "top": "Top cell: {tip}",
+    "loading": "Loading cells",
+    "empty": "No location data for this run",
+    "error": "Cells could not load",
+    "tip": "{pct} · about {n} of {of} expected cases",
+    "pool": "Rest of the sub-zone"
+  },
+  "why": {
+    "title": "Why this forecast",
+    "model": "{v} · trained {from} to {to}",
+    "base": "Typical day",
+    "total": "This day",
+    "cases": "{n} cases",
+    "unknown": "estimated",
+    "at": "At {time}",
+    "sub": "Sub-zone {code}",
+    "subv": "{pct} of zone",
+    "empty": "No explanation for this run",
+    "error": "The explanation could not load",
+    "d": {
+      "trend": "Trend",
+      "annual_season": "Time of year",
+      "holiday": "Holiday",
+      "ramadan": "Ramadan",
+      "payday": "Payday",
+      "salary_window": "Salary days",
+      "school_break": "School break",
+      "school_exams": "School exams",
+      "school_vacation_summer": "Summer vacation",
+      "school_vacation_eid_fitr": "Eid al-Fitr vacation",
+      "school_vacation_eid_adha": "Eid al-Adha vacation",
+      "school_vacation_national": "National vacation",
+      "school_vacation_long_weekend": "Long weekend",
+      "school_vacation_mid_semester": "Mid-semester break",
+      "school_vacation_between_semesters": "Between semesters",
+      "event_eid": "Eid",
+      "event_national_day": "National Day",
+      "event_season_event": "Season event",
+      "event_hajj": "Hajj",
+      "event_umrah": "Umrah season",
+      "event_other": "Other event",
+      "weather_rain": "Rain",
+      "weather_dust": "Dust",
+      "weather_low_visibility": "Low visibility",
+      "weather_heat_40": "Heat 40°C+",
+      "weather_heat_45": "Heat 45°C+",
+      "traffic_heavy": "Heavy traffic",
+      "model_other": "Model blend"
+    }
+  },
+  "fva": {
+    "title": "Forecast against actual",
+    "day": "Past day",
+    "run": "Run backtest",
+    "runReason": "Only the Administrator can run a backtest",
+    "running": "A backtest is running",
+    "started": "Backtest started",
+    "startedDesc": "The result appears in Forecast and Model Admin",
+    "col": {
+      "zone": "Zone",
+      "forecast": "Forecast",
+      "actual": "Actual",
+      "diff": "Difference",
+      "wape": "Hourly WAPE",
+      "range": "Within range"
+    },
+    "made": "Forecast made",
+    "madeVal": "{model}, {date}",
+    "empty": {
+      "title": "No past forecast to compare",
+      "desc": "It appears the day after a forecast run."
+    },
+    "error": "The comparison could not load"
+  }
+}

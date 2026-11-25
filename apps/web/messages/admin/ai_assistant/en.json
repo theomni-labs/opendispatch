@@ -1,0 +1,105 @@
+{
+  "test": {
+    "label": "Test connection",
+    "ok": "Connected",
+    "failed": "Failed",
+    "reasonOff": "The assistant is off",
+    "reasonKey": "The API key is not set"
+  },
+  "refresh": "Refresh",
+  "toast": {
+    "refreshed": "Overview refreshed"
+  },
+  "menu": {
+    "state": "State",
+    "test": "Test result"
+  },
+  "state": {
+    "filled": "Filled",
+    "local": "Local model",
+    "empty": "Empty",
+    "error": "Error"
+  },
+  "stat": {
+    "status": "Status",
+    "provider": "Provider",
+    "calls": "Calls, 7 days",
+    "success": "Success rate"
+  },
+  "status": {
+    "on": "On",
+    "off": "Off",
+    "not_configured": "Not configured"
+  },
+  "provider": {
+    "openai": "OpenAI-compatible",
+    "ollama": "Local",
+    "off": "Off"
+  },
+  "usage": {
+    "title": "Usage, last 7 days",
+    "audit": "Audit Log",
+    "empty": "No calls in the last 7 days",
+    "emptyOff": "The assistant is off"
+  },
+  "col": {
+    "feature": "Feature",
+    "calls": "Calls",
+    "succeeded": "Succeeded",
+    "rejected": "Rejected",
+    "retried": "Retried · fallback",
+    "median": "Median",
+    "p90": "p90"
+  },
+  "feature": {
+    "rule_draft": "Rule draft",
+    "explain": "Explain this",
+    "ask": "Ask",
+    "tool_call": "Lookups"
+  },
+  "unit": {
+    "s": "s"
+  },
+  "cfg": {
+    "title": "Configuration",
+    "model": "Model",
+    "offline": "Offline",
+    "key": "API key",
+    "lastTest": "Last test",
+    "where": "Set in the server environment:"
+  },
+  "yes": "Yes",
+  "no": "No",
+  "key": {
+    "configured": "Configured",
+    "not_configured": "Not configured",
+    "not_needed": "Not needed"
+  },
+  "err": {
+    "timeout": "No answer in time",
+    "provider_error": "Provider error",
+    "empty_answer": "Empty answer",
+    "off": "The assistant is off",
+    "not_configured": "The API key is not set"
+  },
+  "data": {
+    "title": "Data handling",
+    "sent": "Sent",
+    "sent1": "Typed text, masked",
+    "sent2": "Planning figures only",
+    "sent3": "Synthetic data only",
+    "never": "Never sent",
+    "never1": "Names and phone numbers",
+    "never2": "Case and plate numbers",
+    "never3": "Locations and user ids",
+    "never4": "The key stays on the server"
+  },
+  "states": {
+    "error": {
+      "desc": "The assistant overview could not load."
+    },
+    "empty": {
+      "title": "No calls in the last 7 days"
+    }
+  }
+}

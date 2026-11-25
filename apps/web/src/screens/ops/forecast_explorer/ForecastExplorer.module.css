@@ -1,0 +1,238 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Forecast Explorer: the picker card, the map's time controls and the ramp legend, the split card and the timeline. */
+.pickerGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 767px) {
+  .pickerGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.days {
+  overflow-inline: auto;
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .detailGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.mapCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+  padding: var(--od-space-16);
+  padding-block-start: 0;
+}
+
+.mapLibreFrame {
+  position: relative;
+  inline-size: 100%;
+  min-block-size: 360px;
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-lg);
+  background: var(--od-color-bg-subtle);
+  overflow: clip;
+}
+
+/* Beats maplibregl-map's position: relative */
+.mapLibreFrame > .mapLibrePlot {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+}
+
+.mapLibreState {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+.mapControls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-12);
+}
+
+.timeGroup {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.ramp {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  color: var(--od-color-text-label);
+}
+
+.rampBar {
+  display: inline-flex;
+}
+
+.rampSwatch {
+  display: block;
+  inline-size: 20px;
+  block-size: 10px;
+  border: 1px solid var(--od-color-border);
+}
+
+.rampSwatch[data-heat='1'] { background: var(--od-heat-1); }
+.rampSwatch[data-heat='2'] { background: var(--od-heat-2); }
+.rampSwatch[data-heat='3'] { background: var(--od-heat-3); }
+.rampSwatch[data-heat='4'] { background: var(--od-heat-4); }
+.rampSwatch[data-heat='5'] { background: var(--od-heat-5); }
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--od-space-16);
+  padding-block-end: 0;
+}
+
+/* Same row, inside a Card that already has its own padding (padding="lg"). */
+.cardHeaderFlush {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+}
+
+.legendKey {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--od-space-8);
+}
+
+.swatch {
+  flex: none;
+  inline-size: var(--od-space-8);
+  block-size: var(--od-space-8);
+  border-radius: var(--od-radius-full);
+}
+
+/* Chips sit in a wrapping row at their own width, as the mockup's wrapping row. */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.divider {
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.legendRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.topRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+}
+
+.topHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.headerActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.cellsLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  color: var(--od-color-text-label);
+}
+
+.cellsIcon {
+  inline-size: 16px;
+  block-size: 16px;
+  flex: none;
+}
+
+.prayers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-12);
+  color: var(--od-color-text-label);
+}
+
+/* Forecast against actual: header row and body. */
+.fvaHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding: var(--od-space-16);
+}
+
+.fvaBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+  min-inline-size: 0;
+  padding-inline: var(--od-space-16);
+  padding-block-end: var(--od-space-16);
+}

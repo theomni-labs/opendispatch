@@ -1,0 +1,207 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Users and Roles screen. Tokens and logical properties only. */
+
+/* --- lists and cells ----------------------------------------------------------------------------------------------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cellMain {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-6) var(--od-space-8);
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.zoneTags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.summary {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- access groups ------------------------------------------------------------------------------------------------ */
+.groupLabel {
+  color: var(--od-color-text-label);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-4);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- the Roles tab: the mockup's two-thirds and one-third grid, then the matrix -------------------------------------- */
+.rolesGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .rolesGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.roleButton {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--od-space-2);
+  margin: 0;
+  border: 0;
+  padding: 0;
+  background: none;
+  color: var(--od-color-text-heading);
+  font: inherit;
+  font-weight: var(--od-weight-medium);
+  text-align: start;
+  cursor: pointer;
+}
+
+.roleButton:hover {
+  color: var(--od-color-link);
+}
+
+.roleButton[aria-pressed='true'] {
+  color: var(--od-color-primary-text);
+}
+
+.effectiveHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.roleName {
+  font-weight: var(--od-weight-semibold);
+}
+
+.matrixScroll {
+  overflow: auto;
+}
+
+.matrix {
+  inline-size: 100%;
+  min-inline-size: 48rem;
+  border-collapse: collapse;
+  font-size: var(--od-font-size-12);
+}
+
+.matrix th,
+.matrix td {
+  padding: var(--od-space-8) var(--od-space-12);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+  text-align: start;
+  vertical-align: middle;
+}
+
+.matrix thead th {
+  background: var(--od-color-bg-table-header);
+  color: var(--od-color-text-label);
+  font-weight: var(--od-weight-semibold);
+}
+
+.matrix .center {
+  text-align: center;
+}
+
+.matrix .dim {
+  color: var(--od-color-text-secondary);
+}
+
+.matrix .stick {
+  position: sticky;
+  inset-inline-start: 0;
+  z-index: 1;
+  background: var(--od-color-bg-container);
+  font-weight: var(--od-weight-regular);
+  white-space: nowrap;
+}
+
+.matrix .stickHead {
+  background: var(--od-color-bg-table-header);
+  font-weight: var(--od-weight-semibold);
+}
+
+.matrix .groupHead {
+  position: sticky;
+  inset-inline-start: 0;
+  background: var(--od-color-bg-muted);
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.matrix [data-selected] {
+  background: var(--od-color-bg-selected);
+}
+
+.cellBadges {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--od-space-4);
+}
+
+/* --- drawers and forms -------------------------------------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.stubRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.roleList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}

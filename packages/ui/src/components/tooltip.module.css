@@ -1,0 +1,6 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.anchor {
+  display: inline-flex;
+  max-inline-size: 100%;
+}

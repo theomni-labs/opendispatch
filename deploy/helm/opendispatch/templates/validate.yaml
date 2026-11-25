@@ -1,0 +1,82 @@
+{{- $v := .Values -}}
+{{- if not (has $v.global.installMode (list "shared" "dedicated" "private")) }}
+{{- fail "global.installMode must be shared, dedicated or private" }}
+{{- end }}
+{{- if not (has $v.global.recordDataSource (list "SYNTHETIC" "LIVE")) }}
+{{- fail "global.recordDataSource must be SYNTHETIC or LIVE" }}
+{{- end }}
+{{- if ne $v.database.mode "external" }}
+{{- fail "database.mode: only external is supported" }}
+{{- end }}
+{{- if not $v.database.existingSecret }}
+{{- fail "database.existingSecret is required (keys owner-url and app-url)" }}
+{{- end }}
+{{- if not $v.objectStorage.existingSecret }}
+{{- fail "objectStorage.existingSecret is required (the api refuses to start in oidc mode without keys)" }}
+{{- end }}
+{{- if not $v.objectStorage.endpoint }}
+{{- fail "objectStorage.endpoint is required" }}
+{{- end }}
+{{- if ne $v.auth.mode "oidc" }}
+{{- fail "auth.mode must be oidc: demo mode is never deployed" }}
+{{- end }}
+{{- if eq (len $v.tenants) 0 }}
+{{- fail "tenants: list at least one customer id" }}
+{{- end }}
+{{- if and (ne $v.global.installMode "shared") (ne (len $v.tenants) 1) }}
+{{- fail "dedicated and private installs serve exactly one customer" }}
+{{- end }}
+{{- $orgs := list }}
+{{- range $v.tenants }}
+{{- if not (regexMatch "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$" (.id | default "")) }}
+{{- fail "tenants[].id must be a lower-case uuid" }}
+{{- end }}
+{{- /* one organisation per shared customer */}}
+{{- if eq $v.global.installMode "shared" }}
+{{- if not (regexMatch "^[a-z0-9][a-z0-9-]{0,62}$" (.organization | default "")) }}
+{{- fail "shared tier: tenants[].organization is required (the Keycloak organisation alias: a-z, 0-9, dash)" }}
+{{- end }}
+{{- if has .organization $orgs }}
+{{- fail "shared tier: tenants[].organization must be unique" }}
+{{- end }}
+{{- $orgs = append $orgs .organization }}
+{{- else if or .organization .organizationId }}
+{{- fail "tenants[].organization is for the shared tier only" }}
+{{- end }}
+{{- end }}
+{{- if and $v.sharedRealm.enabled (ne $v.global.installMode "shared") }}
+{{- fail "sharedRealm is for the shared tier only" }}
+{{- end }}
+{{- if and $v.sharedRealm.enabled (or (not $v.sharedRealm.server) (not $v.sharedRealm.realm) (not $v.sharedRealm.adminSecret)) }}
+{{- fail "sharedRealm.server, sharedRealm.realm and sharedRealm.adminSecret are required" }}
+{{- end }}
+{{- if and $v.keycloak.enabled (eq $v.global.installMode "shared") }}
+{{- fail "shared tier: Keycloak is ours and not part of this install" }}
+{{- end }}
+{{- if and $v.keycloak.enabled (or (not $v.keycloak.database.jdbcUrl) (not $v.keycloak.database.existingSecret)) }}
+{{- fail "keycloak.database.jdbcUrl and keycloak.database.existingSecret are required" }}
+{{- end }}
+{{- if and $v.keycloak.enabled $v.firstRun.enabled (not (regexMatch "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$" ($v.keycloak.firstAdmin.group | default ""))) }}
+{{- fail "keycloak.firstAdmin.group must be a plain group name (letters, digits, dot, dash, underscore)" }}
+{{- end }}
+{{- if not (has $v.routing.type (list "none" "gateway" "ingress" "route")) }}
+{{- fail "routing.type must be gateway, ingress, route or none" }}
+{{- end }}
+{{- if and (eq $v.routing.type "gateway") (eq (len $v.routing.gateway.parentRefs) 0) }}
+{{- fail "routing.gateway.parentRefs is required for routing.type gateway" }}
+{{- end }}
+{{- if and (hasPrefix "http://" (required "global.publicUrl is required" $v.global.publicUrl)) (not $v.auth.allowInsecureHttp) }}
+{{- fail "global.publicUrl must be https (auth.allowInsecureHttp is for throwaway tests only)" }}
+{{- end }}
+{{- /* a quota on limits.cpu refuses pods without one */}}
+{{- $res := dict "keycloak" $v.keycloak.resources "api" $v.api.resources "worker" $v.worker.resources "web" $v.web.resources "migrations" $v.migrations.resources "firstRun" $v.firstRun.resources "firstRun.bootstrap" $v.firstRun.bootstrap.resources "sharedRealm" $v.sharedRealm.resources -}}
+{{- range $name, $e := $v.engines }}{{ $_ := set $res (printf "engines.%s" $name) $e.resources }}{{ end -}}
+{{- range $name, $r := $res }}
+{{- range $kind := list "requests" "limits" }}
+{{- range $what := list "cpu" "memory" }}
+{{- if not (index (index ($r | default dict) $kind | default dict) $what) }}
+{{- fail (printf "%s.resources.%s.%s is required" $name $kind $what) }}
+{{- end }}
+{{- end }}
+{{- end }}
+{{- end }}

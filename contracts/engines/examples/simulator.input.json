@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "request_id": "3f6f1b1e-7a55-4c27-9d0a-00000000e003",
+  "requested_at": "2026-09-13T02:20:00+03:00",
+  "data_source": "SYNTHETIC",
+  "input_data_sources": [
+    "SYNTHETIC"
+  ],
+  "clock_start_primary": "assignment",
+  "threshold_seconds": 600,
+  "assignment_policy": "nearest",
+  "travel_model": {
+    "average_speed_kmh": 40,
+    "detour_factor": 1.3
+  },
+  "seed": 1,
+  "include_case_outcomes": false,
+  "cases": [
+    {
+      "case_id": "53c6974b-d62b-469d-afcd-d52d2b578eb6",
+      "registered_at": "2026-09-14T00:07:11+03:00",
+      "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "sub_zone_id": "54293f6f-617f-4055-b9af-35236212daae",
+      "latitude": 24.677298,
+      "longitude": 46.732792,
+      "handling": "field",
+      "parties_involved": 2,
+      "on_scene_seconds": 1200
+    },
+    {
+      "case_id": "e21eab2a-6fd9-48a3-b78e-abcacb3bc314",
+      "registered_at": "2026-09-14T00:10:21+03:00",
+      "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "sub_zone_id": "36dffe8a-259b-4332-93b3-0d04722d133a",
+      "latitude": 24.716765,
+      "longitude": 46.682847,
+      "handling": "field",
+      "parties_involved": 2,
+      "on_scene_seconds": 1200
+    },
+    {
+      "case_id": "e8f215c1-e584-4fb9-a71c-282300ca7434",
+      "registered_at": "2026-09-14T00:19:17+03:00",
+      "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "sub_zone_id": "1c3884cd-b920-4cdc-8f46-d3fa53127ce3",
+      "latitude": 24.710849,
+      "longitude": 46.713061,
+      "handling": "field",
+      "parties_involved": 2,
+      "on_scene_seconds": 1200
+    },
+    {
+      "case_id": "b741ff04-a7be-4eb1-ab90-3f4685a1e9c0",
+      "registered_at": "2026-09-14T00:23:05+03:00",
+      "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "sub_zone_id": "54293f6f-617f-4055-b9af-35236212daae",
+      "latitude": 24.685784,
+      "longitude": 46.648071,
+      "handling": "field",
+      "parties_involved": 2,
+      "on_scene_seconds": 1200
+    }
+  ],
+  "roster": {
+    "roster_ref": "roster-2026-09-14-RD-C",
+    "assignments": [
+      {
+        "agent_id": "8aec9202-669d-4b1d-8e97-27d132e909ed",
+        "shift_pattern_id": "bfd12e32-9711-49d5-a7a6-a1653fd12607",
+        "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+        "start_at": "2026-09-14T06:00:00+03:00",
+        "end_at": "2026-09-14T14:00:00+03:00",
+        "break_start_at": "2026-09-14T11:00:00+03:00",
+        "break_end_at": "2026-09-14T11:30:00+03:00",
+        "start_latitude": 24.738023,
+        "start_longitude": 46.721697
+      },
+      {
+        "agent_id": "c86ea707-a8f0-4213-aa6a-8a0c429845dc",
+        "shift_pattern_id": "bfd12e32-9711-49d5-a7a6-a1653fd12607",
+        "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+        "start_at": "2026-09-14T06:00:00+03:00",
+        "end_at": "2026-09-14T14:00:00+03:00",
+        "break_start_at": "2026-09-14T11:00:00+03:00",
+        "break_end_at": "2026-09-14T11:30:00+03:00",
+        "start_latitude": 24.738023,
+        "start_longitude": 46.721697
+      },
+      {
+        "agent_id": "85b352dd-77f5-4e0a-96f7-85126ee6000a",
+        "shift_pattern_id": "bfd12e32-9711-49d5-a7a6-a1653fd12607",
+        "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+        "start_at": "2026-09-14T06:00:00+03:00",
+        "end_at": "2026-09-14T14:00:00+03:00",
+        "break_start_at": "2026-09-14T11:00:00+03:00",
+        "break_end_at": "2026-09-14T11:30:00+03:00",
+        "start_latitude": 24.738023,
+        "start_longitude": 46.721697
+      }
+    ]
+  }
+}

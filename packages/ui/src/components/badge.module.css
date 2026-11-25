@@ -1,0 +1,140 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  max-inline-size: 100%;
+  margin-inline-end: 0;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.md {
+  font-size: var(--od-font-size-12);
+  line-height: 20px;
+}
+
+.sm {
+  padding-inline: var(--od-space-6);
+  font-size: var(--od-font-size-11);
+  line-height: 18px;
+}
+
+.solid {
+  color: var(--od-color-text-on-primary);
+}
+
+.label {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  display: inline-flex;
+  line-height: 0;
+}
+
+.icon :where(svg) {
+  inline-size: 12px;
+  block-size: 12px;
+}
+
+.dot {
+  flex: none;
+  inline-size: 6px;
+  block-size: 6px;
+  border-radius: var(--od-radius-full);
+  background: currentcolor;
+}
+
+.neutral .dot {
+  background: var(--od-color-neutral);
+}
+
+.accent .dot,
+.info .dot {
+  background: var(--od-color-primary);
+}
+
+.success .dot {
+  background: var(--od-color-success);
+}
+
+.warning .dot {
+  background: var(--od-color-warning);
+}
+
+.danger .dot {
+  background: var(--od-color-error);
+}
+
+.solid .dot {
+  background: currentcolor;
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  inline-size: 16px;
+  block-size: 16px;
+  margin-inline-end: calc(-1 * var(--od-space-2));
+  padding: 0;
+  border: 0;
+  border-radius: var(--od-radius-xs);
+  background: transparent;
+  color: inherit;
+  font-size: var(--od-font-size-11);
+  cursor: pointer;
+}
+
+.remove:hover {
+  background: var(--od-color-bg-hover);
+}
+
+.remove:focus-visible {
+  outline: 2px solid var(--od-color-border-focus);
+  outline-offset: 1px;
+}
+
+.count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 20px;
+  block-size: 20px;
+  padding-inline: var(--od-space-6);
+  border-radius: var(--od-radius-full);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
+}
+
+.count-neutral {
+  background: var(--od-color-neutral-bg);
+  color: var(--od-color-neutral-text);
+}
+
+.count-accent,
+.count-info {
+  background: var(--od-color-primary);
+  color: var(--od-color-text-on-primary);
+}
+
+.count-success {
+  background: var(--od-color-success);
+  color: var(--od-color-text-on-primary);
+}
+
+.count-warning {
+  background: var(--od-color-warning);
+  color: var(--od-color-text);
+}
+
+.count-danger {
+  background: var(--od-color-error);
+  color: var(--od-color-text-on-primary);
+}

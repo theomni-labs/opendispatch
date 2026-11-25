@@ -1,0 +1,147 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Data Import and Quality screen. Tokens and logical properties only.
+   Layout lives on inner elements, never on a design system component itself. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.stackTight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+/* Two thirds and one third (the mockup's detail grid), one column below 1080px. */
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1080px) {
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-20);
+  min-inline-size: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+}
+
+.headTitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  overflow-wrap: anywhere;
+}
+
+.strong {
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+/* A label and its value on one line (the mockup's kv). */
+.kv {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+/* Before, change and after (the mockup's cols 3). */
+.stats3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 640px) {
+  .stats3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.plainFieldset {
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.summary {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}

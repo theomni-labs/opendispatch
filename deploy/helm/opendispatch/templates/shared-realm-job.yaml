@@ -1,0 +1,75 @@
+{{- if and (eq .Values.global.installMode "shared") .Values.sharedRealm.enabled }}
+{{- /* organisations in our realm */ -}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-shared-realm
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+data:
+  organizations.sh: |
+    {{- .Files.Get "files/shared-realm/organizations.sh" | nindent 4 }}
+---
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-shared-realm
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: shared-realm
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 900
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" (dict "root" . "component" "shared-realm") | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      restartPolicy: Never
+      containers:
+        - name: shared-realm
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.keycloak "name" "keycloak") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["/bin/bash", "/script/organizations.sh"]
+          env:
+            - name: HOME
+              value: /tmp
+            - name: KC_SERVER
+              value: {{ .Values.sharedRealm.server | quote }}
+            - name: REALM
+              value: {{ .Values.sharedRealm.realm | quote }}
+            - name: CLIENT_ID
+              value: {{ .Values.auth.clientId | quote }}
+            - name: ORGANIZATIONS
+              value: {{ $orgs := list }}{{ range .Values.tenants }}{{ $orgs = append $orgs .organization }}{{ end }}{{ join " " $orgs | quote }}
+            - name: KC_ADMIN_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sharedRealm.adminSecret }}
+                  key: username
+            - name: KC_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.sharedRealm.adminSecret }}
+                  key: password
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          volumeMounts:
+            - name: script
+              mountPath: /script
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.sharedRealm.resources | nindent 12 }}
+      volumes:
+        - name: script
+          configMap:
+            name: {{ include "opendispatch.fullname" . }}-shared-realm
+        {{- include "opendispatch.tmpVolume" . | nindent 8 }}
+{{- end }}

@@ -1,0 +1,96 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Why this forecast: one row per driver. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.titleRow {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(0, 11rem) minmax(0, 1fr) minmax(5rem, max-content);
+  grid-template-areas: 'label bar value';
+  align-items: center;
+  gap: var(--od-space-4) var(--od-space-12);
+}
+
+@media (width <= 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) max-content;
+    grid-template-areas:
+      'label value'
+      'bar bar';
+  }
+}
+
+.row > :nth-child(1) { grid-area: label; }
+.row > :nth-child(2) { grid-area: bar; }
+.row > :nth-child(3) { grid-area: value; }
+
+.total {
+  border-block-start: 1px solid var(--od-color-border);
+  padding-block-start: var(--od-space-8);
+}
+
+.label {
+  color: var(--od-color-text);
+}
+
+.value {
+  text-align: end;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  position: relative;
+  block-size: 8px;
+  background: var(--od-color-bg-subtle);
+  border-radius: var(--od-radius-xs);
+}
+
+.bar::before {
+  content: '';
+  position: absolute;
+  inset-block: -3px;
+  inset-inline-start: 50%;
+  inline-size: 1px;
+  background: var(--od-color-border-strong);
+}
+
+.up,
+.down {
+  position: absolute;
+  inset-block: 0;
+  border-radius: var(--od-radius-xs);
+  background: var(--od-chart-1);
+}
+
+.up {
+  inset-inline-start: 50%;
+}
+
+.down {
+  inset-inline-end: 50%;
+}

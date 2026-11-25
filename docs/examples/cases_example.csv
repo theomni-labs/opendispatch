@@ -1,0 +1,5 @@
+RecordID,CaseNumber,RegisteredTime,CityID,CityNameEn,ZoneID,ZoneNameEn,SubZoneID,SubZoneNameEn,Latitude,Longitude,CaseTypeID,CaseTypeNameEn,PartyCount,AssignedTime,ArrivalTime,ClosingTime,ClaimAmount,AssessmentMethod,LocationType,CustomerPreference,Severity,ResolutionMethod
+EX-000001,RD-260920-00001,2026-09-20 08:14:00,101,Riyadh,2001,Riyadh Central,30001,Amber Terrace,24.7118,46.6301,1,Standard case,2,2026-09-20 08:17:00,2026-09-20 08:29:00,2026-09-20 08:44:00,4200,photo,dense_urban,none,minor,field
+EX-000002,RD-260920-00002,2026-09-20T09:02:30+03:00,101,Riyadh,2002,Riyadh North,30013,Mesa Grove,24.8001,46.6195,2,Police attended,3,2026-09-20T09:05:10+03:00,2026-09-20T09:16:40+03:00,2026-09-20T09:41:00+03:00,12500,in_person,urban,field,moderate,
+EX-000003,JD-260920-00001,2026-09-20 10:47:00,102,Jeddah,2006,Jeddah North,30067,Umber Court,21.6101,39.1089,1,Standard case,2,,,2026-09-20 11:20:00,1800,video,suburban,remote,minor,remote
+EX-000004,DM-260920-00001,2026-09-20 22:31:00,103,Dammam,2008,Dammam Central,30098,Nova Point,26.4325,50.0218,3,Unlisted,2,2026-09-20 22:34:00,2026-09-20 22:47:00,2026-09-20 23:05:00,,,,,,

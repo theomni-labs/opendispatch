@@ -1,0 +1,13 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.inline {
+  display: flex;
+  flex-direction: row;
+  min-inline-size: 0;
+}

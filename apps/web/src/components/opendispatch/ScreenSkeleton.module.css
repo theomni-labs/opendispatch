@@ -1,0 +1,60 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The loading shapes of the Admin screens. */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-12);
+}
+
+.grow {
+  flex: 1;
+  min-inline-size: 0;
+}
+
+/* Detail: a header row, a block and lines in one card (the shape of docs/mockups/screens/_states.html). */
+.detail {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+/* Cards: as many columns as fit, one on a phone. */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr));
+  gap: var(--od-space-16);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+}
+
+/* Form: a label line and a field, five times, then the button. */
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-20);
+  max-inline-size: 40rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}

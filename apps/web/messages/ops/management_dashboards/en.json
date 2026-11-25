@@ -1,0 +1,91 @@
+{
+  "sub": "Daily roll-up, {date}",
+  "toast": {
+    "export": "Roll-up exported"
+  },
+  "scope": {
+    "label": "Scope",
+    "kingdom": "Kingdom",
+    "city": "City",
+    "zone": "Zone"
+  },
+  "pick": {
+    "city": "City",
+    "zone": "Zone"
+  },
+  "stat": {
+    "cases": "Cases",
+    "regAssigned": "Registered to assigned",
+    "onShift": "On shift"
+  },
+  "read": {
+    "title": "Within 10 min",
+    "fromAssignment": "From assignment",
+    "fromRegistration": "From registration",
+    "cases": "{n} field cases",
+    "target": "Target {pct}"
+  },
+  "cmp": {
+    "cities": "City comparison",
+    "zones": "Zone comparison"
+  },
+  "trend": {
+    "title": "7 days"
+  },
+  "zones": {
+    "title": "Zones"
+  },
+  "col": {
+    "stage": "Stage",
+    "cases": "Cases",
+    "field": "Field"
+  },
+  "states": {
+    "empty": {
+      "title": "No roll-ups yet",
+      "desc": "The daily job has not run."
+    },
+    "error": {
+      "desc": "The roll-ups could not load."
+    }
+  },
+  "plan": {
+    "title": "Plan week",
+    "period": "{from} to {to}",
+    "windows": "Surplus windows",
+    "longest": "Longest",
+    "hours": "Surplus hours",
+    "h": "h",
+    "overrides": "Overrides",
+    "target": "Override target {pct}",
+    "short": "Short hours"
+  },
+  "util": {
+    "title": "Utilization",
+    "all": "All shifts",
+    "home": "Home shifts",
+    "homeTip": "No roster: agents' home shifts",
+    "baseline": "Baseline",
+    "change": "Change",
+    "base": "Baseline {from} to {to}",
+    "target": "Target +{pts} pts",
+    "pts": "pts"
+  },
+  "fc": {
+    "title": "Forecast and cases",
+    "cases": "Cases",
+    "forecast": "Forecast"
+  },
+  "adh": {
+    "title": "Schedule adherence",
+    "zones": "Adherence by zone",
+    "plannedOn": "Planned on duty",
+    "actualOn": "Actual on duty",
+    "planned": "Planned hours",
+    "actual": "Actual hours",
+    "share": "Adherence",
+    "late": "Late starts",
+    "absent": "Absent",
+    "none": "No attendance data"
+  }
+}

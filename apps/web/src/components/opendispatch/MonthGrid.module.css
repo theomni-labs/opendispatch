@@ -1,0 +1,105 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* A month as a grid of days. The weeks follow the page direction. */
+.grid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-md);
+  overflow: hidden;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+}
+
+.weekday {
+  padding: var(--od-space-8);
+  background: var(--od-color-bg-table-header);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  text-align: center;
+}
+
+.cell,
+.empty {
+  min-block-size: 4.5rem;
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  border-inline-start: 1px solid var(--od-color-border-secondary);
+}
+
+.row > :first-child {
+  border-inline-start: 0;
+}
+
+.cell {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  padding: var(--od-space-4) var(--od-space-8);
+  background: var(--od-color-bg-container);
+}
+
+.empty {
+  background: var(--od-color-bg-subtle);
+}
+
+.ramadan {
+  background: var(--od-cat-green-bg);
+}
+
+.holiday {
+  background: var(--od-cat-gold-bg);
+}
+
+.today {
+  background: var(--od-color-bg-selected);
+  outline: 2px solid var(--od-color-primary);
+  outline-offset: -2px;
+}
+
+.day {
+  font-weight: var(--od-weight-semibold);
+}
+
+.secondary {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-11);
+}
+
+.name,
+.link {
+  display: block;
+  overflow: hidden;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-11);
+  line-height: 1.3;
+  text-overflow: ellipsis;
+}
+
+.link {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  font: inherit;
+  font-size: var(--od-font-size-11);
+  text-align: start;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

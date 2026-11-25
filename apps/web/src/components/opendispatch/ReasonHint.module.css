@@ -1,0 +1,50 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's reason: the visible reason next to a control that cannot be used right now, one short line. A control
+   that explains itself is aria-disabled, not disabled: it keeps focus and its tooltip, and never acts. The design
+   system's buttons style only the native :disabled, so the disabled look of an aria-disabled control is set here. */
+.gate {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  max-inline-size: 100%;
+}
+
+.below {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--od-space-6);
+}
+
+.gate :is(button, a)[aria-disabled='true'] {
+  border-color: var(--od-color-border-secondary);
+  background: var(--od-color-bg-subtle);
+  color: var(--od-color-text-disabled);
+  cursor: not-allowed;
+  filter: none;
+}
+
+.gate.quiet :is(button, a)[aria-disabled='true'] {
+  border-color: transparent;
+  background: transparent;
+}
+
+.reason {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  line-height: 1.35;
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+}
+
+.icon > svg {
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+}

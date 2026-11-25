@@ -1,0 +1,11 @@
+name: Question
+description: Ask how something works or how to use it.
+labels: [question]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Your question
+      description: Include what you have read and tried.
+    validations:
+      required: true

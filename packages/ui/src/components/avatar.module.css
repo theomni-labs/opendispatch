@@ -1,0 +1,42 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.avatar {
+  flex: none;
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+}
+
+.gray {
+  background: var(--od-cat-gray-bg);
+  color: var(--od-cat-gray-fg);
+}
+
+.red {
+  background: var(--od-cat-red-bg);
+  color: var(--od-cat-red-fg);
+}
+
+.gold {
+  background: var(--od-cat-gold-bg);
+  color: var(--od-cat-gold-fg);
+}
+
+.green {
+  background: var(--od-cat-green-bg);
+  color: var(--od-cat-green-fg);
+}
+
+.magenta {
+  background: var(--od-cat-magenta-bg);
+  color: var(--od-cat-magenta-fg);
+}
+
+.volcano {
+  background: var(--od-cat-volcano-bg);
+  color: var(--od-cat-volcano-fg);
+}
+
+.geekblue {
+  background: var(--od-cat-geekblue-bg);
+  color: var(--od-cat-geekblue-fg);
+}

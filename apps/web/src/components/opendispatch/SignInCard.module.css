@@ -1,0 +1,116 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The sign-in pages: a bare page, no shell, and one centred column of cards, each at
+   most 420px wide (the mockup's max-inline-size), like the demo start page. Nothing here is directional: logical properties only. */
+
+.page {
+  display: flex;
+  justify-content: center;
+  min-block-size: 100dvb;
+  padding-block: var(--od-space-48);
+  padding-inline: var(--od-space-16);
+  box-sizing: border-box;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  inline-size: min(100%, 26.25rem);
+  min-inline-size: 0;
+}
+
+/* The content of a card: a column with 16px between its parts (the mockup's stack gap 16). It is an element of its own
+   inside the design system's Card, because a class put on the Card itself loses to the Card's own `display: block`: in the
+   production CSS the design system's rule comes after this file's (found in the A2 screenshots). */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* The brand at the start and the language toggle at the end, as the mockup's top row of each card. */
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-16);
+}
+
+.brand {
+  font-family: var(--od-font-latin);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-bold);
+  letter-spacing: 0.02em;
+  color: var(--od-color-text-heading);
+}
+
+/* The card title: the page's h1 on a sign-in page, an h2 for the mock provider card. Weight, not size. */
+.title {
+  margin: 0;
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  line-height: 1.4;
+  color: var(--od-color-text-heading);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.centered {
+  align-self: center;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+/* The alert's title is the page's heading (h1) on a message page: it keeps the alert's own look. */
+.alertTitle {
+  margin: 0;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+
+/* The reference code and its Copy button (the mockup's badge and ghost button). A code is Latin text and digits: it reads
+   left to right in Arabic too. */
+.reference {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.code {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The Signed out state: the empty state inside the card, without the padding of its own (the card has it, and the mockup sets
+   padding 0). The host element and the element selector make this rule the more specific one: the design system's own
+   `.empty` padding comes after this file in the production CSS and would win a single class. */
+.signedOutHost > div {
+  padding: 0;
+}
+
+@media (width < 640px) {
+  .page {
+    padding-block: var(--od-space-24);
+  }
+}

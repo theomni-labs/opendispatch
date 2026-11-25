@@ -1,0 +1,75 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Four figures across, two by two below 1024px (grid stats). */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.hint {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4) var(--od-space-8);
+}
+
+/* Rule 19: armed is quiet, active is warning-toned. */
+.fallback,
+.fallbackActive {
+  --tone-solid: var(--od-color-success);
+
+  display: grid;
+  min-inline-size: 0;
+}
+
+.fallbackActive {
+  --tone-solid: var(--od-color-warning);
+}
+
+.fallbackActive > * {
+  border-color: var(--od-color-warning-border);
+  background: var(--od-color-warning-bg);
+}
+
+.fallbackIcon {
+  color: var(--tone-solid);
+}
+
+.fallbackFoot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-4) var(--od-space-8);
+}
+
+.count {
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-label);
+}
+
+.count b {
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.stages {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--od-space-8);
+}
+
+.stagesTitle {
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-label);
+}

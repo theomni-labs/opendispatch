@@ -1,0 +1,99 @@
+# Private install: the customer's own Kubernetes.
+# Example addresses only; the installer sets the real ones.
+global:
+  installMode: private
+  publicUrl: https://opendispatch.customer.example
+  imageRegistry: registry.customer.example/opendispatch
+  imagePullPolicy: IfNotPresent
+  # a real customer install
+  recordDataSource: LIVE
+
+tenants:
+  # Set by the installer from the licence
+  - id: 00000000-0000-4000-8000-000000000001
+
+images:
+  api: { repository: opendispatch-api, tag: "0.0.0-dev" }
+  worker: { repository: opendispatch-worker, tag: "0.0.0-dev" }
+  web: { repository: opendispatch-web, tag: "0.0.0-dev" }
+  engines: { repository: opendispatch-engines, tag: "0.0.0-dev" }
+
+# The customer brings Postgres 16+ with TimescaleDB
+database:
+  mode: external
+  existingSecret: opendispatch-database
+  cidrs: []
+
+objectStorage:
+  endpoint: s3.customer.example
+  port: 443
+  bucket: opendispatch-imports
+  useSSL: true
+  existingSecret: opendispatch-object-storage
+
+auth:
+  mode: oidc
+  clientId: opendispatch-web
+
+keycloak:
+  enabled: true
+  realm: opendispatch
+  database:
+    jdbcUrl: jdbc:postgresql://postgres.customer.example:5432/keycloak?sslmode=require
+    existingSecret: opendispatch-keycloak-database
+  firstAdmin:
+    username: opendispatch-admin
+  resources:
+    requests: { cpu: 500m, memory: 1Gi }
+    limits: { cpu: "2", memory: 2Gi }
+
+# Starting size; measure with tools/loadgen before changing it
+api:
+  replicas: 2
+  dispatchSource: feeds
+  resources:
+    requests: { cpu: 500m, memory: 1Gi }
+    limits: { cpu: "2", memory: 2Gi }
+
+worker:
+  enabled: true
+  resources:
+    requests: { cpu: 250m, memory: 512Mi }
+    limits: { cpu: "1", memory: 2Gi }
+
+web:
+  replicas: 2
+  resources:
+    requests: { cpu: 250m, memory: 512Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+engines:
+  forecaster:
+    replicas: 1
+    resources: { requests: { cpu: "1", memory: 2Gi }, limits: { cpu: "2", memory: 4Gi } }
+  optimizer:
+    replicas: 1
+    resources: { requests: { cpu: "1", memory: 2Gi }, limits: { cpu: "4", memory: 4Gi } }
+  simulator:
+    replicas: 1
+    resources: { requests: { cpu: 500m, memory: 1Gi }, limits: { cpu: "1", memory: 2Gi } }
+  # live assignment: two, so one can be drained
+  assignment:
+    replicas: 2
+    resources: { requests: { cpu: 500m, memory: 512Mi }, limits: { cpu: "1", memory: 1Gi } }
+
+firstRun:
+  enabled: true
+
+# The customer's cluster is not yet known; the installer picks one
+routing:
+  type: none
+  tls:
+    secretName: opendispatch-tls
+
+networkPolicy:
+  enabled: true
+  routerPeers: []
+
+podDisruptionBudget:
+  enabled: true

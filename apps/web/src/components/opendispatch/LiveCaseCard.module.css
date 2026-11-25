@@ -1,0 +1,105 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's case, slim: one case on the Live Dispatch Board. */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+  padding: var(--od-space-12);
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-lg);
+  background: var(--od-color-bg-container);
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover {
+  border-color: var(--od-color-border-strong);
+}
+
+.head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+/* The case number opens the drawer from the keyboard. */
+.open {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-align: start;
+  cursor: pointer;
+  border-radius: var(--od-radius-sm);
+}
+
+.open:focus-visible {
+  outline: none;
+  box-shadow: var(--od-focus-ring);
+}
+
+.id {
+  font-size: var(--od-font-size-13);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+  font-variant-numeric: tabular-nums;
+}
+
+.time {
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--od-space-4) var(--od-space-8);
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-label);
+}
+
+.pick {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.pickName {
+  font-size: var(--od-font-size-13);
+  font-weight: var(--od-weight-medium);
+  color: var(--od-color-text-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-inline-size: 100%;
+}
+
+.pickMeta {
+  flex: none;
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.action {
+  flex: 1;
+}

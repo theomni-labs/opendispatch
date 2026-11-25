@@ -1,0 +1,22 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.headRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--od-space-8) var(--od-space-12);
+  margin-block-end: var(--od-space-16);
+}
+
+.title {
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.scope {
+  margin-block-start: var(--od-space-12);
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+}

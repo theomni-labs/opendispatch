@@ -1,0 +1,171 @@
+{
+  "sub": "Replay of {date}, {time}",
+  "replay": {
+    "pause": "Pause replay",
+    "resume": "Resume replay"
+  },
+  "outage": {
+    "on": "Simulate feed outage",
+    "off": "Resume feed"
+  },
+  "stage": {
+    "title": "Stage per zone",
+    "button": "Stages"
+  },
+  "fallback": {
+    "armed": "Fallback armed",
+    "armedMeta": "{customer} dispatch takes over after {s, plural, one {# second} other {# seconds}}",
+    "active": "Fallback active",
+    "since": {
+      "none": "Active since {time}",
+      "feed_outage": "Case feed down since {time}",
+      "health_check_failed": "OpenDispatch health check failed at {time}",
+      "opendispatch_timeout": "OpenDispatch missed its decision deadline at {time}",
+      "manual": "Fallback signal sent at {time}",
+      "maintenance": "Maintenance mode since {time}"
+    },
+    "label": "Fallback",
+    "armedShort": "Armed",
+    "activeShort": "Active"
+  },
+  "board": {
+    "title": "Incoming cases",
+    "empty": "No cases",
+    "col": {
+      "waiting": "Waiting",
+      "recommended": "Recommended",
+      "assigned": "Assigned",
+      "enroute": "En route",
+      "onscene": "On scene"
+    }
+  },
+  "need": {
+    "edit": "View only for this role"
+  },
+  "toast": {
+    "assigned": "Assigned to {name}",
+    "reassigned": "Reassigned to {name}",
+    "reason": "Reason: {reason}",
+    "outageOn": "Feed outage",
+    "outageOnDesc": "Board switched to fallback",
+    "outageOff": "Feed restored",
+    "outageOffDesc": "OpenDispatch resumes recommending",
+    "taken": "Already assigned: nothing was sent"
+  },
+  "map": {
+    "title": "Agents",
+    "case": "Case",
+    "spot": "Waiting spot",
+    "perZone": "Cases per zone"
+  },
+  "read": {
+    "title": "Within 10 min",
+    "source": "Source",
+    "customer": "{customer}",
+    "opendispatch": "OpenDispatch shadow",
+    "fromAssignment": "From assignment",
+    "fromRegistration": "From registration",
+    "scope": "{count, plural, one {# case compared} other {# cases compared}} · {from} to {to}"
+  },
+  "cmp": {
+    "title": "Shadow comparison"
+  },
+  "override": {
+    "title": "Override assignment",
+    "agent": "New agent",
+    "choose": "Choose an agent",
+    "noMatch": "No match",
+    "need": {
+      "agent": "Choose an agent",
+      "reason": "Choose a reason",
+      "note": "Add a note"
+    }
+  },
+  "states": {
+    "empty": {
+      "title": "No cases yet",
+      "desc": "Cases appear here as the replay day arrives."
+    }
+  },
+  "ur": {
+    "title": "Out of 10-minute reach",
+    "day": "Day",
+    "cause": "Cause",
+    "causes": {
+      "geography": "Too far",
+      "people": "No agent free"
+    },
+    "col": {
+      "case": "Case",
+      "time": "Registered",
+      "nearest": "Nearest available",
+      "travel": "Travel"
+    },
+    "minutes": "{n} min",
+    "none": {
+      "title": "Every case within reach",
+      "desc": "No case on this day and filter was beyond {min} minutes."
+    }
+  },
+  "ws": {
+    "title": "Waiting spots",
+    "suggestion": "Suggestion",
+    "col": {
+      "agent": "Agent",
+      "move": "Drive",
+      "reason": "Why"
+    },
+    "km": "{n} km",
+    "reasons": {
+      "cover_expected_demand": "Cover expected cases",
+      "rebalance_zone": "Balance the zone"
+    },
+    "none": {
+      "title": "No moves suggested",
+      "desc": "Idle agents are already near the expected cases."
+    }
+  },
+  "fig": {
+    "today": "Today",
+    "within": {
+      "assignment": "From assignment · {value} from registration",
+      "registration": "From registration · {value} from assignment"
+    },
+    "noData": "No comparisons yet"
+  },
+  "tab": {
+    "label": "Board views",
+    "board": "Board",
+    "map": "Map",
+    "spots": "Waiting spots",
+    "reach": "Out of reach",
+    "shadow": "Shadow comparison"
+  },
+  "col": {
+    "progress": "In progress"
+  },
+  "more": "Show {n} more",
+  "less": "Show less",
+  "menu": {
+    "handover": "Shift handover"
+  },
+  "case": {
+    "details": "Details",
+    "history": "History",
+    "registered": "Registered",
+    "parties": "Parties",
+    "stage": "Stage",
+    "handling": "Handling",
+    "rule": "Rule",
+    "agent": "Agent",
+    "h": {
+      "registered": "Registered",
+      "waiting": "Waiting for dispatch",
+      "recommended": "OpenDispatch recommended",
+      "assigned": "Assigned",
+      "overridden": "Overridden",
+      "enroute": "En route",
+      "arrived": "Arrived"
+    }
+  }
+}

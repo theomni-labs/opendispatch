@@ -1,0 +1,26 @@
+{{- if .Values.podDisruptionBudget.enabled }}
+{{- $items := list (dict "component" "api" "replicas" .Values.api.replicas) (dict "component" "web" "replicas" .Values.web.replicas) }}
+{{- range $name, $e := .Values.engines }}
+{{- $items = append $items (dict "component" (printf "engine-%s" $name) "replicas" $e.replicas) }}
+{{- end }}
+{{- $first := true }}
+{{- range $items }}
+{{- if gt (int .replicas) 1 }}
+{{- if not $first }}
+---
+{{- end }}
+{{- $first = false }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: {{ include "opendispatch.fullname" $ }}-{{ .component }}
+  labels:
+    {{- include "opendispatch.labels" $ | nindent 4 }}
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels:
+      {{- include "opendispatch.selector" (dict "root" $ "component" .component) | nindent 6 }}
+{{- end }}
+{{- end }}
+{{- end }}

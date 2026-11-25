@@ -1,0 +1,75 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Field Planner Workbench: the zone and day picker row (not in the mockup, added for a multi-zone install). */
+.picker {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-12);
+  margin-block-end: var(--od-space-4);
+}
+
+.dayNav {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.dayLabel {
+  min-inline-size: 8em;
+  text-align: center;
+  color: var(--od-color-text-label);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.approvalText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+}
+
+.gridHeader {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-8) var(--od-space-16);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--od-space-16);
+  padding-block-end: 0;
+}
+
+.gridHeader > h2 {
+  flex: none;
+}
+
+/* Week view: a center or day cell, and the card footer */
+.cellStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+}
+
+.weekCell {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--od-space-2);
+  color: inherit;
+  text-decoration: none;
+}
+
+.weekCell:hover,
+.weekCell:focus-visible {
+  text-decoration: underline;
+}
+
+.weekFoot {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+

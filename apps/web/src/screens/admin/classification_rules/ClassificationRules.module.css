@@ -1,0 +1,245 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Classification Rules screen. Tokens and logical properties only. */
+
+/* --- the page: stats, then the rules card beside the precedence and approval cards ------------------------------------ */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 22rem;
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.precedence {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.precedenceItem {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  margin: var(--od-space-12) 0 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- cells ---------------------------------------------------------------------------------------------------------- */
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  white-space: normal;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.cond {
+  display: block;
+  min-inline-size: 10rem;
+  max-inline-size: 15rem;
+  white-space: normal;
+}
+
+.change {
+  display: block;
+  min-inline-size: 15rem;
+  max-inline-size: 22rem;
+  white-space: normal;
+}
+
+.versionCell {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.summary {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- the AI review tab ------------------------------------------------------------------------------------------------ */
+.aiHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}
+
+.aiTitle {
+  flex: 1 1 auto;
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-semibold);
+}
+
+.cellStack {
+  display: flex;
+  flex-direction: column;
+}
+
+.wrap {
+  display: block;
+  min-inline-size: 12rem;
+  max-inline-size: 20rem;
+  white-space: normal;
+}
+
+.aiFoot {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- the drawer ------------------------------------------------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.versionBadge {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-semibold);
+}
+
+.dates {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+.versions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.versionItem {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+/* --- the condition builder ----------------------------------------------------------------------------------------------- */
+.builder {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.builderHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.rows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.predicate {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.value {
+  inline-size: 8rem;
+}

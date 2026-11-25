@@ -1,0 +1,61 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.checkbox {
+  align-items: flex-start;
+}
+
+.choice,
+.option {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+}
+
+.description {
+  padding-inline-start: var(--od-space-24);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-13);
+  line-height: var(--od-line-height);
+}
+
+.group {
+  display: flex;
+  gap: var(--od-space-8);
+}
+
+.vertical {
+  flex-direction: column;
+}
+
+.horizontal {
+  flex-flow: row wrap;
+  gap: var(--od-space-8) var(--od-space-20);
+}
+
+.switchRow {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: var(--od-space-8);
+}
+
+.switchText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+}
+
+.switchText .description {
+  padding-inline-start: 0;
+}
+
+.switchLabel {
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-14);
+  line-height: var(--od-control-height-sm);
+  cursor: pointer;
+}
+
+.disabled {
+  color: var(--od-color-text-disabled);
+  cursor: not-allowed;
+}

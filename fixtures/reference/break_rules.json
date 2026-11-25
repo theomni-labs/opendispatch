@@ -1,0 +1,4 @@
+[
+{"id":"b789cbe5-c479-40e7-8d3f-aee0eab303c4","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","code":"BRK-STD","name_en":"Standard: 30 minutes after 5 consecutive hours","name_ar":null,"break_minutes":30,"after_consecutive_hours":5},
+{"id":"adc13b31-32e0-4d05-8de7-d7774c2391d7","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","code":"BRK-RAM","name_en":"Ramadan hours: 30 minutes after 5 consecutive hours","name_ar":null,"break_minutes":30,"after_consecutive_hours":5}
+]

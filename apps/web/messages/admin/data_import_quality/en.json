@@ -1,0 +1,298 @@
+{
+  "upload": "Upload file",
+  "menu": {
+    "mapping": "Download mapping",
+    "exportIssues": "Export issues"
+  },
+  "toast": {
+    "mapping": "Mapping downloaded",
+    "export": "Export started",
+    "uploaded": "File uploaded",
+    "issue": "Issue set to {status}",
+    "validated": {
+      "title": "File validated",
+      "desc": "{e, plural, one {{e} error} other {{e} errors}}, {w, plural, one {{w} warning} other {{w} warnings}}"
+    },
+    "compared": {
+      "title": "Comparison ready",
+      "desc": "{n, plural, one {{n} new case} other {{n} new cases}}"
+    },
+    "blocked": "Dry run blocked",
+    "dry": "Dry run passed",
+    "cut": "Cut over done",
+    "rolledBack": "Cut-over rolled back"
+  },
+  "state": {
+    "label": "State",
+    "filled": "Filled",
+    "empty": "Empty",
+    "loading": "Loading",
+    "error": "Error"
+  },
+  "tab": {
+    "import": "Import",
+    "issues": "Issues",
+    "jobs": "Jobs"
+  },
+  "stat": {
+    "rows": "Rows in file",
+    "errors": "Errors",
+    "warnings": "Warnings",
+    "held": "Cases held"
+  },
+  "up": {
+    "title": "Upload",
+    "drop": "Drop a file or",
+    "browse": "browse",
+    "hintLimit": "CSV only, up to {max} GB",
+    "noMapping": "No column mapping is installed, so a file cannot be read.",
+    "tooBig": "{name} is larger than {max} GB.",
+    "source": "Data source",
+    "sent": "{sent} of {total} MB sent",
+    "joining": "Joining the parts",
+    "cancel": "Cancel",
+    "retry": "Retry",
+    "failed": "Upload stopped",
+    "failedBody": "Part {part} of {parts} did not arrive. Retry sends it and the rest.",
+    "cancelled": "Upload cancelled"
+  },
+  "rows": "rows",
+  "step": {
+    "upload": "Upload",
+    "validate": "Validate",
+    "compare": "Compare",
+    "dryrun": "Dry run",
+    "cutover": "Cut over"
+  },
+  "notValidated": "Not validated yet",
+  "cmp": {
+    "before": "Before",
+    "change": "Change",
+    "after": "After",
+    "new": "New",
+    "changed": "Changed",
+    "unchanged": "Unchanged",
+    "skipped": "Skipped, errors",
+    "missing": "Missing from file",
+    "lost": "The figures are not kept after a reload.",
+    "again": "Compare again"
+  },
+  "dry": {
+    "blocked": "Cut-over blocked",
+    "blockedBody": "{n, plural, one {{n} error must be resolved or ignored first.} other {{n} errors must be resolved or ignored first.}}",
+    "passed": "Dry run passed",
+    "passedBody": "{add} to add, {upd} to update, {skip} skipped.",
+    "passedShort": "Nothing blocks the cut-over."
+  },
+  "viewIssues": "View issues",
+  "cut": {
+    "title": "Cut over",
+    "body": "{add} cases added, {upd} updated.",
+    "body1": "{add} cases added on {when}.",
+    "bodyRows": "{n} rows were brought in on {when}."
+  },
+  "fail": {
+    "title": "Header not read",
+    "body": "A required column is missing from the header row. Check the file against the mapping and upload it again."
+  },
+  "act": {
+    "validate": "Validate",
+    "compare": "Compare",
+    "dryrun": "Run dry run",
+    "cutover": "Cut over",
+    "done": "Done",
+    "again": "Upload again",
+    "doneTip": "This import is cut over",
+    "rollback": "Roll back"
+  },
+  "map": {
+    "title": "Mapping",
+    "draft": "Draft",
+    "version": "Version",
+    "format": "Format",
+    "tz": "Time zone",
+    "required": "Required columns",
+    "colSource": "Column in the file",
+    "colRequired": "Required"
+  },
+  "search": "Search issues",
+  "col": {
+    "severity": "Severity",
+    "issue": "Issue",
+    "row": "Row",
+    "field": "Field",
+    "job": "Job",
+    "file": "File",
+    "rows": "Rows",
+    "validated": "Validated",
+    "cut": "Cut over"
+  },
+  "sev": {
+    "error": "Error",
+    "warning": "Warning",
+    "info": "Info"
+  },
+  "st": {
+    "open": "Open",
+    "acknowledged": "Acknowledged",
+    "resolved": "Resolved",
+    "ignored": "Ignored"
+  },
+  "status": {
+    "uploaded": "Uploaded",
+    "validated": "Validated",
+    "compared": "Compared",
+    "dry_run_done": "Dry run passed",
+    "cut_over": "Cut over",
+    "failed": "Failed",
+    "rolled_back": "Rolled back"
+  },
+  "type": {
+    "assigned_before_registered": "Assigned before registered",
+    "unusual_parties_count": "Unusual parties count",
+    "missing_required_field": "Missing required field",
+    "unknown_reference": "Unknown reference",
+    "out_of_range_coordinate": "Coordinate out of range",
+    "duplicate_external_id": "Duplicate case id",
+    "inconsistent_name_case": "Inconsistent name case",
+    "other": "Other"
+  },
+  "msg": {
+    "emptyReg": "Registration time is empty.",
+    "unknownRef": "{col} {v} is not in the locations.",
+    "range": "{col} {v} is outside {lo} to {hi}.",
+    "dup": "RecordID appears twice in the file.",
+    "header": "Column {col} is missing from the header row.",
+    "before": "Assigned {n} minutes before it was registered.",
+    "parties": "{n, plural, one {{n} party involved.} other {{n} parties involved.}} Meaning to be confirmed by the {customer} team.",
+    "case": "City name \"{v}\" has inconsistent capitals; joined on CityID instead."
+  },
+  "nomatch": "No match",
+  "i": {
+    "sum": "{n} of {total} shown"
+  },
+  "optional": "optional",
+  "d": {
+    "row": "Row {n}",
+    "message": "Message",
+    "caseFacts": "Case",
+    "case": "Case number",
+    "registered": "Registered",
+    "assigned": "Assigned",
+    "diff": "Difference",
+    "parties": "Parties",
+    "handling": "Handling",
+    "field": "Field",
+    "inferred": "inferred",
+    "remote": "Remote"
+  },
+  "states": {
+    "empty": {
+      "title": "No imports yet",
+      "desc": "Upload a CSV file in the generic CSV format."
+    },
+    "error": {
+      "desc": "The imports could not load."
+    }
+  },
+  "shared": {
+    "menu": {
+      "none": "None",
+      "size": "Too large",
+      "title": "Rejected file",
+      "type": "Wrong file type"
+    }
+  },
+  "tabs": {
+    "label": "Import sections"
+  },
+  "notice": {
+    "issueNotFound": "That issue could not be found.",
+    "jobNotFound": "That import could not be found."
+  },
+  "rb": {
+    "title": "Roll back this cut-over?",
+    "desc": "Removes the {n} cases this import added and restores the ones it changed.",
+    "ok": "Roll back",
+    "doneTitle": "Rolled back",
+    "doneBody": "{del} cases removed, {res} restored.",
+    "doneShort": "The cases this import added were removed and the ones it changed restored."
+  },
+  "imsg": {
+    "headerMissing": "Column {col} is missing from the header row.",
+    "empty": "{field} is empty.",
+    "unknownRef": "{col} {value} is not in the locations or case types: add it in Admin, or correct the row.",
+    "unknownLocation": "{col} {value} is not in the locations.",
+    "nameCase": "{col} \"{value}\" differs from \"{known}\" only in capitals; ids are used, so nothing changes.",
+    "cityCase": "City name \"{value}\" has inconsistent capitals; joined on {cityId} instead.",
+    "notAllowed": "{col} \"{value}\" is not one of {list}: the case is imported without it.",
+    "notOneOf": "{col} \"{value}\" is not one of {list}.",
+    "notNumber": "{col} \"{value}\" is not a number.",
+    "below": "{col} {value} is below {min}.",
+    "outside": "{col} {value} is outside {min} to {max}.",
+    "notDateTime": "{col} \"{value}\" is not a date and time: use {format} (Riyadh time) or {iso}.",
+    "notWhole": "{col} \"{value}\" is not a whole number of {min} or more.",
+    "parties": "Only {n, plural, one {# party} other {# parties}} involved.",
+    "partiesToConfirm": "{n, plural, one {# party} other {# parties}} involved. Meaning to be confirmed by the {customer}.",
+    "caseNumber": "CaseNumber \"{value}\" does not start with a two-letter city code.",
+    "duplicate": "{idCol} {value} is also on row {row}; one row per {idCol} is imported (the first without errors).",
+    "duplicateInFile": "{idCol} appears twice in the file.",
+    "assignedBefore": "Assigned {n, plural, one {# minute} other {# minutes}} before it was registered.",
+    "arrivedNoAssign": "{assignedCol} is empty but {arrivalCol} is set: the case counts as remote (inferred).",
+    "future": "Registered {at}, in the future.",
+    "arrivedBefore": "Arrived before the case was registered.",
+    "arrivedLate": "Arrived {n} hours after registration (outlier: over {max}).",
+    "closedBefore": "Closed before the case was registered.",
+    "closedLate": "Closed {n} days after registration (outlier: over {max}).",
+    "dayOutlier": "{date} has {n} cases against a median of {median} a day: a missing or doubled extract? (outlier)",
+    "farFromSubZone": "Latitude {lat}, Longitude {lon} is {km} km from sub-zone {sub} ({name}): swapped or empty coordinates? The case keeps them.",
+    "outsideArea": "Latitude {lat}, Longitude {lon} is outside the service area: the case keeps them.",
+    "capped": "{n} rows in all ({inner}) Only the first {max} are listed.",
+    "cappedLike": "{n} rows in all like row {row} ({inner}) Only the first {max} are listed.",
+    "blankLines": "{n, plural, one {# empty line was} other {# empty lines were}} skipped (the first is line {first}).",
+    "fileEmpty": "The file is empty: it needs a header row.",
+    "noDataRows": "The file has a header row and no data rows.",
+    "assignedBeforeType": "Assigned {n, plural, one {# minute} other {# minutes}} before it was registered ({type} case)."
+  },
+  "ai": {
+    "explainTitle": "Explain these issues",
+    "noIssues": "This import has no issues to explain",
+    "fallback": "The assistant's answer did not pass the number check, so a summary of the issues is shown instead.",
+    "fixes": "Suggested fixes",
+    "note": "Note to the data owner",
+    "rules": "Cleaning-rule draft",
+    "copy": "Copy",
+    "map": "Suggest mapping",
+    "mapTitle": "Suggested mapping",
+    "invalidTitle": "That suggestion was not accepted.",
+    "mapInvalid": "The suggestion did not pass the mapping checks. Try again or map the columns by hand.",
+    "missing": "Required fields without a column",
+    "none": "Not imported",
+    "waiting": "Wait for the suggestion",
+    "col": {
+      "file": "File column",
+      "field": "Maps to",
+      "conf": "Confidence"
+    },
+    "conf": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
+    },
+    "version": "New version",
+    "versionRule": "Use lower-case letters, digits and _ (3 to 64)",
+    "versionTaken": "That version already exists",
+    "notes": "Mapping notes",
+    "apply": "Use for this import",
+    "cancel": "Cancel",
+    "save": "Save version",
+    "saved": "Mapping {v} saved",
+    "savedDesc": "The import is ready to validate.",
+    "noFile": "This import has no stored file to read"
+  },
+  "run": {
+    "title": "{step}: running",
+    "rows": "{done} of {total} rows read",
+    "working": "Working on it"
+  }
+}

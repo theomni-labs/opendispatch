@@ -1,0 +1,142 @@
+{{- if and .Values.keycloak.enabled .Values.firstRun.enabled }}
+{{- /* Realm and first Administrator; idempotent, prints no secret */ -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-first-run
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: first-run
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "0"
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 900
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" (dict "root" . "component" "first-run") | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      restartPolicy: Never
+      containers:
+        - name: first-run
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.keycloak "name" "keycloak") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["/bin/bash", "-c"]
+          args:
+            - |
+              set -euo pipefail
+              kc() { /opt/keycloak/bin/kcadm.sh "$@" --config /tmp/kcadm.config; }
+              ok=0
+              for _ in $(seq 1 60); do
+                if KC_CLI_PASSWORD="$KC_BOOTSTRAP_PASSWORD" kc config credentials --server "$KC_SERVER" \
+                     --realm master --user opendispatch-bootstrap >/dev/null 2>&1; then ok=1; break; fi
+                sleep 5
+              done
+              [ "$ok" = 1 ] || { echo "first-run: Keycloak did not accept the bootstrap sign-in"; exit 1; }
+              if kc get "realms/$REALM" >/dev/null 2>&1; then
+                echo "first-run: realm $REALM exists, left as it is"
+              else
+                kc create realms -f /realm/realm.json >/dev/null
+                echo "first-run: realm $REALM imported"
+              fi
+              cid="$(kc get clients -r "$REALM" -q "clientId=$CLIENT_ID" --fields id --format csv --noquotes)"
+              [ -n "$cid" ] || { echo "first-run: client $CLIENT_ID missing"; exit 1; }
+              printf '{"secret":"%s"}' "$OIDC_CLIENT_SECRET" | kc update "clients/$cid" -r "$REALM" -f - >/dev/null
+              echo "first-run: client secret set from the generated Secret"
+              if ! kc get "clients/$cid/protocol-mappers/models" -r "$REALM" | grep -q '"idp-groups"'; then
+                printf '{"name":"idp-groups","protocol":"openid-connect","protocolMapper":"oidc-usermodel-attribute-mapper","config":{"user.attribute":"opendispatch_idp_groups","claim.name":"groups","multivalued":"true","jsonType.label":"String","id.token.claim":"true","access.token.claim":"true","userinfo.token.claim":"true"}}' \
+                  | kc create "clients/$cid/protocol-mappers/models" -r "$REALM" -f - >/dev/null
+                echo "first-run: IdP groups added to the groups claim"
+              fi
+              kc get users/profile -r "$REALM" > /tmp/profile.json
+              if ! grep -q '"opendispatch_idp_groups"' /tmp/profile.json; then
+                sed -i '0,/"attributes" *: *\[/s//"attributes" : [ {"name":"opendispatch_idp_groups","multivalued":true,"permissions":{"view":["admin"],"edit":["admin"]}},/' /tmp/profile.json
+                kc update users/profile -r "$REALM" -f /tmp/profile.json >/dev/null
+                echo "first-run: user profile keeps IdP groups"
+              fi
+              rm -f /tmp/profile.json
+              sa="$(kc get clients -r "$REALM" -q "clientId=$IDP_ADMIN_CLIENT" --fields id --format csv --noquotes)"
+              if [ -z "$sa" ]; then
+                printf '{"clientId":"%s","enabled":true,"publicClient":false,"standardFlowEnabled":false,"directAccessGrantsEnabled":false,"implicitFlowEnabled":false,"serviceAccountsEnabled":true}' "$IDP_ADMIN_CLIENT" \
+                  | kc create clients -r "$REALM" -f - >/dev/null
+                sa="$(kc get clients -r "$REALM" -q "clientId=$IDP_ADMIN_CLIENT" --fields id --format csv --noquotes)"
+                echo "first-run: service account $IDP_ADMIN_CLIENT created"
+              fi
+              printf '{"secret":"%s"}' "$IDP_ADMIN_SECRET" | kc update "clients/$sa" -r "$REALM" -f - >/dev/null
+              kc add-roles -r "$REALM" --uusername "service-account-$IDP_ADMIN_CLIENT" --cclientid realm-management \
+                --rolename manage-identity-providers --rolename view-identity-providers >/dev/null
+              echo "first-run: $IDP_ADMIN_CLIENT may manage identity providers only"
+              uid="$(kc get users -r "$REALM" -q "username=$ADMIN_USER" -q exact=true --fields id --format csv --noquotes)"
+              if [ -n "$uid" ]; then
+                echo "first-run: first Administrator exists, password and groups unchanged"
+              else
+                gid="$(kc get groups -r "$REALM" -q "search=$ADMIN_GROUP" -q exact=true --fields id --format csv --noquotes | head -n1)"
+                if [ -z "$gid" ]; then
+                  printf '{"name":"%s"}' "$ADMIN_GROUP" | kc create groups -r "$REALM" -f - >/dev/null
+                  echo "first-run: group $ADMIN_GROUP created"
+                fi
+                email=""
+                [ -z "$ADMIN_EMAIL" ] || email="$(printf '"email":"%s","emailVerified":true,' "$ADMIN_EMAIL")"
+                printf '{"username":"%s",%s"enabled":true,"groups":["/%s"],"requiredActions":["UPDATE_PASSWORD","CONFIGURE_TOTP"],"credentials":[{"type":"password","value":"%s","temporary":true}]}' \
+                  "$ADMIN_USER" "$email" "$ADMIN_GROUP" "$FIRST_ADMIN_PASSWORD" | kc create users -r "$REALM" -f - >/dev/null
+                echo "first-run: first Administrator created in group $ADMIN_GROUP"
+              fi
+              echo "first-run: done (password in Secret {{ include "opendispatch.generatedSecret" . }}, key first-admin-password)"
+              rm -f /tmp/kcadm.config
+          env:
+            - name: HOME
+              value: /tmp
+            - name: KC_SERVER
+              value: http://{{ include "opendispatch.fullname" . }}-keycloak:8080{{ .Values.keycloak.relativePath }}
+            - name: REALM
+              value: {{ .Values.keycloak.realm | quote }}
+            - name: CLIENT_ID
+              value: {{ .Values.auth.clientId | quote }}
+            - name: ADMIN_USER
+              value: {{ .Values.keycloak.firstAdmin.username | quote }}
+            - name: ADMIN_EMAIL
+              value: {{ .Values.keycloak.firstAdmin.email | quote }}
+            - name: ADMIN_GROUP
+              value: {{ .Values.keycloak.firstAdmin.group | quote }}
+            - name: IDP_ADMIN_CLIENT
+              value: {{ .Values.keycloak.idpAdmin.clientId | quote }}
+            - name: IDP_ADMIN_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: keycloak-idp-admin-secret
+            - name: KC_BOOTSTRAP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: keycloak-bootstrap-password
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: oidc-client-secret
+            - name: FIRST_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: first-admin-password
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          volumeMounts:
+            - name: realm
+              mountPath: /realm
+              readOnly: true
+            - name: tmp
+              mountPath: /tmp
+          resources:
+            {{- toYaml .Values.firstRun.resources | nindent 12 }}
+      volumes:
+        - name: realm
+          configMap:
+            name: {{ include "opendispatch.fullname" . }}-realm
+        {{- include "opendispatch.tmpVolume" . | nindent 8 }}
+{{- end }}

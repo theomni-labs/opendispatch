@@ -1,0 +1,13 @@
+code,name_en,name_ar,kind,home_zone_code,default_vehicle_code,is_active,skill_codes
+SVR-SMP-001,Lama Al-Rasami,,field,RD-C,VEH-RD-C-01,true,pedestrian_incident;highway_operations
+SVR-SMP-002,Ahmad Al-Shaati,,field,RD-N,VEH-RD-N-01,true,pedestrian_incident;bilingual_en_ar;multi_vehicle
+SVR-SMP-003,Rayan Al-Rabami,,field,RD-E,VEH-RD-E-01,true,multi_vehicle;injury_protocol;highway_operations;heavy_vehicle
+SVR-SMP-004,Hamad Al-Yamuli,,field,RD-S,VEH-RD-S-01,true,highway_operations;heavy_vehicle
+SVR-SMP-005,Talal Al-Farami,,field,RD-W,,true,bilingual_en_ar;photo_documentation;multi_vehicle
+SVR-SMP-006,Majid Al-Maquli,,field,JD-N,,true,highway_operations;heavy_vehicle;bilingual_en_ar;pedestrian_incident
+SVR-SMP-007,Bader Al-Farari,,field,JD-S,,true,photo_documentation;pedestrian_incident
+SVR-SMP-008,Dana Al-Jumahi,,field,DM-C,,false,bilingual_en_ar;injury_protocol;multi_vehicle
+SVR-SMP-009,Ahmad Al-Maqati,,field,RD-C,,true,injury_protocol;photo_documentation;pedestrian_incident;bilingual_en_ar
+SVR-SMP-010,Mansour Al-Jumati,,field,RD-N,,true,pedestrian_incident;heavy_vehicle
+SVR-SMP-011,Omar Al-Maqami,,remote,,,true,remote_review
+SVR-SMP-012,Khalid Al-Rasani,,remote,,,true,remote_review

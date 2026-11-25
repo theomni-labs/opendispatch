@@ -1,0 +1,228 @@
+{
+  "out": {
+    "field_mandatory": "Field mandatory",
+    "field_preferred": "Field preferred",
+    "remote_eligible": "Remote eligible"
+  },
+  "st": {
+    "draft": "Draft",
+    "submitted": "Submitted",
+    "approved": "Approved",
+    "active": "Active",
+    "rejected": "Rejected",
+    "retired": "Retired",
+    "pending": "Pending",
+    "superseded": "Superseded",
+    "cancelled": "Cancelled"
+  },
+  "eff": {
+    "none": "Not set",
+    "open": "No end"
+  },
+  "v": {
+    "label": "v{n}",
+    "next": "v{n} draft"
+  },
+  "f": {
+    "parties_involved": "Parties involved",
+    "injury_present": "Injury present",
+    "insured_party_count": "Insured parties",
+    "estimated_damage_sar": "Damage (SAR)",
+    "multi_vehicle": "Multi-vehicle",
+    "pedestrian_involved": "Pedestrian involved",
+    "highway_or_outside_city_limits": "Highway or outside city",
+    "customer_requests_field_attendance": "Customer asks for field",
+    "severity": "Severity",
+    "claim_value_sar": "Claim value (SAR)",
+    "damage_assessment_method": "Damage assessment",
+    "location_type": "Location type",
+    "customer_preference": "Customer preference",
+    "case_type": "Case type",
+    "any": "Any",
+    "name": "Name (English)",
+    "ar": {
+      "label": "Arabic name",
+      "hint": "Empty: English is shown"
+    },
+    "to": "Effective to"
+  },
+  "op": {
+    "eq": "is",
+    "neq": "is not",
+    "lt": "less than",
+    "lte": "at most",
+    "gt": "more than",
+    "gte": "at least",
+    "in": "in"
+  },
+  "yes": "Yes",
+  "no": "No",
+  "all": "All of",
+  "any": "Any of",
+  "addCond": "Add condition",
+  "rm": "Remove condition",
+  "title": {
+    "new": "New rule"
+  },
+  "tl": {
+    "created": "Drafted by {name}",
+    "submitted": "Submitted for approval",
+    "approved": "Approved by {name}",
+    "rejected": "Rejected by {name}",
+    "retired": "Retired",
+    "effect": "Takes effect {date}",
+    "drafted": "Drafted"
+  },
+  "self": {
+    "reason": "You drafted this. A Dispatch Supervisor approves it."
+  },
+  "btn": {
+    "saveDraft": "Save draft",
+    "submit": "Submit for approval",
+    "retire": "Retire",
+    "newVersion": "Draft new version",
+    "revise": "Revise as draft"
+  },
+  "toast": {
+    "saved": "Draft saved",
+    "submitted": {
+      "title": "Submitted for approval",
+      "desc": "A Dispatch Supervisor approves it"
+    },
+    "approved": {
+      "title": "Rule approved",
+      "desc": "{code} takes effect {date}"
+    },
+    "rejected": "Rule rejected",
+    "retired": "Rule retired",
+    "version": "Version drafted",
+    "created": "Rule drafted",
+    "export": "Rules exported"
+  },
+  "decide": {
+    "approve": "Approve {code}?",
+    "reject": "Reject {code}?",
+    "noteReq": "A note is required"
+  },
+  "need": {
+    "name": "Enter a name and a condition",
+    "code": "Enter a rule code",
+    "cond": "Complete every condition"
+  },
+  "showing": "{n} of {total}",
+  "count": {
+    "field": "Field share is illustrative"
+  },
+  "prec": {
+    "default": "No match",
+    "title": "Precedence"
+  },
+  "locked": "Read only. Draft a new version to change it.",
+  "new": "New rule",
+  "tab": {
+    "rules": "Rules",
+    "approvals": "Approvals",
+    "ai": "AI review"
+  },
+  "q": "Search rules",
+  "col": {
+    "outcome": "Outcome",
+    "rule": "Rule",
+    "cond": "Condition",
+    "version": "Version",
+    "eff": "Effective from",
+    "change": "Change",
+    "submitted": "Submitted",
+    "by": "Decided by"
+  },
+  "nomatch": "No rules match",
+  "wf": {
+    "title": "Approval",
+    "rejected": "Rejected returns to Draft"
+  },
+  "states": {
+    "empty": {
+      "desc": "Draft a rule to start."
+    },
+    "error": {
+      "desc": "Rules could not load."
+    }
+  },
+  "cond": {
+    "title": "Conditions",
+    "field": "Field",
+    "operator": "Operator",
+    "value": "Value",
+    "list": "value, value"
+  },
+  "d": {
+    "source": "Source",
+    "versions": "Versions",
+    "history": "History"
+  },
+  "reason": {
+    "approver": "Only a Dispatch Supervisor can approve"
+  },
+  "tabs": {
+    "label": "Rule views"
+  },
+  "notice": {
+    "notFound": "That rule could not be found."
+  },
+  "retire": {
+    "title": "Retire {code}?",
+    "desc": "It stops applying today, and a waiting draft is dropped."
+  },
+  "appr": {
+    "empty": "No approvals yet"
+  },
+  "val": {
+    "minor": "Minor",
+    "moderate": "Moderate",
+    "severe": "Severe",
+    "photo": "Photos",
+    "video": "Video call",
+    "in_person": "In person",
+    "dense_urban": "Dense urban",
+    "urban": "Urban",
+    "suburban": "Suburban",
+    "highway": "Highway",
+    "rural": "Rural",
+    "none": "No preference",
+    "remote": "Remote",
+    "field": "Field"
+  },
+  "ai": {
+    "title": "Last 7 days",
+    "only": {
+      "label": "Show",
+      "disagreements": "Disagreements",
+      "all": "All"
+    },
+    "run": "Classify 20 recent",
+    "runDone": "{n, plural, one {{n} case classified} other {{n} cases classified}}",
+    "runStopped": "Stopped: {reason}",
+    "st": {
+      "compared": "Cases compared",
+      "handling": "Handling agrees",
+      "severity": "Severity agrees",
+      "reviewed": "Reviewed"
+    },
+    "col": {
+      "case": "Case",
+      "ai": "AI suggests",
+      "rules": "Rules say",
+      "confidence": "Confidence",
+      "why": "Why",
+      "review": "Review"
+    },
+    "rv": {
+      "accepted": "Accepted",
+      "rejected": "Rejected",
+      "none": "Not reviewed"
+    },
+    "empty": "No suggestions yet",
+    "summary": "{n} of {total} cases",
+    "loadError": "The review could not load."
+  }
+}

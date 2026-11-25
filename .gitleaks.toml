@@ -1,0 +1,13 @@
+title = "OpenDispatch gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Dependencies, build output, lockfiles and generated fixtures"
+paths = [
+  '''node_modules/''',
+  '''\.next(-[^/]+)?/''',
+  '''pnpm-lock\.yaml''',
+  '''coverage/''',
+]
