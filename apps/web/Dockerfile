@@ -13,7 +13,7 @@ RUN mkdir -p out && if [ "$OPENDISPATCH_FETCH_MAP" = 1 ]; then \
       || echo "basemap not fetched: the map shows no basemap"; \
     fi
 
-FROM node:22-slim AS build
+FROM node:25-slim AS build
 ENV NEXT_TELEMETRY_DISABLED=1 NEXT_OUTPUT=standalone
 RUN corepack enable
 WORKDIR /repo
@@ -21,7 +21,7 @@ COPY . .
 RUN pnpm install --frozen-lockfile
 RUN pnpm --filter @opendispatch/web build
 
-FROM node:22-slim AS web
+FROM node:25-slim AS web
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0
 WORKDIR /app
 COPY --from=build /repo/apps/web/.next/standalone ./
