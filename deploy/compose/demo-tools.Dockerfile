@@ -10,7 +10,7 @@ RUN for c in demoseed demohistory demoforecasts feedsim; do \
       CGO_ENABLED=0 go build -trimpath -ldflags="-s -w" -o /out/$c ./cmd/$c || exit 1; \
     done
 
-FROM node:22-slim
+FROM node:25-slim
 ENV NODE_ENV=production NPM_CONFIG_UPDATE_NOTIFIER=false
 RUN apt-get update && apt-get install -y --no-install-recommends postgresql-client ca-certificates \
  && rm -rf /var/lib/apt/lists/*
