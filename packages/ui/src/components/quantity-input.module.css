@@ -1,0 +1,17 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.quantity {
+  inline-size: auto;
+  max-inline-size: 100%;
+}
+
+.field {
+  inline-size: 7rem;
+  min-inline-size: 0;
+  text-align: center;
+}
+
+.field input {
+  text-align: center;
+  font-variant-numeric: tabular-nums;
+}

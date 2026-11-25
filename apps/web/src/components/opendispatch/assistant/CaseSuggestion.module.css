@@ -1,0 +1,104 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Suggested by AI. Tokens and logical properties only. */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+  min-inline-size: 0;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.icon {
+  flex: none;
+  inline-size: var(--od-icon-size-md);
+  block-size: var(--od-icon-size-md);
+  color: var(--od-color-icon);
+}
+
+.title {
+  flex: 1 1 auto;
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-semibold);
+}
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  min-inline-size: 0;
+}
+
+.label {
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+.text {
+  margin: 0;
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-14);
+}
+
+.quote {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.muted {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  margin: 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.muted > svg {
+  flex: none;
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+}
+
+.result {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+  min-inline-size: 0;
+}
+
+.inline {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.inlineWrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-14);
+}
+
+.cardLink {
+  align-self: flex-start;
+}
+
+.summary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}

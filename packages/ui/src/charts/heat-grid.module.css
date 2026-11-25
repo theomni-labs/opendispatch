@@ -1,0 +1,60 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.scroller {
+  overflow: auto hidden;
+  max-inline-size: 100%;
+}
+
+.grid {
+  border-collapse: separate;
+  border-spacing: 2px;
+  font-size: var(--od-font-size-12);
+  font-variant-numeric: tabular-nums;
+}
+
+.corner {
+  min-inline-size: 0;
+}
+
+.columnHead {
+  padding: var(--od-space-2) var(--od-space-4);
+  color: var(--od-color-text-secondary);
+  font-weight: var(--od-weight-medium);
+  white-space: nowrap;
+}
+
+.rowHead {
+  padding-inline-end: var(--od-space-8);
+  color: var(--od-color-text-label);
+  font-weight: var(--od-weight-medium);
+  text-align: start;
+  white-space: nowrap;
+}
+
+.cell {
+  min-inline-size: var(--heat-min-col);
+  block-size: 28px;
+  padding: 0 var(--od-space-4);
+  border-radius: var(--od-radius-xs);
+  background: var(--od-color-bg-subtle);
+  color: var(--od-color-text-heading);
+  text-align: center;
+}
+
+.compact .cell {
+  block-size: 20px;
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  outline: 2px solid var(--od-color-border-hover);
+  outline-offset: -2px;
+}
+
+.cell:focus-visible {
+  outline: 2px solid var(--od-color-border-focus);
+  outline-offset: 1px;
+}

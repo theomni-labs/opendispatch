@@ -1,0 +1,248 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Forecast and Model Admin screen. Tokens and logical properties only.
+   Layout lives on inner elements, never on a design system component itself. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.stackTight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.stackXs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  min-inline-size: 0;
+}
+
+/* Four figures across, two by two on a narrow screen (the mockup's grid stats). The shared StatStrip only takes text, and two of
+   the figures are a date and a time that must be allowed to wrap inside their card, so this screen draws its own. */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Lets a figure's text wrap (the Stat's value is set not to). */
+.wrapValue {
+  display: inline-block;
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Two thirds and one third (the mockup's detail grid), one column below 1080px. */
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1080px) {
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+}
+
+.headTitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding: var(--od-space-16) var(--od-space-24);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}
+
+.cardBody {
+  padding: var(--od-space-12) var(--od-space-24);
+}
+
+.strong {
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.empty {
+  margin: 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-14);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 640px) {
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A text link with a chevron at the inline end (the mockup's btn link). */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  color: var(--od-color-link);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.flip {
+  inline-size: 1em;
+  block-size: 1em;
+}
+
+[dir='rtl'] .flip {
+  transform: scaleX(-1);
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Backtest card: sub-sections and the change chip. */
+.btSection {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+.btSectionHead {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding-block: var(--od-space-16) var(--od-space-8);
+  padding-inline: var(--od-space-24);
+}
+
+.btSectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-semibold);
+}
+
+.btFoot {
+  display: flex;
+  padding-block: var(--od-space-8);
+  padding-inline: var(--od-space-24);
+}
+
+.deltaGood,
+.deltaBad {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-2);
+  padding-inline: var(--od-space-4) var(--od-space-6);
+  border-radius: var(--od-radius-sm);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  font-variant-numeric: tabular-nums;
+}
+
+.deltaGood svg,
+.deltaBad svg {
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+}
+
+.deltaGood {
+  background: var(--od-color-success-bg);
+  color: var(--od-color-success-text);
+}
+
+.deltaBad {
+  background: var(--od-color-error-bg);
+  color: var(--od-color-error-text);
+}

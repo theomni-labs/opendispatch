@@ -1,0 +1,167 @@
+{
+  "residency": {
+    "label": "Saudi Arabia",
+    "tip": "Data residency"
+  },
+  "upload": "Upload evidence",
+  "export": "Export controls report",
+  "toast": {
+    "export": "Controls report exported",
+    "loaded": "Control list loaded",
+    "evidence": "Evidence saved",
+    "policy": "Session policy saved",
+    "mfaOn": "MFA claim is now required",
+    "mfaOff": "MFA claim is no longer required",
+    "supOn": "Support access switched on",
+    "supOff": "Support access switched off",
+    "granted": "Support access granted for {n} h",
+    "ended": "Support access ended",
+    "supMax": "Longest grant saved"
+  },
+  "tab": {
+    "sessions": "Sessions",
+    "controls": "Controls",
+    "support": "Support access"
+  },
+  "stat": {
+    "evidenced": "Evidenced"
+  },
+  "st": {
+    "evidenced": "Evidenced",
+    "in_progress": "In progress",
+    "not_started": "Not started",
+    "not_applicable": "Not applicable"
+  },
+  "sess": {
+    "title": "Session policy",
+    "length": "Session length",
+    "idle": "Idle timeout",
+    "max": "Sessions per person",
+    "err": "Idle timeout is longer than the session",
+    "range": "Enter whole numbers in range: length 5 to 1,440 minutes, idle timeout 1 to 240, sessions 1 to 20"
+  },
+  "mfa": {
+    "title": "Sign-in check",
+    "label": "Require MFA claim",
+    "desc": "Sign-ins without it are refused.",
+    "shared": "Managed by our staff in the shared tier"
+  },
+  "res": {
+    "title": "Data residency",
+    "where": "Where data lives",
+    "leaves": "Leaves the network",
+    "leavesValue": "Update check only"
+  },
+  "reset": "Reset",
+  "ctl": {
+    "title": "Controls evidence",
+    "search": "Search controls"
+  },
+  "col": {
+    "control": "Control",
+    "framework": "Framework",
+    "evidence": "Evidence",
+    "reviewed": "Reviewed",
+    "actions": "Actions"
+  },
+  "any": "Any",
+  "fw": {
+    "other": "Other"
+  },
+  "files": "{n} file",
+  "none": "None",
+  "noMatch": "No matching controls",
+  "sup": {
+    "log": "Access log",
+    "started": "Started",
+    "duration": "Duration",
+    "grantedBy": "Granted by",
+    "active": "Active",
+    "ended": "Ended",
+    "end": "End now",
+    "enable": "Allow support access",
+    "default": "Off by default.",
+    "max": "Longest grant",
+    "grant": "Grant access",
+    "needOn": "Switch support access on first",
+    "already": "Support access is already granted"
+  },
+  "hoursShort": "h",
+  "states": {
+    "empty": {
+      "title": "No controls yet",
+      "desc": "Add NCA and PDPL controls to track evidence."
+    },
+    "error": {
+      "desc": "The controls could not load."
+    }
+  },
+  "loadList": "Load control list",
+  "drop": {
+    "prompt": "Drop a file or",
+    "browse": "browse",
+    "hint": "PDF, DOCX or PNG, up to 10 MB",
+    "limit": "10 MB",
+    "title": "Evidence file",
+    "notStored": "Files are not stored in this demo: only the status and the note are saved."
+  },
+  "grant": {
+    "desc": "Time limited. Ends by itself.",
+    "hours": "Duration",
+    "need": "Write a reason",
+    "hoursRange": "Choose from 1 to {max} hours"
+  },
+  "c": {
+    "1": {
+      "t": "Access is limited by role and zone",
+      "n": "Role matrix reviewed with the Administrator."
+    },
+    "2": {
+      "t": "Emergency access is audited",
+      "n": "Every emergency sign-in raises an alert and an audit event."
+    },
+    "3": {
+      "t": "Audit log is append only"
+    },
+    "4": {
+      "t": "Data is encrypted in transit and at rest",
+      "n": "Waiting for the customer cluster settings."
+    },
+    "5": {
+      "t": "Backups are confirmed and restore drills are held",
+      "n": "Last restore drill not yet recorded."
+    },
+    "6": {
+      "t": "Incident contact is recorded"
+    },
+    "7": {
+      "t": "Data stays in the Kingdom",
+      "n": "Private install in the customer cluster."
+    },
+    "8": {
+      "t": "Retention schedule for personal data"
+    },
+    "9": {
+      "t": "Data subject request process"
+    },
+    "10": {
+      "t": "No cross-border transfer without approval",
+      "n": "No data leaves the customer network."
+    },
+    "11": {
+      "t": "Vendor support access is off unless granted",
+      "n": "Support access is switched off by default."
+    }
+  },
+  "tabs": {
+    "label": "Sections"
+  },
+  "notice": {
+    "control": "That control could not be found."
+  },
+  "need": {
+    "changes": "No changes to save",
+    "noteLong": "The note is too long (at most 1,000 characters)",
+    "maxHours": "Enter whole hours from 1 to 72"
+  }
+}

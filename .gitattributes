@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.go text eol=lf
+*.sh text eol=lf
+*.png binary
+*.jpg binary
+*.woff2 binary
+*.gz binary
+*.pmtiles binary
+fixtures/** linguist-generated=true
+engines/tests/data/** linguist-generated=true
+apps/web/src/lib/types/** linguist-generated=true
+pnpm-lock.yaml linguist-generated=true

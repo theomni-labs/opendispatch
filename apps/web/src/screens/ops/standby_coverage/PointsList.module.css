@@ -1,0 +1,84 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Standby points table (#sc-pts): a row toggles the
+   map's selected point (?pt=). */
+.table {
+  inline-size: 100%;
+  border-collapse: collapse;
+}
+
+.caption {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.table th,
+.table td {
+  padding: var(--od-space-8) var(--od-space-16);
+  text-align: start;
+  font-size: var(--od-font-size-13);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}
+
+.table thead th {
+  background: var(--od-color-bg-table-header);
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+  border-block-end-color: var(--od-color-border);
+}
+
+.table .num {
+  text-align: end;
+  font-variant-numeric: tabular-nums;
+}
+
+.row {
+  position: relative;
+}
+
+.row:hover {
+  background: var(--od-color-bg-hover);
+}
+
+.row.selected {
+  background: var(--od-color-primary-bg);
+}
+
+.rowButton {
+  all: unset;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+  inline-size: 100%;
+}
+
+.rowButton::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.rowButton:focus-visible {
+  outline: none;
+  box-shadow: var(--od-focus-ring);
+  border-radius: var(--od-radius-sm);
+}
+
+.cellMain {
+  font-size: var(--od-font-size-13);
+  color: var(--od-color-text-heading);
+}
+
+.cellSub {
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-label);
+}
+
+.beyond {
+  align-self: start;
+  margin-block-start: var(--od-space-4);
+}

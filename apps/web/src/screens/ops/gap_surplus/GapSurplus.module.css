@@ -1,0 +1,105 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Gap and Surplus. Tokens and logical properties only. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+}
+
+.cardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+  padding: var(--od-space-16);
+}
+
+.cardHeadRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-12);
+}
+
+.cardTitleRow {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.cardTitle {
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.gridStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+}
+
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-16);
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-label);
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-6);
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+  inline-size: 12px;
+  block-size: 12px;
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-xs);
+}
+
+.swatchGap {
+  background: color-mix(in srgb, var(--od-color-error) 45%, var(--od-color-bg-container));
+}
+
+.swatchSurplus {
+  background: color-mix(in srgb, var(--od-color-info) 45%, var(--od-color-bg-container));
+}
+
+.swatchOk {
+  background: var(--od-color-bg-subtle);
+}
+
+.drawerStack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-20);
+}
+
+.drawerPillRow {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.drawerDetail {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--od-space-8);
+  margin: 0;
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-14);
+}
+
+.toggles {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}

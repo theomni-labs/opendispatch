@@ -1,0 +1,80 @@
+{
+  "name": "opendispatch",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@10.12.1",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "pnpm --filter @opendispatch/web dev",
+    "build": "pnpm --filter @opendispatch/web build",
+    "start": "pnpm --filter @opendispatch/web start",
+    "typecheck": "tsc -p tsconfig.json --noEmit && pnpm --filter @opendispatch/web typecheck",
+    "lint": "eslint . --max-warnings 0",
+    "lint:css": "stylelint \"apps/**/*.css\" \"packages/ui/src/**/*.css\" \"deploy/keycloak/themes/*/login/resources/css/opendispatch.css\" --allow-empty-input",
+    "test": "pnpm test:pure && pnpm test:live",
+    "test:pure": "vitest run --project pure --maxWorkers=4",
+    "test:live": "vitest run --project live --maxWorkers=4",
+    "generate:types": "tsx scripts/contracts/generate-types.ts",
+    "validate:contracts": "tsx scripts/contracts/validate-contracts.ts",
+    "generate:fixtures": "tsx scripts/synthetic/generate.ts",
+    "validate:fixtures": "tsx scripts/synthetic/validate-fixtures.ts",
+    "calibration:check": "tsx scripts/synthetic/check.ts",
+    "synthetic:sim-groundtruth": "tsx scripts/synthetic/sim-groundtruth.ts --out engines/tests/data/sim_groundtruth",
+    "seed:postgres": "tsx scripts/db/seed-postgres-from-fixtures.ts",
+    "secrets": "gitleaks dir . --config .gitleaks.toml --no-banner --redact && gitleaks git . --config .gitleaks.toml --no-banner --redact",
+    "e2e:shots": "playwright test",
+    "e2e:flows": "playwright test --config=playwright.flows.config.ts",
+    "e2e:ops": "playwright test e2e/ops-matrix.spec.ts e2e/ops-states.spec.ts --project=desktop",
+    "e2e:oidc": "playwright test --config=playwright.oidc.config.ts",
+    "e2e:keycloak": "playwright test --config=playwright.keycloak.config.ts",
+    "keycloak:dev": "node scripts/keycloak/dev.mjs",
+    "keycloak:theme": "node scripts/keycloak/theme-assets.mjs",
+    "i18n:review-sheet": "tsx scripts/i18n/review-sheet.ts",
+    "denylist": "bash scripts/ci/denylist.sh"
+  },
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@redocly/cli": "2.53.3",
+    "@testing-library/dom": "10.4.1",
+    "@testing-library/react": "16.3.3",
+    "@types/node": "22.20.4",
+    "@types/react": "19.3.0",
+    "@types/react-dom": "19.3.0",
+    "@vitejs/plugin-react": "6.1.1",
+    "ajv": "8.20.0",
+    "ajv-formats": "3.0.1",
+    "eslint": "9.39.5",
+    "eslint-config-next": "16.3.5",
+    "jsdom": "27.4.0",
+    "json-schema-to-typescript": "16.0.0",
+    "openapi-typescript": "7.13.0",
+    "postgres": "3.4.9",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "stylelint": "17.15.0",
+    "stylelint-config-standard": "40.0.0",
+    "stylelint-plugin-logical-css": "2.1.0",
+    "tsx": "4.23.13",
+    "typescript": "6.0.3",
+    "typescript-eslint": "8.70.0",
+    "vite": "8.3.0",
+    "vitest": "4.1.11"
+  },
+  "pnpm": {
+    "ignoredOptionalDependencies": [
+      "sharp"
+    ],
+    "peerDependencyRules": {
+      "allowedVersions": {
+        "openapi-typescript>typescript": "6"
+      }
+    },
+    "overrides": {
+      "eslint-plugin-react": "7.37.4"
+    }
+  },
+  "version": "0.1.0",
+  "license": "AGPL-3.0-only"
+}

@@ -1,0 +1,92 @@
+{
+  "sub": "Replay a day against a roster",
+  "run": "Run simulation",
+  "need": {
+    "inputs": "No roster or day to replay yet"
+  },
+  "toast": {
+    "done": "Simulation finished",
+    "doneDesc": "{n, plural, one {1 zone replayed} other {{n} zones replayed}}",
+    "export": "Results exported"
+  },
+  "in": {
+    "title": "Replay inputs"
+  },
+  "setting": {
+    "tip": "Set by the administrator",
+    "primary": {
+      "assignment": "Primary: from assignment",
+      "registration": "Primary: from registration"
+    },
+    "target": "Target {min} min"
+  },
+  "f": {
+    "roster": "Roster",
+    "date": "Cases of",
+    "policy": "Assignment policy"
+  },
+  "policy": {
+    "nearest": "Nearest",
+    "scorer": "Scorer",
+    "replay_actual": "Replay actual"
+  },
+  "ref": {
+    "roster": "Roster {zone}, {date}",
+    "scenario": "Scenario: {name}",
+    "scenarioShort": "Scenario",
+    "all": "All zones"
+  },
+  "res": {
+    "title": "Results",
+    "target": "Target {pct}"
+  },
+  "read": {
+    "fromAssignment": "From assignment",
+    "fromRegistration": "From registration",
+    "of": "{n} of {total} field cases"
+  },
+  "outputPending": "This run has no results yet.",
+  "tab": {
+    "zones": "Zones",
+    "intervals": "Intervals",
+    "history": "History"
+  },
+  "tabs": {
+    "label": "Service-level simulator tabs"
+  },
+  "col": {
+    "cases": "Cases",
+    "field": "Field",
+    "median": "Median",
+    "p90": "P90",
+    "run": "Run",
+    "roster": "Roster",
+    "policy": "Policy"
+  },
+  "total": "Total",
+  "i": {
+    "zone": "Zone",
+    "meta": "Share within 10 min, per interval",
+    "chart": "Share within 10 minutes by interval"
+  },
+  "status": {
+    "queued": "Queued",
+    "running": "Running",
+    "succeeded": "Succeeded",
+    "failed": "Failed"
+  },
+  "foot": "Both clocks shown until confirmed",
+  "footPolicy": "Policy comparison is illustrative and unvalidated",
+  "states": {
+    "empty": {
+      "desc": "No simulation has run yet."
+    },
+    "error": {
+      "desc": "The simulator did not answer."
+    }
+  },
+  "menu": {
+    "export": "Export results"
+  },
+  "engine": "engine"
+}

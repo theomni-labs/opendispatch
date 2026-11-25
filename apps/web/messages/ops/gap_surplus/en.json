@@ -1,0 +1,94 @@
+{
+  "search": "Search zones",
+  "city": "City",
+  "causeFilterLabel": "Cause",
+  "densityLabel": "Interval",
+  "grid": {
+    "title": "Zone by interval"
+  },
+  "stat": {
+    "gaps": "Gap intervals",
+    "surplus": "Surplus intervals",
+    "worst": "Worst gap",
+    "cause": "Main cause",
+    "met": "Demand met",
+    "counts": "{gaps} gap · {surplus} surplus intervals",
+    "reach": "Out of 10-minute reach",
+    "reachHint": "of field demand"
+  },
+  "cause": {
+    "people": "People",
+    "vehicles": "Vehicles",
+    "geography": "Geography"
+  },
+  "dens": {
+    "q": "15 min",
+    "h": "Hourly"
+  },
+  "toast": {
+    "export": "Gap view exported"
+  },
+  "none": {
+    "title": "No matching cells",
+    "desc": "Try another cause or zone."
+  },
+  "key": {
+    "gap": "Gap: fewer planned than required",
+    "surplus": "Surplus",
+    "ok": "Balanced",
+    "met": "Darker: less demand met",
+    "reach": "Darker: more demand beyond 10 minutes"
+  },
+  "kind": {
+    "gap": "Gap",
+    "surplus": "Surplus",
+    "balanced": "Balanced"
+  },
+  "d": {
+    "required": "Required",
+    "planned": "Planned",
+    "delta": "Delta",
+    "cause": "Cause",
+    "reach": "Reach",
+    "reachOf": "{pct}, target {target}",
+    "basis": "Required from",
+    "basisCustomer": "{n} case per agent per 15 min",
+    "basisDuration": "{min} min: travel {travel}, scene {scene}, admin {admin}",
+    "met": "Demand met",
+    "metOf": "{pct} ({planned} of {required})",
+    "out": "Out of 10-minute reach"
+  },
+  "detail": {
+    "ok": "Planned matches required",
+    "gap": {
+      "people": "Agents short by {n}",
+      "vehicles": "Vehicles short by {n}",
+      "geography": "Standby points leave sub-zones uncovered"
+    },
+    "surplus": {
+      "people": "Agents over by {n}"
+    }
+  },
+  "states": {
+    "empty": {
+      "title": "No roster to compare",
+      "desc": "Build a roster first."
+    },
+    "error": {
+      "desc": "The gap view could not load."
+    }
+  },
+  "basis": {
+    "customer": "Required by the {customer} convention",
+    "duration": "Required: duration, {min} min a case",
+    "durationRange": "Required: duration, {from}–{to} min a case",
+    "sick": "Planned less {n} sick days yearly",
+    "assumption": "Assumption"
+  },
+  "show": {
+    "label": "Show",
+    "delta": "Shortfall",
+    "met": "% met",
+    "reach": "Out of reach"
+  }
+}

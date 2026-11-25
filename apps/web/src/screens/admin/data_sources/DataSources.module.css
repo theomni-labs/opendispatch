@@ -1,0 +1,175 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Data Sources and Integrations screen. Tokens and logical properties only.
+   Layout lives on inner elements, never on a design system component itself. */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.stackTight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  min-inline-size: 0;
+}
+
+/* Two thirds and one third (the mockup's detail grid), one column below 1080px. */
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1080px) {
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* The feed cards: as many as fit at 320px (the mockup's grid auto). */
+.feeds {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 20rem), 1fr));
+  gap: var(--od-space-16);
+}
+
+.sectionHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8) var(--od-space-12);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+}
+
+.headTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-12);
+  min-inline-size: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding: var(--od-space-16) var(--od-space-24);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}
+
+.cardBody {
+  padding: var(--od-space-12) var(--od-space-24);
+}
+
+.strong {
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.divider {
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 640px) {
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* A label and its value on one line (the mockup's kv). */
+.kv {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.plainFieldset {
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.push {
+  margin-inline-start: auto;
+}

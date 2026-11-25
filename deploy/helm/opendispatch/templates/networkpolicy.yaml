@@ -1,0 +1,91 @@
+{{- if .Values.networkPolicy.enabled }}
+{{- $rel := .Release.Name -}}
+# Nothing reaches a release pod unless allowed below
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-default-deny
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ $rel }}
+  policyTypes: [Ingress]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-web
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "opendispatch.selector" (dict "root" . "component" "web") | nindent 6 }}
+  policyTypes: [Ingress]
+  ingress:
+    - ports: [{ port: 3000 }]
+      {{- with .Values.networkPolicy.routerPeers }}
+      from:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-api
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "opendispatch.selector" (dict "root" . "component" "api") | nindent 6 }}
+  policyTypes: [Ingress]
+  ingress:
+    - ports: [{ port: 8081 }]
+      from:
+        {{- include "opendispatch.peer" (dict "rel" $rel "key" "app.kubernetes.io/component" "value" "web") | nindent 8 }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-engines
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      app.kubernetes.io/instance: {{ $rel }}
+      opendispatch.omni-labs/role: engine
+  # engines call nothing; only api and worker call them
+  policyTypes: [Ingress, Egress]
+  ingress:
+    - ports: [{ port: 8080 }]
+      from:
+        {{- include "opendispatch.peer" (dict "rel" $rel "key" "app.kubernetes.io/component" "value" "api") | nindent 8 }}
+        {{- include "opendispatch.peer" (dict "rel" $rel "key" "opendispatch.omni-labs/role" "value" "worker") | nindent 8 }}
+  egress: []
+{{- if .Values.keycloak.enabled }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-keycloak
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  podSelector:
+    matchLabels:
+      {{- include "opendispatch.selector" (dict "root" . "component" "keycloak") | nindent 6 }}
+  policyTypes: [Ingress]
+  ingress:
+    - ports: [{ port: 8080 }]
+      {{- with .Values.networkPolicy.routerPeers }}
+      from:
+        {{- toYaml . | nindent 8 }}
+        {{- include "opendispatch.peer" (dict "rel" $rel "key" "app.kubernetes.io/component" "value" "api") | nindent 8 }}
+        {{- include "opendispatch.peer" (dict "rel" $rel "key" "app.kubernetes.io/component" "value" "first-run") | nindent 8 }}
+      {{- end }}
+{{- end }}
+{{- end }}

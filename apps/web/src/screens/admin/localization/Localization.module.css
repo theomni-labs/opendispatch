@@ -1,0 +1,119 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Localization screen. Tokens and logical properties only. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .detailGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.narrow {
+  max-inline-size: 15rem;
+}
+
+.fixed {
+  display: block;
+  cursor: not-allowed;
+}
+
+/* The Arabic-Indic digits of the option's sample are drawn as they are, in order, whatever the page's direction. */
+.digits {
+  unicode-bidi: bidi-override;
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.previewBlock {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.rule {
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+/* The fallback preview: the record's English name (data, left to right) and what shows for it in Arabic. */
+.kv {
+  margin: 0;
+}
+
+.kvRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding-block: var(--od-space-6);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+  font-size: var(--od-font-size-14);
+}
+
+.kvRow dt {
+  color: var(--od-color-text-label);
+  direction: ltr;
+}
+
+.kvRow dd {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  margin: 0;
+}

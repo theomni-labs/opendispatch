@@ -1,0 +1,169 @@
+{
+  "sel": {
+    "row": "Select row",
+    "all": "Select all"
+  },
+  "status": {
+    "active": "Active",
+    "invited": "Invited",
+    "disabled": "Disabled"
+  },
+  "emergency": "Emergency",
+  "never": "Never",
+  "can": {
+    "administrator": "Everything in the Admin Console",
+    "dispatch_supervisor": "Rosters, overrides, live dispatch",
+    "dispatcher": "Watch the board, reassign cases",
+    "planner": "Build rosters, run scenarios",
+    "remote_team_lead": "Remote staffing and queue",
+    "viewer_auditor": "Read only",
+    "change_approver": "Approve or reject updates"
+  },
+  "f": {
+    "any": "Any",
+    "role": "Role"
+  },
+  "sub": "{mode} install",
+  "acc": {
+    "edit": "Can edit",
+    "approve": "Can approve",
+    "view": "Can view",
+    "hidden": "{n} not shown"
+  },
+  "cell": {
+    "edit": "Edit",
+    "view": "View",
+    "approve": "Approve"
+  },
+  "kind": {
+    "rule": "Rule changes",
+    "roster_override": "Roster overrides",
+    "leave": "Leave requests",
+    "update": "Updates"
+  },
+  "col": {
+    "module": "Module",
+    "name": "Name",
+    "email": "Email",
+    "role": "Role",
+    "scope": "Scope",
+    "last": "Last sign-in",
+    "can": "Can do"
+  },
+  "showing": "Showing {n} of {total}",
+  "lang": {
+    "en": "English",
+    "ar": "Arabic"
+  },
+  "d": {
+    "enable": "Enable user",
+    "disable": "Disable user",
+    "lang": "Language",
+    "emerg": "Emergency administrator",
+    "pwd": "Reset password",
+    "mfa": "Reset MFA",
+    "switch": "Switch to this user",
+    "edit": "Edit"
+  },
+  "disable": {
+    "title": "Disable {name}?",
+    "desc": "They cannot sign in. History stays.",
+    "ok": "Disable user"
+  },
+  "need": {
+    "person": "Enter a name and email",
+    "zone": "Choose at least one zone"
+  },
+  "zones": {
+    "none": "Not needed for this role",
+    "some": "{n} chosen"
+  },
+  "toast": {
+    "invited": {
+      "title": "Invitation sent",
+      "desc": "{name}, {role}"
+    },
+    "disabled": "User disabled",
+    "disabledN": "{n, plural, one {{n} user disabled} other {{n} users disabled}}",
+    "enabled": "User enabled",
+    "pwd": "Password reset",
+    "mfa": "Authenticator app reset",
+    "reset": {
+      "desc": "Temporary secret ends {hint}. Audited."
+    },
+    "switched": "Switched to {role}",
+    "export": "Users exported",
+    "updated": "User updated"
+  },
+  "reason": {
+    "privateOnly": "Private installs only",
+    "needAll": "Choose a role first",
+    "adminOnly": "Only an Administrator can reset",
+    "self": "You cannot disable your own account",
+    "lastAdmin": "The last Administrator cannot be disabled",
+    "noEmergency": "There is no emergency account",
+    "switchInactive": "Only active users can be switched to"
+  },
+  "invite": "Invite user",
+  "reset": {
+    "password": "Reset emergency password",
+    "mfa": "Reset emergency MFA"
+  },
+  "export": "Export users",
+  "state": {
+    "label": "State",
+    "filled": "Filled",
+    "empty": "Empty",
+    "loading": "Loading",
+    "error": "Error"
+  },
+  "tab": {
+    "users": "Users",
+    "roles": "Roles"
+  },
+  "st": {
+    "total": "Users"
+  },
+  "search": "Search users",
+  "bulk": {
+    "disable": "Disable",
+    "failed": "Not disabled: {n}."
+  },
+  "nomatch": "No users match",
+  "eff": {
+    "title": "Effective access"
+  },
+  "matrix": {
+    "title": "Access matrix"
+  },
+  "states": {
+    "empty": {
+      "desc": "Invited users appear here."
+    },
+    "error": {
+      "desc": "Users could not load."
+    }
+  },
+  "w": {
+    "person": "Person",
+    "role": "Role and zones",
+    "review": "Review",
+    "name": "Full name",
+    "send": "Send invite"
+  },
+  "shared": {
+    "demo": {
+      "install": "Install mode",
+      "privateOnly": "Private installs only"
+    }
+  },
+  "tabs": {
+    "label": "Sections"
+  },
+  "table": {
+    "caption": "Users"
+  },
+  "notice": {
+    "notFound": "That user could not be found."
+  }
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "request_id": "3f6f1b1e-7a55-4c27-9d0a-00000000e004",
+  "requested_at": "2026-09-14T09:12:01+03:00",
+  "data_source": "SYNTHETIC",
+  "input_data_sources": [
+    "SYNTHETIC"
+  ],
+  "now": "2026-09-14T09:12:01+03:00",
+  "stage": "shadow",
+  "decision_deadline_ms": 2000,
+  "top_n": 3,
+  "case": {
+    "case_id": "53c6974b-d62b-469d-afcd-d52d2b578eb6",
+    "registered_at": "2026-09-14T09:11:40+03:00",
+    "zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+    "sub_zone_id": "54293f6f-617f-4055-b9af-35236212daae",
+    "latitude": 24.677298,
+    "longitude": 46.732792,
+    "handling": "field",
+    "parties_involved": 2,
+    "required_skills": [],
+    "existing_assignment_id": null
+  },
+  "candidates": [
+    {
+      "agent_id": "8aec9202-669d-4b1d-8e97-27d132e909ed",
+      "status": "available",
+      "latitude": 24.7,
+      "longitude": 46.68,
+      "position_at": "2026-09-14T09:11:55+03:00",
+      "roster_zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "shift_end_at": "2026-09-14T14:00:00+03:00",
+      "skills": [
+        "general"
+      ],
+      "has_vehicle": true,
+      "cases_today": 0
+    },
+    {
+      "agent_id": "c86ea707-a8f0-4213-aa6a-8a0c429845dc",
+      "status": "available",
+      "latitude": 24.71,
+      "longitude": 46.69,
+      "position_at": "2026-09-14T09:11:55+03:00",
+      "roster_zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "shift_end_at": "2026-09-14T14:00:00+03:00",
+      "skills": [
+        "general"
+      ],
+      "has_vehicle": true,
+      "cases_today": 1
+    },
+    {
+      "agent_id": "85b352dd-77f5-4e0a-96f7-85126ee6000a",
+      "status": "on_break",
+      "latitude": 24.72,
+      "longitude": 46.7,
+      "position_at": "2026-09-14T09:11:55+03:00",
+      "roster_zone_id": "091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a",
+      "shift_end_at": "2026-09-14T14:00:00+03:00",
+      "skills": [
+        "general"
+      ],
+      "has_vehicle": true,
+      "cases_today": 2
+    }
+  ],
+  "prayer_window": null
+}

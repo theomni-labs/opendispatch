@@ -1,0 +1,171 @@
+{
+  "sub": "إعادة عرض {date}، الساعة {time}",
+  "replay": {
+    "pause": "إيقاف إعادة العرض مؤقتًا",
+    "resume": "استئناف إعادة العرض"
+  },
+  "outage": {
+    "on": "محاكاة انقطاع التغذية",
+    "off": "استئناف التغذية"
+  },
+  "stage": {
+    "title": "المرحلة لكل منطقة",
+    "button": "المراحل"
+  },
+  "fallback": {
+    "armed": "الإسناد الاحتياطي جاهز",
+    "armedMeta": "{s, plural, zero {يتولى توجيه {customer} بعد لحظات} one {يتولى توجيه {customer} بعد ثانية واحدة} two {يتولى توجيه {customer} بعد ثانيتين} few {يتولى توجيه {customer} بعد {s} ثوانٍ} many {يتولى توجيه {customer} بعد {s} ثانية} other {يتولى توجيه {customer} بعد {s} ثانية}}",
+    "active": "الإسناد الاحتياطي مفعّل",
+    "since": {
+      "none": "مفعّل منذ {time}",
+      "feed_outage": "تغذية البلاغات متوقفة منذ {time}",
+      "health_check_failed": "فشل فحص سلامة OpenDispatch عند {time}",
+      "opendispatch_timeout": "تجاوز OpenDispatch مهلة القرار عند {time}",
+      "manual": "أُرسلت إشارة الرجوع إلى توجيه {customer} عند {time}",
+      "maintenance": "وضع الصيانة مفعّل منذ {time}"
+    },
+    "label": "البديل",
+    "armedShort": "جاهز",
+    "activeShort": "مفعّل"
+  },
+  "board": {
+    "title": "البلاغات الواردة",
+    "empty": "لا توجد بلاغات",
+    "col": {
+      "waiting": "بالانتظار",
+      "recommended": "موصى بها",
+      "assigned": "مُسنَدة",
+      "enroute": "في الطريق",
+      "onscene": "في الموقع"
+    }
+  },
+  "need": {
+    "edit": "للعرض فقط لهذا الدور"
+  },
+  "toast": {
+    "assigned": "أُسند إلى {name}",
+    "reassigned": "أُعيد الإسناد إلى {name}",
+    "reason": "السبب: {reason}",
+    "outageOn": "انقطاع التغذية",
+    "outageOnDesc": "تحوّلت اللوحة إلى الإسناد الاحتياطي",
+    "outageOff": "عادت التغذية",
+    "outageOffDesc": "يستأنف OpenDispatch التوصية",
+    "taken": "مُسند بالفعل: لم يُرسل شيء"
+  },
+  "map": {
+    "title": "المندوبون",
+    "case": "بلاغ",
+    "spot": "مكان انتظار",
+    "perZone": "البلاغات لكل منطقة"
+  },
+  "read": {
+    "title": "خلال 10 دقائق",
+    "source": "المصدر",
+    "customer": "{customer}",
+    "opendispatch": "OpenDispatch (تشغيل ظلّي)",
+    "fromAssignment": "من الإسناد",
+    "fromRegistration": "من التسجيل",
+    "scope": "{count, plural, zero {لا بلاغات مقارنة} one {بلاغ واحد مقارن} two {بلاغان مقارنان} few {{count} بلاغات مقارنة} many {{count} بلاغًا مقارنًا} other {{count} بلاغ مقارن}} · من {from} إلى {to}"
+  },
+  "cmp": {
+    "title": "المقارنة الظلّية"
+  },
+  "override": {
+    "title": "تعديل الإسناد يدويًا",
+    "agent": "مندوب جديد",
+    "choose": "اختر مندوبًا",
+    "noMatch": "لا توجد نتيجة",
+    "need": {
+      "agent": "اختر مندوبًا",
+      "reason": "اختر سببًا",
+      "note": "أضف ملاحظة"
+    }
+  },
+  "states": {
+    "empty": {
+      "title": "لا توجد بلاغات بعد",
+      "desc": "تظهر البلاغات هنا مع وصول يوم إعادة العرض."
+    }
+  },
+  "ur": {
+    "title": "خارج نطاق 10 دقائق",
+    "day": "اليوم",
+    "cause": "السبب",
+    "causes": {
+      "geography": "بعيد جدًا",
+      "people": "لا يوجد مندوب متاح"
+    },
+    "col": {
+      "case": "البلاغ",
+      "time": "وقت التسجيل",
+      "nearest": "أقرب مندوب متاح",
+      "travel": "الانتقال"
+    },
+    "minutes": "{n} د",
+    "none": {
+      "title": "كل البلاغات ضمن النطاق",
+      "desc": "لا يوجد بلاغ في هذا اليوم والتصفية تجاوز {min} دقائق."
+    }
+  },
+  "ws": {
+    "title": "أماكن الانتظار",
+    "suggestion": "اقتراح",
+    "col": {
+      "agent": "المندوب",
+      "move": "المسافة",
+      "reason": "السبب"
+    },
+    "km": "{n} كم",
+    "reasons": {
+      "cover_expected_demand": "تغطية البلاغات المتوقعة",
+      "rebalance_zone": "موازنة المنطقة"
+    },
+    "none": {
+      "title": "لا توجد تحركات مقترحة",
+      "desc": "المندوبون المتاحون قريبون من البلاغات المتوقعة."
+    }
+  },
+  "fig": {
+    "today": "اليوم",
+    "within": {
+      "assignment": "من الإسناد · {value} من التسجيل",
+      "registration": "من التسجيل · {value} من الإسناد"
+    },
+    "noData": "لا توجد مقارنات بعد"
+  },
+  "tab": {
+    "label": "عروض اللوحة",
+    "board": "اللوحة",
+    "map": "الخريطة",
+    "spots": "نقاط الانتظار",
+    "reach": "خارج النطاق",
+    "shadow": "المقارنة الظلّية"
+  },
+  "col": {
+    "progress": "قيد التنفيذ"
+  },
+  "more": "عرض {n} أخرى",
+  "less": "عرض أقل",
+  "menu": {
+    "handover": "تسليم المناوبة"
+  },
+  "case": {
+    "details": "التفاصيل",
+    "history": "السجل",
+    "registered": "التسجيل",
+    "parties": "الأطراف",
+    "stage": "المرحلة",
+    "handling": "المعالجة",
+    "rule": "القاعدة",
+    "agent": "المعاين",
+    "h": {
+      "registered": "تم التسجيل",
+      "waiting": "بانتظار التوجيه",
+      "recommended": "أوصى OpenDispatch",
+      "assigned": "تم الإسناد",
+      "overridden": "تم التجاوز",
+      "enroute": "في الطريق",
+      "arrived": "وصل"
+    }
+  }
+}

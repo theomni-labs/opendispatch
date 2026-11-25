@@ -1,0 +1,245 @@
+{
+  "sub": "Hijri dates by Umm al-Qura",
+  "add": "Add holiday",
+  "menu": {
+    "recompute": "Recompute prayer times"
+  },
+  "toast": {
+    "recomputed": {
+      "title": "Prayer times recomputed",
+      "desc": "{cities} cities, {days} days, {records} records"
+    },
+    "export": "Export started",
+    "updated": "{name} updated",
+    "created": "{name} created",
+    "policy": "Leave policy updated",
+    "deleted": "{name} deleted"
+  },
+  "tab": {
+    "calendar": "Calendar",
+    "holidays": "Holidays",
+    "prayer": "Prayer times",
+    "policy": "Leave policy",
+    "events": "Events"
+  },
+  "stat": {
+    "holidays": "Holidays in 2026",
+    "ramadan": "Ramadan days",
+    "national": "Days to National Day",
+    "cities": "Cities"
+  },
+  "cal": {
+    "label": "Calendar",
+    "gregorian": "Gregorian",
+    "hijri": "Hijri"
+  },
+  "prevMonth": "Previous month",
+  "nextMonth": "Next month",
+  "today": "Today",
+  "ramadan": {
+    "markerYear": "Ramadan {year}"
+  },
+  "legend": {
+    "today": "Today",
+    "ramadan": "Ramadan",
+    "holiday": "Holiday"
+  },
+  "sw": {
+    "hijri": "Show Hijri dates",
+    "ramadan": "Mark Ramadan",
+    "gregorian": "Show Gregorian dates"
+  },
+  "search": "Search holidays",
+  "col": {
+    "holiday": "Holiday",
+    "type": "Type",
+    "gregorian": "Gregorian",
+    "hijri": "Hijri",
+    "days": "Days"
+  },
+  "kind": {
+    "public": "Public",
+    "religious": "Religious",
+    "observance": "Observance"
+  },
+  "nomatch": "No match",
+  "p": {
+    "title": "Prayer times",
+    "method": "Umm al-Qura",
+    "stored": "Stored",
+    "prev": "Previous day",
+    "next": "Next day",
+    "range": "Stored from {from} to {to}",
+    "city": "City",
+    "fajr": "Fajr",
+    "sunrise": "Sunrise",
+    "dhuhr": "Dhuhr",
+    "asr": "Asr",
+    "maghrib": "Maghrib",
+    "isha": "Isha",
+    "computed": "Computed"
+  },
+  "l": {
+    "title": "Leave rules",
+    "notice": "Minimum notice",
+    "share": "Most on leave at once",
+    "blackout": "Blackout periods",
+    "addPeriod": "Add period",
+    "none": "No periods",
+    "unsaved": "Unsaved changes",
+    "nochange": "Nothing to save",
+    "reset": "Reset"
+  },
+  "uom": {
+    "days": "days"
+  },
+  "states": {
+    "empty": {
+      "title": "No holidays",
+      "desc": "Add the first holiday."
+    },
+    "error": {
+      "desc": "The calendar could not load."
+    }
+  },
+  "h": {
+    "new": "New holiday",
+    "edit": "Edit holiday",
+    "nameEn": "Name, English",
+    "nameAr": "Name, Arabic",
+    "from": "From",
+    "to": "To",
+    "delete": "Delete",
+    "deleteTitle": "Delete {name}?",
+    "deleteDesc": "The holiday is removed from the calendar. This cannot be undone."
+  },
+  "b": {
+    "label": "Label"
+  },
+  "need": {
+    "name": "Add a name",
+    "dates": "Enter two valid dates",
+    "order": "End is before start",
+    "label": "Add a label"
+  },
+  "notice": {
+    "notFound": "That holiday could not be found."
+  },
+  "tabs": {
+    "label": "Calendar views"
+  },
+  "ev": {
+    "title": "Events and calendar",
+    "add": "Add date range",
+    "addShort": "Add",
+    "setDay": "Set day",
+    "col": {
+      "feature": "Feature",
+      "dates": "Dates",
+      "source": "Source",
+      "actions": "Actions"
+    },
+    "group": {
+      "set": "Set here",
+      "derived": "Derived, read only",
+      "notice": "From notices"
+    },
+    "payday": "Payday day",
+    "payDayLabel": "Day of month",
+    "payVal": "Day {n} of each month",
+    "assume": "Assumption, {customer} to confirm",
+    "kind": {
+      "school": "School term",
+      "season": "Season event",
+      "umrah": "Umrah window"
+    },
+    "src": {
+      "setting": "Setting",
+      "hijri": "From the Hijri calendar",
+      "fixed": "Fixed date",
+      "customer": "{customer} calendar",
+      "notice": "Notice"
+    },
+    "derivedTip": "Derived, not editable",
+    "nothing": "Nothing is assumed",
+    "edit": "Edit",
+    "remove": "Remove",
+    "name": "Name",
+    "newTitle": "New date range",
+    "editTitle": "Edit date range",
+    "err": {
+      "order": "End is before start",
+      "overlap": "Overlaps {name}",
+      "day": "Enter a day from 1 to 31"
+    },
+    "removed": "{name} removed",
+    "payRemoved": "Payday day removed",
+    "paySaved": "Payday day saved",
+    "scope": {
+      "all": "All regions",
+      "western": "Western region",
+      "central": "Central region"
+    },
+    "period": {
+      "vacation_summer": "Summer vacation",
+      "vacation_eid_fitr": "Eid al-Fitr vacation",
+      "vacation_eid_adha": "Eid al-Adha vacation",
+      "vacation_national": "National holiday vacation",
+      "vacation_long_weekend": "Long weekend",
+      "vacation_mid_semester": "Mid-semester vacation",
+      "vacation_between_semesters": "Vacation between semesters"
+    },
+    "derivedName": {
+      "eid_fitr": "Eid al-Fitr",
+      "eid_adha": "Eid al-Adha",
+      "hajj": "Hajj",
+      "national_day": "National Day",
+      "founding_day": "Founding Day"
+    },
+    "noticeNone": "No events from notices"
+  },
+  "nt": {
+    "open": "Read notice",
+    "title": "Read an event notice",
+    "label": "Notice text",
+    "read": "Read notice",
+    "needText": "Paste the notice text first",
+    "foot": "Saved events go to the forecaster",
+    "none": "No event found in this notice",
+    "found": "{n, plural, one {1 event found, nothing saved yet} other {{n} events found, nothing saved yet}}",
+    "unmapped": "Not used",
+    "draft": "Draft",
+    "type": "Type",
+    "types": {
+      "sports_match": "Sports match",
+      "festival": "Festival",
+      "concert": "Concert",
+      "conference": "Conference",
+      "road_closure": "Road closure",
+      "public_holiday": "Public holiday",
+      "other": "Other"
+    },
+    "fromTime": "From time",
+    "toTime": "To time",
+    "zones": "Zones",
+    "everywhere": "Every zone",
+    "impact": {
+      "low": "Low impact",
+      "medium": "Medium impact",
+      "high": "High impact"
+    },
+    "lvl": {
+      "low": "Low",
+      "medium": "Medium",
+      "high": "High"
+    },
+    "discard": "Discard",
+    "save": "Save event",
+    "fromHijri": "Hijri dates converted",
+    "err": {
+      "time": "Times are HH:MM",
+      "zones": "Choose at least one zone"
+    },
+    "expected": "Expected impact"
+  }
+}

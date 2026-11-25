@@ -1,0 +1,26 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The server's English detail under the translated line: small, muted, always left to right (it is English text). */
+.detail {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+/* A known reason, translated */
+.reason {
+  display: block;
+}
+
+/* The folded English detail */
+.more {
+  margin-block-start: var(--od-space-4);
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+}
+
+.more > summary {
+  cursor: pointer;
+}

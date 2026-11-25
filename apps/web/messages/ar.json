@@ -1,0 +1,760 @@
+{
+  "common": {
+    "illustrative": "توضيحي",
+    "retry": "إعادة المحاولة",
+    "goHome": "الصفحة الرئيسية",
+    "signOut": "تسجيل الخروج",
+    "loading": "جارٍ التحميل",
+    "more": "المزيد",
+    "search": "بحث",
+    "filter": "تصفية",
+    "export": "تصدير",
+    "viewAll": "عرض الكل",
+    "cancel": "إلغاء",
+    "save": "حفظ",
+    "apply": "تطبيق",
+    "close": "إغلاق",
+    "confirm": "تأكيد",
+    "clear": "مسح",
+    "clearAll": "مسح الكل",
+    "selected": "محدد",
+    "back": "رجوع",
+    "next": "التالي",
+    "previous": "السابق",
+    "approve": "اعتماد",
+    "reject": "رفض",
+    "details": "التفاصيل",
+    "status": "الحالة",
+    "zone": "المنطقة",
+    "agent": "المندوب",
+    "vehicle": "المركبة",
+    "note": "ملاحظة",
+    "reason": "السبب",
+    "minShort": "د",
+    "all": "الكل",
+    "none": "لا شيء",
+    "on": "مفعّل",
+    "off": "معطّل",
+    "since": "منذ"
+  },
+  "dataSource": {
+    "label": "مصدر البيانات",
+    "mixed": "مختلط",
+    "none": "لا توجد بيانات",
+    "SYNTHETIC": "اصطناعية",
+    "IMPORTED": "عيّنة مستوردة",
+    "LIVE": "بيانات مباشرة"
+  },
+  "roles": {
+    "administrator": "مسؤول النظام",
+    "dispatch_supervisor": "مشرف التوجيه",
+    "dispatcher": "منسّق التوجيه",
+    "planner": "مخطِّط",
+    "remote_team_lead": "قائد فريق العمل عن بُعد",
+    "viewer_auditor": "مطّلع ومدقّق",
+    "change_approver": "معتمِد التغييرات"
+  },
+  "scopes": {
+    "whole_install": "كامل النظام",
+    "assigned_zones": "مناطق محدّدة",
+    "remote_pool": "فريق العمل عن بُعد"
+  },
+  "installModes": {
+    "private": "خاص",
+    "dedicated": "مخصّص",
+    "shared": "مشترك"
+  },
+  "nav": {
+    "ops": {
+      "group": {
+        "live": "المباشر",
+        "plan": "التخطيط",
+        "analyze": "التحليل"
+      },
+      "forecast_explorer": {
+        "title": "مستكشف التوقعات",
+        "menu": "مستكشف التوقعات"
+      },
+      "live_dispatch_board": {
+        "title": "لوحة التوجيه المباشر",
+        "menu": "لوحة التوجيه المباشر"
+      },
+      "remote_queue": {
+        "title": "طابور العمل عن بُعد والجدولة",
+        "menu": "العمل عن بُعد"
+      },
+      "field_planner": {
+        "title": "منصّة التخطيط الميداني",
+        "menu": "التخطيط الميداني"
+      },
+      "standby_coverage": {
+        "title": "خريطة نقاط التمركز والتغطية",
+        "menu": "التمركز والتغطية"
+      },
+      "gap_surplus": {
+        "title": "العجز والفائض",
+        "menu": "العجز والفائض"
+      },
+      "service_level_simulator": {
+        "title": "محاكي مستوى الخدمة",
+        "menu": "محاكي مستوى الخدمة"
+      },
+      "scenario_lab": {
+        "title": "مختبر السيناريوهات",
+        "menu": "مختبر السيناريوهات"
+      },
+      "leave_planner": {
+        "title": "تخطيط الإجازات",
+        "menu": "تخطيط الإجازات"
+      },
+      "break_planner": {
+        "title": "تخطيط الاستراحات",
+        "menu": "تخطيط الاستراحات"
+      },
+      "management_dashboards": {
+        "title": "لوحات الإدارة",
+        "menu": "لوحات الإدارة"
+      },
+      "productivity_metrics": {
+        "title": "الإنتاجية والمؤشرات",
+        "menu": "الإنتاجية والمؤشرات"
+      }
+    },
+    "admin": {
+      "group": {
+        "access": "الوصول",
+        "reference_data": "البيانات المرجعية",
+        "operations": "العمليات",
+        "system": "النظام"
+      },
+      "users_roles": {
+        "title": "المستخدمون والأدوار",
+        "menu": "المستخدمون والأدوار"
+      },
+      "sign_in_identity": {
+        "title": "تسجيل الدخول ومزوّدو الهوية",
+        "menu": "مزوّدو الهوية"
+      },
+      "locations": {
+        "title": "المواقع",
+        "menu": "المواقع"
+      },
+      "agents_vehicles": {
+        "title": "المندوبون والمركبات",
+        "menu": "المندوبون والمركبات"
+      },
+      "classification_rules": {
+        "title": "قواعد التصنيف",
+        "menu": "قواعد التصنيف"
+      },
+      "shift_break_policies": {
+        "title": "سياسات الورديات والاستراحات",
+        "menu": "الورديات والاستراحات"
+      },
+      "leave_policy_calendar": {
+        "title": "سياسة الإجازات والتقويم",
+        "menu": "الإجازات والتقويم"
+      },
+      "forecast_model": {
+        "title": "إدارة التوقعات والنموذج",
+        "menu": "إدارة النموذج"
+      },
+      "data_sources": {
+        "title": "مصادر البيانات والتكاملات",
+        "menu": "مصادر البيانات"
+      },
+      "data_import_quality": {
+        "title": "استيراد البيانات وجودتها",
+        "menu": "الاستيراد والجودة"
+      },
+      "audit_log": {
+        "title": "سجل التدقيق",
+        "menu": "سجل التدقيق"
+      },
+      "notifications_alerts": {
+        "title": "الإشعارات والتنبيهات",
+        "menu": "الإشعارات والتنبيهات"
+      },
+      "api_webhooks": {
+        "title": "واجهة البرمجة وخطّافات الويب",
+        "menu": "الواجهة والخطّافات"
+      },
+      "security_compliance": {
+        "title": "الأمن والامتثال",
+        "menu": "الأمن والامتثال"
+      },
+      "system_health": {
+        "title": "سلامة النظام",
+        "menu": "سلامة النظام"
+      },
+      "updates": {
+        "title": "التحديثات",
+        "menu": "التحديثات"
+      },
+      "localization": {
+        "title": "اللغة والإعدادات الإقليمية",
+        "menu": "اللغة والإعدادات الإقليمية"
+      },
+      "ai_assistant": {
+        "title": "المساعد الذكي",
+        "menu": "المساعد الذكي"
+      }
+    }
+  },
+  "shell": {
+    "brand": "OpenDispatch",
+    "console": {
+      "ops": "واجهة العمليات",
+      "admin": "واجهة الإدارة"
+    },
+    "access": {
+      "view": "عرض فقط",
+      "reduced": "صلاحيات محدودة"
+    },
+    "search": "بحث في الأقسام"
+  },
+  "states": {
+    "empty": {
+      "title": "لا يوجد شيء بعد"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "desc": "تعذّر تحميل البيانات."
+    },
+    "noAccess": {
+      "title": "لا تملك صلاحية الوصول",
+      "desc": "اطلب من مسؤول النظام منحك الصلاحية."
+    },
+    "notFound": {
+      "title": "الصفحة غير موجودة",
+      "desc": "هذا العنوان لا يطابق أي شاشة."
+    }
+  },
+  "demo": {
+    "badge": "عرض تجريبي",
+    "startTitle": "اختر دورًا",
+    "customer": "العميل",
+    "installMode": "التثبيت",
+    "role": "الدور",
+    "zones": "المناطق",
+    "start": "ابدأ العرض",
+    "apply": "تطبيق",
+    "controls": "أدوات العرض التجريبي",
+    "user": "مستخدم العرض التجريبي",
+    "userInitials": "م ت",
+    "errorInvalid": "تعذّر تطبيق الاختيار.",
+    "errorZone": "منطقة غير معروفة.",
+    "errorUnavailable": "العرض التجريبي غير متاح."
+  },
+  "signIn": {
+    "title": "تسجيل الدخول",
+    "screens": "شاشات تسجيل الدخول",
+    "email": "البريد الإلكتروني",
+    "continue": "متابعة",
+    "or": "أو",
+    "sso": "تسجيل الدخول عبر الدخول الموحّد",
+    "emergencyLink": "مسؤول الطوارئ",
+    "mock": {
+      "badge": "مزوّد العرض التجريبي",
+      "title": "مزوّد العرض التجريبي",
+      "subject": "المستخدم",
+      "groups": "المجموعات من المزوّد",
+      "groupsHint": "مفصولة بفواصل",
+      "outcome": "النتيجة",
+      "signed": "تسجيل الدخول ينجح",
+      "noRole": "لا توجد مجموعة مطابقة",
+      "refused": "المزوّد يرفض",
+      "error": "المزوّد يفشل",
+      "submit": "تسجيل الدخول"
+    },
+    "refused": {
+      "title": "تم رفض تسجيل الدخول",
+      "body": "لم يقبل مزوّد مؤسستك عملية تسجيل الدخول."
+    },
+    "noRole": {
+      "title": "لم يُسنَد إليك دور",
+      "body": "سجّلت الدخول، لكن لا توجد قاعدة تمنحك الوصول. اطلب من مسؤول النظام.",
+      "reason": "عدم وجود قاعدة مطابقة يعني عدم الوصول"
+    },
+    "error": {
+      "title": "حدث خطأ ما",
+      "body": "حاول مجددًا. وإن استمر الخطأ فشارك هذا الرمز مع الدعم."
+    },
+    "again": "حاول مجددًا",
+    "back": "العودة إلى تسجيل الدخول",
+    "copy": "نسخ",
+    "copied": "تم نسخ الرمز",
+    "emergency": {
+      "title": "دخول الطوارئ",
+      "password": "كلمة المرور",
+      "mfaTitle": "رمز المصادقة",
+      "code": "الرمز",
+      "codeHint": "من تطبيق المصادقة",
+      "locked": "يُقفل بعد 5 محاولات فاشلة",
+      "codeNeeded": "أدخل رمزًا من 6 أرقام",
+      "invalid": "بيانات الدخول غير صحيحة"
+    },
+    "out": {
+      "title": "لقد سجّلت الخروج",
+      "body": "أغلق هذه النافذة أو سجّل الدخول مجددًا."
+    }
+  },
+  "language": {
+    "label": "اللغة",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "ds": {
+    "combobox": {
+      "placeholder": "اختر…",
+      "empty": "لا نتائج مطابقة",
+      "show": "عرض الخيارات",
+      "hide": "إخفاء الخيارات"
+    },
+    "drawer": {
+      "close": "إغلاق"
+    },
+    "modal": {
+      "close": "إغلاق"
+    },
+    "tabs": {
+      "sections": "الأقسام"
+    },
+    "toast": {
+      "region": "الإشعارات",
+      "dismiss": "إغلاق الإشعار",
+      "dismissTitle": "إغلاق"
+    },
+    "dataTable": {
+      "bulkActions": "إجراءات جماعية",
+      "selectAllRows": "تحديد كل الصفوف في هذه الصفحة",
+      "deselectAllRows": "إلغاء تحديد كل الصفوف في هذه الصفحة",
+      "selectedCount": "{n, plural, zero {لا صفوف محددة} one {صف واحد محدد} two {صفان محددان} few {{n} صفوف محددة} many {{n} صفًا محددًا} other {{n} صف محدد}}",
+      "clearSelection": "مسح",
+      "selectRow": "تحديد الصف {id}",
+      "emptyTitle": "لا توجد سجلات",
+      "emptyDescription": "جرّب تعديل البحث أو التصفية."
+    },
+    "pagination": {
+      "label": "التنقل بين الصفحات",
+      "range": "{from} إلى {to} من {total}",
+      "pageOf": "الصفحة {page} من {pages}",
+      "compact": "{page} / {pages}",
+      "pageSize": "الصفوف في الصفحة",
+      "previous": "الصفحة السابقة",
+      "next": "الصفحة التالية",
+      "goToPage": "الصفحة {page}"
+    },
+    "filterBar": {
+      "filteredBy": "التصفية حسب",
+      "removeFilter": "إزالة التصفية {label}",
+      "clearAll": "مسح الكل",
+      "clearFilter": "مسح"
+    },
+    "fileDrop": {
+      "dropToUpload": "أفلت للرفع",
+      "promptOne": "اسحب ملفًا إلى هنا أو",
+      "promptMany": "اسحب الملفات إلى هنا أو",
+      "browse": "تصفّح",
+      "selectedFiles": "الملفات المحددة",
+      "remove": "إزالة {name}",
+      "sizeBytes": "{size} بايت",
+      "sizeKb": "{size} كيلوبايت",
+      "sizeMb": "{size} ميجابايت",
+      "rejectType": "نوع الملف {name} غير مقبول.",
+      "rejectSize": "حجم الملف {name} أكبر من {max}.",
+      "dismiss": "إغلاق الرسالة"
+    },
+    "quantityInput": {
+      "decrease": "تقليل",
+      "increase": "زيادة"
+    },
+    "searchInput": {
+      "placeholder": "بحث",
+      "clear": "مسح البحث"
+    },
+    "field": {
+      "optional": "(اختياري)"
+    },
+    "breadcrumbs": {
+      "label": "مسار التنقل"
+    },
+    "pageHeader": {
+      "back": "رجوع"
+    },
+    "alert": {
+      "dismiss": "إغلاق"
+    },
+    "avatar": {
+      "more": "{n, plural, zero {لا أشخاص آخرين} one {شخص آخر} two {شخصان آخران} few {{n} أشخاص آخرين} many {{n} شخصًا آخر} other {{n} شخص آخر}}"
+    },
+    "tag": {
+      "remove": "إزالة {name}",
+      "removeGeneric": "إزالة"
+    },
+    "stepper": {
+      "completed": "(مكتمل)"
+    },
+    "skeleton": {
+      "loading": "جارٍ التحميل"
+    },
+    "descriptionList": {
+      "empty": "—"
+    },
+    "chart": {
+      "noData": "لا توجد بيانات",
+      "titled": "{title}. {summary}",
+      "listSeparator": "، ",
+      "compactThousand": "{n} ألف",
+      "compactMillion": "{n} مليون"
+    },
+    "chartLegend": {
+      "label": "مفتاح الرسم البياني"
+    },
+    "lineChart": {
+      "summary": "رسم بياني خطي: {series}، {count, plural, zero {لا نقاط} one {نقطة واحدة} two {نقطتان} few {{count} نقاط} many {{count} نقطة} other {{count} نقطة}}، من {first} إلى {last}، بقيم من {min} إلى {max}.",
+      "markers": "العلامات: {markers}.",
+      "band": "النطاق المرجّح",
+      "bandValue": "{low} إلى {high}"
+    },
+    "barChart": {
+      "summary": "رسم بياني شريطي{stacked, plural, =1 { مكدّس} other { مجمّع}}{horizontal, plural, =1 { أفقي} other {}}: {categories, plural, zero {لا فئات} one {فئة واحدة} two {فئتان} few {{categories} فئات} many {{categories} فئة} other {{categories} فئة}}{seriesCount, plural, zero {، السلسلة ({names})} one {، السلسلة ({names})} two {، سلسلتان ({names})} few {، {seriesCount} سلاسل ({names})} many {، {seriesCount} سلسلة ({names})} other {، {seriesCount} سلسلة ({names})}}، بقيم من {min} إلى {max}.",
+      "total": "الإجمالي"
+    },
+    "donutChart": {
+      "summary": "رسم بياني حلقي، الإجمالي {total}: {items}.",
+      "item": "{label} {value} ({percent})",
+      "empty": "رسم بياني حلقي، لا توجد بيانات."
+    },
+    "sparkline": {
+      "summary": "الاتجاه: {count, plural, zero {لا نقاط} one {نقطة واحدة} two {نقطتان} few {{count} نقاط} many {{count} نقطة} other {{count} نقطة}}، الأدنى {min}، الأعلى {max}، آخر قيمة {latest}."
+    },
+    "heatGrid": {
+      "summary": "شبكة حرارية: {rows, plural, zero {لا صفوف} one {صف واحد} two {صفان} few {{rows} صفوف} many {{rows} صفًا} other {{rows} صف}}، {columns, plural, zero {لا أعمدة} one {عمود واحد} two {عمودان} few {{columns} أعمدة} many {{columns} عمودًا} other {{columns} عمود}}، بقيم من {min} إلى {max}.",
+      "cell": "{row}، {column}: {value}",
+      "cellKind": "{row}، {column}: {value}، {kind}",
+      "cellNoValue": "{row}، {column}: لا توجد قيمة",
+      "kindGap": "عجز",
+      "kindSurplus": "فائض",
+      "kindOk": "متوازن"
+    },
+    "railShell": {
+      "nav": "التنقل الرئيسي",
+      "skip": "انتقل إلى المحتوى الرئيسي",
+      "menuOpen": "فتح القائمة",
+      "notifications": "الإشعارات",
+      "notificationsUnread": "الإشعارات: {count, plural, zero {لا إشعارات غير مقروءة} one {إشعار واحد غير مقروء} two {إشعاران غير مقروءان} few {{count} إشعارات غير مقروءة} many {{count} إشعارًا غير مقروء} other {{count} إشعار غير مقروء}}"
+    },
+    "commandPalette": {
+      "placeholder": "بحث",
+      "results": "نتائج البحث",
+      "empty": "لا توجد نتائج",
+      "count": "{count, plural, zero {لا نتائج} one {نتيجة واحدة} two {نتيجتان} few {{count} نتائج} many {{count} نتيجة} other {{count} نتيجة}}"
+    },
+    "duration": {
+      "minuteShort": "د"
+    },
+    "dateInput": {
+      "hijriCaption": "هجري: {date}"
+    },
+    "formFooter": {
+      "label": "إجراءات النموذج",
+      "unsaved": "تغييرات غير محفوظة",
+      "clean": "لا توجد تغييرات غير محفوظة"
+    }
+  },
+  "opendispatch": {
+    "stage": {
+      "shadow": "التشغيل الظلّي",
+      "recommend": "التوصية",
+      "automatic": "التلقائي"
+    },
+    "status": {
+      "available": "متاح",
+      "assigned": "مُسنَد",
+      "en_route": "في الطريق",
+      "on_scene": "في الموقع",
+      "on_break": "في استراحة",
+      "offline": "غير متصل"
+    },
+    "qualifier": {
+      "inferred": "مستنتج"
+    },
+    "reading": {
+      "primary": "الأساسي، بحسب الإعداد"
+    },
+    "fallback": {
+      "cases": "بلاغات الإسناد الاحتياطي"
+    },
+    "gate": {
+      "viewOnly": "عرض فقط لهذا الدور",
+      "approve": "دورك لا يتيح الاعتماد"
+    },
+    "map": {
+      "label": "خريطة تخطيطية",
+      "zoomIn": "تكبير",
+      "zoomOut": "تصغير",
+      "reset": "إعادة ضبط العرض",
+      "empty": "لا شيء لعرضه على الخريطة",
+      "outside": "{n} أخرى في مدن أخرى، غير معروضة",
+      "error": "تعذّر رسم الخريطة",
+      "summary": "المناطق: {zones}، النقاط: {pins}",
+      "zones": "المناطق",
+      "points": "النقاط",
+      "level": "المستوى {level} من 5",
+      "kind": {
+        "case": "بلاغ",
+        "standby": "نقطة تمركز",
+        "spot": "موقع انتظار مقترح"
+      },
+      "zone": {
+        "gap": "عجز",
+        "surplus": "فائض"
+      }
+    },
+    "dispatch": {
+      "pickOpenDispatch": "اختيار OpenDispatch",
+      "pickWould": "كان OpenDispatch سيختار",
+      "eta": "وقت الوصول",
+      "arrived": "وصل",
+      "travel": "رحلة",
+      "waitingCustomer": "بانتظار توجيه {customer}",
+      "reassignedFrom": "أُعيد إسنادها من",
+      "accept": "قبول",
+      "override": "تعديل يدوي",
+      "parties": "{count, plural, zero {لا أطراف} one {طرف واحد} two {طرفان} few {{count} أطراف} many {{count} طرفًا} other {{count} طرف}}",
+      "source": {
+        "opendispatch": "OpenDispatch",
+        "customer": "{customer}",
+        "manual": "يدوي",
+        "fallback": "احتياطي"
+      },
+      "overReach": "أكثر من 10 د",
+      "class": {
+        "field": "ميداني",
+        "remote": "عن بُعد",
+        "rule": "القاعدة:",
+        "default": "القاعدة: الافتراضية",
+        "feed": "من التغذية"
+      },
+      "state": {
+        "waiting": "بالانتظار",
+        "recommended": "موصى به",
+        "assigned": "مُسنَد",
+        "enroute": "في الطريق",
+        "onscene": "في الموقع"
+      },
+      "waitingMin": "بالانتظار {n} د",
+      "etaAt": "الوصول {time}",
+      "arrivedAt": "وصل {time}",
+      "travelMin": "{n} د للوصول",
+      "open": "فتح البلاغ {case}",
+      "outsideScope": "معاين خارج مناطقك"
+    },
+    "shadowComparison": {
+      "columnCase": "البلاغ",
+      "columnOpenDispatch": "اختيار OpenDispatch",
+      "columnDefault": "الفعلي لدى {customer}",
+      "same": "نفسه",
+      "different": "مختلف",
+      "empty": "لا توجد بلاغات مقارنة بعد",
+      "error": "تعذّر تحميل المقارنة"
+    },
+    "roster": {
+      "label": "شبكة الجدول",
+      "empty": "لا يوجد جدول لعرضه",
+      "error": "تعذّر رسم الجدول",
+      "kind": {
+        "shift": "وردية",
+        "break": "استراحة",
+        "breakHolds": "تشمل صلاة",
+        "breakConflict": "تقطع صلاة",
+        "prayer": "وقت الصلاة",
+        "leave": "إجازة",
+        "override": "تعديل يدوي",
+        "gap": "عجز"
+      }
+    },
+    "reasonCode": {
+      "agent_unavailable": "المندوب غير متاح",
+      "vehicle_unavailable": "المركبة غير متاحة",
+      "closer_agent_known": "مندوب أقرب معروف",
+      "skills_needed": "مهارات مطلوبة",
+      "dispatcher_judgement": "تقدير منسّق التوجيه",
+      "other": "سبب آخر"
+    },
+    "assistant": {
+      "ask": "اسأل",
+      "drawerTitle": "اسأل النظام",
+      "question": "السؤال",
+      "send": "اسأل",
+      "suggestion": "اقتراح",
+      "meta": "{provider} · {model} · {seconds} ث",
+      "lookups": "عمليات البحث ({n} من {max})",
+      "refused": "أسئلة بيانات التخطيط فقط.",
+      "capped": "توقف بعد {max} عمليات بحث.",
+      "off": "المساعد غير مهيأ",
+      "working": "جارٍ العمل",
+      "explainTitle": "اشرح هذا",
+      "explain": "اشرح",
+      "again": "مرة أخرى",
+      "filtersGap": "امسح عوامل تصفية المدينة والسبب والبحث لشرح هذا العرض",
+      "filtersForecast": "اعرض المنطقة كاملة بالقواعد النشطة لشرحها",
+      "sent": "ما أُرسل",
+      "draftLabel": "صف القاعدة",
+      "draft": "صياغة",
+      "draftApplied": "وُضعت المسودة في المنشئ. راجعها قبل الحفظ.",
+      "unmappedTitle": "ليست في المسودة",
+      "unmappedHint": "لا يوجد في المنشئ حقل لهذه الشروط. أضفها يدويًا أو اتركها.",
+      "handoverTitle": "تسليم المناوبة",
+      "handoverOpen": "فتح",
+      "handoverScope": "مناطقك",
+      "handoverTab": "التسليم",
+      "alertsTab": "التنبيهات",
+      "window": "آخر",
+      "window4": "4 ساعات",
+      "window8": "8 ساعات",
+      "window12": "12 ساعة",
+      "windowRange": "من {from} إلى {to}",
+      "summarise": "لخّص",
+      "copy": "نسخ",
+      "copied": "تم النسخ",
+      "copyFailed": "تعذّر النسخ",
+      "figuresOnly": "تعذّر التحقق من الإجابة؛ تُعرض الأرقام بدلًا منها.",
+      "noAlerts": "لا تنبيهات غير مقروءة",
+      "category": {
+        "model": "النموذج",
+        "rule": "القواعد",
+        "roster": "الجداول",
+        "leave": "الإجازات",
+        "import": "الاستيراد",
+        "integration": "التكامل",
+        "fallback": "الإسناد الاحتياطي",
+        "security": "الأمن",
+        "update": "التحديثات",
+        "system": "النظام",
+        "dispatch": "التوجيه"
+      },
+      "severity": {
+        "info": "معلومة",
+        "warning": "تحذير",
+        "critical": "حرج"
+      }
+    },
+    "caseAi": {
+      "title": "اقتراح الذكاء الاصطناعي",
+      "suggest": "اقترح",
+      "again": "مرة أخرى",
+      "working": "جارٍ قراءة الوصف",
+      "description": "الوصف",
+      "photos": "الصور",
+      "noPhotos": "لم تُرفق صور",
+      "photosCount": "{n, plural, zero {لا صور} one {صورة واحدة} two {صورتان} few {{n} صور} many {{n} صورة} other {{n} صورة}}",
+      "noDescription": "لا يوجد وصف لهذا البلاغ",
+      "textOnly": "النموذج المحلي يقرأ النص فقط",
+      "handling": "المعالجة",
+      "severity": "الشدة",
+      "injury": "إصابة",
+      "method": "التقييم",
+      "confidence": "الثقة",
+      "reason": "السبب",
+      "rules": "حسب القواعد",
+      "agrees": "متوافق",
+      "differs": "مختلف",
+      "accept": "قبول",
+      "reject": "رفض",
+      "unchanged": "المعالجة لم تتغير",
+      "accepted": "قبله {name}",
+      "rejected": "رفضه {name}",
+      "toastAccepted": "قُبل الاقتراح",
+      "toastRejected": "رُفض الاقتراح",
+      "toastDesc": "يحتفظ البلاغ بطريقة معالجته.",
+      "ruleDefault": "القاعدة: الافتراضية",
+      "rule": "القاعدة: {name}",
+      "handlingField": "ميداني",
+      "handlingRemote": "عن بُعد",
+      "sevMinor": "بسيط",
+      "sevModerate": "متوسط",
+      "sevSevere": "شديد",
+      "yes": "نعم",
+      "no": "لا",
+      "methodPhoto": "صور",
+      "methodVideo": "فيديو",
+      "methodInPerson": "حضوري",
+      "open": "اقتراح الذكاء الاصطناعي",
+      "summary": "الذكاء الاصطناعي: {handling} · {pct}"
+    }
+  },
+  "patterns": {
+    "action": {
+      "saved": "تم الحفظ",
+      "error": {
+        "unauthenticated": "انتهت جلستك. سجّل الدخول من جديد.",
+        "forbidden": "دورك لا يتيح لك ذلك.",
+        "not_found": "هذا السجل لم يعد موجودًا.",
+        "invalid": "راجع البيانات ثم حاول مرة أخرى.",
+        "conflict": "لا يمكن ذلك في حالته الحالية.",
+        "unexpected": "حدث خطأ من جهتنا.",
+        "network": "تعذّر الوصول إلى الخادم. حاول مرة أخرى."
+      },
+      "reference": "المرجع {reference}",
+      "details": "التفاصيل",
+      "reason": {
+        "STORAGE_UNAVAILABLE": "تخزين الملفات غير متاح. اطلب من مسؤول النظام التحقق منه.",
+        "FEED_OUTAGE_SIMULATION_OFF": "لا تتوفر محاكاة الانقطاع أثناء قراءة اللوحة من التغذية الحية.",
+        "ASSISTANT_OFF": "اطلب من مسؤول النظام إعداده.",
+        "ASSISTANT_UNAVAILABLE": "حاول مرة أخرى بعد قليل.",
+        "ASSISTANT_INVALID_OUTPUT": "أعد الصياغة، أو املأ الحقول يدويًا."
+      },
+      "reasonTitle": {
+        "ASSISTANT_OFF": "المساعد غير مُفعّل",
+        "ASSISTANT_UNAVAILABLE": "تعذّر على المساعد الإجابة الآن",
+        "ASSISTANT_INVALID_OUTPUT": "لم تجتز مسودة المساعد الفحوص"
+      }
+    },
+    "toolbar": {
+      "search": "بحث"
+    },
+    "list": {
+      "noMatch": "لا توجد نتائج مطابقة"
+    },
+    "notice": {
+      "recordNotFound": "تعذّر العثور على هذا السجل."
+    },
+    "dialog": {
+      "needReason": "اكتب {min, plural, zero {{min} حرف} one {حرفًا واحدًا} two {حرفين} few {{min} أحرف} many {{min} حرفًا} other {{min} حرف}} على الأقل."
+    },
+    "zones": {
+      "chooseOne": "اختر منطقة واحدة على الأقل",
+      "chosen": "المختارة: {count}",
+      "wholeCity": "كل مناطق {city}",
+      "none": "لا توجد مناطق للاختيار"
+    },
+    "stub": {
+      "demo": "عرض تجريبي",
+      "notApplied": "غير مطبّق",
+      "demoHint": "سلوك مبرمج: لا يحدث شيء فعلي.",
+      "notAppliedHint": "محفوظ ومسجَّل في التدقيق، لكنه غير مطبّق بعد.",
+      "export": "التصدير لم يُبنَ بعد",
+      "exportHint": "لم يُنزَّل أي ملف."
+    },
+    "copy": {
+      "copy": "نسخ",
+      "copied": "تم النسخ",
+      "failed": "تعذّر النسخ"
+    },
+    "audit": {
+      "system": "النظام",
+      "unknownActor": "مستخدم غير معروف",
+      "outcome": {
+        "success": "تم",
+        "failure": "فشل",
+        "denied": "مرفوض"
+      },
+      "empty": "لا توجد أحداث بعد"
+    },
+    "export": {
+      "ready": "الملف جاهز"
+    }
+  }
+}

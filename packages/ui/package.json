@@ -1,0 +1,29 @@
+{
+  "name": "@opendispatch/ui",
+  "version": "0.1.0",
+  "description": "OpenDispatch user interface components: thin wrappers over Ant Design, ECharts charts, format helpers and theme tokens. Published as TypeScript source.",
+  "license": "AGPL-3.0-only",
+  "private": true,
+  "type": "module",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": "./src/index.ts",
+    "./charts": "./src/charts/index.ts",
+    "./format": "./src/format/index.ts",
+    "./tokens": "./src/theme/tokens.ts",
+    "./tokens.css": "./src/styles/tokens.css",
+    "./styles.css": "./src/styles/base.css"
+  },
+  "dependencies": {
+    "@ant-design/icons": "5.6.1",
+    "antd": "5.29.3",
+    "echarts": "6.1.0",
+    "@ant-design/v5-patch-for-react-19": "1.0.3"
+  },
+  "peerDependencies": {
+    "react": "^19",
+    "react-dom": "^19"
+  }
+}

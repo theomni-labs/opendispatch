@@ -1,0 +1,115 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Locations screen. Tokens and logical properties only. */
+
+/* --- the page: stats, then the table card beside the map (two thirds and one third, as detail grid) -------------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* --- cells ---------------------------------------------------------------------------------------------------------- */
+.cellMain {
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.treeCell {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.indent {
+  margin-inline-start: var(--od-space-40);
+}
+
+.flip {
+  display: inline-flex;
+}
+
+[dir='rtl'] .flip svg {
+  transform: scaleX(-1);
+}
+
+.arabic {
+  font-weight: var(--od-weight-medium);
+}
+
+.summary {
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+/* --- the map ---------------------------------------------------------------------------------------------------------- */
+.mapBody {
+  padding: 0 var(--od-space-16) var(--od-space-16);
+}
+
+/* --- drawer and dialog ---------------------------------------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.geo {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+.chosen {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.stageRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}

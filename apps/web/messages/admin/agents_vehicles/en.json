@@ -1,0 +1,168 @@
+{
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "veh": {
+    "in": "In service",
+    "out": "Out of service"
+  },
+  "leave": {
+    "approved": "Approved",
+    "requested": "Requested",
+    "declined": "Declined",
+    "annual": "Annual",
+    "emergency": "Emergency",
+    "other": "Other"
+  },
+  "type": {
+    "sedan": "Sedan",
+    "suv": "SUV",
+    "pickup": "Pickup"
+  },
+  "inferred": "inferred",
+  "handling": {
+    "remote": "Remote",
+    "field": "Field"
+  },
+  "d": {
+    "handling": "Handling",
+    "daysoff": "Days off",
+    "standby": "Standby point",
+    "leave": "Leave requests",
+    "skills": "Skills",
+    "assign": "Assigned today",
+    "homeShift": "Home shift",
+    "annual": "Annual leave days",
+    "elig": "Eligible shifts",
+    "eligAny": "None chosen: any shift of the kind",
+    "taken": "Annual leave taken",
+    "takenOf": "{n} of {m, plural, one {# day} other {# days}} this year"
+  },
+  "day": {
+    "Sunday": "Sun",
+    "Monday": "Mon",
+    "Tuesday": "Tue",
+    "Wednesday": "Wed",
+    "Thursday": "Thu",
+    "Friday": "Fri",
+    "Saturday": "Sat"
+  },
+  "add": {
+    "agent": "Add agent",
+    "vehicle": "Add vehicle",
+    "skill": "Add skill"
+  },
+  "title": {
+    "add": {
+      "agent": "Add agent",
+      "vehicle": "Add vehicle"
+    },
+    "edit": {
+      "agent": "Edit agent",
+      "vehicle": "Edit vehicle"
+    }
+  },
+  "need": {
+    "name": "Enter a name",
+    "plate": "Enter a plate number",
+    "code": "Enter a code",
+    "skillCode": "Enter a code in lower case letters, digits and underscores",
+    "file": "Choose a file",
+    "annual": "Annual leave days: a whole number from 0 to 365"
+  },
+  "toast": {
+    "saved": {
+      "s": "Agent saved",
+      "v": "Vehicle saved"
+    },
+    "added": {
+      "s": "Agent added",
+      "v": "Vehicle added"
+    },
+    "skill": "Skill added",
+    "inactive": "{n} set inactive",
+    "export": "Exported",
+    "imported": "{n, plural, one {{n} agent imported} other {{n} agents imported}}",
+    "maint": {
+      "added": "Maintenance window added",
+      "removed": "Maintenance window removed"
+    },
+    "ar": "Arabic name saved",
+    "skillRemoved": "Skill removed"
+  },
+  "showing": "{n} of {total}",
+  "skill": {
+    "in": "In use by {n} agents",
+    "ar": {
+      "fallback": "English shown",
+      "add": "Add Arabic name"
+    },
+    "new": "New skill",
+    "none": "No skills yet",
+    "code": {
+      "hint": "Lower case, digits and underscores"
+    },
+    "remove": "Remove skill",
+    "pick": "Choose a skill"
+  },
+  "col": {
+    "code": "Code",
+    "ar": "Arabic name",
+    "leave": "Leave",
+    "name": "Name",
+    "zone": "Zone or pool",
+    "type": "Type",
+    "plate": "Plate number"
+  },
+  "f": {
+    "any": "Any",
+    "shift": "Shift"
+  },
+  "allZones": "All zones",
+  "import": "Import",
+  "tab": {
+    "agents": "Agents",
+    "vehicles": "Vehicles",
+    "skills": "Skills"
+  },
+  "q-s": "Search agents",
+  "bulk": {
+    "inactive": "Set inactive"
+  },
+  "nomatch": "No agents match",
+  "q-v": "Search vehicles",
+  "skills": {
+    "title": "Vocabulary"
+  },
+  "states": {
+    "empty": {
+      "desc": "Import agents or add one."
+    },
+    "error": {
+      "desc": "Agents could not load."
+    }
+  },
+  "nomatchVehicles": "No vehicles match",
+  "tabs": {
+    "label": "Agent views"
+  },
+  "notice": {
+    "notFound": "That record could not be found."
+  },
+  "importTitle": "Import agents",
+  "importDesc": "Staff code, name, kind, home zone, vehicle, skills",
+  "importHint": "CSV, up to 2 MB",
+  "importSample": "Use a sample file",
+  "importReadFailed": "The file could not be read.",
+  "maint": {
+    "title": "Maintenance",
+    "in": "In maintenance",
+    "until": "Until {date}",
+    "from": "From",
+    "to": "To",
+    "add": "Add window",
+    "remove": "Remove",
+    "need": "Enter both times and a reason"
+  }
+}

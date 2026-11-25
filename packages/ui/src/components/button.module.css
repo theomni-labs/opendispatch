@@ -1,0 +1,144 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Ant Design draws the <button>s. A link styled as a button cannot use Ant Design's Button (it renders its own <a>),
+   so these rules give the provider's link the same shape, sizes and colours, from the same tokens. */
+
+.button {
+  max-inline-size: 100%;
+}
+
+.label {
+  min-inline-size: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}
+
+.icon :where(svg) {
+  inline-size: 1em;
+  block-size: 1em;
+}
+
+.anchor {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--od-space-8);
+  block-size: var(--od-control-height-md);
+  padding-inline: 15px;
+  border: 1px solid transparent;
+  border-radius: var(--od-radius-md);
+  font-family: inherit;
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-regular);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    color 0.2s,
+    background-color 0.2s,
+    border-color 0.2s;
+}
+
+.anchor:focus-visible {
+  outline: 3px solid var(--od-color-primary-border);
+  outline-offset: 1px;
+}
+
+.sm {
+  block-size: var(--od-control-height-sm);
+  padding-inline: 7px;
+  border-radius: var(--od-radius-sm);
+}
+
+.lg {
+  block-size: var(--od-control-height-lg);
+  padding-inline: 15px;
+  font-size: var(--od-font-size-16);
+  border-radius: var(--od-radius-lg);
+}
+
+.iconOnly {
+  padding-inline: 0;
+  inline-size: var(--od-control-height-md);
+}
+
+.iconOnly.sm {
+  inline-size: var(--od-control-height-sm);
+}
+
+.iconOnly.lg {
+  inline-size: var(--od-control-height-lg);
+}
+
+.block {
+  display: flex;
+  inline-size: 100%;
+}
+
+.primary {
+  background: var(--od-color-primary);
+  color: var(--od-color-text-on-primary);
+}
+
+.primary:hover {
+  background: var(--od-color-primary-hover);
+  color: var(--od-color-text-on-primary);
+}
+
+.secondary {
+  background: var(--od-color-bg-container);
+  border-color: var(--od-color-border);
+  color: var(--od-color-text);
+}
+
+.secondary:hover {
+  border-color: var(--od-color-primary-hover);
+  color: var(--od-color-primary-hover);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--od-color-text);
+}
+
+.ghost:hover {
+  background: var(--od-color-bg-hover);
+  color: var(--od-color-text);
+}
+
+.accent {
+  background: var(--od-color-primary-bg);
+  color: var(--od-color-primary-text);
+}
+
+.accent:hover {
+  background: var(--od-color-bg-selected);
+  color: var(--od-color-primary-active);
+}
+
+.danger {
+  background: var(--od-color-error);
+  color: var(--od-color-text-on-primary);
+}
+
+.danger:hover {
+  background: var(--od-color-error-text);
+  color: var(--od-color-text-on-primary);
+}
+
+.link {
+  background: transparent;
+  color: var(--od-color-link);
+}
+
+.link:hover {
+  color: var(--od-color-link-hover);
+}

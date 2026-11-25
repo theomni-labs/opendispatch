@@ -1,0 +1,86 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* A day as a strip of segments. Left to right in both languages: a time axis never flips. */
+.ribbon {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  direction: ltr;
+}
+
+.track {
+  position: relative;
+  block-size: var(--od-space-20);
+  border-radius: var(--od-radius-sm);
+  background: var(--od-color-bg-muted);
+  overflow: hidden;
+}
+
+.segment {
+  position: absolute;
+  inset-block: 0;
+  background: var(--od-chart-1);
+}
+
+.t1 {
+  background: var(--od-chart-1);
+}
+
+.t2 {
+  background: var(--od-chart-2);
+}
+
+.t3 {
+  background: var(--od-chart-3);
+}
+
+.t4 {
+  background: var(--od-chart-4);
+}
+
+.t5 {
+  background: var(--od-chart-5);
+}
+
+.t6 {
+  background: var(--od-chart-6);
+}
+
+.ticks {
+  position: relative;
+  block-size: var(--od-space-16);
+}
+
+/* A tick is a zero-width box at its hour, so its text is centred on the hour without a physical transform; the first tick starts
+   at the hour and the last one ends at it, so neither leaves the ribbon. */
+.tick {
+  position: absolute;
+  inset-block-start: 0;
+  display: flex;
+  justify-content: center;
+  inline-size: 0;
+  color: var(--od-chart-label);
+  font-size: var(--od-font-size-11);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.tick:first-child {
+  justify-content: flex-start;
+}
+
+.tick:last-child {
+  justify-content: flex-end;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}

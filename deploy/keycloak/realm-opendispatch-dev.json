@@ -1,0 +1,176 @@
+{
+  "realm": "opendispatch",
+  "displayName": "OPENDISPATCH",
+  "enabled": true,
+  "sslRequired": "external",
+  "registrationAllowed": false,
+  "resetPasswordAllowed": false,
+  "editUsernameAllowed": false,
+  "verifyEmail": false,
+  "rememberMe": false,
+  "loginWithEmailAllowed": true,
+  "duplicateEmailsAllowed": false,
+  "bruteForceProtected": true,
+  "bruteForceStrategy": "MULTIPLE",
+  "permanentLockout": false,
+  "failureFactor": 5,
+  "waitIncrementSeconds": 60,
+  "maxFailureWaitSeconds": 900,
+  "maxDeltaTimeSeconds": 43200,
+  "minimumQuickLoginWaitSeconds": 60,
+  "quickLoginCheckMilliSeconds": 1000,
+  "passwordPolicy": "length(20) and notUsername and notEmail",
+  "ssoSessionIdleTimeout": 1800,
+  "ssoSessionMaxLifespan": 36000,
+  "accessTokenLifespan": 300,
+  "accessCodeLifespan": 60,
+  "accessCodeLifespanLogin": 900,
+  "internationalizationEnabled": true,
+  "supportedLocales": ["en", "ar"],
+  "defaultLocale": "en",
+  "loginTheme": "opendispatch",
+  "groups": [
+    { "name": "opendispatch-administrators" },
+    { "name": "5b1d0c1e-3a44-4f0b-9d25-7f1c3e8a2b01" },
+    { "name": "opendispatch-dispatch-riyadh-core" },
+    { "name": "opendispatch-planners-riyadh" },
+    { "name": "opendispatch-remote-team-leads" },
+    { "name": "opendispatch-auditors" },
+    { "name": "opendispatch-change-approvers" }
+  ],
+  "clients": [
+    {
+      "clientId": "opendispatch-web",
+      "name": "OPENDISPATCH",
+      "enabled": true,
+      "protocol": "openid-connect",
+      "publicClient": false,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "implicitFlowEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": ["http://localhost:3000/auth/callback", "http://127.0.0.1:3000/auth/callback"],
+      "webOrigins": ["+"],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:3000/*##http://127.0.0.1:3000/*"
+      },
+      "protocolMappers": [
+        {
+          "name": "groups",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-group-membership-mapper",
+          "config": {
+            "claim.name": "groups",
+            "full.path": "false",
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "userinfo.token.claim": "true"
+          }
+        },
+        {
+          "name": "amr",
+          "protocol": "openid-connect",
+          "protocolMapper": "oidc-amr-mapper",
+          "config": {
+            "id.token.claim": "true",
+            "access.token.claim": "true",
+            "introspection.token.claim": "true"
+          }
+        }
+      ]
+    }
+  ],
+  "users": [
+    {
+      "id": "87c9621f-5c24-4050-937b-3fe26e30a31f",
+      "username": "admin.demo",
+      "email": "admin.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Administrator",
+      "enabled": true,
+      "groups": ["/opendispatch-administrators"]
+    },
+    {
+      "id": "090f71ae-fe93-449c-99c8-5daa46e4aab6",
+      "username": "supervisor.demo",
+      "email": "supervisor.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Dispatch Supervisor",
+      "enabled": true,
+      "groups": ["/5b1d0c1e-3a44-4f0b-9d25-7f1c3e8a2b01"]
+    },
+    {
+      "id": "b126d16e-8e84-4f30-a965-925ca1a77864",
+      "username": "dispatcher.demo",
+      "email": "dispatcher.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Dispatcher",
+      "enabled": true,
+      "groups": ["/opendispatch-dispatch-riyadh-core"]
+    },
+    {
+      "id": "75072e4a-98be-471c-8514-517ec22c09c9",
+      "username": "planner.demo",
+      "email": "planner.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Planner",
+      "enabled": true,
+      "groups": ["/opendispatch-planners-riyadh"]
+    },
+    {
+      "id": "7180d4c7-058c-49ae-b963-8a2020e070ce",
+      "username": "remote.lead.demo",
+      "email": "remote.lead.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Remote Team Lead",
+      "enabled": true,
+      "groups": ["/opendispatch-remote-team-leads"]
+    },
+    {
+      "id": "9fab4bbe-4ed1-4516-af6c-0716e8a743ad",
+      "username": "viewer.demo",
+      "email": "viewer.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Viewer Auditor",
+      "enabled": true,
+      "groups": ["/opendispatch-auditors"]
+    },
+    {
+      "id": "d2df229d-6289-4f64-81d3-84fd9d7bd64e",
+      "username": "approver.demo",
+      "email": "approver.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Change Approver",
+      "enabled": true,
+      "groups": ["/opendispatch-change-approvers"]
+    },
+    {
+      "id": "2cda12f2-c0eb-4441-8b7e-1fbfe5b6d960",
+      "username": "mfa.demo",
+      "email": "mfa.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "Auditor With Authenticator",
+      "enabled": true,
+      "groups": ["/opendispatch-auditors"]
+    },
+    {
+      "id": "85fa6386-fb9d-49af-b3ad-0390100b9234",
+      "username": "nogroup.demo",
+      "email": "nogroup.demo@opendispatch-demo.example",
+      "emailVerified": true,
+      "firstName": "Demo",
+      "lastName": "No Group",
+      "enabled": true,
+      "groups": []
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Pages outside the consoles (the demo start page, the 404 and the top-level error): no shell, so a centred column. */
+.page {
+  display: flex;
+  justify-content: center;
+  min-block-size: 100dvb;
+  padding-block: var(--od-space-32);
+  padding-inline: var(--od-space-16);
+  box-sizing: border-box;
+}
+
+.wide {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  inline-size: min(100%, 60rem);
+  min-inline-size: 0;
+}
+
+.narrow {
+  inline-size: min(100%, 32rem);
+  min-inline-size: 0;
+  padding-block-start: var(--od-space-48);
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-16);
+}
+
+/* The link to the sign-in screens, then the language toggle, at the end of the top row. */
+.topEnd {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-16);
+}
+
+/* The wordmark, as in the shell's top bar. */
+.brand {
+  font-family: var(--od-font-latin);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-bold);
+  letter-spacing: 0.02em;
+  color: var(--od-color-text-heading);
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-24);
+}

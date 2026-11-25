@@ -1,0 +1,214 @@
+{
+  "picker": {
+    "zone": "Zone",
+    "prevDay": "Previous day",
+    "nextDay": "Next day",
+    "view": "View",
+    "day": "Day",
+    "week": "Week",
+    "prevWeek": "Previous week",
+    "nextWeek": "Next week",
+    "weekOf": "{from} to {to}"
+  },
+  "approval": "Approval",
+  "add": "Add override",
+  "menu": {
+    "submit": "Submit for approval",
+    "rebuild": "Rebuild with optimizer (stub)"
+  },
+  "toast": {
+    "rebuild": "Rebuild is not built yet",
+    "rebuildDesc": "Nothing was rebuilt",
+    "export": "Roster exported",
+    "approved": "Roster approved",
+    "approvedDesc": "Publish (stub) is now available",
+    "rejected": "Roster returned to draft",
+    "submitted": "Sent for approval",
+    "submittedDesc": "Waiting for a Dispatch Supervisor",
+    "publish": "Publish is a stub",
+    "publishDesc": "Nothing was sent to the {customer} systems",
+    "oapproved": "Override approved",
+    "orejected": "Override rejected",
+    "override": "Override sent for approval",
+    "overrideDesc": "The gap changes once it is approved",
+    "fallback": "Fallback roster built"
+  },
+  "publish": "Publish (stub)",
+  "stat": {
+    "agents": "Agents",
+    "gaps": "Gap intervals",
+    "surplus": "Surplus intervals",
+    "overrides": "Pending overrides"
+  },
+  "tab": {
+    "roster": "Roster",
+    "overrides": "Overrides",
+    "vehicles": "Vehicles"
+  },
+  "grid": {
+    "title": "Roster grid"
+  },
+  "col": {
+    "change": "Change",
+    "by": "Requested by"
+  },
+  "shift": {
+    "A": "Day A",
+    "B": "Day B",
+    "N": "Night"
+  },
+  "states": {
+    "empty": {
+      "title": "No roster for this day",
+      "desc": "Build one with the optimizer."
+    },
+    "error": {
+      "desc": "The roster could not load."
+    }
+  },
+  "empty": {
+    "action": "Build roster"
+  },
+  "d": {
+    "type": "Change",
+    "line": "Assignment",
+    "new": "New agent",
+    "shift": "Shift",
+    "submit": "Submit override",
+    "choose": "Choose"
+  },
+  "type": {
+    "replace_agent": "Replace agent",
+    "change_shift": "Change shift",
+    "change_vehicle": "Change vehicle",
+    "remove_assignment": "Remove assignment",
+    "add_assignment": "Add assignment"
+  },
+  "need": {
+    "agent": "Choose an agent",
+    "vehicle": "Choose a vehicle",
+    "reason": "Choose a reason",
+    "note": "Add a note"
+  },
+  "status": {
+    "building": "Building",
+    "draft": "Draft",
+    "submitted": "Pending approval",
+    "approved": "Approved",
+    "rejected": "Rejected, back to draft",
+    "published": "Published",
+    "superseded": "Superseded"
+  },
+  "by": {
+    "submitted": "Submitted by {name}, {date}",
+    "approved": "Approved by {name}, {date}",
+    "published": "Published {date}",
+    "none": "Not approved yet",
+    "draft": "Draft in progress"
+  },
+  "you": "You",
+  "unavailable": "Unavailable",
+  "removed": "Removed",
+  "gap": {
+    "label": "Gap",
+    "count": "{n} intervals"
+  },
+  "break": {
+    "tip": "Break {from} to {to}"
+  },
+  "r": {
+    "own": "You cannot approve your own request",
+    "notPending": "Not pending approval",
+    "approved": "Already approved",
+    "needApprove": "Approve the roster first",
+    "notDraft": "Only a draft can be submitted",
+    "needSubmit": "Submit it for approval first",
+    "notOverridable": "This roster cannot be changed"
+  },
+  "os": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "rejected": "Rejected"
+  },
+  "vehTable": {
+    "unassigned": "Unassigned"
+  },
+  "source": {
+    "optimizer": "Optimizer",
+    "fallback": "Fallback roster",
+    "status": {
+      "feasible": "Feasible",
+      "partial": "Partial",
+      "infeasible": "Infeasible"
+    },
+    "note": {
+      "partial": "Not every interval could be staffed",
+      "infeasible": "No roster met every hard rule"
+    },
+    "reason": {
+      "no_forecast_for_day": "No forecast for this day: run a forecast that covers it",
+      "engine_unavailable": "Engine unavailable",
+      "no_answer": "No usable optimizer answer"
+    }
+  },
+  "engine": "engine",
+  "model": {
+    "greedy": "Greedy search",
+    "cpsat": "CP-SAT"
+  },
+  "solver": {
+    "optimal": "Proven optimal",
+    "feasible": "Best found",
+    "heuristic": "Heuristic"
+  },
+  "policy": {
+    "clear_of_prayer": "Breaks: clear of prayer",
+    "lined_up_with_prayer": "Breaks: lined up with prayer"
+  },
+  "week": {
+    "build": "Build week",
+    "submit": "Submit week",
+    "publish": "Publish week (stub)",
+    "stat": {
+      "rosters": "Rosters built",
+      "shifts": "Agent shifts",
+      "net": "Net agent-hours"
+    },
+    "tab": {
+      "schedule": "Schedule",
+      "availability": "Availability"
+    },
+    "col": {
+      "center": "Center",
+      "shift": "Shift",
+      "scheduled": "Shift hours",
+      "leave": "Leave and rest",
+      "sick": "Sick provision",
+      "breaks": "Breaks and prayer",
+      "net": "Net hours"
+    },
+    "cell": {
+      "passed": "Passed",
+      "none": "Not built",
+      "too_far": "Too far ahead",
+      "n": "{n, plural, one {# agent} other {# agents}}, {g, plural, one {# gap} other {# gaps}}"
+    },
+    "avail": {
+      "n": "{n, plural, one {# agent} other {# agents}}",
+      "unit": "Agent-hours, whole week"
+    },
+    "rules": "Weekly limits: {days} days, {hours} hours",
+    "toast": {
+      "built": "Week built",
+      "builtDesc": "Built {n}, skipped {s}",
+      "submitted": "Week submitted for approval",
+      "submittedDesc": "Submitted {n}, skipped {s}",
+      "publishDesc": "Approved rosters: {n}. Nothing was sent to the {customer} systems"
+    },
+    "r": {
+      "none": "Nothing to build this week",
+      "noDraft": "No draft roster this week",
+      "noApproved": "No approved roster this week"
+    }
+  }
+}

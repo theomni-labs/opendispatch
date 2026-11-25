@@ -1,0 +1,396 @@
+{
+  "sub": "Placeholder forecaster",
+  "subEngine": "Forecaster {model}",
+  "run": {
+    "label": "Run forecast",
+    "paused": "Paused. Resume it before running."
+  },
+  "menu": {
+    "retrain": "Retrain now"
+  },
+  "toast": {
+    "retrain": {
+      "title": "Retraining started",
+      "desc": "Results appear in Experiments",
+      "saved": "Retraining schedule changed",
+      "at": "At {time}"
+    },
+    "export": "Export started",
+    "run": {
+      "title": "Forecast run finished",
+      "desc": "Placeholder model, illustrative"
+    },
+    "switched": "{v} is now active",
+    "notified": "Administrator and Planner notified",
+    "paused": "Forecast paused",
+    "resumed": "Forecast resumed",
+    "clock": "Clock start changed",
+    "level": "Planning level changed",
+    "challenger": "Challenger changed",
+    "gateBaseline": "Backtest baseline changed",
+    "optimizer": "Optimizer model changed",
+    "horizon": "Horizon changed",
+    "auto": "Retraining setting changed",
+    "remote": "Remote handling time changed"
+  },
+  "state": {
+    "label": "State",
+    "filled": "Filled",
+    "empty": "Empty",
+    "loading": "Loading",
+    "error": "Error"
+  },
+  "alert": {
+    "title": "Forecast paused",
+    "body": "<n>{who}</n> paused it at <t>{time}</t>: <r>{reason}</r>"
+  },
+  "resume": "Resume",
+  "stat": {
+    "active": "Active version",
+    "last": "Last run",
+    "next": "Next retraining",
+    "mape": "{n, plural, one {MAPE, rolling # day} other {MAPE, rolling # days}}",
+    "mapeTarget": "target {p}"
+  },
+  "running": "Running",
+  "paused": "Paused",
+  "v": {
+    "title": "Model versions",
+    "current": "Current",
+    "makeActive": "Make active",
+    "placeholder": "Placeholder model",
+    "placeholderOff": "Placeholder model: not used while engines are on",
+    "lift": "Lift: WAPE {wape}, MAPE {mape}",
+    "noLift": "No backtest yet"
+  },
+  "col": {
+    "version": "Version",
+    "trained": "Trained",
+    "engine": "Engine",
+    "action": "Actions"
+  },
+  "status": {
+    "active": "Active",
+    "candidate": "Candidate",
+    "retired": "Retired",
+    "challenger": "Challenger"
+  },
+  "r": {
+    "title": "Latest run",
+    "model": "Model version",
+    "rules": "Rule set",
+    "horizon": "Horizon",
+    "coverage": "Likely range",
+    "time": "Started, finished",
+    "input": "Input data",
+    "days": "{n, plural, one {{n} day} other {{n} days}}",
+    "running": "Running",
+    "succeeded": "Succeeded",
+    "none": "No forecast run yet.",
+    "failed": "Failed",
+    "queued": "Queued",
+    "cancelled": "Cancelled",
+    "from": "From {date}",
+    "snapshot": "Data snapshot"
+  },
+  "h": {
+    "title": "Recent changes",
+    "audit": "Audit log",
+    "run": "Forecast run finished ({model})",
+    "switched": "Version switched: {from} to {to}",
+    "paused": "Forecast paused",
+    "resumed": "Forecast resumed",
+    "retrain": "Retraining set to {cad}",
+    "clock": "Clock start: {v}",
+    "level": "Planning level: {v}",
+    "system": "System",
+    "challengerRun": "Challenger run finished ({model})",
+    "lift": "Backtest: {challenger} against {champion}",
+    "backtest": "Backtest run ({model})",
+    "degraded": "Forecast error above the limit in {n} zone(s) ({model})",
+    "backtestStarted": "Backtest started ({model})",
+    "backtestFailed": "Backtest failed ({cls})",
+    "runCal": "Forecast run finished ({model}, {calendar})",
+    "challengerRunCal": "Challenger run finished ({model}, {calendar})",
+    "challengerSkipped": "Challenger {challenger} not stored: the engine ran {model}",
+    "challenger": "Challenger: {model}",
+    "challengerOff": "Challenger turned off",
+    "gateBaseline": "Backtest baseline: {v}",
+    "optimizer": "Optimizer model: {v}"
+  },
+  "cal": {
+    "customer": "{customer} planning calendar",
+    "settings": "calendar from settings"
+  },
+  "p": {
+    "title": "Forecast state",
+    "switch": "Pause forecast",
+    "horizon": "Horizon",
+    "days": "{n, plural, one {{n} day} other {{n} days}}"
+  },
+  "t": {
+    "title": "Retraining",
+    "cadence": "Cadence",
+    "day": "Day",
+    "time": "Time",
+    "timePh": "HH:MM",
+    "badTime": "Time is not valid",
+    "nochange": "Nothing to save",
+    "auto": "Retrain on accuracy drop"
+  },
+  "cad": {
+    "manual": "Manual",
+    "daily": "Daily",
+    "weekly": "Weekly",
+    "monthly": "Monthly"
+  },
+  "m": {
+    "title": "10-minute measure",
+    "clock": "Clock starts",
+    "fromAssignment": "From assignment",
+    "fromRegistration": "From registration",
+    "default": "Default",
+    "primary": "Primary, a setting",
+    "level": "Planning level",
+    "optimizer": "Optimizer model",
+    "remote": "Remote handling time",
+    "remoteMinutes": "Fixed minutes per case"
+  },
+  "a": {
+    "title": "Assumptions",
+    "liveSpeed": "Live assignment speed",
+    "planSpeed": "Planning speed",
+    "kmh": "{n} km/h",
+    "payday": "Payday",
+    "day": "Day {n} of the month",
+    "off": "Off",
+    "handling": "Field or remote",
+    "inferred": "Inferred",
+    "supplied": "Supplied by the {customer}",
+    "history": "Case history",
+    "weather": "Weather",
+    "wxRange": "{cities} cities, {from} to {to}",
+    "wxNone": "None",
+    "wxFeed": "Live feed",
+    "wxStored": "Stored",
+    "assumption": "Assumption",
+    "confirmed": "Confirmed",
+    "traffic": "Traffic",
+    "trSynthetic": "Synthetic series",
+    "trFile": "Imported file",
+    "trNone": "None",
+    "wxSynthetic": "Synthetic weather"
+  },
+  "level": {
+    "zone": "Zone (default)",
+    "sub_zone": "Sub-zone",
+    "city": "City"
+  },
+  "states": {
+    "empty": {
+      "title": "No model versions",
+      "desc": "A version appears after the first training."
+    },
+    "error": {
+      "desc": "The model state could not load."
+    }
+  },
+  "c": {
+    "need": "Add a reason",
+    "switch": "Make {v} active?",
+    "pause": "Pause the forecast?",
+    "resume": "Resume the forecast?"
+  },
+  "unknownPerson": "an administrator",
+  "day": {
+    "0": "Sunday",
+    "1": "Monday",
+    "2": "Tuesday",
+    "3": "Wednesday",
+    "4": "Thursday",
+    "5": "Friday",
+    "6": "Saturday"
+  },
+  "bt": {
+    "title": "Backtest",
+    "run": "Run backtest",
+    "running": "Running",
+    "runningReason": "A backtest is running",
+    "started": "Backtest started",
+    "startedDesc": "It runs in the background. This card updates when it finishes.",
+    "gate": {
+      "pass": "Passed",
+      "fail": "Failed",
+      "not_enough_history": "Not enough history"
+    },
+    "stale": "Stale",
+    "staleNote": "Run on {old}. Active version is {cur}.",
+    "shortHist": "History under a year: seasons and events are not fully tested.",
+    "failedNote": "The last run failed ({cls}). The result shown is from the run before.",
+    "failedOnly": "The last run failed ({cls}).",
+    "result": "Result",
+    "resBetter": "{p} better than baseline",
+    "resShort": "Only {p} better than baseline",
+    "resWorse": "{p} worse than baseline",
+    "target": "Target",
+    "held": "Held-out period",
+    "window": "Training window",
+    "model": "Model version",
+    "features": "Feature set",
+    "featuresVal": "{n} features",
+    "metrics": "Error against baseline",
+    "col": {
+      "measure": "Measure",
+      "model": "Model",
+      "naive": "Same hour last week",
+      "segment": "{customer} method",
+      "change": "Change",
+      "champion": "Champion",
+      "challenger": "Challenger",
+      "lift": "Lift",
+      "daytype": "Day type",
+      "baseline": "Baseline",
+      "days": "Days",
+      "baselineWape": "Baseline WAPE",
+      "cases": "Cases",
+      "hour": "Hour",
+      "open": "Open"
+    },
+    "tip": {
+      "wape": "Weighted absolute percentage error",
+      "mape": "Mean absolute percentage error, per zone and day",
+      "mae": "Mean absolute error",
+      "rmse": "Root mean squared error"
+    },
+    "sub": {
+      "wape": "Share of cases missed",
+      "mape": "Per zone and day",
+      "cases": "Cases per hour",
+      "range": "Share of hours inside the range",
+      "ev": "Eid, Hajj, national days",
+      "ord": "All other days"
+    },
+    "range": "Within likely range",
+    "better": "Better",
+    "worse": "Worse",
+    "chall": "Challenger {model}",
+    "challError": "The challenger could not be scored.",
+    "split": "Event days and ordinary days",
+    "evDays": "Event days",
+    "ordDays": "Ordinary days",
+    "fewDays": "Not enough days",
+    "weakest": "Weakest locations",
+    "worseThanBase": "Worse than baseline",
+    "fewCasesShort": "Few cases",
+    "showAll": "Show all {n}",
+    "showFewer": "Show fewer",
+    "hourly": "Error by hour",
+    "fewCases": "Too few cases for hourly error",
+    "worstHours": "Worst hours",
+    "worstHour": "Worst hour",
+    "empty": {
+      "title": "No backtest yet",
+      "desc": "It appears after the first run."
+    },
+    "error": "The backtest could not load",
+    "targetOn": "{p} better than {base}",
+    "base": {
+      "segment": "{customer} method",
+      "naive": "same hour last week"
+    },
+    "targetVal": "{p} better than baseline",
+    "baseline": "Baseline",
+    "baselineNaive": "Same hour, last week",
+    "baselineSegment": "{customer} method (segment average)",
+    "passBar": "Pass bar",
+    "bar": {
+      "pass": "Pass bar met",
+      "fail": "Pass bar missed",
+      "not_enough_history": "Not enough history"
+    },
+    "mapeOk": "MAPE within {p} target",
+    "mapeAbove": "MAPE above {p} target"
+  },
+  "cmp": {
+    "title": "Model comparison",
+    "challenger": "Challenger",
+    "none": "None",
+    "baseline": "Backtest baseline",
+    "segment": "{customer} method (default)",
+    "naive": "Same hour, last week"
+  },
+  "acc": {
+    "title": "Accuracy, rolling {n, plural, one {{n} day} other {{n} days}}",
+    "menu": "Accuracy card",
+    "tip": {
+      "mape": "Mean absolute percentage error"
+    },
+    "targetVal": "{p} or less",
+    "window": "Window",
+    "measured": "{n, plural, one {{n} day measured} other {{n} days measured}}",
+    "by": {
+      "label": "Break down by",
+      "zone": "Zone",
+      "hour": "Hour of day",
+      "weekday": "Day of week"
+    },
+    "col": {
+      "day": "Day",
+      "status": "Against target",
+      "cases": "Cases"
+    },
+    "status": {
+      "ok": "At or below target",
+      "above": "Above target"
+    },
+    "noCases": "No cases",
+    "meta": "Computed {time}",
+    "empty": {
+      "title": "No accuracy yet",
+      "desc": "It appears the day after the first past forecast."
+    },
+    "error": "The accuracy could not load"
+  },
+  "opt": {
+    "cpsat1": "CP-SAT 1 (OR-Tools, default)",
+    "greedy03": "Greedy search 0.3",
+    "greedy02": "Greedy search 0.2",
+    "greedy01": "Greedy search 0.1"
+  },
+  "accAlert": {
+    "title": "Forecast error above target",
+    "body": "Zones above the target: {n} of {total}"
+  },
+  "x": {
+    "title": "Experiments",
+    "empty": "No experiments yet",
+    "col": {
+      "run": "Run",
+      "trigger": "Trigger",
+      "model": "Model",
+      "data": "Data snapshot",
+      "wape": "WAPE",
+      "started": "Started"
+    },
+    "kind": {
+      "backtest": "Backtest",
+      "challenger": "Challenger run",
+      "retrain": "Retrain"
+    },
+    "trigger": {
+      "manual": "Manual",
+      "schedule": "Scheduled",
+      "degradation": "Accuracy drop"
+    },
+    "status": {
+      "running": "Running",
+      "succeeded": "Succeeded",
+      "failed": "Failed"
+    }
+  },
+  "rh": {
+    "measured": "Measured, last 28 days (default)",
+    "fixed": "Fixed minutes",
+    "hint": "Used when too few cases are measured"
+  }
+}

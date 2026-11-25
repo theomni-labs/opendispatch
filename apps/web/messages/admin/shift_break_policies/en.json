@@ -1,0 +1,124 @@
+{
+  "sub": "All shift times are assumptions",
+  "add": "Add pattern",
+  "menu": {
+    "breakRule": "Edit break rule"
+  },
+  "stat": {
+    "active": "Active patterns",
+    "draft": "Draft patterns",
+    "breaks": "Break rules",
+    "mode": "Hours today"
+  },
+  "mode": {
+    "label": "Hours",
+    "normal": "Normal",
+    "ramadan": "Ramadan"
+  },
+  "tbl": {
+    "title": "Shift patterns"
+  },
+  "assumption": "Assumption",
+  "search": "Search patterns",
+  "f": {
+    "kind": "Kind"
+  },
+  "kind": {
+    "field": "Field",
+    "remote": "Remote"
+  },
+  "status": {
+    "active": "Active",
+    "draft": "Draft"
+  },
+  "bulk": {
+    "active": "Set active",
+    "draft": "Set to draft"
+  },
+  "col": {
+    "pattern": "Pattern",
+    "kind": "Kind",
+    "normal": "Normal hours",
+    "ramadan": "Ramadan hours",
+    "break": "Break"
+  },
+  "nomatch": "No match",
+  "week": {
+    "title": "Week pattern"
+  },
+  "brk": {
+    "title": "Break rule",
+    "std": "Standard",
+    "ram": "Ramadan hours",
+    "short": "{m} min after {h} h",
+    "rule": "Rule",
+    "after": "After",
+    "length": "Break"
+  },
+  "edit": "Edit",
+  "uom": {
+    "h": "h"
+  },
+  "ram": {
+    "title": "Ramadan hours",
+    "calendar": "Calendar",
+    "window": "Ramadan 1447",
+    "next": "Next Ramadan",
+    "shifts": {
+      "label": "Field shifts",
+      "v": "4 instead of 3"
+    },
+    "auto": "Use in the Ramadan window",
+    "windowYear": "Ramadan {year}",
+    "shiftsCount": "{ramadan} instead of {normal}"
+  },
+  "states": {
+    "empty": {
+      "title": "No shift patterns",
+      "desc": "Add the first pattern."
+    },
+    "error": {
+      "desc": "The patterns could not load."
+    }
+  },
+  "dr": {
+    "edit": "Edit pattern",
+    "new": "New pattern",
+    "name": "Name",
+    "code": "Code",
+    "applies": "Applies",
+    "from": "Start",
+    "to": "End"
+  },
+  "need": {
+    "name": "Add a name",
+    "code": "Add a code",
+    "dup": "Code already used",
+    "times": "Check the times"
+  },
+  "toast": {
+    "export": "Export started",
+    "updated": "Pattern {code} updated",
+    "created": "Pattern {code} created",
+    "draft": "Saved as draft",
+    "bulk": "{n} patterns set to {status}",
+    "breakSaved": "Break rule saved",
+    "prayer": "Breaks and prayer changed"
+  },
+  "shared": {
+    "kind": {
+      "break": "Break"
+    }
+  },
+  "notice": {
+    "notFound": "That pattern could not be found."
+  },
+  "pr": {
+    "label": "Breaks and prayer",
+    "clear": "Clear of prayer",
+    "linedUp": "Lined up with prayer",
+    "default": "Default",
+    "window": "Prayer window",
+    "min": "{n} min"
+  }
+}

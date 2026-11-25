@@ -1,0 +1,8 @@
+# Lint configuration for the contracts (used by scripts/contracts/validate-contracts.ts).
+extends:
+  - recommended
+rules:
+  # Some component schemas are persisted-table shapes used by the data layer and the fixture
+  # validator without an operation of their own (for example Setting). They are contracts, not
+  # dead code.
+  no-unused-components: off

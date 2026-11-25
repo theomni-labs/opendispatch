@@ -1,0 +1,124 @@
+{{- if .Values.keycloak.enabled }}
+{{- $sel := dict "root" . "component" "keycloak" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-keycloak
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http
+  selector:
+    {{- include "opendispatch.selector" $sel | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-keycloak
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: keycloak
+spec:
+  # one replica until the cache is set up
+  replicas: 1
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      {{- include "opendispatch.selector" $sel | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" $sel | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      containers:
+        - name: keycloak
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.keycloak "name" "keycloak") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          args: ["start"]
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: management
+              containerPort: 9000
+          env:
+            - name: KC_DB
+              value: postgres
+            - name: KC_DB_URL
+              value: {{ .Values.keycloak.database.jdbcUrl | quote }}
+            - name: KC_DB_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.keycloak.database.existingSecret }}
+                  key: username
+            - name: KC_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.keycloak.database.existingSecret }}
+                  key: password
+            - name: KC_HOSTNAME
+              value: {{ printf "%s%s" (trimSuffix "/" .Values.global.publicUrl) .Values.keycloak.relativePath | quote }}
+            - name: KC_HOSTNAME_BACKCHANNEL_DYNAMIC
+              value: "true"
+            - name: KC_HTTP_RELATIVE_PATH
+              value: {{ .Values.keycloak.relativePath | quote }}
+            - name: KC_HTTP_MANAGEMENT_RELATIVE_PATH
+              value: /
+            - name: KC_HTTP_ENABLED
+              value: "true"
+            - name: KC_PROXY_HEADERS
+              value: xforwarded
+            - name: KC_HEALTH_ENABLED
+              value: "true"
+            - name: KC_CACHE
+              value: local
+            - name: KC_BOOTSTRAP_ADMIN_USERNAME
+              value: opendispatch-bootstrap
+            - name: KC_BOOTSTRAP_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ include "opendispatch.generatedSecret" . }}
+                  key: keycloak-bootstrap-password
+          securityContext:
+            allowPrivilegeEscalation: false
+            # start re-augments into /opt/keycloak
+            readOnlyRootFilesystem: false
+            capabilities:
+              drop: [ALL]
+          startupProbe:
+            httpGet: { path: /health/started, port: management }
+            periodSeconds: 5
+            failureThreshold: 60
+          livenessProbe:
+            httpGet: { path: /health/live, port: management }
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /health/ready, port: management }
+            periodSeconds: 10
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            {{- if .Values.keycloak.theme.enabled }}
+            - name: theme
+              mountPath: /opt/keycloak/themes/opendispatch
+              readOnly: true
+            {{- end }}
+          resources:
+            {{- toYaml .Values.keycloak.resources | nindent 12 }}
+      volumes:
+        {{- include "opendispatch.tmpVolume" . | nindent 8 }}
+        {{- if .Values.keycloak.theme.enabled }}
+        - name: theme
+          configMap:
+            name: {{ include "opendispatch.fullname" . }}-keycloak-theme
+            items:
+              {{- range $path, $_ := .Files.Glob "files/keycloak-theme/**" }}
+              - key: {{ include "opendispatch.themeKey" $path }}
+                path: {{ trimPrefix "files/keycloak-theme/" $path }}
+              {{- end }}
+        {{- end }}
+{{- end }}

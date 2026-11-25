@@ -1,0 +1,52 @@
+{{- if and .Values.keycloak.enabled .Values.firstRun.enabled }}
+{{- /* app role, never owner */ -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-first-run-bootstrap
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: first-run-bootstrap
+  annotations:
+    helm.sh/hook: post-install,post-upgrade
+    helm.sh/hook-weight: "1"
+    helm.sh/hook-delete-policy: before-hook-creation
+spec:
+  backoffLimit: 2
+  activeDeadlineSeconds: 300
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" (dict "root" . "component" "first-run-bootstrap") | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      restartPolicy: Never
+      containers:
+        - name: bootstrap
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.api "name" "api") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          command: ["/app/bootstrap"]
+          env:
+            - name: OPENDISPATCH_APP_DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.database.existingSecret }}
+                  key: app-url
+            - name: OPENDISPATCH_OIDC_TENANTS_FILE
+              value: /etc/opendispatch/oidc/tenants.json
+            - name: OPENDISPATCH_BOOTSTRAP_ADMIN_GROUP
+              value: {{ .Values.keycloak.firstAdmin.group | quote }}
+            {{- include "opendispatch.recordSourceEnv" . | nindent 12 }}
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          volumeMounts:
+            - name: oidc
+              mountPath: /etc/opendispatch/oidc
+              readOnly: true
+          resources:
+            {{- toYaml .Values.firstRun.bootstrap.resources | nindent 12 }}
+      volumes:
+        - name: oidc
+          configMap:
+            name: {{ include "opendispatch.fullname" . }}-oidc
+{{- end }}

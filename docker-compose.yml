@@ -1,0 +1,234 @@
+# SPDX-License-Identifier: AGPL-3.0-only
+#
+# The full OpenDispatch stack on SYNTHETIC data:
+#   docker compose up --build
+# then open http://127.0.0.1:3000 (only the web app is published, on localhost).
+#
+# The credentials below are development defaults for a local demo. Override every one of them
+# (see .env.example, or run `make env`) before the stack is reachable by anyone else.
+
+x-db-urls: &db-urls
+  OPENDISPATCH_OWNER_DATABASE_URL: postgres://opendispatch_owner:${OPENDISPATCH_OWNER_DB_PASSWORD:-dev-owner-password}@postgres:5432/opendispatch_demo
+  OPENDISPATCH_MIGRATION_DATABASE_URL: postgres://opendispatch_owner:${OPENDISPATCH_OWNER_DB_PASSWORD:-dev-owner-password}@postgres:5432/opendispatch_demo
+  OPENDISPATCH_APP_DATABASE_URL: postgres://opendispatch_app:${OPENDISPATCH_APP_DB_PASSWORD:-dev-app-password}@postgres:5432/opendispatch_demo
+
+x-engines: &engine-urls
+  OPENDISPATCH_ENGINE_MODE: engine
+  OPENDISPATCH_ENGINE_FORECASTER_URL: http://forecaster:8080
+  OPENDISPATCH_ENGINE_OPTIMIZER_URL: http://optimizer:8080
+  OPENDISPATCH_ENGINE_SIMULATOR_URL: http://simulator:8080
+  OPENDISPATCH_ENGINE_ASSIGNMENT_URL: http://assignment:8080
+
+x-app-env: &app-env
+  <<: [*db-urls, *engine-urls]
+  OPENDISPATCH_AUTH_MODE: demo
+  DEMO_SESSION_SECRET: ${DEMO_SESSION_SECRET:-local-demo-only-session-secret-4f9c2a7e1b3d8a6c}
+  OPENDISPATCH_FEED_KEYS_FILE: /etc/opendispatch/feed-keys.json
+  FEED_SIM_SECRET: ${FEED_SIM_SECRET:-local-demo-only-feed-secret-9d2e6b1a7c4f3e8b}
+  OPENDISPATCH_DISPATCH_SOURCE: feeds
+  OPENDISPATCH_FALLBACK_SILENCE_SECONDS: "45"
+  OPENDISPATCH_FALLBACK_CHECK_SECONDS: "10"
+  OPENDISPATCH_WEATHER_SOURCE: synthetic
+  OPENDISPATCH_TRAFFIC_SOURCE: synthetic
+  OPENDISPATCH_S3_ENDPOINT: s3
+  OPENDISPATCH_S3_PORT: "8333"
+  OPENDISPATCH_S3_USE_SSL: "false"
+  OPENDISPATCH_S3_ACCESS_KEY: ${OPENDISPATCH_S3_ACCESS_KEY:-devaccesskey}
+  OPENDISPATCH_S3_SECRET_KEY: ${OPENDISPATCH_S3_SECRET_KEY:-local-demo-only-s3-secret-7a1c9e}
+  OPENDISPATCH_S3_BUCKET: opendispatch-imports
+  OPENDISPATCH_ASSISTANT_PROVIDER: ${OPENDISPATCH_ASSISTANT_PROVIDER:-off}
+  OPENDISPATCH_ASSISTANT_MODEL: ${OPENDISPATCH_ASSISTANT_MODEL:-}
+  OPENDISPATCH_ASSISTANT_OLLAMA_URL: ${OPENDISPATCH_ASSISTANT_OLLAMA_URL:-http://ollama:11434}
+  OPENDISPATCH_ASSISTANT_OPENAI_URL: ${OPENDISPATCH_ASSISTANT_OPENAI_URL:-}
+  OPENDISPATCH_ASSISTANT_API_KEY: ${OPENDISPATCH_ASSISTANT_API_KEY:-}
+  OPENDISPATCH_ASSISTANT_VISION: ${OPENDISPATCH_ASSISTANT_VISION:-}
+  OPENDISPATCH_ASSISTANT_TIMEOUT_SECONDS: ${OPENDISPATCH_ASSISTANT_TIMEOUT_SECONDS:-}
+
+x-engine: &engine
+  build:
+    context: ./engines
+    target: engine
+  image: opendispatch/engines:0.1.0
+  read_only: true
+  tmpfs: [/tmp]
+  environment: &engine-env
+    HOME: /tmp
+    OPENDISPATCH_CONTRACTS_DIR: /contracts/engines
+  volumes:
+    - ./contracts/engines:/contracts/engines:ro
+  restart: unless-stopped
+
+x-tools: &tools
+  build:
+    context: .
+    dockerfile: deploy/compose/demo-tools.Dockerfile
+  image: opendispatch/demo-tools:0.1.0
+  volumes:
+    - demo-state:/state
+
+services:
+  postgres:
+    # The -oss build of TimescaleDB is Apache-2.0. Do not swap in the non-oss image.
+    image: timescale/timescaledb:2.30.2-pg16-oss
+    command: ["postgres", "-c", "timescaledb.telemetry_level=off"]
+    environment:
+      POSTGRES_USER: opendispatch_owner
+      POSTGRES_PASSWORD: ${OPENDISPATCH_OWNER_DB_PASSWORD:-dev-owner-password}
+      POSTGRES_DB: opendispatch_demo
+      OPENDISPATCH_APP_DB_PASSWORD: ${OPENDISPATCH_APP_DB_PASSWORD:-dev-app-password}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./deploy/compose/postgres-init.sh:/docker-entrypoint-initdb.d/10-app-role.sh:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U opendispatch_owner -d opendispatch_demo"]
+      interval: 2s
+      timeout: 3s
+      retries: 60
+    restart: unless-stopped
+
+  s3:
+    # SeaweedFS (Apache-2.0), S3-compatible. Any S3-compatible store works: set OPENDISPATCH_S3_*.
+    image: chrislusf/seaweedfs:4.48
+    entrypoint: ["/bin/sh", "/opt/s3-start.sh"]
+    environment:
+      OPENDISPATCH_S3_ACCESS_KEY: ${OPENDISPATCH_S3_ACCESS_KEY:-devaccesskey}
+      OPENDISPATCH_S3_SECRET_KEY: ${OPENDISPATCH_S3_SECRET_KEY:-local-demo-only-s3-secret-7a1c9e}
+    volumes:
+      - s3data:/data
+      - ./deploy/compose/s3-start.sh:/opt/s3-start.sh:ro
+    restart: unless-stopped
+
+  forecaster:
+    <<: *engine
+    environment:
+      <<: *engine-env
+      OPENDISPATCH_ENGINE: forecaster
+  optimizer:
+    <<: *engine
+    environment:
+      <<: *engine-env
+      OPENDISPATCH_ENGINE: optimizer
+  simulator:
+    <<: *engine
+    environment:
+      <<: *engine-env
+      OPENDISPATCH_ENGINE: simulator
+  assignment:
+    <<: *engine
+    environment:
+      <<: *engine-env
+      OPENDISPATCH_ENGINE: assignment
+
+  api:
+    build:
+      context: .
+      dockerfile: apps/api-go/Dockerfile
+      target: api
+    image: opendispatch/api:0.1.0
+    environment:
+      <<: *app-env
+      OPENDISPATCH_LISTEN_ADDR: ":8081"
+    volumes:
+      - ./deploy/compose/feed-keys.json:/etc/opendispatch/feed-keys.json:ro
+    depends_on:
+      postgres: {condition: service_healthy}
+      s3: {condition: service_started}
+      forecaster: {condition: service_started}
+      optimizer: {condition: service_started}
+      simulator: {condition: service_started}
+      assignment: {condition: service_started}
+    restart: unless-stopped
+
+  seed:
+    <<: *tools
+    command: ["seed"]
+    environment:
+      <<: *db-urls
+      OPENDISPATCH_API_URL: http://api:8081
+    depends_on:
+      api: {condition: service_started}
+    restart: "no"
+
+  feeds:
+    <<: *tools
+    command: ["feeds"]
+    environment:
+      OPENDISPATCH_API_URL: http://api:8081
+      FEED_SIM_SECRET: ${FEED_SIM_SECRET:-local-demo-only-feed-secret-9d2e6b1a7c4f3e8b}
+      DEMO_SESSION_SECRET: ${DEMO_SESSION_SECRET:-local-demo-only-session-secret-4f9c2a7e1b3d8a6c}
+      OPENDISPATCH_DEMO_FEED_SPEED: ${OPENDISPATCH_DEMO_FEED_SPEED:-1}
+    depends_on:
+      seed: {condition: service_completed_successfully}
+    restart: unless-stopped
+
+  history:
+    <<: *tools
+    command: ["history"]
+    environment:
+      <<: [*db-urls]
+      OPENDISPATCH_DEMO_DB_HOSTS: postgres
+      OPENDISPATCH_DEMO_HISTORY_WEEKS: ${OPENDISPATCH_DEMO_HISTORY_WEEKS:-52}
+    depends_on:
+      seed: {condition: service_completed_successfully}
+    restart: "no"
+
+  worker:
+    build:
+      context: .
+      dockerfile: apps/api-go/Dockerfile
+      target: worker
+    image: opendispatch/worker:0.1.0
+    environment:
+      <<: *app-env
+      OPENDISPATCH_TENANT_ID: 8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55
+      OPENDISPATCH_WORKER_HEALTH_ADDR: ":8082"
+      OPENDISPATCH_WORKER_INTERVAL_SECONDS: "300"
+    volumes:
+      - ./deploy/compose/feed-keys.json:/etc/opendispatch/feed-keys.json:ro
+    depends_on:
+      history: {condition: service_completed_successfully}
+    restart: unless-stopped
+
+  backfill:
+    <<: *tools
+    command: ["backfill"]
+    environment:
+      <<: [*db-urls, *engine-urls]
+      OPENDISPATCH_DEMO_DB_HOSTS: postgres
+      OPENDISPATCH_DEMO_PAST_FORECAST_DAYS: ${OPENDISPATCH_DEMO_PAST_FORECAST_DAYS:-14}
+    depends_on:
+      history: {condition: service_completed_successfully}
+    restart: "no"
+
+  web:
+    build:
+      context: .
+      dockerfile: apps/web/Dockerfile
+      args:
+        OPENDISPATCH_FETCH_MAP: ${OPENDISPATCH_FETCH_MAP:-1}
+    image: opendispatch/web:0.1.0
+    environment:
+      OPENDISPATCH_API_URL: http://api:8081
+      OPENDISPATCH_AUTH_MODE: demo
+      DEMO_SESSION_SECRET: ${DEMO_SESSION_SECRET:-local-demo-only-session-secret-4f9c2a7e1b3d8a6c}
+      DEMO_COOKIE_SECURE: "0"
+    ports:
+      - "127.0.0.1:${OPENDISPATCH_WEB_PORT:-3000}:3000"
+    depends_on:
+      api: {condition: service_started}
+    restart: unless-stopped
+
+  ollama:
+    # Optional local model for the assistant: docker compose --profile assistant up,
+    # with OPENDISPATCH_ASSISTANT_PROVIDER=ollama. The model is pulled once, then works offline.
+    image: ollama/ollama:0.40.13
+    profiles: [assistant]
+    volumes:
+      - ollama:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  pgdata:
+  s3data:
+  demo-state:
+  ollama:

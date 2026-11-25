@@ -1,0 +1,62 @@
+{
+  "toast": {
+    "export": "Coverage exported",
+    "moved": "{from} to {to}: 1 agent moved",
+    "movedDesc": "Gap and Surplus recalculates"
+  },
+  "stat": {
+    "points": "Standby points",
+    "waiting": "Agents waiting",
+    "covered": "Sub-zones covered",
+    "uncovered": "Uncovered",
+    "coverageValue": "{covered} of {total}",
+    "reach": "Reach {pct} in {min} min",
+    "out": "Out of 10-minute reach",
+    "outHint": "{n, plural, one {# sub-zone uncovered} other {# sub-zones uncovered}}"
+  },
+  "map": {
+    "title": "Coverage"
+  },
+  "key": {
+    "point": "Standby point",
+    "cover": "Coverage radius",
+    "ok": "Covered",
+    "gap": "Uncovered",
+    "out": "Out of 10-minute reach"
+  },
+  "list": {
+    "title": "Standby points"
+  },
+  "col": {
+    "point": "Point",
+    "agents": "Agents",
+    "covers": "Covers"
+  },
+  "unc": {
+    "label": "Uncovered",
+    "none": "All sub-zones covered"
+  },
+  "reco": {
+    "title": "Recommended move",
+    "apply": "Apply move",
+    "n": "{n} agent",
+    "none": "No move needed",
+    "noneUnc": "No move reaches the uncovered sub-zones",
+    "done": "Move applied. No further move.",
+    "locations": "Open Locations"
+  },
+  "states": {
+    "empty": {
+      "title": "No standby points yet",
+      "desc": "Add them in Locations."
+    },
+    "error": {
+      "desc": "The coverage could not load."
+    }
+  },
+  "pt": {
+    "minutes": "{min} min",
+    "km": "{km} km from base",
+    "beyond": "Beyond {km} km"
+  }
+}

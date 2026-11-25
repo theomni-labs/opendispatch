@@ -1,0 +1,125 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.bar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.search {
+  inline-size: 16rem;
+  max-inline-size: 100%;
+}
+
+.searchIcon {
+  color: var(--od-color-icon-secondary);
+}
+
+.clear {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--od-color-icon-secondary);
+  cursor: pointer;
+}
+
+.clear:hover {
+  color: var(--od-color-text);
+}
+
+.clear:focus-visible,
+.chipRemove:focus-visible {
+  border-radius: var(--od-radius-xs);
+  outline: none;
+  box-shadow: var(--od-focus-ring);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-8);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-8);
+  margin-inline-start: auto;
+}
+
+.activeRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  font-size: var(--od-font-size-13);
+}
+
+.activeLabel {
+  color: var(--od-color-text-secondary);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  margin: 0;
+}
+
+.chipRemove {
+  display: inline-flex;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--od-color-icon-secondary);
+  font-size: var(--od-font-size-11);
+  cursor: pointer;
+}
+
+.chipRemove:hover {
+  color: var(--od-color-text);
+}
+
+.clearAll {
+  padding-inline: var(--od-space-4);
+}
+
+.filterChip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.filterChipSet {
+  border-color: var(--od-color-primary-border);
+  background: var(--od-color-primary-bg);
+}
+
+.filterName {
+  font-weight: var(--od-weight-medium);
+}
+
+.filterValue {
+  color: var(--od-color-primary-text);
+}
+
+.filterArrow {
+  font-size: var(--od-font-size-11);
+}

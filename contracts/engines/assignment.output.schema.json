@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/assignment.output.schema.json",
+  "title": "AssignmentOutput",
+  "description": "Assignment engine result for ONE case: a ranked list of agents, each with the estimated travel time in seconds and the reason for the ranking as structured reason codes plus a short English text. Screens localise from the codes; the text is a fallback. Candidates that were ruled out are listed with an exclusion code so the dispatcher can see why a nearby agent was skipped. INVARIANTS checked by validate-contracts: ranks run 1, 2, 3 in list order with no gaps; an agent appears once; status ranked has at least one ranking entry; already_assigned and no_eligible_agent have an empty ranking. Travel time need not rise with rank: skills, workload, breaks and prayer times can put a farther agent first, and the reason codes say why.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "engine",
+    "model_version",
+    "generated_at",
+    "data_source",
+    "illustrative",
+    "case_id",
+    "status",
+    "decision_time_ms",
+    "ranking"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "version"],
+      "properties": {
+        "name": { "const": "assignment" },
+        "version": { "type": "string", "minLength": 1, "maxLength": 64 }
+      }
+    },
+    "model_version": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "illustrative": { "type": "boolean" },
+    "case_id": { "$ref": "#/$defs/Uuid" },
+    "status": {
+      "description": "ranked: at least one eligible agent. no_eligible_agent: nobody can be sent (dispatcher decides). already_assigned: the case already has an assignment; nothing is ranked.",
+      "type": "string",
+      "enum": ["ranked", "no_eligible_agent", "already_assigned"]
+    },
+    "decision_time_ms": { "type": "integer", "minimum": 0 },
+    "deadline_exceeded": {
+      "description": "True when the engine ran out of time and returned its best partial ranking.",
+      "type": "boolean"
+    },
+    "ranking": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/RankedAgent" }
+    },
+    "excluded": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["agent_id", "exclusion_code"],
+        "properties": {
+          "agent_id": { "$ref": "#/$defs/Uuid" },
+          "exclusion_code": {
+            "type": "string",
+            "enum": [
+              "OFFLINE",
+              "OFF_SHIFT",
+              "ON_BREAK",
+              "PRAYER_TIME",
+              "NO_VEHICLE",
+              "MISSING_SKILL",
+              "BUSY",
+              "OUT_OF_ZONE",
+              "STALE_POSITION"
+            ]
+          },
+          "text": { "type": "string", "maxLength": 200 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] },
+    "AssignmentReasonCode": {
+      "title": "AssignmentReasonCode",
+      "description": "Why an agent is ranked where they are. Positive codes explain a high rank; caution codes explain a trade-off the dispatcher may want to know about.",
+      "type": "string",
+      "enum": [
+        "NEAREST_BY_TRAVEL_TIME",
+        "SHORTER_TRAVEL_THAN_NEXT",
+        "HAS_REQUIRED_SKILL",
+        "VEHICLE_AVAILABLE",
+        "LOWER_WORKLOAD",
+        "IN_ROSTER_ZONE",
+        "AVAILABLE_NOW",
+        "BREAK_DUE_SOON",
+        "PRAYER_TIME_SOON",
+        "SHIFT_ENDING_SOON",
+        "FINISHING_CURRENT_CASE",
+        "LONGER_TRAVEL_THAN_BEST",
+        "HIGHER_WORKLOAD",
+        "OUTSIDE_ROSTER_ZONE",
+        "POSITION_NOT_RECENT"
+      ]
+    },
+    "RankedAgent": {
+      "title": "RankedAgent",
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "rank",
+        "agent_id",
+        "estimated_travel_seconds",
+        "estimated_arrival_at",
+        "score",
+        "reason_codes",
+        "reason_text"
+      ],
+      "properties": {
+        "rank": { "type": "integer", "minimum": 1 },
+        "agent_id": { "$ref": "#/$defs/Uuid" },
+        "estimated_travel_seconds": { "type": "integer", "minimum": 0 },
+        "estimated_arrival_at": { "type": "string", "format": "date-time" },
+        "score": {
+          "description": "Higher is better. Comparable only within this response.",
+          "type": "number"
+        },
+        "reason_codes": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/AssignmentReasonCode" }
+        },
+        "reason_text": {
+          "description": "One short English sentence for the dispatcher.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        }
+      }
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000004",
+      "engine": { "name": "assignment", "version": "0.1.0" },
+      "model_version": "nearest-baseline-0.1",
+      "generated_at": "2026-09-14T09:12:01+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "illustrative": true,
+      "case_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000c9",
+      "status": "ranked",
+      "decision_time_ms": 84,
+      "deadline_exceeded": false,
+      "ranking": [
+        {
+          "rank": 1,
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d1",
+          "estimated_travel_seconds": 420,
+          "estimated_arrival_at": "2026-09-14T09:19:01+03:00",
+          "score": 0.91,
+          "reason_codes": ["NEAREST_BY_TRAVEL_TIME", "AVAILABLE_NOW", "VEHICLE_AVAILABLE", "IN_ROSTER_ZONE"],
+          "reason_text": "Closest available agent, about 7 minutes away, in the roster zone."
+        }
+      ],
+      "excluded": [
+        {
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d2",
+          "exclusion_code": "ON_BREAK",
+          "text": "On break until 09:30."
+        }
+      ]
+    }
+  ]
+}

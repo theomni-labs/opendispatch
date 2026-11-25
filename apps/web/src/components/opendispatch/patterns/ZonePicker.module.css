@@ -1,0 +1,68 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The mockups' invite drawer: a label, the cities one under another (city name in the muted meta style), each city's zones
+   in a wrapping row of checkboxes, and one hint line. A fieldset, so a disabled picker disables every checkbox at once. */
+.picker {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-block-end: var(--od-space-8);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}
+
+.cities {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-12);
+}
+
+.city {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+}
+
+.cityToggle {
+  align-self: flex-start;
+}
+
+.cityName {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+.zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding-inline-start: var(--od-space-24);
+}
+
+.hint,
+.error {
+  font-size: var(--od-font-size-12);
+  line-height: 1.35;
+}
+
+.hint {
+  color: var(--od-color-text-secondary);
+}
+
+.error {
+  color: var(--od-color-error-text);
+}
+
+.picker[disabled] .cities {
+  opacity: 0.6;
+}

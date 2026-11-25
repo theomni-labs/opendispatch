@@ -1,0 +1,77 @@
+{{- $sel := dict "root" . "component" "web" -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-web
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  ports:
+    - name: http
+      port: 3000
+      targetPort: http
+  selector:
+    {{- include "opendispatch.selector" $sel | nindent 4 }}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-web
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+    app.kubernetes.io/component: web
+spec:
+  replicas: {{ .Values.web.replicas }}
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      {{- include "opendispatch.selector" $sel | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "opendispatch.selector" $sel | nindent 8 }}
+    spec:
+      {{- include "opendispatch.podSecurity" . | nindent 6 }}
+      containers:
+        - name: web
+          image: {{ include "opendispatch.image" (dict "root" . "img" .Values.images.web "name" "web") }}
+          imagePullPolicy: {{ .Values.global.imagePullPolicy }}
+          ports:
+            - name: http
+              containerPort: 3000
+          env:
+            - name: OPENDISPATCH_API_URL
+              value: http://{{ include "opendispatch.fullname" . }}-api:8081
+            - name: OPENDISPATCH_AUTH_MODE
+              value: oidc
+            - name: DEMO_STATE_DIR
+              value: /tmp/demo-state
+            - name: HOSTNAME
+              value: 0.0.0.0
+          securityContext:
+            {{- include "opendispatch.containerSecurity" . | nindent 12 }}
+          startupProbe:
+            tcpSocket: { port: http }
+            periodSeconds: 2
+            failureThreshold: 60
+          livenessProbe:
+            tcpSocket: { port: http }
+            periodSeconds: 20
+          readinessProbe:
+            httpGet: { path: /en/sign-in, port: http }
+            periodSeconds: 10
+            timeoutSeconds: 5
+          volumeMounts:
+            - name: tmp
+              mountPath: /tmp
+            - name: next-cache
+              mountPath: /app/apps/web/.next/cache
+          resources:
+            {{- toYaml .Values.web.resources | nindent 12 }}
+      volumes:
+        {{- include "opendispatch.tmpVolume" . | nindent 8 }}
+        - name: next-cache
+          emptyDir:
+            sizeLimit: 1Gi

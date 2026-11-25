@@ -1,0 +1,74 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list > li + li {
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-12);
+  padding-block: var(--od-space-12);
+  color: var(--od-color-text);
+}
+
+.link {
+  text-decoration: none;
+  border-radius: var(--od-radius-md);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--od-color-border-focus);
+  outline-offset: 2px;
+}
+
+.disabled {
+  color: var(--od-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.text {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  min-inline-size: 0;
+}
+
+.titleRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.title {
+  font-weight: var(--od-weight-medium);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.chevron {
+  display: inline-flex;
+  color: var(--od-color-icon-secondary);
+  line-height: 0;
+}
+
+:dir(rtl) .chevron {
+  transform: scaleX(-1);
+}
+
+.link:hover .title {
+  color: var(--od-color-link);
+}

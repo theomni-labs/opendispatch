@@ -1,0 +1,280 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Updates screen. Tokens and logical properties only. Layout lives on inner
+   elements, never on a design system component itself: a Card gets its padding from its own prop. */
+
+/* --- the page --------------------------------------------------------------------------------------------------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.stackTight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+/* The mockup's detail grid: two thirds and one third, one column below 1080px. */
+.grid2 {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1080px) {
+  .grid2 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* Four figures across, two by two on a narrow screen (the mockup's grid stats). */
+.statGrid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .statGrid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* Lets a figure's text wrap: the Stat's value is set not to, and "20 Sep 2026, 14:02" is wider than a card on a phone. */
+.wrapValue {
+  display: inline-block;
+  white-space: normal;
+}
+
+/* --- cards ------------------------------------------------------------------------------------------------------ */
+.cardInner {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+}
+
+.headTitle {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.cardTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+/* A card whose table runs edge to edge: the title row sits above it with the card's own padding. */
+.cardHeader {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding: var(--od-space-16) var(--od-space-24);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+}
+
+.cardBody {
+  padding: var(--od-space-16) var(--od-space-24);
+}
+
+.notes {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.empty {
+  margin: 0;
+  padding: var(--od-space-16) var(--od-space-24);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-14);
+}
+
+/* --- small parts ------------------------------------------------------------------------------------------------ */
+.strong {
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.label {
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}
+
+.dim {
+  opacity: 0.55;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.between {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-4);
+}
+
+.divider {
+  inline-size: 100%;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  margin: 0;
+  padding-inline-start: var(--od-space-20);
+}
+
+.counter {
+  align-self: flex-start;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.hidden {
+  display: none;
+}
+
+/* --- checks: a pill in one column, the name and its detail in the next (the mockup's check list) ------------------ */
+.checks {
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  place-items: start;
+  gap: var(--od-space-8) var(--od-space-12);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.checks > li {
+  display: contents;
+}
+
+.checkText {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+}
+
+/* --- forms ------------------------------------------------------------------------------------------------------ */
+.formGrid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 640px) {
+  .formGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.span2 {
+  grid-column: 1 / -1;
+}
+
+.narrow {
+  max-inline-size: 15rem;
+}
+
+.plainFieldset {
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-block-end: var(--od-space-8);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-12);
+}
+
+/* --- drawer and dialog footers ---------------------------------------------------------------------------------------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}

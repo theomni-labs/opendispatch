@@ -1,0 +1,28 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Around the design system's table: headers wrap instead of truncating, and a fade at the inline end says "scroll". */
+.wrap {
+  min-inline-size: 0;
+}
+
+.wrap thead th {
+  white-space: normal;
+  overflow-wrap: normal;
+}
+
+.wrap thead th button {
+  block-size: auto;
+  min-block-size: var(--od-space-24);
+  padding-block: var(--od-space-2);
+  white-space: normal;
+  text-align: start;
+}
+
+/* The scrolling box carries data-cue="more" while content is hidden past its inline end. */
+.wrap [data-cue='more'] {
+  mask-image: linear-gradient(90deg, currentcolor calc(100% - var(--od-space-32)), transparent);
+}
+
+[dir='rtl'] .wrap [data-cue='more'] {
+  mask-image: linear-gradient(270deg, currentcolor calc(100% - var(--od-space-32)), transparent);
+}

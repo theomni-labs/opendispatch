@@ -1,0 +1,124 @@
+{
+  "status": {
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "ar": {
+    "add": "Add Arabic name",
+    "fallback": "English shown"
+  },
+  "kind": {
+    "city": "city",
+    "zone": "zone",
+    "sub_zone": "sub-zone",
+    "standby": "standby point"
+  },
+  "kindn": {
+    "city": "City",
+    "zone": "Zone",
+    "sub_zone": "Sub-zone",
+    "standby": "Standby point"
+  },
+  "edit": {
+    "title": "Edit {kind}"
+  },
+  "add": {
+    "title": "Add {kind}",
+    "label": "Add location"
+  },
+  "e": {
+    "parent": {
+      "city": "City"
+    },
+    "radius": {
+      "km": "Radius (km)",
+      "m": "Coverage radius (m)"
+    },
+    "type": "Type",
+    "name": "Name (English)",
+    "ar": {
+      "hint": "Empty: English is shown"
+    },
+    "lat": "Latitude",
+    "lon": "Longitude"
+  },
+  "need": {
+    "name": "Enter a name and code",
+    "file": "Choose a file",
+    "geo": "Enter a valid latitude and longitude",
+    "radius": "Enter a valid radius",
+    "parent": "Choose where it belongs"
+  },
+  "toast": {
+    "saved": "Location saved",
+    "added": "Location added",
+    "export": "Locations exported",
+    "deleted": "Standby point deleted",
+    "imported": "{n, plural, one {{n} location imported} other {{n} locations imported}}",
+    "importedDesc": "Cities {cities}, zones {zones}, sub-zones {subs}, standby points {points}"
+  },
+  "showing": "{n} of {total}",
+  "map": {
+    "standby": "Standby point",
+    "title": "Map"
+  },
+  "toggle": "Expand or collapse",
+  "allZones": "All zones",
+  "import": {
+    "label": "Import",
+    "title": "Import locations",
+    "desc": "Cities, zones, sub-zones, standby points",
+    "drop": "Drop a CSV file or",
+    "browse": "browse",
+    "limit": "5 MB",
+    "hint": "CSV, up to 5 MB",
+    "sample": "Use a sample file",
+    "readFailed": "The file could not be read."
+  },
+  "tab": {
+    "zones": "Zones",
+    "subs": "Sub-zones",
+    "standby": "Standby points"
+  },
+  "st": {
+    "cities": "Cities"
+  },
+  "tree": {
+    "title": "Cities and zones"
+  },
+  "col": {
+    "name": "Name",
+    "ar": "Arabic name",
+    "agents": "Agents",
+    "code": "Code",
+    "sub": "Sub-zone",
+    "radius": "Radius (m)"
+  },
+  "search": "Search locations",
+  "states": {
+    "empty": {
+      "desc": "Import or add a city to start."
+    },
+    "error": {
+      "desc": "Locations could not load."
+    }
+  },
+  "shared": {
+    "stage": {
+      "label": "Stage"
+    }
+  },
+  "delete": {
+    "label": "Delete",
+    "title": "Delete {name}?",
+    "desc": "The standby point is removed. This cannot be undone.",
+    "ok": "Delete standby point"
+  },
+  "nomatch": "No locations match",
+  "notice": {
+    "notFound": "That location could not be found."
+  },
+  "tabs": {
+    "label": "Location views"
+  }
+}

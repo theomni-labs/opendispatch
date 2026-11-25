@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/forecaster.input.schema.json",
+  "title": "ForecasterInput",
+  "description": "Input to the demand forecaster. Aggregated history only (counts per sub-zone and 15-minute interval); the engine never receives case rows, coordinates of cases, or personal data. No tenant, customer or role appears here: the worker holds the tenant and stores the result under it. Timestamps are ISO 8601 with the +03:00 offset (Asia/Riyadh); interval_start values are aligned to :00, :15, :30 and :45. additionalProperties is false everywhere so a typo in a fixture or a worker payload fails validation instead of being ignored.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "requested_at",
+    "data_source",
+    "horizon",
+    "model",
+    "zones",
+    "calendar",
+    "history"
+  ],
+  "properties": {
+    "schema_version": {
+      "description": "Version of this contract. Additive changes keep 1.x.",
+      "const": "1.0"
+    },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "requested_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "description": "Every distinct data_source among the inputs. More than one entry means the inputs are mixed and every screen must say so.",
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "horizon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["start_date", "days"],
+      "properties": {
+        "start_date": { "type": "string", "format": "date" },
+        "days": { "description": "Days forecast from start_date: 1 to 30 (the planning horizon is 7 to 30 days; was at most 14 before 1.0 allowed 30).", "type": "integer", "minimum": 1, "maximum": 30 }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_version", "range_coverage"],
+      "properties": {
+        "model_version": {
+          "description": "Forecast model version selected in Forecast and Model Admin.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "range_coverage": {
+          "description": "Share of outcomes the low to high range should contain, for example 0.8 means low is the 10th and high the 90th percentile.",
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "exclusiveMaximum": 1,
+          "default": 0.8
+        }
+      }
+    },
+    "rule_set_version": {
+      "description": "Label of the classification rule set used to count field cases in the history (assumption: precedence Field mandatory over Field preferred over Remote eligible; no match means Field preferred).",
+      "type": "string",
+      "maxLength": 64
+    },
+    "zones": {
+      "description": "The location structure to forecast: one entry per zone with its sub-zones (forecast areas).",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["zone_id", "sub_zones"],
+        "properties": {
+          "zone_id": { "$ref": "#/$defs/Uuid" },
+          "city_id": { "$ref": "#/$defs/Uuid" },
+        "region": { "enum": ["central", "western"] },
+          "sub_zones": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["sub_zone_id"],
+              "properties": {
+                "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+                "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+                "longitude": { "type": "number", "minimum": -180, "maximum": 180 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "calendar": {
+      "description": "One entry per day of the horizon, plus any history days the model needs.",
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["date", "is_holiday", "is_ramadan"],
+        "properties": {
+          "date": { "type": "string", "format": "date" },
+          "is_holiday": { "type": "boolean" },
+          "holiday_name": { "type": "string", "maxLength": 120 },
+          "is_ramadan": { "type": "boolean" },
+          "is_payday": { "type": "boolean" },
+          "salary_window": { "type": "boolean" },
+          "school_in_session": { "type": "boolean" },
+          "school_period": {
+            "enum": ["semester", "exams", "vacation_summer", "vacation_eid_fitr", "vacation_eid_adha", "vacation_national", "vacation_long_weekend", "vacation_mid_semester", "vacation_between_semesters", "other"]
+          },
+          "school_period_by_region": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "central": { "enum": ["semester", "exams", "vacation_summer", "vacation_eid_fitr", "vacation_eid_adha", "vacation_national", "vacation_long_weekend", "vacation_mid_semester", "vacation_between_semesters", "other"] },
+              "western": { "enum": ["semester", "exams", "vacation_summer", "vacation_eid_fitr", "vacation_eid_adha", "vacation_national", "vacation_long_weekend", "vacation_mid_semester", "vacation_between_semesters", "other"] }
+            }
+          },
+          "events": {
+            "type": "array",
+            "maxItems": 8,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["type"],
+              "properties": {
+                "type": { "enum": ["eid", "national_day", "season_event", "hajj", "umrah", "other"] },
+                "name": { "type": "string", "maxLength": 120 },
+                "zone_ids": { "type": "array", "maxItems": 100, "items": { "$ref": "#/$defs/Uuid" } }
+              }
+            }
+          },
+          "hijri_date": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["year", "month", "day"],
+            "properties": {
+              "year": { "type": "integer", "minimum": 1300, "maximum": 1600 },
+              "month": { "type": "integer", "minimum": 1, "maximum": 12 },
+              "day": { "type": "integer", "minimum": 1, "maximum": 30 }
+            }
+          },
+          "prayer_times": {
+            "description": "Local times (Asia/Riyadh), HH:MM.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["fajr", "dhuhr", "asr", "maghrib", "isha"],
+            "properties": {
+              "fajr": { "$ref": "#/$defs/LocalTime" },
+              "dhuhr": { "$ref": "#/$defs/LocalTime" },
+              "asr": { "$ref": "#/$defs/LocalTime" },
+              "maghrib": { "$ref": "#/$defs/LocalTime" },
+              "isha": { "$ref": "#/$defs/LocalTime" }
+            }
+          }
+        }
+      }
+    },
+    "history": {
+      "description": "Aggregated counts only. cases_field is the number of those cases classified as field work with rule_set_version; cases_total minus cases_field is the remote_inferred share.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["records"],
+      "properties": {
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sub_zone_id", "interval_start", "cases_total", "cases_field"],
+            "properties": {
+              "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+              "interval_start": { "type": "string", "format": "date-time" },
+              "cases_total": { "type": "integer", "minimum": 0 },
+              "cases_field": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "aggregated_records": {
+          "description": "Optional older history at a coarser grain, so years of history fit one request. Each period is hourly (60) or daily (1440) and must not overlap the 15-minute records.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sub_zone_id", "period_start", "period_minutes", "cases_total", "cases_field"],
+            "properties": {
+              "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+              "period_start": { "type": "string", "format": "date-time" },
+              "period_minutes": { "enum": [60, 1440] },
+              "cases_total": { "type": "integer", "minimum": 0 },
+              "cases_field": { "type": "integer", "minimum": 0 }
+            }
+          }
+        },
+        "location_records": {
+          "description": "Optional case counts per micro-cell (a geohash cell inside a sub-zone) by hour of day and day group. Counts only: never case coordinates.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["sub_zone_id", "cell_id", "hour", "day_group", "cases"],
+            "properties": {
+              "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+              "cell_id": { "$ref": "#/$defs/CellId" },
+              "hour": { "type": "integer", "minimum": 0, "maximum": 23 },
+              "day_group": { "$ref": "#/$defs/DayGroup" },
+              "cases": { "type": "integer", "minimum": 0 }
+            }
+          }
+        }
+      }
+    },
+    "weather": {
+      "description": "Optional daily weather per city, from a live feed or an imported file. Fields that are unknown are omitted.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["city_id", "date"],
+        "properties": {
+          "city_id": { "$ref": "#/$defs/Uuid" },
+          "date": { "type": "string", "format": "date" },
+          "rain_mm": { "type": "number", "minimum": 0 },
+          "dust_event": { "type": "boolean" },
+          "max_temp_c": { "type": "number", "minimum": -20, "maximum": 60 },
+          "visibility_km": { "type": "number", "minimum": 0 },
+          "source": { "type": "string", "maxLength": 64 }
+        }
+      }
+    },
+    "traffic": {
+      "description": "Optional daily traffic congestion per city, from a feed, an imported file or a SYNTHETIC series. congestion_index is the day's congestion against a typical day for that city (1.0 typical, 1.2 or more is a heavy day). Days that are unknown are omitted.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["city_id", "date", "congestion_index"],
+        "properties": {
+          "city_id": { "$ref": "#/$defs/Uuid" },
+          "date": { "type": "string", "format": "date" },
+          "congestion_index": { "type": "number", "minimum": 0, "maximum": 5 },
+          "source": { "type": "string", "maxLength": 64 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "LocalTime": { "type": "string", "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] },
+    "CellId": { "type": "string", "pattern": "^[0-9b-hjkmnp-z]{5,8}$" },
+    "DayGroup": { "enum": ["weekday", "thursday", "friday", "saturday"] }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000001",
+      "requested_at": "2026-09-13T02:00:00+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "horizon": { "start_date": "2026-09-14", "days": 1 },
+      "model": { "model_version": "placeholder-0.1", "range_coverage": 0.8 },
+      "rule_set_version": "draft-2026-09",
+      "zones": [
+        {
+          "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "city_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000c1",
+          "sub_zones": [
+            {
+              "sub_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000b1",
+              "latitude": 24.7,
+              "longitude": 46.7
+            }
+          ]
+        }
+      ],
+      "calendar": [
+        {
+          "date": "2026-09-14",
+          "is_holiday": false,
+          "is_ramadan": false,
+          "prayer_times": {
+            "fajr": "04:35",
+            "dhuhr": "11:50",
+            "asr": "15:15",
+            "maghrib": "17:55",
+            "isha": "19:25"
+          }
+        }
+      ],
+      "history": {
+        "records": [
+          {
+            "sub_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000b1",
+            "interval_start": "2026-09-07T07:00:00+03:00",
+            "cases_total": 6,
+            "cases_field": 4
+          }
+        ]
+      }
+    }
+  ]
+}

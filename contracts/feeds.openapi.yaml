@@ -1,0 +1,188 @@
+openapi: 3.1.0
+info:
+  title: OpenDispatch inbound feeds
+  version: 0.1.0
+  summary: Signed webhooks that a case source and an agent-status source send to OpenDispatch.
+  description: |
+    Two feeds, plain HTTPS webhooks (no broker: a customer cluster may be offline and the sender retries).
+    Every request is signed. The customer is the one the signing key belongs to, never anything in the body.
+
+    **Signing.** `X-Feed-Key-Id` names a key. `X-Feed-Timestamp` is unix seconds and must be within five minutes of the
+    server clock. `X-Feed-Signature` is the lowercase hex of `HMAC-SHA256(secret, timestamp + "." + body)` over the exact body
+    bytes. Keys rotate: a `retiring` key still signs until its `not_after`, a `revoked` key never does.
+
+    **Idempotency.** Each event has an `idempotency_key` that is unique per feed. Sending an event again is answered with a
+    normal 202 and counted under `duplicates`; nothing is stored twice.
+
+    **Ordering.** Events may arrive late or out of order. A case event changes a stored case only when its
+    `case.updated_at` is newer than the stored one; an older one is kept in the log as `stale` and changes nothing.
+    An agent's current state is the status event with the newest `occurred_at`; every status event is kept in the history.
+
+    **Busy.** While maintenance mode is on the api answers 503 with `Retry-After` and stores nothing. The sender keeps the
+    events and sends them again.
+
+    **Answer.** 202 means the events are stored and will be applied in order; `rejected` lists events refused for their
+    shape. An event that names an unknown zone, case type or agent is stored and marked rejected with its reason when it
+    is applied, so it can be corrected and sent again under a new key.
+  x-owner: OpenDispatch
+  license:
+    name: AGPL-3.0-only
+    identifier: AGPL-3.0-only
+servers:
+  - url: https://{host}
+    variables:
+      host:
+        default: opendispatch.example
+paths:
+  /feeds/v1/cases:
+    post:
+      operationId: postCaseEvents
+      summary: Send new or changed cases
+      tags: [feeds]
+      security:
+        - feedSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/CaseEvents'}
+      responses:
+        '202': {$ref: '#/components/responses/Accepted'}
+        '400': {$ref: '#/components/responses/Error'}
+        '401': {$ref: '#/components/responses/Error'}
+        '413': {$ref: '#/components/responses/Error'}
+        '503': {$ref: '#/components/responses/Busy'}
+  /feeds/v1/agent-status:
+    post:
+      operationId: postAgentStatusEvents
+      summary: Send agent status and position
+      tags: [feeds]
+      security:
+        - feedSignature: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/StatusEvents'}
+      responses:
+        '202': {$ref: '#/components/responses/Accepted'}
+        '400': {$ref: '#/components/responses/Error'}
+        '401': {$ref: '#/components/responses/Error'}
+        '413': {$ref: '#/components/responses/Error'}
+        '503': {$ref: '#/components/responses/Busy'}
+components:
+  securitySchemes:
+    feedSignature:
+      type: apiKey
+      in: header
+      name: X-Feed-Signature
+      description: See the signing rules in the description; X-Feed-Key-Id and X-Feed-Timestamp go with it.
+  responses:
+    Accepted:
+      description: The events are stored; duplicates were ignored.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/FeedResult'}
+    Error:
+      description: The request was refused.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/FeedError'}
+    Busy:
+      description: Maintenance mode is on; send again later.
+      headers:
+        Retry-After:
+          description: Seconds to wait.
+          schema: {type: integer}
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/FeedError'}
+  schemas:
+    FeedError:
+      type: object
+      required: [error]
+      properties:
+        error: {type: string, description: 'unauthorized, maintenance, events_required, body_too_large, try_again or feeds_off'}
+    FeedResult:
+      type: object
+      required: [accepted, duplicates, rejected]
+      properties:
+        accepted: {type: integer, minimum: 0}
+        duplicates: {type: integer, minimum: 0}
+        rejected:
+          type: array
+          items:
+            type: object
+            required: [index, reason]
+            properties:
+              index: {type: integer, minimum: 0}
+              reason: {type: string}
+    CaseEvents:
+      type: object
+      required: [events]
+      properties:
+        events:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items: {$ref: '#/components/schemas/CaseEvent'}
+    CaseEvent:
+      type: object
+      required: [idempotency_key, occurred_at, case]
+      properties:
+        idempotency_key: {type: string, minLength: 1, maxLength: 200}
+        occurred_at: {type: string, format: date-time}
+        case: {$ref: '#/components/schemas/CasePayload'}
+    CasePayload:
+      type: object
+      required: [external_id, case_number, registered_at, updated_at, zone_external_id, case_type_external_id]
+      properties:
+        external_id: {type: string, description: 'The source''s own id; a case is created once per external id.'}
+        case_number: {type: string}
+        registered_at: {type: string, format: date-time}
+        updated_at: {type: string, format: date-time, description: 'The case''s version: only a newer one changes a stored case.'}
+        zone_external_id: {type: string}
+        case_type_external_id: {type: string}
+        latitude: {type: [number, 'null']}
+        longitude: {type: [number, 'null']}
+        parties_involved: {type: [integer, 'null']}
+        assigned_at: {type: [string, 'null'], format: date-time}
+        arrived_at: {type: [string, 'null'], format: date-time}
+        closed_at: {type: [string, 'null'], format: date-time}
+        agent_code: {type: [string, 'null']}
+        severity: {type: [string, 'null']}
+        injury_present: {type: [boolean, 'null']}
+        handling:
+          type: string
+          enum: [field, remote_inferred]
+          description: >-
+            Optional. Left out, the approved classification rules decide it on arrival. Sent, it is routed by
+            as is unless the setting classification.live_handling_source is rules; the rules' answer is kept either way.
+        estimated_damage_sar: {type: [number, 'null'], minimum: 0}
+        claim_value_sar: {type: [number, 'null'], minimum: 0, description: Rule criterion.}
+        damage_assessment_method: {type: [string, 'null'], enum: [photo, video, in_person, null], description: Rule criterion.}
+        location_type: {type: [string, 'null'], enum: [dense_urban, urban, suburban, highway, rural, null], description: Rule criterion.}
+        customer_preference: {type: [string, 'null'], enum: [none, remote, field, null], description: Rule criterion.}
+        pedestrian_involved: {type: [boolean, 'null'], description: Rule criterion.}
+        highway_or_outside_city_limits: {type: [boolean, 'null'], description: Rule criterion.}
+    StatusEvents:
+      type: object
+      required: [events]
+      properties:
+        events:
+          type: array
+          minItems: 1
+          maxItems: 500
+          items: {$ref: '#/components/schemas/StatusEvent'}
+    StatusEvent:
+      type: object
+      required: [idempotency_key, occurred_at, agent_code, status]
+      properties:
+        idempotency_key: {type: string, minLength: 1, maxLength: 200}
+        occurred_at: {type: string, format: date-time}
+        agent_code: {type: string}
+        status:
+          type: string
+          enum: [available, en_route, on_scene, on_break, offline]
+        latitude: {type: [number, 'null']}
+        longitude: {type: [number, 'null']}

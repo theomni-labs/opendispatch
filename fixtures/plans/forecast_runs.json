@@ -1,0 +1,3 @@
+[
+{"id":"5a1c9ff5-b337-4215-ac9c-43193c0ee54a","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-13T02:00:00+03:00","updated_at":"2026-09-13T02:04:00+03:00","created_by":"6f52eded-7db7-4d9e-a601-2be325208161","data_source":"SYNTHETIC","model_version":"placeholder-0.1","engine_version":"0.1.0","rule_set_version":"draft-2026-09","status":"succeeded","horizon_start_date":"2026-09-14","horizon_days":1,"range_coverage":0.8,"illustrative":true,"input_data_sources":["SYNTHETIC"],"started_at":"2026-09-13T02:00:00+03:00","finished_at":"2026-09-13T02:04:00+03:00","error_message":null}
+]

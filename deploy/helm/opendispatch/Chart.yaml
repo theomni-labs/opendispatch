@@ -1,0 +1,9 @@
+apiVersion: v2
+name: opendispatch
+description: >-
+  Reference chart for OpenDispatch: deploys the api, worker, web, engines and optional Keycloak with the values
+  files in deploy/helm/opendispatch (shared, dedicated and private installs). Bring your own PostgreSQL 16 with
+  TimescaleDB (-oss build) and any S3-compatible object store.
+type: application
+version: 0.1.0
+appVersion: "0.1.0"

@@ -1,0 +1,107 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-oidc
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+data:
+  tenants.json: |
+    [
+    {{- $root := . }}
+    {{- range $i, $t := .Values.tenants }}
+    {{- if $i }},{{ end }}
+      {{- $entry := dict
+        "tenant_id" $t.id
+        "issuer" (include "opendispatch.issuer" $root)
+        "client_id" $root.Values.auth.clientId
+        "client_secret_env" "OPENDISPATCH_OIDC_CLIENT_SECRET"
+        "redirect_uri" (printf "%s/auth/callback" (trimSuffix "/" $root.Values.global.publicUrl))
+        "groups_claim" "groups"
+        "install_mode" $root.Values.global.installMode
+        "allow_insecure_http" $root.Values.auth.allowInsecureHttp }}
+      {{- /* shared tier only */}}
+      {{- with $t.organization }}{{ $_ := set $entry "organization" . }}{{ end }}
+      {{- with $t.organizationId }}{{ $_ := set $entry "organization_id" . }}{{ end }}
+      {{- $entry | toJson | nindent 6 }}
+    {{- end }}
+    ]
+---
+{{- /* Engine contracts, until the engine image carries them */}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-engine-contracts
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+data:
+  {{- range $path, $_ := .Files.Glob "files/engine-contracts/*.schema.json" }}
+  {{ base $path }}: {{ $.Files.Get $path | quote }}
+  {{- end }}
+{{- if .Values.keycloak.enabled }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-realm
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+data:
+  realm.json: |
+    {{- $public := trimSuffix "/" .Values.global.publicUrl }}
+    {{- dict
+      "realm" .Values.keycloak.realm
+      "enabled" true
+      "sslRequired" "external"
+      "registrationAllowed" false
+      "resetPasswordAllowed" false
+      "loginWithEmailAllowed" true
+      "duplicateEmailsAllowed" false
+      "bruteForceProtected" true
+      "internationalizationEnabled" true
+      "supportedLocales" (list "en" "ar")
+      "defaultLocale" "en"
+      "loginTheme" (ternary "opendispatch" "keycloak.v2" .Values.keycloak.theme.enabled)
+      "groups" (list (dict "name" .Values.keycloak.firstAdmin.group))
+      "clients" (list (dict
+        "clientId" .Values.auth.clientId
+        "enabled" true
+        "protocol" "openid-connect"
+        "publicClient" false
+        "standardFlowEnabled" true
+        "directAccessGrantsEnabled" false
+        "implicitFlowEnabled" false
+        "serviceAccountsEnabled" false
+        "redirectUris" (list (printf "%s/auth/callback" $public))
+        "webOrigins" (list $public)
+        "attributes" (dict "pkce.code.challenge.method" "S256" "post.logout.redirect.uris" (printf "%s/*" $public))
+        "protocolMappers" (list (dict
+          "name" "groups"
+          "protocol" "openid-connect"
+          "protocolMapper" "oidc-group-membership-mapper"
+          "config" (dict "claim.name" "groups" "full.path" "false" "id.token.claim" "true" "access.token.claim" "true" "userinfo.token.claim" "true")) (dict
+          "name" "idp-groups"
+          "protocol" "openid-connect"
+          "protocolMapper" "oidc-usermodel-attribute-mapper"
+          "config" (dict "user.attribute" "opendispatch_idp_groups" "claim.name" "groups" "multivalued" "true" "jsonType.label" "String" "id.token.claim" "true" "access.token.claim" "true" "userinfo.token.claim" "true")))))
+      | toPrettyJson | nindent 4 }}
+{{- if .Values.keycloak.theme.enabled }}
+---
+{{- /* Login theme opendispatch: one key per file */}}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "opendispatch.fullname" . }}-keycloak-theme
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+data:
+  {{- range $path, $_ := .Files.Glob "files/keycloak-theme/**" }}
+  {{- if not (hasSuffix ".woff2" $path) }}
+  {{ include "opendispatch.themeKey" $path }}: {{ $.Files.Get $path | quote }}
+  {{- end }}
+  {{- end }}
+binaryData:
+  {{- range $path, $_ := .Files.Glob "files/keycloak-theme/**.woff2" }}
+  {{ include "opendispatch.themeKey" $path }}: {{ $.Files.Get $path | b64enc }}
+  {{- end }}
+{{- end }}
+{{- end }}

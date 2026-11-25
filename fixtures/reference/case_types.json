@@ -1,0 +1,5 @@
+[
+{"id":"f0b53b0e-2b4f-44c5-9169-0023d2d32373","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"1","name_en":"Standard case","name_ar":null,"is_active":true,"extra":{}},
+{"id":"df9eee65-1c85-4351-8547-0fcd1a5aab20","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"2","name_en":"Police attended","name_ar":null,"is_active":true,"extra":{}},
+{"id":"3a551811-af3d-44bb-bc17-71c78c44b5d5","tenant_id":"8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55","created_at":"2026-09-05T20:00:00+03:00","updated_at":"2026-09-05T20:00:00+03:00","created_by":null,"data_source":"SYNTHETIC","external_id":"3","name_en":"Unlisted","name_ar":null,"is_active":true,"extra":{}}
+]

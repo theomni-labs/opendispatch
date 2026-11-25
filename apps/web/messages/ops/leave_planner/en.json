@@ -1,0 +1,138 @@
+{
+  "sub": "Requests and their effect on coverage",
+  "new": "New request",
+  "menu": {
+    "export": "Export requests"
+  },
+  "toast": {
+    "export": "Requests exported",
+    "created": "Request created",
+    "approved": "Leave approved",
+    "declined": "Leave declined",
+    "bulk": "{n} requests decided",
+    "skipped": "{n} skipped: entered by you"
+  },
+  "stat": {
+    "pending": "Pending",
+    "approved": "Approved",
+    "gaps": "New gaps if approved",
+    "windows": "Recommended weeks"
+  },
+  "req": {
+    "title": "Leave requests"
+  },
+  "status": {
+    "requested": "Requested",
+    "approved": "Approved",
+    "declined": "Declined"
+  },
+  "tabs": {
+    "label": "Leave request tabs"
+  },
+  "search": "Search agents",
+  "filter": {
+    "type": "Type"
+  },
+  "type": {
+    "annual": "Annual",
+    "sick": "Sick",
+    "emergency": "Emergency",
+    "other": "Other"
+  },
+  "decline": "Decline",
+  "col": {
+    "dates": "Dates",
+    "effect": "Effect"
+  },
+  "rows": {
+    "empty": "No requests here"
+  },
+  "eff": {
+    "remote": "No field change",
+    "none": "No change",
+    "gaps": "+{n} gaps",
+    "ok": "No new gap"
+  },
+  "days": "{n, plural, zero {no days} one {1 day} two {2 days} few {{n} days} many {{n} days} other {{n} days}}",
+  "yours": "Yours",
+  "own": "You entered this request",
+  "win": {
+    "title": "Leave windows",
+    "demand": "Demand",
+    "rec": "Recommended"
+  },
+  "n": {
+    "from": "From",
+    "to": "To",
+    "create": "Create request",
+    "noCandidates": "No agent is available to request leave for.",
+    "needAgent": "Choose an agent",
+    "needDates": "Choose valid dates"
+  },
+  "d": {
+    "onShift": "Days on shift",
+    "requested": "Requested",
+    "decided": "Decided",
+    "effect": "Effect on coverage",
+    "required": "Required",
+    "coverage": "Planned after leave",
+    "summary": "Staffing falls by one on {d, plural, one {1 day} other {{d} days}}; {n, plural, one {1 interval drops} other {{n} intervals drop}} below required"
+  },
+  "spark": "Required staffing against planned coverage",
+  "states": {
+    "empty": {
+      "desc": "No leave requests yet."
+    },
+    "error": {
+      "desc": "The requests could not load."
+    }
+  },
+  "out": {
+    "title": "Leave outlook",
+    "horizon": "Horizon",
+    "w13": "13 weeks",
+    "w52": "52 weeks",
+    "strip": "Leave outlook by zone and week",
+    "status": {
+      "grant": "Leave can be granted",
+      "normal": "Normal",
+      "restrict": "Restrict leave"
+    },
+    "col": {
+      "week": "Week",
+      "outlook": "Outlook",
+      "demand": "Demand",
+      "room": "Leave room",
+      "reason": "Reason",
+      "sick": "Sick a day"
+    },
+    "weekN": "Week {n}",
+    "empty": "Every week is normal",
+    "noHistory": "Not enough case history",
+    "error": "The outlook could not load.",
+    "reason": {
+      "driver": "{name} week, demand {pct}",
+      "plain": "Demand {pct}",
+      "none": "Demand as usual",
+      "blackout": "Blackout: {label}",
+      "leave_full": "Approved leave at the limit"
+    },
+    "driver": {
+      "ramadan": "Ramadan",
+      "eid_fitr": "Eid al-Fitr",
+      "eid_adha": "Eid al-Adha",
+      "hajj": "Hajj",
+      "national_day": "National Day",
+      "founding_day": "Founding Day",
+      "payday": "Payday",
+      "school_break": "School break",
+      "season_event": "Season event",
+      "umrah": "Umrah"
+    },
+    "sick": {
+      "history": "Sick: from history",
+      "assumed": "Sick: assumed rate"
+    },
+    "sickTip": "Expected off sick a day, by zone and month"
+  }
+}

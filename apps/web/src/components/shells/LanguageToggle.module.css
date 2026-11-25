@@ -1,0 +1,46 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The mockup's lang: a 30px pill holding EN and AR, the current one filled. */
+.group {
+  display: inline-flex;
+  flex: none;
+  align-items: stretch;
+  block-size: 30px;
+  padding: var(--od-space-2);
+  border: 1px solid var(--od-color-border-control);
+  border-radius: var(--od-radius-full);
+  background: var(--od-color-bg-container);
+}
+
+.item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-inline-size: 34px;
+  padding-block: 0;
+  padding-inline: var(--od-space-8);
+  border-radius: var(--od-radius-full);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  line-height: 1;
+  letter-spacing: 0;
+  text-decoration: none;
+}
+
+a.item:hover {
+  color: var(--od-color-text-heading);
+}
+
+.current,
+.current:hover {
+  background: var(--od-color-primary);
+  color: var(--od-color-text-on-primary);
+}
+
+@media (width < 640px) {
+  .item {
+    min-inline-size: 28px;
+    padding-inline: var(--od-space-6);
+  }
+}

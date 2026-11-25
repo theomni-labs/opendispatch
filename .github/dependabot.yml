@@ -1,0 +1,24 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule: {interval: weekly}
+    open-pull-requests-limit: 5
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: gomod
+    directories: [/apps/api-go, /tools/loadgen]
+    schedule: {interval: weekly}
+    groups:
+      minor-and-patch:
+        update-types: [minor, patch]
+  - package-ecosystem: pip
+    directory: /engines/requirements
+    schedule: {interval: weekly}
+  - package-ecosystem: docker
+    directories: [/apps/api-go, /apps/web, /engines, /deploy/compose]
+    schedule: {interval: monthly}
+  - package-ecosystem: github-actions
+    directory: /
+    schedule: {interval: monthly}

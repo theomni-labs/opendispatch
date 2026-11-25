@@ -1,0 +1,144 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's compare: OpenDispatch's choice beside the customer's actual choice, one row per case. */
+.list {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(72px, 0.7fr) minmax(0, 1.5fr) minmax(0, 1.5fr) 88px;
+  align-items: center;
+  gap: var(--od-space-12);
+  padding-block: var(--od-space-8);
+}
+
+.row + .row {
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.head {
+  padding-block: var(--od-space-4) var(--od-space-8);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-label);
+  border-block-end: 1px solid var(--od-color-border);
+}
+
+.head + .row {
+  border-block-start: 0;
+}
+
+.side {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  min-inline-size: 0;
+}
+
+.name {
+  font-size: var(--od-font-size-13);
+  font-weight: var(--od-weight-medium);
+  color: var(--od-color-text-heading);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sub {
+  font-size: var(--od-font-size-12);
+  color: var(--od-color-text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+.caseNumber {
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+  color: var(--od-color-text-label);
+  font-variant-numeric: tabular-nums;
+}
+
+.pill {
+  justify-self: end;
+}
+
+/* Always read by a screen reader; visually hidden until the row stacks on a narrow screen (below). */
+.sideLabel {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+  font-size: var(--od-font-size-11);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-secondary);
+}
+
+@media (width < 640px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas: 'case state' 'opendispatch customer';
+    gap: var(--od-space-8) var(--od-space-12);
+  }
+
+  .case {
+    grid-area: case;
+  }
+
+  .pill {
+    grid-area: state;
+  }
+
+  .opendispatch {
+    grid-area: opendispatch;
+  }
+
+  .customer {
+    grid-area: customer;
+  }
+
+  .sideLabel {
+    position: static;
+    inline-size: auto;
+    block-size: auto;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    white-space: normal;
+    clip-path: none;
+  }
+
+  .head {
+    display: none;
+  }
+}
+
+.state {
+  padding-block: var(--od-space-16);
+}
+
+.skeletons {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

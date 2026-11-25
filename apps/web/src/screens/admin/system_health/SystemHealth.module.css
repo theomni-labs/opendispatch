@@ -1,0 +1,238 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The System Health screen. Tokens and logical properties only. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+/* The four figures: four across, two by two below 1024px (the mockups' grid stats). */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--od-space-16);
+}
+
+@media (width <= 1023px) {
+  .stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.meta {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+/* --- the overview: services and feeds beside the version and diagnostics cards ------------------ */
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .detailGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-8);
+}
+
+@media (width <= 767px) {
+  .services {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.service {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-md);
+  padding: var(--od-space-12);
+  background: var(--od-color-bg-container);
+}
+
+.serviceHead {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  font-weight: var(--od-weight-semibold);
+}
+
+.includes {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.includes li {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+/* --- storage and backups ------------------------------------------------------------------------------------------------ */
+.twoCols {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .twoCols {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--od-space-8);
+  font-size: var(--od-font-size-14);
+}
+
+.swatch {
+  flex: none;
+  inline-size: var(--od-space-8);
+  block-size: var(--od-space-8);
+  border-radius: var(--od-radius-full);
+}
+
+.legendLabel {
+  flex: 1 1 auto;
+  min-inline-size: 0;
+}
+
+.legendValue {
+  color: var(--od-color-text-secondary);
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+/* The settings of the diagnostics file: a key and its value on one line each (keys and values are data, left to right). */
+.kv {
+  margin: 0;
+}
+
+.kvRow {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding-block: var(--od-space-6);
+  border-block-end: 1px solid var(--od-color-border-secondary);
+  font-size: var(--od-font-size-14);
+}
+
+.kvRow dt {
+  color: var(--od-color-text-label);
+}
+
+.kvRow dd {
+  margin: 0;
+  color: var(--od-color-text);
+}
+
+/* Figure and unit of a stat, on one baseline like the design system's own stat. */
+.valueUnit {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--od-space-4);
+}
+
+.unit {
+  font-size: var(--od-font-size-13);
+  font-weight: var(--od-weight-medium);
+  color: var(--od-color-text-secondary);
+}
+
+.strong {
+  font-weight: var(--od-weight-semibold);
+}
+
+.skeletonBody {
+  padding: var(--od-space-16);
+}

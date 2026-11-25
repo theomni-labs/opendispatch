@@ -1,0 +1,316 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's map: a schematic canvas (no tiles, no network) with zone outlines, pins, links and a legend.
+   The plot is always left to right, like every time axis and chart plot; the controls,
+   the legend and the note sit outside it and follow the page direction. */
+.root {
+  position: relative;
+  inline-size: 100%;
+  min-block-size: 280px;
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-lg);
+  background: var(--od-color-bg-subtle);
+  overflow: clip;
+}
+
+.plot {
+  position: absolute;
+  inset: 0;
+  direction: ltr;
+}
+
+.svg {
+  position: absolute;
+  inset: 0;
+  inline-size: 100%;
+  block-size: 100%;
+  max-inline-size: none;
+}
+
+.road {
+  fill: none;
+  stroke: var(--od-color-border);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 6;
+}
+
+.minor {
+  stroke-width: 3;
+}
+
+/* ---------- Zones: stage, gap and surplus, or a heat level ---------- */
+.zone {
+  fill: var(--od-color-neutral-bg);
+  fill-opacity: 0.7;
+  stroke: var(--od-color-border-control);
+  stroke-linejoin: round;
+  stroke-width: 1;
+}
+
+.shadow {
+  fill: var(--od-color-neutral-bg);
+}
+
+.recommend {
+  fill: var(--od-color-info-bg);
+  stroke: var(--od-color-info);
+}
+
+.automatic {
+  fill: var(--od-color-primary-bg);
+  stroke: var(--od-color-primary);
+}
+
+.gap {
+  fill: var(--od-color-error-bg);
+  fill-opacity: 0.85;
+  stroke: var(--od-color-error);
+}
+
+.surplus {
+  fill: var(--od-color-info-bg);
+  stroke: var(--od-color-info);
+}
+
+.heat1 {
+  fill: var(--od-heat-1);
+  fill-opacity: 1;
+}
+
+.heat2 {
+  fill: var(--od-heat-2);
+  fill-opacity: 1;
+}
+
+.heat3 {
+  fill: var(--od-heat-3);
+  fill-opacity: 1;
+}
+
+.heat4 {
+  fill: var(--od-heat-4);
+  fill-opacity: 1;
+}
+
+.heat5 {
+  fill: var(--od-heat-5);
+  fill-opacity: 1;
+}
+
+.active {
+  stroke-width: 2;
+}
+
+.cover {
+  fill: var(--od-color-primary);
+  fill-opacity: 0.1;
+  stroke: var(--od-color-primary);
+  stroke-width: 1;
+}
+
+.label {
+  fill: var(--od-color-text-label);
+  font-family: var(--od-font-ui);
+  font-size: var(--od-font-size-11);
+  font-weight: var(--od-weight-semibold);
+  paint-order: stroke;
+  pointer-events: none;
+  stroke: var(--od-color-bg-container);
+  stroke-linejoin: round;
+  stroke-width: 3;
+  text-anchor: middle;
+}
+
+/* ---------- Pins ---------- */
+.pin {
+  fill: var(--od-color-neutral);
+  stroke: var(--od-color-bg-container);
+  stroke-width: 2;
+}
+
+.available {
+  fill: var(--od-color-success);
+}
+
+.assigned,
+.enRoute {
+  fill: var(--od-color-info);
+}
+
+.onScene {
+  fill: var(--od-color-primary);
+}
+
+.onBreak {
+  fill: var(--od-color-warning);
+}
+
+.offline {
+  fill: var(--od-color-icon-secondary);
+}
+
+.caseKind {
+  fill: var(--od-color-error);
+}
+
+.standby {
+  fill: var(--od-color-bg-container);
+  stroke: var(--od-color-primary);
+  stroke-width: 2;
+}
+
+.spot {
+  fill: var(--od-color-bg-container);
+  stroke: var(--od-color-success);
+  stroke-dasharray: 2 2;
+  stroke-width: 2;
+}
+
+.selected {
+  stroke: var(--od-color-text-heading);
+  stroke-width: 2;
+}
+
+.link {
+  fill: none;
+  stroke: var(--od-color-info);
+  stroke-dasharray: 4 3;
+  stroke-width: 1.5;
+}
+
+/* A suggested move to a waiting spot (advisory). */
+.suggestion {
+  stroke: var(--od-color-success);
+  stroke-dasharray: 2 3;
+}
+
+.arrow {
+  fill: var(--od-color-success);
+}
+
+/* ---------- Keyboard and pointer: zones and pins are buttons when the map has onSelect ---------- */
+.item {
+  cursor: pointer;
+  outline: none;
+}
+
+/* A wider target than the 12px pin, for a finger. */
+.hit {
+  fill: none;
+  pointer-events: all;
+}
+
+.ring {
+  fill: none;
+  opacity: 0;
+  pointer-events: none;
+  stroke: var(--od-color-border-focus);
+  stroke-width: 2;
+}
+
+.item:focus-visible .ring {
+  opacity: 1;
+}
+
+.item:focus-visible .zone {
+  stroke: var(--od-color-border-focus);
+  stroke-width: 3;
+}
+
+/* ---------- Furniture: controls, legend, note ---------- */
+.controls {
+  position: absolute;
+  inset-block-start: var(--od-space-8);
+  inset-inline-end: var(--od-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+}
+
+/* aria-disabled, not disabled: at the zoom limit the button keeps keyboard focus. The design system's buttons style
+   only the native :disabled, so its look is set here. */
+.controls button[aria-disabled='true'] {
+  border-color: var(--od-color-border-secondary);
+  background: var(--od-color-bg-subtle);
+  color: var(--od-color-text-disabled);
+  cursor: not-allowed;
+}
+
+.legend {
+  position: absolute;
+  inset-block-end: var(--od-space-8);
+  inset-inline-start: var(--od-space-8);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--od-space-4) var(--od-space-12);
+  max-inline-size: calc(100% - var(--od-space-16));
+  margin: 0;
+  padding: var(--od-space-6) var(--od-space-8);
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-md);
+  background: var(--od-color-bg-container);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-11);
+  list-style: none;
+}
+
+.legendItem {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+  box-sizing: border-box;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--od-radius-full);
+}
+
+.swatchCase {
+  background: var(--od-color-error);
+}
+
+.swatchStandby {
+  border: 2px solid var(--od-color-primary);
+  background: var(--od-color-bg-container);
+}
+
+.swatchSpot {
+  border: 2px dashed var(--od-color-success);
+  background: var(--od-color-bg-container);
+}
+
+.note {
+  position: absolute;
+  inset-block-start: var(--od-space-8);
+  inset-inline-start: var(--od-space-8);
+  margin: 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-11);
+  pointer-events: none;
+}
+
+/* ---------- Loading, empty and error fill the frame ---------- */
+.state {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.srOnly {
+  position: absolute;
+  inline-size: 1px;
+  block-size: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  clip-path: inset(50%);
+}

@@ -1,0 +1,329 @@
+{
+  "meta": {
+    "purpose": "Summary numbers and structural parameters for the synthetic generator. The generator reads ONLY this file. Every value is invented: no real record, coordinate or statistic is stored here or anywhere in the repository.",
+    "source_values": ["assumption"],
+    "note_on_sources": "Every value below carries source assumption: our own invented choice, documented in scripts/synthetic/README.md. Synthetic output is labelled SYNTHETIC and is never a measured result."
+  },
+
+  "structure": {
+    "seed": { "value": "opendispatch-synthetic-2026-09-v1", "source": "assumption" },
+    "customer": {
+      "id": { "value": "8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55", "source": "assumption" },
+      "name": { "value": "Example Response (synthetic)", "source": "assumption" }
+    },
+    "timezone": { "value": "Asia/Riyadh", "offset": "+03:00", "source": "assumption" },
+    "first_case_day": { "value": "2026-09-06", "weekday": "Sunday", "source": "assumption" },
+    "last_case_day": { "value": "2026-09-12", "weekday": "Saturday", "source": "assumption" },
+    "demo_today": { "value": "2026-09-13", "weekday": "Sunday", "source": "assumption" },
+    "cases_per_day": { "value": 1500, "source": "assumption" },
+    "agents_per_zone": { "value": 42, "source": "assumption" },
+    "remote_share_of_agents": { "value": 0.25, "source": "assumption" },
+    "vehicles_per_zone": { "value": 14, "source": "assumption" },
+    "sub_zones_per_zone": { "min": 10, "max": 18, "source": "assumption" },
+    "standby_points_per_zone": { "min": 3, "max": 5, "source": "assumption" },
+    "sub_zone_min_separation_km": { "value": 1.8, "source": "assumption" },
+    "standby_coverage_radius_km": { "value": 4.5, "source": "assumption" }
+  },
+
+  "locations": {
+    "note": "City anchors are approximate public city-centre points used only to place the map. Zone centres, sub-zone centres, standby points and every case coordinate are invented offsets from them. Arabic names stay empty. The city codes RD, JD and DM are invented.",
+    "cities": [
+      {
+        "code": "RD",
+        "name_en": "Riyadh",
+        "anchor": { "lat": 24.71, "lng": 46.68 },
+        "source": "assumption",
+        "share": { "value": 0.62, "source": "assumption" },
+        "zones": [
+          { "code": "RD-C", "name_en": "Riyadh Central", "offset_km": [0, 0], "radius_km": 6.0, "demand_weight": 0.26, "live_stage": "recommend", "source": "assumption" },
+          { "code": "RD-N", "name_en": "Riyadh North", "offset_km": [0, 11], "radius_km": 6.5, "demand_weight": 0.22, "live_stage": "recommend", "source": "assumption" },
+          { "code": "RD-E", "name_en": "Riyadh East", "offset_km": [12, 0], "radius_km": 6.5, "demand_weight": 0.2, "live_stage": "shadow", "source": "assumption" },
+          { "code": "RD-S", "name_en": "Riyadh South", "offset_km": [0, -11], "radius_km": 6.5, "demand_weight": 0.16, "live_stage": "shadow", "source": "assumption" },
+          { "code": "RD-W", "name_en": "Riyadh West", "offset_km": [-12, 0], "radius_km": 6.5, "demand_weight": 0.16, "live_stage": "shadow", "source": "assumption" }
+        ]
+      },
+      {
+        "code": "JD",
+        "name_en": "Jeddah",
+        "anchor": { "lat": 21.54, "lng": 39.17 },
+        "source": "assumption",
+        "share": { "value": 0.26, "source": "assumption" },
+        "zones": [
+          { "code": "JD-N", "name_en": "Jeddah North", "offset_km": [0, 8], "radius_km": 6.5, "demand_weight": 0.56, "live_stage": "shadow", "source": "assumption" },
+          { "code": "JD-S", "name_en": "Jeddah South", "offset_km": [0, -8], "radius_km": 6.5, "demand_weight": 0.44, "live_stage": "shadow", "source": "assumption" }
+        ]
+      },
+      {
+        "code": "DM",
+        "name_en": "Dammam",
+        "anchor": { "lat": 26.42, "lng": 50.09 },
+        "source": "assumption",
+        "share": { "value": 0.12, "source": "assumption" },
+        "zones": [
+          { "code": "DM-C", "name_en": "Dammam Central", "offset_km": [0, 0], "radius_km": 7.5, "demand_weight": 1.0, "live_stage": "shadow", "source": "assumption" }
+        ]
+      }
+    ],
+    "sub_zone_names": { "prefixes": ["Amber", "Cedar", "Dune", "Falcon", "Garnet", "Harbor", "Ivory", "Juniper", "Kestrel", "Lagoon", "Mesa", "Nova", "Oasis", "Palm", "Quartz", "Ridge", "Saffron", "Tamarisk", "Umber", "Vista", "Willow", "Zephyr", "Basalt", "Coral", "Delta", "Ember", "Fjord", "Glen", "Haven", "Isle"], "suffixes": ["Heights", "Park", "Gate", "Row", "Quarter", "Grove", "Court", "Junction", "Point", "Fields", "Terrace", "Crossing", "Square", "Rise"], "source": "assumption" },
+    "sub_zone_demand_sigma": { "value": 0.45, "unit": "lognormal sigma of sub-zone demand weights", "source": "assumption" }
+  },
+
+  "demand": {
+    "day_of_week_multiplier": {
+      "value": { "Sunday": 0.9, "Monday": 0.94, "Tuesday": 0.98, "Wednesday": 1.04, "Thursday": 1.12, "Friday": 1.06, "Saturday": 0.96 },
+      "note": "Mean 1.00. Wednesday, Thursday and Friday higher, Sunday lowest.",
+      "source": "assumption"
+    },
+    "slot_count_noise_sigma": { "value": 0.05, "note": "lognormal noise on each 15-minute slot's expected count before rounding", "source": "assumption" },
+    "hourly_levels": {
+      "value": [1.575, 1.225, 0.925, 0.7, 0.76, 0.9, 2.1, 4.8, 5.1, 5.2, 5.1, 4.8, 4.7, 6.0, 6.8, 7.0, 6.8, 6.2, 5.8, 5.6, 5.4, 5.0, 4.2, 3.0],
+      "note": "Relative level per 15-minute slot at each hour's centre, linear in between. Afternoon peak about 13:00 to 17:00, evening shoulder, taper after 22:00, quietest hour 03:00 to 04:00.",
+      "source": "assumption"
+    },
+    "slot_overrides": {
+      "value": {
+        "00:00": 1.36, "00:15": 1.3, "00:30": 1.23, "00:45": 1.15,
+        "05:00": 0.8, "05:15": 0.85, "05:30": 0.9, "05:45": 0.95,
+        "06:00": 1.0, "06:15": 1.4, "06:30": 2.6, "06:45": 3.4,
+        "07:00": 3.2, "07:15": 3.8, "07:30": 4.4, "07:45": 4.8
+      },
+      "note": "Pins the two shape targets: the 00:00 hour is 0.6 of the 06:00 hour (5.04 against 8.40), and the 07:00 slot is 3.2 times the 06:00 slot. Sharp rise from 06:30.",
+      "source": "assumption"
+    },
+    "ramadan_profile": {
+      "value": {
+        "sample_date": "2026-03-04",
+        "note_on_sample_date": "A day in Ramadan 1447 (18 Feb to 19 Mar 2026). Used only by check.ts --ramadan; fixtures never contain it.",
+        "multipliers": [
+          { "label": "before fajr, the hour to fajr", "from_minutes_after_fajr": -60, "to_minutes_after_fajr": 0, "multiplier": 2.5 },
+          { "label": "late morning to mid-afternoon", "from_local_time": "10:00", "to_local_time": "15:00", "multiplier": 0.55 },
+          { "label": "the hour before iftar", "from_minutes_after_maghrib": -60, "to_minutes_after_maghrib": 0, "multiplier": 1.9 },
+          { "label": "the hour after iftar", "from_minutes_after_maghrib": 0, "to_minutes_after_maghrib": 60, "multiplier": 0.6 },
+          { "label": "night after iftar", "from_minutes_after_maghrib": 60, "to_minutes_after_maghrib": 300, "multiplier": 1.15 }
+        ],
+        "base": "hourly_levels and slot_overrides above, then multiplied by whichever windows apply"
+      },
+      "source": "assumption"
+    },
+    "assigned_before_registration": {
+      "share_of_unlisted_field_cases": { "value": 0.04, "source": "assumption" },
+      "lead_minutes_median": { "value": 4, "source": "assumption" },
+      "lead_minutes_max": { "value": 8, "source": "assumption" },
+      "note": "Some source systems stamp an assignment before the registration; a small share of Unlisted field cases do so here."
+    }
+  },
+
+  "targets": {
+    "note": "Every numeric target the generator is checked against. Tolerances: plus or minus 10 percent relative on medians and percentiles, plus or minus 3 percentage points on shares.",
+    "remote_share": { "value": 0.38, "unit": "share of all cases", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "registered_to_assigned_median_min": { "value": 3.1, "unit": "minutes, field cases", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "registered_to_assigned_p90_min": { "value": 14, "unit": "minutes, field cases", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "assigned_to_arrived_median_min": { "value": 10.5, "unit": "minutes, field cases", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "assigned_to_arrived_p90_min": { "value": 19.5, "unit": "minutes, field cases", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "arrived_to_closed_median_min": { "value": 14, "unit": "minutes, field cases", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "late_night_ratio": { "value": 0.6, "unit": "cases in the 00:00 hour divided by cases in the 06:00 hour ", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "morning_ramp_ratio": { "value": 3.2, "unit": "cases in the 15-minute slot starting 07:00 divided by the slot starting 06:00", "tolerance": { "kind": "relative", "value": 0.1 }, "tolerance_source": "assumption", "source": "assumption" },
+    "parties_two_share": { "value": 0.9, "unit": "share of cases ", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "parties_three_or_more_share": { "value": 0.1, "unit": "share of cases ", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "parties_zero_or_one_share_max": { "value": 0.02, "unit": "share of cases a ceiling, not a target", "tolerance": { "kind": "ceiling" }, "tolerance_source": "assumption", "source": "assumption" },
+    "field_share_unlisted": { "value": 0.95, "unit": "share of Unlisted cases handled in the field (nearly all)", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "field_share_customer_and_police": { "value": 0.8, "unit": "share of Police attended cases handled in the field", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "field_share_customer": { "value": 0.56, "unit": "share of Standard cases handled in the field", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "city_share_riyadh": { "value": 0.62, "unit": "share of cases among Riyadh, Jeddah, Dammam", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "city_share_jeddah": { "value": 0.26, "unit": "share of cases among Riyadh, Jeddah, Dammam", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "city_share_dammam": { "value": 0.12, "unit": "share of cases among Riyadh, Jeddah, Dammam", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+    "zones_in_fixtures": { "value": { "RD": 5, "JD": 2, "DM": 1 }, "unit": "zones per city in the fixtures (an invented layout)", "tolerance": { "kind": "exact" }, "tolerance_source": "assumption", "source": "assumption" },
+
+    "extra_figures": {
+      "note": "Further figures printed by the check and held to the same tolerances.",
+      "within_10_min_of_assignment": { "value": 0.48, "unit": "share of field cases arrived within 10 minutes of assignment", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+      "within_10_min_of_registration": { "value": 0.21, "unit": "share of field cases arrived within 10 minutes of registration", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+      "case_type_mix": {
+        "value": { "Standard case": 0.82, "Police attended": 0.06, "Unlisted": 0.12 },
+        "unit": "share of cases",
+        "tolerance": { "kind": "points", "value": 3 },
+        "tolerance_source": "assumption",
+        "source": "assumption"
+      },
+      "unlisted_assigned_before_registration_share": { "value": 0.04, "unit": "share of Unlisted field cases with assigned_at before registered_at", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+      "parties_three_share": { "value": 0.07, "unit": "share of cases with exactly three parties", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" },
+      "parties_four_or_more_share": { "value": 0.03, "unit": "share of cases with four or more parties", "tolerance": { "kind": "points", "value": 3 }, "tolerance_source": "assumption", "source": "assumption" }
+    }
+  },
+
+  "timing_model": {
+    "note": "Lognormal delays. Median and 90th percentile come from the targets above; sigma = ln(p90 / median) / 1.2816. Draws are stratified so the sample quantiles sit on the targets.",
+    "registered_to_assigned_cap_min": { "value": 120, "source": "assumption" },
+    "assigned_to_arrived_min_min": { "value": 1.5, "source": "assumption" },
+    "assigned_to_arrived_cap_min": { "value": 60, "source": "assumption" },
+    "arrived_to_closed_p90_min": { "value": 23.5, "note": "our choice of spread", "source": "assumption" },
+    "arrived_to_closed_min_min": { "value": 2, "source": "assumption" },
+    "arrived_to_closed_cap_min": { "value": 120, "source": "assumption" },
+    "on_scene_completed_fraction_of_closing": { "min": 0.75, "max": 0.95, "note": "on_scene_completed_at = arrived_at + fraction x (closed_at - arrived_at)", "source": "assumption" },
+    "dispatch_ack_seconds": { "min": 30, "max": 120, "note": "assigned to departing", "source": "assumption" }
+  },
+
+  "handling_model": {
+    "note": "Handling is field or remote_inferred. Field quotas per case type are the targets above. Within a type, cases that the draft rules would send to the field are picked first.",
+    "injury_share": { "value": 0.035, "source": "assumption" },
+    "damage_sar_median": { "value": 3500, "source": "assumption" },
+    "damage_sar_sigma": { "value": 0.9, "source": "assumption" },
+    "three_party_field_boost": { "value": 0.2, "source": "assumption" },
+    "parties_distribution": {
+      "value": { "0": 0.002, "1": 0.008, "2": 0.89, "3": 0.07, "4": 0.02, "5": 0.007, "6": 0.003 },
+      "note": "Two parties 89%, three or more 10%, zero or one 1%.",
+      "source": "assumption"
+    },
+    "channel_mix": { "value": { "app": 0.5, "phone": 0.36, "whatsapp": 0.14 }, "note": "the three channels of the contract; the mix is invented", "source": "assumption" },
+    "classification_criteria": {
+      "note": "Rule criteria the customer has not supplied, kept in each case's extra. Drawn from their own stream per case, so no other figure moves.",
+      "claim_value_factor": { "min": 1.0, "max": 1.6, "note": "claim value = damage estimate x this factor, rounded to SAR 50", "source": "assumption" },
+      "damage_assessment_by_severity": {
+        "value": { "minor": { "photo": 0.6, "video": 0.25, "in_person": 0.15 }, "moderate": { "photo": 0.3, "video": 0.35, "in_person": 0.35 }, "severe": { "photo": 0.05, "video": 0.15, "in_person": 0.8 } },
+        "source": "assumption"
+      },
+      "location_type_mix": { "value": { "dense_urban": 0.35, "urban": 0.35, "suburban": 0.15, "highway": 0.1, "rural": 0.05 }, "source": "assumption" },
+      "customer_preference_mix": { "value": { "none": 0.8, "remote": 0.12, "field": 0.08 }, "source": "assumption" }
+    }
+  },
+
+  "remote_queue": {
+    "review_minutes": { "min": 8, "max": 25, "source": "assumption" },
+    "paperwork_minutes": { "min": 8, "max": 22, "source": "assumption" },
+    "overnight_until": { "value": "07:30", "note": "cases registered before this time wait for the daytime queue", "source": "assumption" },
+    "daytime_queue_opens": { "value": "11:00", "note": "overnight remote cases are closed in registration order from this time", "source": "assumption" },
+    "reviewers_per_remote_agent": { "value": 0.34, "note": "share of a city's remote agents reviewing at any moment", "source": "assumption" },
+    "working_window": { "from": "07:00", "to": "23:00", "note": "the two remote blocks of the role matrix", "source": "assumption" }
+  },
+
+  "movement": {
+    "road_distance_factor": { "value": 1.35, "note": "road distance divided by straight-line distance", "source": "assumption" },
+    "reference_speed_kmh": { "value": 30, "note": "urban road speed of the recommendation fixtures' travel estimate (the drive model below has its own)", "source": "assumption" },
+    "min_speed_kmh": { "value": 9, "source": "assumption" },
+    "max_speed_kmh": { "value": 100, "note": "fastest plausible drive; a drawn travel time shorter than this allows is lengthened", "source": "assumption" },
+    "standby_roam_radius_km": { "value": 1.2, "note": "an available agent hovers within this radius of the standby point", "source": "assumption" },
+    "case_scatter_radius_km": { "value": 1.3, "note": "case coordinates fall within this radius of the sub-zone centre", "source": "assumption" },
+    "return_to_standby": { "value": true, "note": "after closing, an agent drives back to the waiting spot and can be dispatched on the way", "source": "assumption" },
+    "travel_time_distance_coupling": { "value": 0.8, "note": "used only by the Go live-day generator (apps/api-go/internal/synthetic), which has not moved to drive_model yet", "source": "assumption" },
+    "drive_model": {
+      "note": "Assigned to arrived = dispatch ack + drive. Drive = road km / (reference speed x hour factor x zone factor) x exp(noise_sigma x N(0,1)), kept between min and max speed. The agent is the free one of the zone with the shortest expected drive. Tuned so the assigned-to-arrived median and 90th percentile land on the targets.",
+      "reference_speed_kmh": { "value": 42, "note": "average road speed of a dispatched drive before the hour and zone factors", "source": "assumption" },
+      "speed_factor_by_hour": { "value": [1.25, 1.25, 1.25, 1.25, 1.25, 1.2, 1.05, 0.8, 0.8, 0.95, 0.95, 0.95, 0.95, 0.9, 0.9, 0.8, 0.8, 0.8, 0.8, 0.8, 0.9, 0.9, 0.95, 1.1], "note": "times the reference speed, by local hour: faster at night, slower in the morning and evening peaks", "source": "assumption" },
+      "zone_speed_factor": { "value": { "RD-C": 0.85, "RD-N": 1.0, "RD-E": 1.05, "RD-S": 1.1, "RD-W": 1.05, "JD-N": 0.95, "JD-S": 1.05, "DM-C": 1.15 }, "note": "times the reference speed, by zone: dense centres slower, outer zones faster", "source": "assumption" },
+      "setup_seconds": { "value": 180, "note": "parking and walking to the scene, on top of the drive", "source": "assumption" },
+      "noise_sigma": { "value": 0.25, "note": "lognormal sigma of a drive around its expected time (traffic, parking, finding the scene)", "source": "assumption" },
+      "shift_end_penalty_seconds": { "value": 900, "note": "added to the expected drive of an agent whose shift ends within 20 minutes", "source": "assumption" }
+    }
+  },
+
+  "roster_model": {
+    "field_shift_split": {
+      "value": { "day_a": 0.32, "day_b": 0.46, "night": 0.22 },
+      "note": "share of a zone's field agents on each field shift, close to the demand shares of the shape",
+      "source": "assumption"
+    },
+    "remote_block_split": { "value": { "remote_block_1": 0.5, "remote_block_2": 0.5 }, "source": "assumption" },
+    "days_off_per_week": { "value": 2, "source": "assumption" },
+    "remote_flag": {
+      "value": "The last quarter of each zone's agents (by employee number) are remote reviewers: kind 'remote', home_zone_id null (the contract: remote agents belong to the remote pool), extra.reviews_for_city keeps the city queue they work for, rostered with zone_id null.",
+      "source": "assumption"
+    }
+  },
+
+  "people": {
+    "skills_vocabulary": {
+      "value": [
+        { "code": "injury_protocol", "name_en": "Injury protocol", "name_ar": "بروتوكول الإصابات" },
+        { "code": "heavy_vehicle", "name_en": "Heavy vehicle incidents", "name_ar": "حوادث المركبات الثقيلة" },
+        { "code": "pedestrian_incident", "name_en": "Pedestrian incidents", "name_ar": "حوادث المشاة" },
+        { "code": "highway_operations", "name_en": "Highway operations", "name_ar": "عمليات الطرق السريعة" },
+        { "code": "multi_vehicle", "name_en": "Multi-vehicle incidents", "name_ar": "حوادث تعدد المركبات" },
+        { "code": "bilingual_en_ar", "name_en": "English and Arabic", "name_ar": "الإنجليزية والعربية" },
+        { "code": "photo_documentation", "name_en": "Photo documentation", "name_ar": "التوثيق بالصور" },
+        { "code": "senior_agent", "name_en": "Senior agent", "name_ar": "معاين أول" },
+        { "code": "remote_review", "name_en": "Remote review", "name_ar": "المراجعة عن بُعد" },
+        { "code": "night_operations", "name_en": "Night operations", "name_ar": "العمليات الليلية" }
+      ],
+      "note": "Invented vocabulary. The Arabic names are a draft, the one exception to empty Arabic (configuration vocabulary, never people or places).",
+      "source": "assumption"
+    },
+    "skills_per_field_agent": { "min": 2, "max": 5, "source": "assumption" },
+    "person_names": { "given_names": ["Faisal", "Omar", "Khalid", "Sami", "Yousef", "Nasser", "Tariq", "Hamad", "Rayan", "Majid", "Saad", "Waleed", "Adel", "Bader", "Fahad", "Ziyad", "Mansour", "Talal", "Hisham", "Ahmad", "Layla", "Noura", "Reem", "Hala", "Maha", "Dana", "Sara", "Lama", "Abeer", "Rana"], "family_name_stems": ["Bar", "Dah", "Far", "Gha", "Hab", "Jum", "Kal", "Lah", "Maq", "Naz", "Qad", "Rab", "Sal", "Taw", "Wad", "Yam", "Zah", "Sha", "Tam", "Ras"], "family_name_endings": ["ani", "ari", "iri", "awi", "ami", "uli", "ati", "ahi"], "note": "Invented people: given names from a list, family names built from syllables.", "source": "assumption" },
+    "vehicle_types": { "value": ["sedan", "suv", "pickup"], "source": "assumption" },
+    "vehicle_out_of_service_share": { "value": 0.07, "source": "assumption" },
+    "leave_request_share_of_agents": { "value": 0.06, "note": "invented", "source": "assumption" },
+    "leave_status_mix": { "value": { "requested": 0.4, "approved": 0.45, "declined": 0.15 }, "source": "assumption" },
+    "leave_length_days": { "min": 1, "max": 7, "source": "assumption" },
+    "leave_types": { "value": ["annual", "sick", "emergency", "other"], "source": "assumption" }
+  },
+
+  "roles_and_settings": {
+    "override_reason_codes": {
+      "value": [
+        { "code": "agent_unavailable", "name_en": "Agent unavailable", "requires_note": false },
+        { "code": "vehicle_unavailable", "name_en": "Vehicle unavailable", "requires_note": false },
+        { "code": "closer_agent_known", "name_en": "Closer agent known", "requires_note": false },
+        { "code": "skills_needed", "name_en": "Skills needed", "requires_note": false },
+        { "code": "dispatcher_judgement", "name_en": "Dispatcher judgement", "requires_note": false },
+        { "code": "other", "name_en": "Other (note required)", "requires_note": true }
+      ],
+      "source": "assumption"
+    },
+    "ten_minute_clock_start": { "value": "assignment", "allowed": ["assignment", "registration"], "note": " A1: default assignment; both readings are always shown", "source": "assumption" },
+    "planning_level": { "value": "zone", "allowed": ["zone"], "source": "assumption" },
+    "live_assignment_default_stage": { "value": "shadow", "allowed": ["shadow", "recommend", "automatic"], "note": "shadow everywhere except two Riyadh zones on recommend (see live_stage per zone above)", "source": "assumption" },
+    "fallback_timeout_seconds": { "value": 5, "note": " starting assumption", "source": "assumption" },
+    "assignment_ten_minute_threshold_seconds": { "value": 600, "source": "assumption" },
+    "local_users_for_outsiders": { "value": false, "source": "assumption" },
+    "support_access_enabled": { "value": false, "source": "assumption" }
+  },
+
+  "calendar": {
+    "hijri_calendar": { "value": "islamic-umalqura", "note": "computed with Intl in the generator (Node full ICU)", "source": "assumption" },
+    "year": { "value": 2026, "source": "assumption" },
+    "prayer_method": { "value": "UmmAlQura", "source": "assumption" },
+    "holiday_rules": {
+      "value": [
+        { "key": "founding_day", "kind": "public", "calendar": "gregorian", "month": 2, "day": 22, "duration_days": 1, "name_en": "Founding Day", "name_ar": "يوم التأسيس" },
+        { "key": "ramadan", "kind": "observance", "calendar": "hijri", "month": 9, "day": 1, "duration_days": 0, "name_en": "Ramadan", "name_ar": "شهر رمضان" },
+        { "key": "eid_al_fitr", "kind": "public", "calendar": "hijri", "month": 10, "day": 1, "duration_days": 3, "name_en": "Eid al-Fitr", "name_ar": "عيد الفطر" },
+        { "key": "arafah_day", "kind": "religious", "calendar": "hijri", "month": 12, "day": 9, "duration_days": 1, "name_en": "Arafah Day", "name_ar": "يوم عرفة" },
+        { "key": "eid_al_adha", "kind": "public", "calendar": "hijri", "month": 12, "day": 10, "duration_days": 4, "name_en": "Eid al-Adha", "name_ar": "عيد الأضحى" },
+        { "key": "islamic_new_year", "kind": "observance", "calendar": "hijri", "month": 1, "day": 1, "duration_days": 1, "name_en": "Islamic New Year", "name_ar": "رأس السنة الهجرية" },
+        { "key": "national_day", "kind": "public", "calendar": "gregorian", "month": 9, "day": 23, "duration_days": 1, "name_en": "Saudi National Day", "name_ar": "اليوم الوطني" }
+      ],
+      "note": "Dates and durations from general knowledge, to verify with the customer. duration_days 0 means the whole Hijri month (Ramadan). The case week 6 to 12 Sep 2026 contains no public holiday.",
+      "source": "assumption"
+    }
+  },
+
+  "fixtures": {
+    "forecast": {
+      "run_created_at": { "value": "2026-09-13T02:00:00+03:00", "source": "assumption" },
+      "horizon_start": { "value": "2026-09-14", "source": "assumption" },
+      "horizon_days": { "value": 1, "note": "one day keeps the committed forecast values small", "source": "assumption" },
+      "range_coverage": { "value": 0.8, "source": "assumption" },
+      "model_version": { "value": "placeholder-0.1", "source": "assumption" },
+      "history_days_in_input": { "value": 7, "source": "assumption" }
+    },
+    "roster_days": { "from": "2026-09-13", "to": "2026-09-19", "note": "demo today and the next six days", "source": "assumption" },
+    "replay": {
+      "day": { "value": "2026-09-13", "note": "demo today; field cases only", "source": "assumption" },
+      "scripted_feed_outage": { "from": "15:20:00", "to": "15:32:00", "source": "assumption" },
+      "scripted_reassignment_zone_code": { "value": "RD-C", "source": "assumption" }
+    }
+  },
+  "workforce": {
+    "note": "Phase 4 demo history, loaded by apps/api-go/cmd/demohistory: monthly sick days per zone, attendance spans before demo today, and agent and case times on the history's last weeks of field cases.",
+    "sick_days_per_fte_year": { "value": 5, "note": "the requirements' example; randomly distributed", "source": "assumption" },
+    "working_days_per_fte_year": { "value": 230, "source": "assumption" },
+    "sick_month_factor": { "value": [1.25, 1.2, 1.05, 0.95, 0.9, 0.85, 0.8, 0.85, 0.95, 1.0, 1.1, 1.3], "note": "January first; more in winter, less in summer", "source": "assumption" },
+    "sick_zone_factor": { "min": 0.75, "max": 1.3, "note": "one draw per zone", "source": "assumption" },
+    "attendance_days": { "value": 28, "note": "days of attendance before demo today", "source": "assumption" },
+    "late_start_share": { "value": 0.07, "source": "assumption" },
+    "late_start_minutes": { "min": 5, "max": 45, "source": "assumption" },
+    "early_finish_share": { "value": 0.04, "source": "assumption" },
+    "early_finish_minutes": { "min": 10, "max": 60, "source": "assumption" },
+    "timed_history_weeks": { "value": 8, "note": "the history's last weeks before the case week: field cases get an agent on duty and case times, so utilization has a baseline to measure", "source": "assumption" }
+  }
+}

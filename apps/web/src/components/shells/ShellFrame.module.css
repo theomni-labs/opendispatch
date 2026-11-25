@@ -1,0 +1,26 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* Carries the specs' data attributes only: it must not change the layout of the shell inside it. */
+.frame {
+  display: contents;
+}
+
+/* The user's initials (the mockup's topbar avatar). Hidden on phones, as in the mockup. */
+.avatar {
+  display: grid;
+  flex: none;
+  place-items: center;
+  inline-size: var(--od-control-height-md);
+  block-size: var(--od-control-height-md);
+  border-radius: var(--od-radius-full);
+  background: var(--od-color-primary-bg);
+  color: var(--od-color-primary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-semibold);
+}
+
+@media (width < 640px) {
+  .avatar {
+    display: none;
+  }
+}

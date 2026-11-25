@@ -1,0 +1,196 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/assignment.input.schema.json",
+  "title": "AssignmentInput",
+  "description": "Input to the assignment engine for ONE case: the case, the candidate agents with their current status and position, and the rules that apply now. The engine ranks candidates and never writes anything; the worker decides what to do with the ranking according to the stage of the zone (shadow, recommend, automatic) and never sends a second assignment for a case that already has one. No tenant, customer or role appears here. additionalProperties is false everywhere.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "requested_at",
+    "data_source",
+    "now",
+    "case",
+    "candidates"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "request_id": { "$ref": "#/$defs/Uuid" },
+    "requested_at": { "type": "string", "format": "date-time" },
+    "data_source": { "$ref": "#/$defs/DataSource" },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/DataSource" }
+    },
+    "now": {
+      "description": "The decision clock. In a replay this is the replay time, not wall-clock time.",
+      "type": "string",
+      "format": "date-time"
+    },
+    "stage": {
+      "description": "Live-assignment stage of the case's zone. Informational for the engine.",
+      "type": "string",
+      "enum": ["shadow", "recommend", "automatic"]
+    },
+    "decision_deadline_ms": {
+      "description": "Time the engine has to answer. Working assumption 2000 (plan D4). The customer's own fallback fires at 5000.",
+      "type": "integer",
+      "minimum": 50,
+      "maximum": 30000,
+      "default": 2000
+    },
+    "top_n": {
+      "description": "Maximum length of the ranked list returned.",
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 50,
+      "default": 5
+    },
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "case_id",
+        "registered_at",
+        "zone_id",
+        "latitude",
+        "longitude",
+        "handling"
+      ],
+      "properties": {
+        "case_id": { "$ref": "#/$defs/Uuid" },
+        "registered_at": { "type": "string", "format": "date-time" },
+        "zone_id": { "$ref": "#/$defs/Uuid" },
+        "sub_zone_id": { "$ref": "#/$defs/Uuid" },
+        "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+        "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+        "case_type_id": { "$ref": "#/$defs/Uuid" },
+        "handling": { "type": "string", "enum": ["field", "remote_inferred"] },
+        "parties_involved": { "type": "integer", "minimum": 0 },
+        "required_skills": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "maxLength": 64 }
+        },
+        "existing_assignment_id": {
+          "description": "Set when the case already has an assignment. The engine then returns status already_assigned and no ranking.",
+          "type": ["string", "null"],
+          "format": "uuid"
+        }
+      }
+    },
+    "candidates": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "agent_id",
+          "status",
+          "latitude",
+          "longitude",
+          "position_at",
+          "skills",
+          "has_vehicle"
+        ],
+        "properties": {
+          "agent_id": { "$ref": "#/$defs/Uuid" },
+          "status": {
+            "type": "string",
+            "enum": ["available", "assigned", "en_route", "on_scene", "on_break", "offline"]
+          },
+          "latitude": { "type": "number", "minimum": -90, "maximum": 90 },
+          "longitude": { "type": "number", "minimum": -180, "maximum": 180 },
+          "position_at": { "type": "string", "format": "date-time" },
+          "roster_zone_id": { "type": ["string", "null"], "format": "uuid" },
+          "shift_end_at": { "type": ["string", "null"], "format": "date-time" },
+          "on_break_until": { "type": ["string", "null"], "format": "date-time" },
+          "next_break_due_at": { "type": ["string", "null"], "format": "date-time" },
+          "skills": { "type": "array", "uniqueItems": true, "items": { "type": "string", "maxLength": 64 } },
+          "has_vehicle": { "type": "boolean" },
+          "cases_today": { "type": "integer", "minimum": 0 },
+          "busy_until": {
+            "description": "When the agent is expected to finish the current case, if any.",
+            "type": ["string", "null"],
+            "format": "date-time"
+          }
+        }
+      }
+    },
+    "prayer_window": {
+      "description": "Current or next prayer time window during which agents should not be dispatched unless urgent.",
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "name": { "type": "string", "enum": ["fajr", "dhuhr", "asr", "maghrib", "isha"] },
+        "starts_at": { "type": "string", "format": "date-time" },
+        "ends_at": { "type": "string", "format": "date-time" }
+      }
+    },
+    "travel_model": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "average_speed_kmh": { "type": "number", "exclusiveMinimum": 0, "maximum": 200 },
+        "detour_factor": { "type": "number", "minimum": 1, "maximum": 3 }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": { "type": "string", "format": "uuid" },
+    "DataSource": { "type": "string", "enum": ["SYNTHETIC", "IMPORTED", "LIVE"] }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "3f6f1b1e-7a55-4c27-9d0a-000000000004",
+      "requested_at": "2026-09-14T09:12:01+03:00",
+      "data_source": "SYNTHETIC",
+      "input_data_sources": ["SYNTHETIC"],
+      "now": "2026-09-14T09:12:01+03:00",
+      "stage": "recommend",
+      "decision_deadline_ms": 2000,
+      "top_n": 3,
+      "case": {
+        "case_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000c9",
+        "registered_at": "2026-09-14T09:11:40+03:00",
+        "zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+        "sub_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000b1",
+        "latitude": 24.71,
+        "longitude": 46.68,
+        "handling": "field",
+        "parties_involved": 2,
+        "required_skills": [],
+        "existing_assignment_id": null
+      },
+      "candidates": [
+        {
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d1",
+          "status": "available",
+          "latitude": 24.7,
+          "longitude": 46.7,
+          "position_at": "2026-09-14T09:11:55+03:00",
+          "roster_zone_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000a1",
+          "shift_end_at": "2026-09-14T14:00:00+03:00",
+          "skills": ["general"],
+          "has_vehicle": true,
+          "cases_today": 2
+        },
+        {
+          "agent_id": "3f6f1b1e-7a55-4c27-9d0a-0000000000d2",
+          "status": "on_break",
+          "latitude": 24.72,
+          "longitude": 46.66,
+          "position_at": "2026-09-14T09:11:50+03:00",
+          "on_break_until": "2026-09-14T09:30:00+03:00",
+          "skills": ["general"],
+          "has_vehicle": true,
+          "cases_today": 3
+        }
+      ],
+      "prayer_window": null
+    }
+  ]
+}

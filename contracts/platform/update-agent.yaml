@@ -1,0 +1,1037 @@
+openapi: 3.1.0
+info:
+  title: OpenDispatch Update Agent local API (STUB)
+  version: 0.1.0
+  summary: OWNED BY THE HOST PLATFORM. Stub to be replaced by their contract.
+  description: |
+    # OWNED BY THE HOST PLATFORM. THIS FILE IS A STUB.
+
+    The update agent is built and owned in the host platform's repository. This file only records the
+    local API that OpenDispatch's Updates screen (Admin module 16, private installs) and flow 9 need, so
+    the screens and the api's pass-through can be built now. **It is replaced by the host platform's own
+    contract when they publish it. Do not extend it, do not build the agent from it, and do not
+    treat any field name here as agreed with the host platform.** Changes to the update agent contract are a
+    stop-and-ask item for OpenDispatch.
+
+    Covers the five Updates tabs of and the flow in 9.4:
+
+    - **Overview**: status, releases, release detail with manifest summary, check now, download
+      and verify state, pre-flight results, schedule into the next window, approve or reject
+      (second approver flag), apply, skip, rollback, resume, restore request.
+    - **Connection**: connected or offline mode, hostname and port to allow, proxy address,
+      credentials and certificate, test connection, last contact, offline upload and its
+      verification result.
+    - **Change windows**: recurring windows, blackout periods in Hijri or Gregorian dates,
+      approvers, second approver required, emergency override (two approvers and a written
+      reason), change policy.
+    - **History**: every update and rollback with who approved it and in which window.
+    - **Settings**: channel, check interval, download automatically or not.
+
+    The OpenDispatch api calls these operations on behalf of the signed-in user after its own role check
+    (Administrator edits, Change Approver approves or rejects) and audit write. `acting_user` in a
+    request body is filled by the OpenDispatch api from the request context and is never accepted from a
+    browser. The agent accepts no commands from outside the cluster and can open no remote session.
+  license:
+    name: AGPL-3.0-only
+    identifier: AGPL-3.0-only
+  x-owner: host-platform
+  x-status: stub
+x-owner: host-platform
+x-status: stub
+servers:
+  - url: /v1
+    description: In-cluster service of the update agent. Address comes from the Helm values.
+security:
+  - agentServiceToken: []
+tags:
+  - {name: Overview, description: 'Updates tab 1: status, releases, apply flow', x-tab: overview}
+  - {name: Connection, description: 'Updates tab 2: connected or offline, proxy, offline upload', x-tab: connection}
+  - {name: ChangeWindows, description: 'Updates tab 3: windows, blackout periods, approvers, emergency override', x-tab: change-windows}
+  - {name: History, description: 'Updates tab 4: every update and rollback', x-tab: history}
+  - {name: Settings, description: 'Updates tab 5: channel, check interval, automatic download', x-tab: settings}
+paths:
+  /status:
+    get:
+      operationId: getUpdateStatus
+      summary: Get the agent's current status
+      tags: [Overview]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Status'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /check:
+    post:
+      operationId: checkForUpdatesNow
+      summary: Check for updates now
+      description: Connected mode fetches the release index. Offline mode answers 409 until a file is uploaded.
+      tags: [Overview]
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/Status'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases:
+    get:
+      operationId: listReleases
+      summary: List known releases
+      tags: [Overview]
+      parameters:
+        - {name: state, in: query, schema: {$ref: '#/components/schemas/ReleaseState'}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 200, default: 50}}
+        - {name: cursor, in: query, schema: {type: string, maxLength: 512}}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ReleaseList'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}:
+    get:
+      operationId: getRelease
+      summary: Get a release with its manifest summary
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ReleaseDetail'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/download:
+    get:
+      operationId: getDownloadState
+      summary: Get the download and verification state of a release
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/DownloadState'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    post:
+      operationId: startDownload
+      summary: Download a release and verify it
+      description: Downloads the manifest and images, pushes the images into the install's registry, then verifies the signature and every image digest. Any failure discards the release and raises an alert.
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/DownloadState'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/preflight:
+    get:
+      operationId: getPreflight
+      summary: Get the pre-flight results of a release
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PreflightResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    post:
+      operationId: runPreflight
+      summary: Run the pre-flight checks
+      description: Disk and registry space, database reachable, recent backup, upgrade path, system healthy, and the migration rehearsal in a temporary database (never the live one).
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PreflightResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/backup-confirmation:
+    post:
+      operationId: confirmBackupForRelease
+      summary: Confirm that a fresh backup exists
+      description: With the customer's own Postgres the agent cannot back up the database. The Administrator confirms one before the update.
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/BackupConfirmation'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/PreflightResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/schedule:
+    post:
+      operationId: scheduleUpdate
+      summary: Schedule a release into the next open change window
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ScheduleRequest'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ScheduledUpdate'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/approve:
+    post:
+      operationId: approveUpdate
+      summary: Approve a scheduled update
+      description: When the change policy requires a second approver, the update needs two approvals from different people and nobody approves their own scheduling.
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/DecisionRequest'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ScheduledUpdate'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/reject:
+    post:
+      operationId: rejectUpdate
+      summary: Reject a scheduled update
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/DecisionRequest'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ScheduledUpdate'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/apply:
+    post:
+      operationId: applyUpdate
+      summary: Apply a release now, inside an open change window
+      description: Refused outside a change window unless the emergency override is used. Switches live assignment to the customer's fallback and turns on the maintenance page when the release needs downtime.
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ApplyRequest'}
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApplyRun'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /releases/{version}/skip:
+    post:
+      operationId: skipRelease
+      summary: Skip a release
+      tags: [Overview]
+      parameters:
+        - {$ref: '#/components/parameters/Version'}
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/SkipRequest'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ReleaseDetail'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /emergency-override:
+    post:
+      operationId: requestEmergencyOverride
+      summary: Apply a hotfix outside a change window
+      description: Needs two different approvers and a written reason. Flagged in the Audit Log.
+      tags: [ChangeWindows]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/EmergencyOverrideRequest'}
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApplyRun'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /runs/{run_id}:
+    get:
+      operationId: getApplyRun
+      summary: Get an apply, rollback, resume or restore run
+      description: Includes the steps, the health check result and, when the health check failed, that the agent rolled back by itself.
+      tags: [Overview]
+      parameters:
+        - {name: run_id, in: path, required: true, schema: {$ref: '#/components/schemas/Uuid'}}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ApplyRun'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /recovery:
+    post:
+      operationId: requestRecovery
+      summary: Roll back, resume or ask for a restore
+      description: rollback returns to the recorded previous version. resume continues a migration that failed partway, after a fixed release is available. restore records a request that the customer's database team carries out (the agent cannot restore a customer's database).
+      tags: [Overview]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/RecoveryRequest'}
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/RecoveryResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /history:
+    get:
+      operationId: listUpdateHistory
+      summary: List every update and rollback
+      tags: [History]
+      parameters:
+        - {name: from, in: query, schema: {type: string, format: date-time}}
+        - {name: to, in: query, schema: {type: string, format: date-time}}
+        - {name: limit, in: query, schema: {type: integer, minimum: 1, maximum: 200, default: 50}}
+        - {name: cursor, in: query, schema: {type: string, maxLength: 512}}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/HistoryList'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /settings:
+    get:
+      operationId: getUpdateSettings
+      summary: Get the update settings
+      tags: [Settings]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpdateSettings'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    put:
+      operationId: updateUpdateSettings
+      summary: Replace the update settings
+      tags: [Settings]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/UpdateSettings'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpdateSettings'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /connection:
+    get:
+      operationId: getConnection
+      summary: Get the connection settings
+      description: Includes the exact hostname and port to allow in the firewall, and the last successful contact.
+      tags: [Connection]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ConnectionSettings'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    put:
+      operationId: updateConnection
+      summary: Replace the connection settings
+      tags: [Connection]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ConnectionSettingsWrite'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ConnectionSettings'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /connection/test:
+    post:
+      operationId: testConnection
+      summary: Test the connection to the update server
+      tags: [Connection]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpdateConnectionTestResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /offline-uploads:
+    post:
+      operationId: uploadOfflineFile
+      summary: Upload an offline update file
+      description: Same signature and digest checks as a downloaded release. The valid-until date of the release index is not enforced offline.
+      tags: [Connection]
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema: {$ref: '#/components/schemas/OfflineUploadRequest'}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/OfflineUploadResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /offline-uploads/{upload_id}:
+    get:
+      operationId: getOfflineUpload
+      summary: Get the verification result of an offline upload
+      tags: [Connection]
+      parameters:
+        - {name: upload_id, in: path, required: true, schema: {$ref: '#/components/schemas/Uuid'}}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/OfflineUploadResult'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /change-windows:
+    get:
+      operationId: getChangeWindows
+      summary: Get recurring windows, blackout periods and the upcoming windows
+      tags: [ChangeWindows]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChangeWindows'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    put:
+      operationId: updateChangeWindows
+      summary: Replace recurring windows and blackout periods
+      description: Blackout dates may be entered in Hijri or Gregorian; both forms are stored.
+      tags: [ChangeWindows]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ChangeWindowsWrite'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChangeWindows'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /change-windows/next:
+    get:
+      operationId: getNextChangeWindow
+      summary: Get the next open change window
+      tags: [ChangeWindows]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/UpcomingWindow'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+  /change-policy:
+    get:
+      operationId: getChangePolicy
+      summary: Get the change policy (approvers, second approver, emergency override)
+      tags: [ChangeWindows]
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChangePolicy'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+    put:
+      operationId: updateChangePolicy
+      summary: Replace the change policy
+      tags: [ChangeWindows]
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema: {$ref: '#/components/schemas/ChangePolicy'}
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema: {$ref: '#/components/schemas/ChangePolicy'}
+        '4XX': {$ref: '#/components/responses/ClientError'}
+components:
+  securitySchemes:
+    agentServiceToken:
+      type: http
+      scheme: bearer
+      description: In-cluster service credential of the OpenDispatch api. The agent is never reachable from a browser or from outside the cluster.
+  parameters:
+    Version:
+      name: version
+      in: path
+      required: true
+      description: Release version, MAJOR.MINOR.PATCH.
+      schema: {$ref: '#/components/schemas/ReleaseVersion'}
+  responses:
+    ClientError:
+      description: Client error. `code` says which.
+      content:
+        application/json:
+          schema: {$ref: '#/components/schemas/Error'}
+  schemas:
+    Uuid: {type: string, format: uuid}
+    Timestamp: {type: string, format: date-time}
+    NullableTimestamp: {type: [string, 'null'], format: date-time}
+    ReleaseVersion: {type: string, pattern: '^[0-9]+\.[0-9]+\.[0-9]+$', maxLength: 32}
+    LocalTime:
+      type: string
+      pattern: '^([01][0-9]|2[0-3]):[0-5][0-9]$'
+      description: Local time of day, HH:MM, Asia/Riyadh. 00:00 as an end time means midnight.
+    Error:
+      type: object
+      additionalProperties: false
+      required: [code, message]
+      properties:
+        code:
+          type: string
+          enum: [VALIDATION_FAILED, FORBIDDEN, NOT_FOUND, CONFLICT, OUTSIDE_CHANGE_WINDOW, BLACKOUT_PERIOD, SECOND_APPROVER_REQUIRED, SELF_APPROVAL_FORBIDDEN, RELEASE_REVOKED_KEY, RELEASE_OLDER_THAN_INSTALLED, INDEX_EXPIRED, VERIFICATION_FAILED, PREFLIGHT_FAILED, OFFLINE_MODE, INTERNAL]
+        message: {type: string, maxLength: 500}
+        request_id: {type: string, maxLength: 64}
+    ActingUser:
+      description: The signed-in person on whose behalf the OpenDispatch api calls the agent. Filled by the OpenDispatch api from the request context, never by a browser.
+      type: object
+      additionalProperties: false
+      required: [user_id, display_name]
+      properties:
+        user_id: {$ref: '#/components/schemas/Uuid'}
+        display_name: {type: string, maxLength: 120}
+    ReleaseChannel: {type: string, enum: [stable, hotfix]}
+    ConnectionMode: {type: string, enum: [connected, offline]}
+    ReleaseKind: {type: string, enum: [application, infrastructure]}
+    ReleaseState:
+      type: string
+      enum: [available, downloading, verified, ready, scheduled, applying, applied, skipped, superseded, withdrawn, rejected]
+    AgentState:
+      type: string
+      enum: [idle, checking, downloading, verifying, preflight, ready, scheduled, applying, rolling_back, needs_attention]
+    Status:
+      type: object
+      additionalProperties: false
+      required: [current_version, channel, connection_mode, state, in_maintenance, live_assignment_fallback_active, notify_only]
+      properties:
+        current_version: {$ref: '#/components/schemas/ReleaseVersion'}
+        previous_version: {type: [string, 'null'], pattern: '^[0-9]+\.[0-9]+\.[0-9]+$', description: Kept pinned in the registry for rollback.}
+        agent_version: {$ref: '#/components/schemas/ReleaseVersion'}
+        channel: {$ref: '#/components/schemas/ReleaseChannel'}
+        connection_mode: {$ref: '#/components/schemas/ConnectionMode'}
+        state: {$ref: '#/components/schemas/AgentState'}
+        last_check_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        last_check_result: {type: [string, 'null'], enum: [up_to_date, update_found, failed, null]}
+        ready_release_version: {type: [string, 'null'], pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'}
+        next_window_start: {$ref: '#/components/schemas/NullableTimestamp'}
+        release_index_valid_until: {$ref: '#/components/schemas/NullableTimestamp'}
+        in_maintenance: {type: boolean}
+        live_assignment_fallback_active: {type: boolean}
+        notify_only: {type: boolean, description: 'The customer''s own pipeline applies the chart; the agent only downloads and verifies.'}
+    ImageDigest:
+      type: object
+      additionalProperties: false
+      required: [name, digest]
+      properties:
+        name: {type: string, enum: [web, api, worker, engines, update-agent]}
+        digest: {type: string, pattern: '^sha256:[0-9a-f]{64}$'}
+    MigrationInfo:
+      type: object
+      additionalProperties: false
+      required: [id, needs_downtime, non_transactional]
+      properties:
+        id: {type: string, maxLength: 128}
+        summary: {type: [string, 'null'], maxLength: 300}
+        needs_downtime: {type: boolean}
+        non_transactional: {type: boolean}
+    ManifestSummary:
+      description: What the Updates screen shows about a release before it is applied.
+      type: object
+      additionalProperties: false
+      required: [version, channel, kind, upgrade_from, images, migrations, needs_downtime, requires_restore_to_rollback, live_assignment_fallback, release_notes, signature_key_id]
+      properties:
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        channel: {$ref: '#/components/schemas/ReleaseChannel'}
+        kind: {$ref: '#/components/schemas/ReleaseKind'}
+        upgrade_from: {type: array, items: {type: string, maxLength: 64}, description: Versions or ranges this release can upgrade from.}
+        images: {type: array, items: {$ref: '#/components/schemas/ImageDigest'}}
+        migrations: {type: array, items: {$ref: '#/components/schemas/MigrationInfo'}}
+        needs_downtime: {type: boolean}
+        downtime_estimate_minutes: {type: [integer, 'null'], minimum: 0, description: 'A labelled estimate, never a promise.'}
+        requires_restore_to_rollback: {type: boolean, description: The Updates screen warns before Apply and maintenance stays on for the whole update.}
+        live_assignment_fallback: {type: boolean, description: Live assignment switches to the customer's fallback during the update.}
+        release_notes:
+          type: object
+          additionalProperties: false
+          required: [en, ar]
+          properties:
+            en: {type: string, maxLength: 4000}
+            ar: {type: string, maxLength: 4000}
+        signature_key_id: {type: string, maxLength: 128}
+    ReleaseSummary:
+      type: object
+      additionalProperties: false
+      required: [version, channel, kind, state, published_at, needs_downtime, requires_restore_to_rollback, live_assignment_fallback]
+      properties:
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        channel: {$ref: '#/components/schemas/ReleaseChannel'}
+        kind: {$ref: '#/components/schemas/ReleaseKind'}
+        state: {$ref: '#/components/schemas/ReleaseState'}
+        published_at: {$ref: '#/components/schemas/Timestamp'}
+        needs_downtime: {type: boolean}
+        requires_restore_to_rollback: {type: boolean}
+        live_assignment_fallback: {type: boolean}
+    ReleaseList:
+      type: object
+      additionalProperties: false
+      required: [items, page]
+      properties:
+        items: {type: array, items: {$ref: '#/components/schemas/ReleaseSummary'}}
+        page: {$ref: '#/components/schemas/PageInfo'}
+    PageInfo:
+      type: object
+      additionalProperties: false
+      required: [next_cursor, has_more]
+      properties:
+        next_cursor: {type: [string, 'null'], maxLength: 512}
+        has_more: {type: boolean}
+        total: {type: integer, minimum: 0, description: Present only when cheap to compute.}
+    ReleaseDetail:
+      type: object
+      additionalProperties: false
+      required: [summary, manifest]
+      properties:
+        summary: {$ref: '#/components/schemas/ReleaseSummary'}
+        manifest: {$ref: '#/components/schemas/ManifestSummary'}
+        download: {oneOf: [{$ref: '#/components/schemas/DownloadState'}, {type: 'null'}]}
+        preflight: {oneOf: [{$ref: '#/components/schemas/PreflightResult'}, {type: 'null'}]}
+        scheduled: {oneOf: [{$ref: '#/components/schemas/ScheduledUpdate'}, {type: 'null'}]}
+    VerificationResult:
+      description: Signature against trusted keys and every image digest. Any failure discards the release.
+      type: object
+      additionalProperties: false
+      required: [verified, signature_valid, digests_match, key_revoked, older_than_installed, index_expired]
+      properties:
+        verified: {type: boolean}
+        signature_valid: {type: boolean}
+        digests_match: {type: boolean}
+        key_revoked: {type: boolean}
+        older_than_installed: {type: boolean, description: 'Refused, except the recorded previous version used for rollback.'}
+        index_expired: {type: boolean, description: Connected mode only; not enforced offline.}
+        key_id: {type: [string, 'null'], maxLength: 128}
+        message: {type: [string, 'null'], maxLength: 500}
+    DownloadState:
+      type: object
+      additionalProperties: false
+      required: [state, bytes_done, bytes_total, images]
+      properties:
+        state: {type: string, enum: [not_started, downloading, downloaded, verifying, verified, failed]}
+        bytes_done: {type: integer, minimum: 0}
+        bytes_total: {type: integer, minimum: 0}
+        images:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [name, state]
+            properties:
+              name: {type: string, enum: [web, api, worker, engines, update-agent]}
+              state: {type: string, enum: [pending, pulled, pushed_to_registry, verified, failed]}
+        verification: {oneOf: [{$ref: '#/components/schemas/VerificationResult'}, {type: 'null'}]}
+        error_message: {type: [string, 'null'], maxLength: 500}
+    PreflightCheck:
+      type: object
+      additionalProperties: false
+      required: [id, status]
+      properties:
+        id: {type: string, enum: [disk_and_registry_space, database_reachable, recent_backup, upgrade_path_allowed, system_healthy, migration_rehearsal]}
+        status: {type: string, enum: [pending, running, passed, failed, needs_confirmation]}
+        message: {type: [string, 'null'], maxLength: 500}
+    PreflightResult:
+      type: object
+      additionalProperties: false
+      required: [state, checks]
+      properties:
+        state: {type: string, enum: [not_run, running, passed, failed]}
+        ran_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        checks: {type: array, items: {$ref: '#/components/schemas/PreflightCheck'}}
+        migration_time_estimate_seconds: {type: [integer, 'null'], minimum: 0, description: 'Labelled as an estimate. Produced from generated rows of about the live tables'' sizes; no customer data is copied.'}
+    BackupConfirmation:
+      type: object
+      additionalProperties: false
+      required: [acting_user]
+      properties:
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+        note: {type: [string, 'null'], maxLength: 300}
+    ScheduleRequest:
+      type: object
+      additionalProperties: false
+      required: [acting_user]
+      properties:
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+        window_start: {$ref: '#/components/schemas/Timestamp', description: Omit to use the next open window.}
+    ApprovalRecord:
+      type: object
+      additionalProperties: false
+      required: [approver, decision, decided_at]
+      properties:
+        approver: {$ref: '#/components/schemas/ActingUser'}
+        decision: {type: string, enum: [approved, rejected]}
+        decided_at: {$ref: '#/components/schemas/Timestamp'}
+        note: {type: [string, 'null'], maxLength: 500}
+    ScheduledUpdate:
+      type: object
+      additionalProperties: false
+      required: [version, window_start, window_end, requested_by, second_approver_required, approvals, state]
+      properties:
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        window_start: {$ref: '#/components/schemas/Timestamp'}
+        window_end: {$ref: '#/components/schemas/Timestamp'}
+        requested_by: {$ref: '#/components/schemas/ActingUser'}
+        second_approver_required: {type: boolean}
+        approvals: {type: array, items: {$ref: '#/components/schemas/ApprovalRecord'}}
+        state: {type: string, enum: [awaiting_approval, approved, rejected, applied, cancelled]}
+    DecisionRequest:
+      type: object
+      additionalProperties: false
+      required: [acting_user]
+      properties:
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+        note: {type: [string, 'null'], maxLength: 500}
+    ApplyRequest:
+      type: object
+      additionalProperties: false
+      required: [acting_user]
+      properties:
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+    SkipRequest:
+      type: object
+      additionalProperties: false
+      required: [acting_user, reason]
+      properties:
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+        reason: {type: string, minLength: 1, maxLength: 300}
+    EmergencyOverrideRequest:
+      type: object
+      additionalProperties: false
+      required: [version, approvers, reason]
+      properties:
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        approvers: {type: array, minItems: 2, maxItems: 2, items: {$ref: '#/components/schemas/ActingUser'}, description: Two different people.}
+        reason: {type: string, minLength: 20, maxLength: 1000, description: Written reason. Flagged in the Audit Log.}
+    RunStep:
+      type: object
+      additionalProperties: false
+      required: [name, state]
+      properties:
+        name:
+          type: string
+          enum: [record_revisions, confirm_backup, fallback_and_maintenance_on, migrate_platform, migrate_opendispatch, helm_upgrade, smoke_tests, maintenance_off, report]
+        state: {type: string, enum: [pending, running, succeeded, failed, skipped]}
+        started_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        finished_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        message: {type: [string, 'null'], maxLength: 500}
+    ApplyRun:
+      type: object
+      additionalProperties: false
+      required: [run_id, version, kind, state, steps, started_at, maintenance_on, live_assignment_fallback]
+      properties:
+        run_id: {$ref: '#/components/schemas/Uuid'}
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        kind: {type: string, enum: [update, rollback, resume, restore, emergency]}
+        state: {type: string, enum: [running, succeeded, failed, rolled_back, needs_attention]}
+        steps: {type: array, items: {$ref: '#/components/schemas/RunStep'}}
+        started_at: {$ref: '#/components/schemas/Timestamp'}
+        finished_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        maintenance_on: {type: boolean}
+        live_assignment_fallback: {type: boolean}
+        health_check_passed: {type: [boolean, 'null'], description: 'False means the agent rolled back by itself.'}
+        offered_recovery: {type: array, items: {type: string, enum: [resume, restore]}, description: 'Set when a migration that cannot run in a transaction failed partway.'}
+    RecoveryRequest:
+      type: object
+      additionalProperties: false
+      required: [action, acting_user]
+      properties:
+        action: {type: string, enum: [rollback, resume, restore]}
+        run_id: {oneOf: [{$ref: '#/components/schemas/Uuid'}, {type: 'null'}]}
+        acting_user: {$ref: '#/components/schemas/ActingUser'}
+        note: {type: [string, 'null'], maxLength: 500}
+    RecoveryResult:
+      type: object
+      additionalProperties: false
+      required: [action, state]
+      properties:
+        action: {type: string, enum: [rollback, resume, restore]}
+        state: {type: string, enum: [started, requested, refused]}
+        run: {oneOf: [{$ref: '#/components/schemas/ApplyRun'}, {type: 'null'}]}
+        restore_request: {oneOf: [{$ref: '#/components/schemas/RestoreRequest'}, {type: 'null'}]}
+    RestoreRequest:
+      description: With the customer's own Postgres a restore is a request carried out by the customer's database team. OpenDispatch's databases should be restorable on their own.
+      type: object
+      additionalProperties: false
+      required: [id, state, requested_by, requested_at]
+      properties:
+        id: {$ref: '#/components/schemas/Uuid'}
+        state: {type: string, enum: [requested, in_progress, completed]}
+        backup_reference: {type: [string, 'null'], maxLength: 200}
+        requested_by: {$ref: '#/components/schemas/ActingUser'}
+        requested_at: {$ref: '#/components/schemas/Timestamp'}
+    HistoryEntry:
+      type: object
+      additionalProperties: false
+      required: [id, version, kind, result, started_at, approved_by]
+      properties:
+        id: {$ref: '#/components/schemas/Uuid'}
+        version: {$ref: '#/components/schemas/ReleaseVersion'}
+        from_version: {type: [string, 'null'], pattern: '^[0-9]+\.[0-9]+\.[0-9]+$'}
+        kind: {type: string, enum: [update, rollback, resume, restore, skip, emergency_override]}
+        result: {type: string, enum: [succeeded, failed, rolled_back, skipped, cancelled]}
+        started_at: {$ref: '#/components/schemas/Timestamp'}
+        finished_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        approved_by: {type: array, items: {$ref: '#/components/schemas/ActingUser'}}
+        window_start: {$ref: '#/components/schemas/NullableTimestamp'}
+        window_label: {type: [string, 'null'], maxLength: 120}
+        emergency: {type: boolean}
+        note: {type: [string, 'null'], maxLength: 500}
+    HistoryList:
+      type: object
+      additionalProperties: false
+      required: [items, page]
+      properties:
+        items: {type: array, items: {$ref: '#/components/schemas/HistoryEntry'}}
+        page: {$ref: '#/components/schemas/PageInfo'}
+    UpdateSettings:
+      type: object
+      additionalProperties: false
+      required: [channel, check_interval_hours, auto_download, notify_only]
+      properties:
+        channel: {$ref: '#/components/schemas/ReleaseChannel'}
+        check_interval_hours: {type: integer, minimum: 1, maximum: 168, default: 6, description: Connected mode. The plan says every few hours.}
+        auto_download: {type: boolean}
+        notify_only: {type: boolean}
+    AllowedEndpoint:
+      type: object
+      additionalProperties: false
+      required: [hostname, port, purpose]
+      properties:
+        hostname: {type: string, maxLength: 253}
+        port: {type: integer, minimum: 1, maximum: 65535, default: 443}
+        purpose: {type: string, maxLength: 120}
+    ProxySettings:
+      type: object
+      additionalProperties: false
+      required: [enabled]
+      properties:
+        enabled: {type: boolean}
+        address: {type: [string, 'null'], maxLength: 300}
+        username: {type: [string, 'null'], maxLength: 120}
+        has_password: {type: boolean}
+        has_ca_certificate: {type: boolean, description: For proxies that inspect encrypted traffic.}
+    ConnectionSettings:
+      type: object
+      additionalProperties: false
+      required: [mode, allowed_endpoints, proxy]
+      properties:
+        mode: {$ref: '#/components/schemas/ConnectionMode'}
+        allowed_endpoints: {type: array, items: {$ref: '#/components/schemas/AllowedEndpoint'}, description: 'The exact hostname and port to allow in the firewall, shown with a copy button.'}
+        proxy: {$ref: '#/components/schemas/ProxySettings'}
+        last_contact_at: {$ref: '#/components/schemas/NullableTimestamp'}
+        last_contact_result: {type: [string, 'null'], enum: [ok, failed, null]}
+    ConnectionSettingsWrite:
+      type: object
+      additionalProperties: false
+      required: [mode]
+      properties:
+        mode: {$ref: '#/components/schemas/ConnectionMode'}
+        proxy:
+          type: object
+          additionalProperties: false
+          required: [enabled]
+          properties:
+            enabled: {type: boolean}
+            address: {type: [string, 'null'], maxLength: 300}
+            username: {type: [string, 'null'], maxLength: 120}
+            password: {type: string, format: password, writeOnly: true, maxLength: 512}
+            ca_certificate_pem: {type: string, writeOnly: true, maxLength: 20000}
+    UpdateConnectionTestResult:
+      type: object
+      additionalProperties: false
+      required: [ok, checked_at, steps]
+      properties:
+        ok: {type: boolean}
+        checked_at: {$ref: '#/components/schemas/Timestamp'}
+        steps:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [name, ok]
+            properties:
+              name: {type: string, enum: [proxy, dns, tcp, tls, release_index_signature]}
+              ok: {type: boolean}
+              message: {type: [string, 'null'], maxLength: 300}
+    OfflineUploadRequest:
+      type: object
+      additionalProperties: false
+      required: [file]
+      properties:
+        file: {type: string, contentMediaType: application/octet-stream, description: The signed offline update file downloaded from the customer portal.}
+    OfflineUploadResult:
+      type: object
+      additionalProperties: false
+      required: [upload_id, uploaded_at, accepted, verification]
+      properties:
+        upload_id: {$ref: '#/components/schemas/Uuid'}
+        uploaded_at: {$ref: '#/components/schemas/Timestamp'}
+        accepted: {type: boolean}
+        verification: {$ref: '#/components/schemas/VerificationResult'}
+        release: {oneOf: [{$ref: '#/components/schemas/ReleaseSummary'}, {type: 'null'}]}
+    RecurringWindow:
+      type: object
+      additionalProperties: false
+      required: [id, label, days_of_week, start_time, end_time]
+      properties:
+        id: {$ref: '#/components/schemas/Uuid'}
+        label: {type: string, maxLength: 120}
+        days_of_week: {type: array, minItems: 1, uniqueItems: true, items: {type: integer, minimum: 0, maximum: 6}, description: 0 = Sunday. Time zone Asia/Riyadh.}
+        start_time: {$ref: '#/components/schemas/LocalTime'}
+        end_time: {$ref: '#/components/schemas/LocalTime'}
+    HijriDate:
+      type: object
+      additionalProperties: false
+      required: [year, month, day]
+      properties:
+        year: {type: integer, minimum: 1300, maximum: 1600}
+        month: {type: integer, minimum: 1, maximum: 12}
+        day: {type: integer, minimum: 1, maximum: 30}
+    Blackout:
+      description: A period when nothing may be applied, for example the last ten days of Ramadan, Eid or month-end. `entered_as` says which calendar the person typed; both forms are stored.
+      type: object
+      additionalProperties: false
+      required: [id, label, entered_as, start_gregorian, end_gregorian]
+      properties:
+        id: {$ref: '#/components/schemas/Uuid'}
+        label: {type: string, maxLength: 120}
+        entered_as: {type: string, enum: [hijri, gregorian]}
+        start_gregorian: {type: string, format: date}
+        end_gregorian: {type: string, format: date}
+        start_hijri: {$ref: '#/components/schemas/HijriDate'}
+        end_hijri: {$ref: '#/components/schemas/HijriDate'}
+    UpcomingWindow:
+      type: object
+      additionalProperties: false
+      required: [start, end, open, blocked_by_blackout]
+      properties:
+        start: {$ref: '#/components/schemas/Timestamp'}
+        end: {$ref: '#/components/schemas/Timestamp'}
+        open: {type: boolean}
+        blocked_by_blackout: {type: boolean}
+        window_label: {type: [string, 'null'], maxLength: 120}
+    ChangeWindows:
+      type: object
+      additionalProperties: false
+      required: [recurring, blackouts, upcoming]
+      properties:
+        recurring: {type: array, items: {$ref: '#/components/schemas/RecurringWindow'}}
+        blackouts: {type: array, items: {$ref: '#/components/schemas/Blackout'}}
+        upcoming: {type: array, items: {$ref: '#/components/schemas/UpcomingWindow'}}
+    ChangeWindowsWrite:
+      type: object
+      additionalProperties: false
+      required: [recurring, blackouts]
+      properties:
+        recurring:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [label, days_of_week, start_time, end_time]
+            properties:
+              label: {type: string, maxLength: 120}
+              days_of_week: {type: array, minItems: 1, uniqueItems: true, items: {type: integer, minimum: 0, maximum: 6}}
+              start_time: {$ref: '#/components/schemas/LocalTime'}
+              end_time: {$ref: '#/components/schemas/LocalTime'}
+        blackouts:
+          type: array
+          items:
+            type: object
+            additionalProperties: false
+            required: [label, entered_as]
+            properties:
+              label: {type: string, maxLength: 120}
+              entered_as: {type: string, enum: [hijri, gregorian]}
+              start_gregorian: {type: string, format: date}
+              end_gregorian: {type: string, format: date}
+              start_hijri: {$ref: '#/components/schemas/HijriDate'}
+              end_hijri: {$ref: '#/components/schemas/HijriDate'}
+    ChangePolicy:
+      type: object
+      additionalProperties: false
+      required: [approver_user_ids, second_approver_required, emergency_override_enabled, emergency_reason_min_length]
+      properties:
+        approver_user_ids: {type: array, uniqueItems: true, items: {$ref: '#/components/schemas/Uuid'}, description: People with the Change Approver role.}
+        second_approver_required: {type: boolean}
+        emergency_override_enabled: {type: boolean}
+        emergency_reason_min_length: {type: integer, minimum: 20, maximum: 1000, default: 20}

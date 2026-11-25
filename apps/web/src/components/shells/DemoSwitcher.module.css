@@ -1,0 +1,52 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Demo pill of the top bar (the mockup's topbar pill). */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-6);
+  max-inline-size: 100%;
+  block-size: 30px;
+  padding-block: 0;
+  padding-inline: var(--od-space-8) var(--od-space-8);
+  border: 1px solid var(--od-color-border-control);
+  border-radius: var(--od-radius-full);
+  background: var(--od-color-bg-container);
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-13);
+  white-space: nowrap;
+}
+
+.pill:hover {
+  background: var(--od-color-bg-hover);
+}
+
+.role {
+  max-inline-size: 16ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.chevron {
+  flex: none;
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+  color: var(--od-color-icon);
+}
+
+.pill[aria-expanded='true'] .chevron {
+  transform: rotate(180deg);
+}
+
+/* Phones: the pill keeps the Demo tag and the chevron; the role name is in the pop-over. */
+@media (width < 640px) {
+  .role {
+    display: none;
+  }
+}
+
+/* The pop-over draws no padding of its own: the form inside has it, so its sticky button bar can run edge to edge. `div.` beats
+   the design system's single-class padding whatever the order of the style sheets. */
+div.panel {
+  padding: 0;
+}

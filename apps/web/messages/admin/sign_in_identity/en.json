@@ -1,0 +1,256 @@
+{
+  "ro": {
+    "reason": "Managed by our staff in the shared tier",
+    "title": "Read only",
+    "body": "Our staff set up providers in the shared tier.",
+    "request": "Request a change"
+  },
+  "status": {
+    "on": "Enabled",
+    "off": "Disabled"
+  },
+  "test": {
+    "pass": "Passed",
+    "fail": "Failed",
+    "none": "Not tested",
+    "label": "Test connection"
+  },
+  "demo": "Demo",
+  "domains": {
+    "none": "Any"
+  },
+  "ok": {
+    "title": "Connection works"
+  },
+  "fail": {
+    "title": "Connection failed",
+    "reach": "The provider address did not answer."
+  },
+  "ref": "Reference {code}",
+  "step": {
+    "reach": "Reach the provider",
+    "discovery": "Read the discovery document",
+    "client": "Check the client",
+    "claims": "Find the email, name and groups claims",
+    "saml": "Read the SAML settings",
+    "signed": "Signed assertions are required",
+    "attrs": "Find the email, name and groups attributes",
+    "keycloak": "Set up in Keycloak"
+  },
+  "match": {
+    "exact": "Exact",
+    "object_id": "Object ID",
+    "prefix": "Prefix"
+  },
+  "prev": {
+    "match": "Matched {n}",
+    "role": "Role",
+    "none": "No matching rule: no access",
+    "title": "Preview",
+    "groups": "Groups in the token"
+  },
+  "toast": {
+    "added": "Provider added",
+    "tested": "Connection test passed",
+    "disabled": "Provider disabled",
+    "enabled": "Provider enabled",
+    "rule": "Group rule saved",
+    "ruleDel": "Group rule deleted",
+    "policy": "Sign-in policy saved",
+    "request": {
+      "title": "Change requested",
+      "desc": "Our staff will contact you"
+    },
+    "export": "Settings exported",
+    "updated": "Provider saved",
+    "emergencyOn": "Emergency sign-in enabled"
+  },
+  "need": {
+    "preset": "Choose a preset",
+    "fields": "Fill in the required settings",
+    "test": "Test the connection first",
+    "group": "Enter a group",
+    "zone": "Choose at least one zone",
+    "changes": "No changes to save",
+    "domain": "Add at least one domain"
+  },
+  "rule": {
+    "add": "Add rule",
+    "edit": "Edit rule",
+    "del": "Delete",
+    "delTitle": "Delete this group rule?",
+    "delDesc": "People who match only this rule will get no access at their next sign-in."
+  },
+  "prov": {
+    "edit": "Edit provider"
+  },
+  "d": {
+    "disable": "Disable",
+    "enable": "Enable",
+    "edit": "Edit"
+  },
+  "h": {
+    "4": "4 hours",
+    "8": "8 hours",
+    "12": "12 hours",
+    "min": "{n, plural, one {{n} minute} other {{n} minutes}}"
+  },
+  "zones": {
+    "none": "Not needed for this role"
+  },
+  "locked": "Always required",
+  "mock": {
+    "reason": "The demo provider cannot be changed"
+  },
+  "private": "Private installs only",
+  "em": {
+    "off": {
+      "title": "Emergency sign-in disabled",
+      "desc": "Only SSO can sign in now"
+    },
+    "active": "Active",
+    "title": "Emergency administrator",
+    "name": "Name",
+    "email": "Email",
+    "signin": "Sign-in",
+    "local": "Local: email and password",
+    "mfa": "Authenticator app",
+    "last": "Last sign-in",
+    "rules": "Every use",
+    "r1": "MFA enforced by OpenDispatch",
+    "r2": "Raises an alert",
+    "r3": "Written to the Audit Log",
+    "enabled": "Emergency sign-in enabled",
+    "recent": "Recent use",
+    "event": "Signed in locally with MFA",
+    "audit": "Open Audit Log",
+    "never": "Never",
+    "mfaLabel": "MFA"
+  },
+  "entra": {
+    "150": "Above 150 groups Entra ID sends none. Send only groups assigned to the application.",
+    "200": "Above 200 groups Entra ID sends none. Send only groups assigned to the application."
+  },
+  "f": {
+    "directory_tenant_id": "Directory (tenant) ID",
+    "app_client_id": "Application (client) ID",
+    "client_secret": "Client secret",
+    "metadata_url": "App federation metadata URL",
+    "entity_id": "Entity ID",
+    "fed_metadata_url": "Federation metadata URL",
+    "adfs_issuer_url": "ADFS issuer URL",
+    "client_id": "Client ID",
+    "okta_domain": "Okta domain",
+    "hosted_domain": "Workspace domain",
+    "issuer_url": "Issuer URL",
+    "scopes": "Scopes",
+    "sso_url": "Single sign-on URL",
+    "signing_certificate": "Signing certificate",
+    "name_id_format": "NameID format",
+    "principal_type": "User identified by"
+  },
+  "note": {
+    "adfs_saml": "Add a claim rule for email, name and groups.",
+    "adfs_oidc": "Add the groups claim to the application group.",
+    "okta": "Add a groups claim to the authorization server.",
+    "google_workspace": "Enable Cloud Identity group claims.",
+    "ping_identity": "Map the groups attribute to the groups claim.",
+    "generic_saml": "Keycloak checks the signature."
+  },
+  "add": "Add provider",
+  "export": "Export settings",
+  "tab": {
+    "providers": "Providers",
+    "rules": "Group rules",
+    "policy": "Sign-in policy",
+    "emergency": "Emergency admin"
+  },
+  "col": {
+    "name": "Provider",
+    "preset": "Preset",
+    "protocol": "Protocol",
+    "domains": "Email domains",
+    "test": "Last test",
+    "group": "Group",
+    "on": "On",
+    "priority": "Priority",
+    "sync": "Keycloak"
+  },
+  "states": {
+    "empty": {
+      "desc": "Add a provider so people can sign in with SSO."
+    },
+    "error": {
+      "desc": "Providers could not load."
+    }
+  },
+  "rules": {
+    "sub": "Lowest number wins"
+  },
+  "pol": {
+    "force": {
+      "title": "Force SSO for the {customer} domain",
+      "desc": "These addresses cannot use a local password"
+    },
+    "addDomain": "Add domain",
+    "mfa": {
+      "title": "Require MFA claim",
+      "desc": "Refuse sign-ins without MFA in the token"
+    },
+    "session": "Session length",
+    "discard": "Discard",
+    "domainBad": "Enter a valid domain name"
+  },
+  "claim": {
+    "email": "Email claim",
+    "name": "Name claim",
+    "groups": "Groups claim"
+  },
+  "signed": {
+    "label": "Signed assertions",
+    "req": "Signed assertions required"
+  },
+  "r": {
+    "type": "Match"
+  },
+  "w": {
+    "preset": "Preset",
+    "settings": "Settings",
+    "claims": "Token fields",
+    "test": "Test",
+    "name": "Display name",
+    "save": "Save provider",
+    "secretKeep": "Leave empty to keep the secret already given"
+  },
+  "tabs": {
+    "label": "Sections"
+  },
+  "notice": {
+    "provider": "That provider could not be found.",
+    "rule": "That group rule could not be found."
+  },
+  "req": {
+    "desc": "Our staff set up providers in this install. Say what should change and we will contact you.",
+    "label": "What should change?",
+    "ok": "Send request"
+  },
+  "sync": {
+    "synced": "Synced",
+    "failed": "Failed",
+    "not_configured": "Stored only"
+  },
+  "kc": {
+    "title": "Stored only",
+    "body": "Keycloak not connected"
+  },
+  "nameid": {
+    "persistent": "Persistent",
+    "email": "Email address",
+    "transient": "Transient",
+    "unspecified": "Unspecified"
+  },
+  "principal": {
+    "subject": "Subject NameID",
+    "email": "Email attribute"
+  }
+}

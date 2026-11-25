@@ -1,0 +1,39 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The Hijri date field: three Selects in a row and the Gregorian date under them. Tokens and logical properties only. */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-inline-size: 0;
+  margin: 0;
+  border: 0;
+  padding: 0;
+}
+
+.legend {
+  padding: 0;
+  margin-block-end: var(--od-space-4);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}
+
+.row {
+  display: grid;
+  grid-template-columns: minmax(4.5rem, 1fr) minmax(0, 2fr) minmax(5rem, 1fr);
+  gap: var(--od-space-8);
+  align-items: start;
+}
+
+.day,
+.month,
+.year {
+  min-inline-size: 0;
+}
+
+.caption {
+  margin: 0;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}

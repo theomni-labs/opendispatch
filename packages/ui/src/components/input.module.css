@@ -1,0 +1,23 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.input {
+  min-inline-size: 0;
+}
+
+.textarea {
+  min-inline-size: 0;
+}
+
+.icon {
+  display: inline-flex;
+  color: var(--od-color-icon-secondary);
+}
+
+.affix {
+  color: var(--od-color-text-secondary);
+  white-space: nowrap;
+}
+
+.icon + .affix {
+  margin-inline-start: var(--od-space-4);
+}

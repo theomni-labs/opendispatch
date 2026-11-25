@@ -1,0 +1,11 @@
+[
+  {
+    "tenant_id": "8f3c2a10-5b7e-4d64-9a21-3c6e0d7b1a55",
+    "issuer": "http://127.0.0.1:8291",
+    "client_id": "opendispatch-e2e",
+    "client_secret_env": "MOCKIDP_CLIENT_SECRET",
+    "redirect_uri": "http://localhost:3223/auth/callback",
+    "install_mode": "private",
+    "allow_insecure_http": true
+  }
+]

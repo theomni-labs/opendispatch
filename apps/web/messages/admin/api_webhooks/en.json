@@ -1,0 +1,129 @@
+{
+  "create": "Create client",
+  "createShort": "Create",
+  "addHook": "Add webhook",
+  "exportLog": "Export delivery log",
+  "tab": {
+    "clients": "API clients",
+    "hooks": "Webhooks",
+    "log": "Delivery log",
+    "limits": "Rate limits"
+  },
+  "stat": {
+    "clients": "Active clients",
+    "failed": "Failed deliveries"
+  },
+  "col": {
+    "client": "Client",
+    "scopes": "Scopes",
+    "scope": "Scope",
+    "key": "Key",
+    "lastUsed": "Last used",
+    "actions": "Actions",
+    "hook": "Webhook",
+    "events": "Events",
+    "event": "Event",
+    "lastDelivery": "Last delivery",
+    "time": "Time",
+    "attempts": "Attempts"
+  },
+  "st": {
+    "active": "Active",
+    "revoked": "Revoked",
+    "on": "On",
+    "off": "Off",
+    "succeeded": "Delivered",
+    "failed": "Failed"
+  },
+  "any": "Any",
+  "none": "No matching deliveries",
+  "log": {
+    "search": "Search deliveries"
+  },
+  "created": "Created {date}",
+  "never": "Never",
+  "rotate": "Rotate key",
+  "test": "Send test",
+  "retry": {
+    "label": "Retry",
+    "title": "Delivery retries",
+    "wait": "Wait between",
+    "signing": "Signing"
+  },
+  "lim": {
+    "title": "Rate limits",
+    "perMin": "Requests per minute",
+    "burst": "Burst",
+    "clients": "Clients"
+  },
+  "states": {
+    "empty": {
+      "title": "No API clients yet",
+      "desc": "Create a client to connect a system."
+    },
+    "error": {
+      "desc": "The clients could not load."
+    }
+  },
+  "f": {
+    "name": "Name",
+    "namePh": "Reporting export",
+    "url": "Address",
+    "urlHint": "Must start with https://",
+    "enabled": "Webhook on"
+  },
+  "scope": {
+    "read": "Read plans, rosters and reports",
+    "write": "Change plans and settings",
+    "feeds": "Send case and agent feeds"
+  },
+  "need": {
+    "name": "Enter a name",
+    "scopes": "Choose at least one scope",
+    "url": "Enter a valid https address",
+    "events": "Choose at least one event",
+    "changes": "No changes to save",
+    "limit": "Enter whole numbers from 1 to 100,000"
+  },
+  "secret": {
+    "title": "Copy the key now",
+    "rotated": "New key: copy it now",
+    "once": "It is shown once. OpenDispatch keeps only the last 4 characters.",
+    "key": "Key",
+    "copy": "Copy",
+    "ack": "I have copied the key",
+    "done": "Done",
+    "first": "Copy the key first"
+  },
+  "toast": {
+    "copied": "Key copied",
+    "revoked": "Key revoked",
+    "tested": "Test delivered",
+    "retried": "Delivery retried",
+    "hook": "Webhook added",
+    "export": "Delivery log exported",
+    "limits": "Rate limits saved",
+    "testFailed": "Test delivery failed",
+    "retryFailed": "Failed again",
+    "hookDeleted": "Webhook deleted"
+  },
+  "tabs": {
+    "label": "Sections"
+  },
+  "notice": {
+    "hook": "That webhook could not be found."
+  },
+  "nothingSent": "(stub: nothing was sent)",
+  "hook": {
+    "edit": "Edit webhook",
+    "delete": "Delete",
+    "delTitle": "Delete this webhook?",
+    "delDesc": "No more events are sent to its address. Its delivery log is kept."
+  },
+  "revokeConfirm": {
+    "title": "Revoke this key?",
+    "desc": "Systems that use this key stop working at once. This cannot be undone.",
+    "ok": "Revoke"
+  },
+  "revoke": "Revoke key"
+}

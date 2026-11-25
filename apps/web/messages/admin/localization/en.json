@@ -1,0 +1,98 @@
+{
+  "toast": {
+    "saved": "Localization saved",
+    "reset": "Defaults restored"
+  },
+  "lang": {
+    "title": "Language",
+    "default": "Default language",
+    "ar": "Arabic",
+    "en": "English"
+  },
+  "dir": {
+    "rtl": "Right to left",
+    "ltr": "Left to right"
+  },
+  "tag": {
+    "default": "Default"
+  },
+  "num": {
+    "title": "Numbers",
+    "western": "Western digits",
+    "arabic": "Arabic-Indic digits"
+  },
+  "date": {
+    "title": "Dates",
+    "primary": "Primary calendar",
+    "secondary": "Show secondary calendar",
+    "week": "First day of week"
+  },
+  "cal": {
+    "gregorian": "Gregorian",
+    "hijri": "Hijri"
+  },
+  "day": {
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "monday": "Monday"
+  },
+  "tz": {
+    "title": "Time zone",
+    "fixed": "Fixed for this install"
+  },
+  "names": {
+    "title": "Arabic names",
+    "fallback": "English shows where Arabic is empty."
+  },
+  "col": {
+    "data": "Data",
+    "records": "Records",
+    "arabic": "Arabic",
+    "coverage": "Coverage"
+  },
+  "k": {
+    "cities": "Cities",
+    "zones": "Zones",
+    "subzones": "Sub-zones",
+    "standby": "Standby points",
+    "casetypes": "Case types",
+    "shifts": "Shift patterns",
+    "breaks": "Break rules",
+    "holidays": "Holidays"
+  },
+  "pv": {
+    "title": "Preview",
+    "date": "Date",
+    "datetime": "Date and time",
+    "number": "Number",
+    "percent": "Percent",
+    "time": "Time",
+    "week": "Week starts"
+  },
+  "fb": {
+    "title": "Fallback preview",
+    "tag": "English",
+    "tip": "English fallback"
+  },
+  "states": {
+    "empty": {
+      "title": "Defaults in use",
+      "desc": "English, Western digits, Riyadh time."
+    },
+    "error": {
+      "desc": "The settings could not load."
+    }
+  },
+  "empty": {
+    "action": "Configure"
+  },
+  "need": {
+    "changes": "No changes to save"
+  },
+  "resetDialog": {
+    "title": "Reset to defaults?",
+    "desc": "English, Western digits, Gregorian with the Hijri date beside it, the week starts on Sunday. Riyadh time stays fixed.",
+    "ok": "Reset"
+  },
+  "reset": "Reset to defaults"
+}

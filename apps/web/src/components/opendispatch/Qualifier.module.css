@@ -1,0 +1,19 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's qualifier: a muted note tied to a value ("inferred", "from assignment", "estimated"). */
+.qualifier {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-4);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+  line-height: 1.35;
+  white-space: nowrap;
+}
+
+.icon {
+  flex: none;
+  inline-size: var(--od-icon-size-sm);
+  block-size: var(--od-icon-size-sm);
+}

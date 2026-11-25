@@ -1,0 +1,33 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's status dot: an agent's live status as an 8px dot. Colour alone is not enough, so the dot carries the
+   status name for assistive technology (or hides itself when the status is written next to it). */
+.dot {
+  display: inline-block;
+  flex: none;
+  inline-size: 8px;
+  block-size: 8px;
+  border-radius: var(--od-radius-full);
+  background: var(--od-color-neutral);
+}
+
+.available {
+  background: var(--od-color-success);
+}
+
+.assigned,
+.enRoute {
+  background: var(--od-color-info);
+}
+
+.onScene {
+  background: var(--od-color-primary);
+}
+
+.onBreak {
+  background: var(--od-color-warning);
+}
+
+.offline {
+  background: var(--od-color-icon-secondary);
+}

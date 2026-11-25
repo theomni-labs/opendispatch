@@ -1,0 +1,75 @@
+{
+  "sub": "{from} to {to}",
+  "cases": "Field cases",
+  "agents": "Agents",
+  "onSceneMedian": "Median on scene",
+  "read": {
+    "title": "Time to scene",
+    "target": "Target {pct} within {min} min"
+  },
+  "fromAssignment": "From assignment",
+  "fromRegistration": "From registration",
+  "zoneAll": "All zones",
+  "clockLabel": "Clock",
+  "median": "Median",
+  "hist": {
+    "toScene": "Time to scene (min)",
+    "onScene": "Time on scene (min)",
+    "cases": "Cases"
+  },
+  "heat": {
+    "title": "Zone by hour",
+    "slower": "Slower than the median",
+    "faster": "Faster than the median",
+    "unit": "Minutes, from assignment",
+    "unitR": "Minutes, from registration"
+  },
+  "tbl": {
+    "title": "Agents"
+  },
+  "search": "Search agents",
+  "f": {
+    "speedLabel": "To scene",
+    "cases": {
+      "hi": "30 or more",
+      "lo": "Under 30"
+    },
+    "speed": {
+      "fast": "Under 10 min",
+      "slow": "10 min or more"
+    }
+  },
+  "th": {
+    "cases": "Cases",
+    "onScene": "On scene",
+    "util": "Utilisation"
+  },
+  "none": {
+    "title": "No agents match"
+  },
+  "toast": {
+    "export": "Metrics exported"
+  },
+  "drawer": {
+    "week": "This week",
+    "day": "Day",
+    "toScene": "To scene",
+    "onScene": "On scene",
+    "zoneMedian": "Zone median"
+  },
+  "states": {
+    "empty": {
+      "title": "No metrics yet",
+      "desc": "They appear after the first full day."
+    },
+    "error": {
+      "desc": "The metrics could not load."
+    }
+  },
+  "zones": {
+    "title": "By zone",
+    "toScene": "To scene",
+    "admin": "Admin",
+    "perShift": "Cases a shift"
+  }
+}

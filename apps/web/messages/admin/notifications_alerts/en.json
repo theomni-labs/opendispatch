@@ -1,0 +1,235 @@
+{
+  "send": "Send test alert",
+  "menu": {
+    "quiet": "Quiet hours",
+    "markAll": "Mark all read",
+    "export": "Export log",
+    "state": "State"
+  },
+  "state": {
+    "filled": "Filled",
+    "empty": "Empty",
+    "error": "Error"
+  },
+  "toast": {
+    "test": {
+      "title": "Test alert sent",
+      "desc": "For {event}. It appears at the bell in the top bar."
+    },
+    "export": "Alert log exported",
+    "allRead": "All your alerts are marked read",
+    "read": "{n, plural, one {{n} alert marked read} other {{n} alerts marked read}}",
+    "rule": "Rule saved",
+    "quiet": "Quiet hours saved",
+    "skipped": "{n, plural, one {{n} alert is for someone else and was left as it is} other {{n} alerts are for other people and were left as they are}}"
+  },
+  "tab": {
+    "rules": "Rules",
+    "log": "Alert log"
+  },
+  "stat": {
+    "rules": "Rules on",
+    "unread": "Unread",
+    "critical": "Critical",
+    "quiet": "Quiet hours"
+  },
+  "range": "{from} to {to}",
+  "rules": {
+    "title": "Notification rules",
+    "search": "Search events"
+  },
+  "log": {
+    "title": "Alert log",
+    "search": "Search alerts",
+    "yours": "Yours"
+  },
+  "col": {
+    "event": "Event",
+    "channels": "Channels",
+    "recipients": "Recipients",
+    "severity": "Severity",
+    "on": "On",
+    "time": "Time",
+    "alert": "Alert",
+    "category": "Category",
+    "to": "To"
+  },
+  "aria": {
+    "edit": "Edit rule",
+    "on": "Rule on",
+    "row": "Select row",
+    "all": "Select all"
+  },
+  "f": {
+    "severity": "Severity",
+    "unread": "Unread",
+    "read": "Read"
+  },
+  "any": "Any",
+  "none": "No matching results",
+  "bulk": {
+    "markRead": "Mark read",
+    "nothing": "Nothing to mark: the selected alerts are read already or are for other people."
+  },
+  "ch": {
+    "in_app": "In app",
+    "email": "Email"
+  },
+  "sev": {
+    "info": "Info",
+    "warning": "Warning",
+    "critical": "Critical"
+  },
+  "ev": {
+    "model_paused": "Model paused",
+    "model_switched": "Model switched",
+    "rule_approved": "Rule approved",
+    "rule_rejected": "Rule rejected",
+    "roster_approved": "Roster approved",
+    "override_created": "Override created",
+    "leave_decided": "Leave decided",
+    "import_failed": "Import failed",
+    "integration_down": "Feed outage",
+    "fallback_active": "{customer} fallback active",
+    "emergency_admin_sign_in": "Emergency admin sign-in",
+    "update_ready": "Update ready",
+    "update_failed": "Update failed",
+    "backup_overdue": "Backup overdue",
+    "model_degraded": "Forecast error above the limit",
+    "case_unreachable": "Case out of 10-minute reach"
+  },
+  "cat": {
+    "model": "Model",
+    "rule": "Rule",
+    "roster": "Roster",
+    "leave": "Leave",
+    "import": "Import",
+    "integration": "Integration",
+    "fallback": "Fallback",
+    "security": "Security",
+    "update": "Update",
+    "system": "System",
+    "dispatch": "Dispatch"
+  },
+  "a": {
+    "1": {
+      "t": "Agent feed is degraded",
+      "b": "Position updates are delayed for 4 agents."
+    },
+    "2": {
+      "t": "Roster rejected",
+      "b": "Riyadh East, Monday 14 September: gaps in the afternoon peak."
+    },
+    "3": {
+      "t": "Roster waiting for approval",
+      "b": "Riyadh Central, Monday 14 September."
+    },
+    "4": {
+      "t": "Import validated with errors",
+      "b": "synthetic_extract_2026-09-13_partial.csv has 3 errors."
+    },
+    "5": {
+      "t": "Fallback was active for 12 minutes",
+      "b": "{customer} dispatch assigned the cases from 15:40 to 15:52."
+    },
+    "6": {
+      "t": "Fallback was active for 12 minutes"
+    },
+    "7": {
+      "t": "Overnight remote queue cleared",
+      "b": "All overnight cases were closed by 14:20."
+    },
+    "8": {
+      "t": "Leave requests to review",
+      "b": "Several requests fall in the next two weeks."
+    },
+    "9": {
+      "t": "Backup overdue",
+      "b": "The last successful backup was 30 hours ago."
+    },
+    "10": {
+      "t": "Update ready to schedule",
+      "b": "A new release is downloaded and verified."
+    },
+    "11": {
+      "t": "Candidate forecast model available",
+      "b": "placeholder-0.2 is a candidate. Every figure is Illustrative."
+    },
+    "12": {
+      "t": "Emergency admin signed in",
+      "b": "One sign-in on 8 September."
+    },
+    "13": {
+      "t": "Demo data loaded",
+      "b": "Synthetic data for 6 to 13 September 2026."
+    },
+    "14": {
+      "t": "Rule approved",
+      "b": "RULE-005 version 1 took effect."
+    }
+  },
+  "pv": {
+    "title": "Alert preview",
+    "model": {
+      "label": "Model paused",
+      "t": "Forecast paused",
+      "b": "<n>{name}</n> paused the forecast: data check"
+    },
+    "feed": {
+      "label": "Feed outage",
+      "t": "Agent feed is down",
+      "b": "No position updates since 06:02."
+    },
+    "emg": {
+      "label": "Emergency sign-in",
+      "t": "Emergency administrator signed in",
+      "b": "The local emergency account was used."
+    },
+    "sentTo": "Sent to",
+    "night": {
+      "label": "At night",
+      "now": "Sent at once",
+      "held": "Email held until {end}"
+    },
+    "off": "Rule is off"
+  },
+  "qh": {
+    "title": "Quiet hours",
+    "window": "Window",
+    "applies": "Applies to",
+    "always": "Always sent",
+    "edit": "Edit"
+  },
+  "qd": {
+    "sub": "Riyadh time",
+    "on": "Quiet hours on",
+    "from": "From",
+    "to": "To",
+    "emailOnly": "Email only",
+    "both": "In app and email",
+    "critical": "Critical alerts always send",
+    "criticalWhy": "Critical alerts are never held",
+    "same": "The start and the end must differ"
+  },
+  "rd": {
+    "title": "Edit rule",
+    "enabled": "Rule on",
+    "need": "Choose at least one channel"
+  },
+  "states": {
+    "empty": {
+      "title": "No alerts yet",
+      "desc": "Alerts appear when a rule fires."
+    },
+    "error": {
+      "desc": "The alerts could not load."
+    }
+  },
+  "sendNone": "No rule is switched on",
+  "tabs": {
+    "label": "Notification sections"
+  },
+  "notice": {
+    "ruleNotFound": "That rule could not be found."
+  }
+}

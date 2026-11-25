@@ -1,0 +1,14 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The focusable wrapper of a Switch that explains why it is off limits: it keeps the switch's own layout. */
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  border-radius: var(--od-radius-md);
+  cursor: not-allowed;
+}
+
+.wrap:focus-visible {
+  outline: none;
+  box-shadow: var(--od-focus-ring);
+}

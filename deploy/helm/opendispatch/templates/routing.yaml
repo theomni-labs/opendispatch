@@ -1,0 +1,98 @@
+{{- /* one of gateway, ingress, route, none */ -}}
+{{- $fn := include "opendispatch.fullname" . -}}
+{{- $host := include "opendispatch.publicHostname" . -}}
+{{- $kc := .Values.keycloak.enabled -}}
+{{- $kcPaths := list (printf "%s/realms/" .Values.keycloak.relativePath) (printf "%s/resources/" .Values.keycloak.relativePath) -}}
+{{- if eq .Values.routing.type "gateway" }}
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: {{ $fn }}
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+spec:
+  parentRefs:
+    {{- toYaml .Values.routing.gateway.parentRefs | nindent 4 }}
+  hostnames:
+    - {{ $host | quote }}
+  rules:
+    {{- if $kc }}
+    - matches:
+        {{- range $kcPaths }}
+        - path: { type: PathPrefix, value: {{ . | quote }} }
+        {{- end }}
+      backendRefs:
+        - name: {{ $fn }}-keycloak
+          port: 8080
+    {{- end }}
+    - matches:
+        - path: { type: PathPrefix, value: / }
+      backendRefs:
+        - name: {{ $fn }}-web
+          port: 3000
+{{- else if eq .Values.routing.type "ingress" }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ $fn }}
+  labels:
+    {{- include "opendispatch.labels" . | nindent 4 }}
+  {{- with .Values.routing.ingress.annotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  {{- with .Values.routing.ingress.className }}
+  ingressClassName: {{ . }}
+  {{- end }}
+  {{- with .Values.routing.tls.secretName }}
+  tls:
+    - hosts: [{{ $host | quote }}]
+      secretName: {{ . }}
+  {{- end }}
+  rules:
+    - host: {{ $host | quote }}
+      http:
+        paths:
+          {{- if $kc }}
+          {{- range $kcPaths }}
+          - path: {{ . }}
+            pathType: Prefix
+            backend:
+              service: { name: {{ $fn }}-keycloak, port: { number: 8080 } }
+          {{- end }}
+          {{- end }}
+          - path: /
+            pathType: Prefix
+            backend:
+              service: { name: {{ $fn }}-web, port: { number: 3000 } }
+{{- else if eq .Values.routing.type "route" }}
+{{- $routes := list (dict "name" "web" "path" "/" "svc" "web") }}
+{{- if $kc }}
+{{- range $i, $p := $kcPaths }}
+{{- $routes = append $routes (dict "name" (printf "keycloak-%d" $i) "path" (trimSuffix "/" $p) "svc" "keycloak") }}
+{{- end }}
+{{- end }}
+{{- range $i, $r := $routes }}
+{{- if $i }}
+---
+{{- end }}
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{ $fn }}-{{ $r.name }}
+  labels:
+    {{- include "opendispatch.labels" $ | nindent 4 }}
+spec:
+  host: {{ $host | quote }}
+  path: {{ $r.path }}
+  to:
+    kind: Service
+    name: {{ $fn }}-{{ $r.svc }}
+  port:
+    targetPort: http
+  tls:
+    termination: {{ $.Values.routing.route.termination }}
+    insecureEdgeTerminationPolicy: Redirect
+{{- end }}
+{{- end }}

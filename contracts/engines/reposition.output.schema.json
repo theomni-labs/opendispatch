@@ -1,0 +1,156 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://opendispatch.example/contracts/engines/reposition.output.schema.json",
+  "title": "RepositionOutput",
+  "description": "Suggested waiting spots for idle agents of one zone (advisory; the operator fallback rule: never an assignment).",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "request_id",
+    "engine",
+    "model_version",
+    "generated_at",
+    "data_source",
+    "illustrative",
+    "zone_id",
+    "decision_time_ms",
+    "waiting_spots"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "request_id": {
+      "$ref": "#/$defs/Uuid"
+    },
+    "engine": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "name",
+        "version"
+      ],
+      "properties": {
+        "name": {
+          "const": "assignment"
+        },
+        "version": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 64
+        }
+      }
+    },
+    "model_version": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 64
+    },
+    "generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "data_source": {
+      "$ref": "#/$defs/DataSource"
+    },
+    "input_data_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "$ref": "#/$defs/DataSource"
+      }
+    },
+    "illustrative": {
+      "type": "boolean"
+    },
+    "zone_id": {
+      "$ref": "#/$defs/Uuid"
+    },
+    "decision_time_ms": {
+      "type": "integer",
+      "minimum": 0
+    },
+    "waiting_spots": {
+      "description": "Only agents asked to move; one who should stay is left out.",
+      "type": "array",
+      "maxItems": 2000,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "agent_id",
+          "latitude",
+          "longitude",
+          "move_km",
+          "reason_code"
+        ],
+        "properties": {
+          "agent_id": {
+            "$ref": "#/$defs/Uuid"
+          },
+          "latitude": {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          "longitude": {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          "move_km": {
+            "type": "number",
+            "minimum": 0
+          },
+          "reason_code": {
+            "type": "string",
+            "enum": [
+              "cover_expected_demand",
+              "rebalance_zone"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "Uuid": {
+      "type": "string",
+      "format": "uuid"
+    },
+    "DataSource": {
+      "type": "string",
+      "enum": [
+        "SYNTHETIC",
+        "IMPORTED",
+        "LIVE"
+      ]
+    }
+  },
+  "examples": [
+    {
+      "schema_version": "1.0",
+      "request_id": "7d0f7b9e-1c2a-4f3e-9b8a-0a1b2c3d4e5f",
+      "engine": {
+        "name": "assignment",
+        "version": "0.3.0"
+      },
+      "model_version": "scorer-0.3",
+      "generated_at": "2026-09-13T09:00:00.120+03:00",
+      "data_source": "SYNTHETIC",
+      "illustrative": true,
+      "zone_id": "5b8c1a2d-3e4f-4a5b-8c6d-7e8f9a0b1c2d",
+      "decision_time_ms": 12,
+      "waiting_spots": [
+        {
+          "agent_id": "0a1b2c3d-4e5f-4a6b-8c7d-8e9f0a1b2c3d",
+          "latitude": 24.74,
+          "longitude": 46.69,
+          "move_km": 3.6,
+          "reason_code": "cover_expected_demand"
+        }
+      ]
+    }
+  ]
+}

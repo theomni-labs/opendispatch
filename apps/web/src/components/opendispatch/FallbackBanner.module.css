@@ -1,0 +1,70 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's fallback: The customer's dispatch is the fallback for every case. Armed is quiet; active
+   (OpenDispatch did not answer in time, or its health checks fail) turns warning-toned and names the reason. */
+.banner {
+  --tone-bg: var(--od-color-bg-container);
+  --tone-border: var(--od-color-border);
+  --tone-solid: var(--od-color-success);
+
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8) var(--od-space-16);
+  padding: var(--od-space-12) var(--od-space-16);
+  border: 1px solid var(--tone-border);
+  border-radius: var(--od-radius-lg);
+  background: var(--tone-bg);
+  color: var(--od-color-text);
+  font-size: var(--od-font-size-13);
+}
+
+.active {
+  --tone-bg: var(--od-color-warning-bg);
+  --tone-border: var(--od-color-warning-border);
+  --tone-solid: var(--od-color-warning);
+}
+
+.icon {
+  display: inline-flex;
+  flex: none;
+  color: var(--tone-solid);
+}
+
+.icon > svg {
+  inline-size: var(--od-icon-size-xl);
+  block-size: var(--od-icon-size-xl);
+}
+
+.text {
+  display: flex;
+  flex: 1 1 200px;
+  flex-direction: column;
+  gap: var(--od-space-2);
+  min-inline-size: 0;
+}
+
+.title {
+  color: var(--od-color-text-heading);
+  font-weight: var(--od-weight-semibold);
+}
+
+.meta {
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+}
+
+.count {
+  display: inline-flex;
+  align-items: baseline;
+  gap: var(--od-space-6);
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-12);
+}
+
+.number {
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--od-weight-bold);
+}

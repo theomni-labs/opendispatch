@@ -1,0 +1,68 @@
+{
+  "mapping_id": "generic_csv_v1",
+  "format_version": 1,
+  "status": "draft",
+  "description": "Generic case export: one CSV file with a header row, one case per row. Column names only: this file holds no data. A different export layout means a new mapping version (for example generic_csv_v2.json), not a code change. See docs/data-model.md.",
+  "source": {
+    "file_type": "csv",
+    "header_row": true,
+    "time_zone": "Asia/Riyadh",
+    "timestamps": "ISO 8601 with an offset, or 'YYYY-MM-DD HH:MM:SS' read as local time in time_zone."
+  },
+  "target": "cases",
+  "columns": [
+    { "default_column": "RecordID", "internal_field": "external_id", "type": "string", "required": true, "unique": true, "note": "The source system's own id. Unique per tenant; the stored id is a UUID, so ids from different tenants never collide." },
+    { "default_column": "CaseNumber", "internal_field": "case_number", "type": "string", "required": true, "unique": true, "note": "The first two letters are a city code (RD = Riyadh)." },
+    { "default_column": "RegisteredTime", "internal_field": "registered_at", "type": "datetime", "required": true },
+    { "default_column": "CityID", "internal_field": "city_id", "type": "reference", "references": "cities.external_id", "required": true, "note": "Rows join on ids only." },
+    { "default_column": "CityNameEn", "internal_field": "cities.name_en", "type": "string", "required": false, "note": "Informational; never joined on." },
+    { "default_column": "ZoneID", "internal_field": "zone_id", "type": "reference", "references": "zones.external_id", "required": true, "note": "The dispatch zone." },
+    { "default_column": "ZoneNameEn", "internal_field": "zones.name_en", "type": "string", "required": false },
+    { "default_column": "SubZoneID", "internal_field": "sub_zone_id", "type": "reference", "references": "sub_zones.external_id", "required": true, "note": "The forecast area." },
+    { "default_column": "SubZoneNameEn", "internal_field": "sub_zones.name_en", "type": "string", "required": false },
+    { "default_column": "Latitude", "internal_field": "latitude", "type": "number", "required": true, "range": [-90, 90] },
+    { "default_column": "Longitude", "internal_field": "longitude", "type": "number", "required": true, "range": [-180, 180] },
+    { "default_column": "CaseTypeID", "internal_field": "case_type_id", "type": "reference", "references": "case_types.external_id", "required": true },
+    { "default_column": "CaseTypeNameEn", "internal_field": "case_types.name_en", "type": "string", "required": false, "note": "For example Standard case, Police attended, Unlisted." },
+    { "default_column": "PartyCount", "internal_field": "parties_involved", "type": "integer", "required": true, "minimum": 0, "note": "Values 0 and 1 are valid but unusual and are reported as warnings." },
+    { "default_column": "AssignedTime", "internal_field": "assigned_at", "type": "datetime", "required": false, "nullable": true, "note": "Empty for cases handled remotely. May be earlier than registered_at in some source systems: a data-quality warning, not a validation error." },
+    { "default_column": "ArrivalTime", "internal_field": "arrived_at", "type": "datetime", "required": false, "nullable": true },
+    { "default_column": "ClosingTime", "internal_field": "closed_at", "type": "datetime", "required": false, "nullable": true, "note": "For remote cases, the end of the review." },
+    { "default_column": "ClaimAmount", "internal_field": "claim_value_sar", "type": "number", "minimum": 0, "required": false, "extra": true, "note": "Classification rule criterion; kept in the case's extra. Read on new cases only." },
+    { "default_column": "AssessmentMethod", "internal_field": "damage_assessment_method", "type": "enum", "values": ["photo", "video", "in_person"], "required": false, "extra": true, "note": "Classification rule criterion." },
+    { "default_column": "LocationType", "internal_field": "location_type", "type": "enum", "values": ["dense_urban", "urban", "suburban", "highway", "rural"], "required": false, "extra": true, "note": "Classification rule criterion." },
+    { "default_column": "CustomerPreference", "internal_field": "customer_preference", "type": "enum", "values": ["none", "remote", "field"], "required": false, "extra": true, "note": "Classification rule criterion." },
+    { "default_column": "Severity", "internal_field": "severity", "type": "string", "required": false, "nullable": true, "allowed": ["minor", "moderate", "severe"], "note": "Any other value is a warning and the case is imported without a severity." },
+    { "default_column": "ResolutionMethod", "internal_field": "resolution_method", "type": "string", "required": false, "nullable": true, "allowed": ["field", "remote"], "note": "When present it sets handling (field, or remote as remote_inferred) instead of the assigned-time rule, and is kept in the case's extra.resolution_method." }
+  ],
+  "service_area": { "latitude": [16, 33], "longitude": [34, 56], "note": "The bounding box of the sample geography. A point outside is a warning (out_of_range_coordinate); the case keeps it." },
+  "derived": [
+    { "internal_field": "handling", "values": ["field", "remote_inferred"], "rule": "ResolutionMethod when present (field, or remote as remote_inferred); otherwise field when assigned_at is present, otherwise remote_inferred", "note": "Screens show it as inferred." }
+  ],
+  "not_in_source_file": ["agent_id", "vehicle_id", "injury_present", "estimated_damage_sar", "on_scene_completed_at", "remote_review_at", "channel"],
+  "not_in_source_file_note": "Fields a basic case export usually lacks. They stay empty for imported cases.",
+  "validation": [
+    { "issue_type": "missing_required_field", "severity": "error", "when": "a required column is empty, or a required column is missing from the header" },
+    { "issue_type": "unknown_reference", "severity": "error", "when": "a CityID, ZoneID, SubZoneID or CaseTypeID is not in the reference data" },
+    { "issue_type": "duplicate_external_id", "severity": "warning", "when": "RecordID appears more than once" },
+    { "issue_type": "out_of_range_coordinate", "severity": "error", "when": "Latitude or Longitude is outside its range" },
+    { "issue_type": "assigned_before_registered", "severity": "warning", "when": "assigned_at is earlier than registered_at" },
+    { "issue_type": "unusual_parties_count", "severity": "warning", "when": "parties_involved is 0 or 1" },
+    { "issue_type": "inconsistent_name_case", "severity": "info", "when": "a name column differs from its earlier spelling only in capitals" },
+    { "issue_type": "out_of_range_coordinate", "severity": "warning", "when": "Latitude and Longitude are valid but outside service_area" },
+    { "issue_type": "other", "severity": "warning", "when": "a point is more than 100 km from its sub-zone centre" },
+    { "issue_type": "other", "severity": "warning", "when": "Severity or ResolutionMethod is not one of its allowed values" },
+    { "issue_type": "other", "severity": "warning", "when": "registered more than a day in the future, arrived or closed before registration (impossible times)" },
+    { "issue_type": "other", "severity": "warning", "when": "arrival more than 24 hours, or closing more than 30 days, after registration (outliers)" },
+    { "issue_type": "other", "severity": "warning", "when": "a registration day (not the first or last of the file) has more than 3 times, or less than a third of, the median cases per day, with at least 7 days and a median of 10 (a missing or doubled extract)" }
+  ],
+  "cleaning_rules": [
+    { "rule": "errors_skip_row", "applies_to": "rows with an error", "action": "The row is not imported; the issue stays listed against the import job." },
+    { "rule": "duplicates_first_wins", "applies_to": "duplicate RecordID", "action": "The first row without errors is imported; later copies are skipped." },
+    { "rule": "warnings_keep_row", "applies_to": "rows with only warnings or notes", "action": "The row is imported unchanged; nothing is guessed or filled in (no imputation)." },
+    { "rule": "unknown_values_dropped", "applies_to": "Severity or ResolutionMethod outside allowed", "action": "Imported without that value (null); handling falls back to the assigned-time rule." },
+    { "rule": "names_by_id", "applies_to": "name columns", "action": "Ids are used; names are never joined on, so capitals do not matter." },
+    { "rule": "timestamps_local", "applies_to": "datetime columns", "action": "Read as ISO 8601, or YYYY-MM-DD HH:MM:SS as local time in time_zone." },
+    { "rule": "escalate_to_data_owner", "applies_to": "any error or warning", "action": "One notification per validated import goes to the data owner role (setting imports.data_owner_role, default administrator), critical with errors, warning otherwise; audited as import.quality_escalated." }
+  ]
+}

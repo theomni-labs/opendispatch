@@ -1,0 +1,28 @@
+{
+"schema_version": "1.0",
+"request_id": "1ba7b617-c166-4f21-80e3-7afaa9bffb79",
+"engine": {"name":"simulator","version":"0.1.0"},
+"model_version": "placeholder-0.1",
+"generated_at": "2026-09-12T23:55:00+03:00",
+"data_source": "SYNTHETIC",
+"input_data_sources": [
+"SYNTHETIC"
+],
+"illustrative": true,
+"roster_ref": "actual-2026-09-12",
+"assignment_policy": "nearest",
+"primary_clock_start": "assignment",
+"threshold_seconds": 600,
+"overall": {"case_count":1440,"field_case_count":886,"remote_case_count":546,"from_registration":{"within_count":567,"case_count":886,"share":0.639955},"from_assignment":{"within_count":571,"case_count":886,"share":0.64447},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":476,"p90_seconds":972},"registered_to_arrived":{"median_seconds":478,"p90_seconds":974}},
+"zones": [
+{"zone_id":"091ff2b2-f0e1-4b97-bfc9-7cdd0698c32a","service_level":{"case_count":265,"field_case_count":164,"remote_case_count":96,"from_registration":{"within_count":106,"case_count":164,"share":0.646341},"from_assignment":{"within_count":107,"case_count":164,"share":0.652439},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":485,"p90_seconds":836},"registered_to_arrived":{"median_seconds":487,"p90_seconds":839}}},
+{"zone_id":"eecf5c7f-237c-443c-b331-b75ba3fb26fc","service_level":{"case_count":172,"field_case_count":110,"remote_case_count":61,"from_registration":{"within_count":64,"case_count":110,"share":0.581818},"from_assignment":{"within_count":64,"case_count":110,"share":0.581818},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":539,"p90_seconds":941},"registered_to_arrived":{"median_seconds":541,"p90_seconds":943}}},
+{"zone_id":"555117e3-96d2-43fc-9fb1-45ec4ed1d8ad","service_level":{"case_count":159,"field_case_count":99,"remote_case_count":60,"from_registration":{"within_count":71,"case_count":99,"share":0.717172},"from_assignment":{"within_count":73,"case_count":99,"share":0.737374},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":403,"p90_seconds":900},"registered_to_arrived":{"median_seconds":404,"p90_seconds":901}}},
+{"zone_id":"41202fec-ca6a-4438-a061-54ca54a7a41a","service_level":{"case_count":144,"field_case_count":87,"remote_case_count":57,"from_registration":{"within_count":62,"case_count":87,"share":0.712644},"from_assignment":{"within_count":62,"case_count":87,"share":0.712644},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":409,"p90_seconds":916},"registered_to_arrived":{"median_seconds":412,"p90_seconds":918}}},
+{"zone_id":"8c20c4e5-0b8b-4559-91ce-47e9c7290c1d","service_level":{"case_count":153,"field_case_count":90,"remote_case_count":63,"from_registration":{"within_count":58,"case_count":90,"share":0.644444},"from_assignment":{"within_count":58,"case_count":90,"share":0.644444},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":504,"p90_seconds":1049},"registered_to_arrived":{"median_seconds":506,"p90_seconds":1051}}},
+{"zone_id":"73c8608b-21c0-4c43-8b48-cb9da664317e","service_level":{"case_count":214,"field_case_count":128,"remote_case_count":84,"from_registration":{"within_count":83,"case_count":128,"share":0.648438},"from_assignment":{"within_count":84,"case_count":128,"share":0.65625},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":439,"p90_seconds":1022},"registered_to_arrived":{"median_seconds":440,"p90_seconds":1025}}},
+{"zone_id":"ddbd4f3e-a940-453e-8884-61e037ad55e7","service_level":{"case_count":160,"field_case_count":102,"remote_case_count":58,"from_registration":{"within_count":50,"case_count":102,"share":0.490196},"from_assignment":{"within_count":50,"case_count":102,"share":0.490196},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":610,"p90_seconds":1048},"registered_to_arrived":{"median_seconds":611,"p90_seconds":1049}}},
+{"zone_id":"9eb021e8-b6a5-4fc0-add9-db600d697b78","service_level":{"case_count":173,"field_case_count":106,"remote_case_count":67,"from_registration":{"within_count":73,"case_count":106,"share":0.688679},"from_assignment":{"within_count":73,"case_count":106,"share":0.688679},"registered_to_assigned":{"median_seconds":2,"p90_seconds":3},"assigned_to_arrived":{"median_seconds":419,"p90_seconds":1064},"registered_to_arrived":{"median_seconds":422,"p90_seconds":1065}}}
+],
+"unserved_cases": 0
+}

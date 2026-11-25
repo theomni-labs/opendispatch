@@ -1,0 +1,166 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-4);
+  min-inline-size: 0;
+  color: var(--od-color-text);
+}
+
+.link {
+  text-decoration: none;
+  border-radius: var(--od-radius-md);
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--od-color-primary-border);
+  outline-offset: 2px;
+}
+
+.top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}
+
+.label {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.icon {
+  display: inline-flex;
+  color: var(--od-color-icon-secondary);
+  line-height: 0;
+}
+
+.icon :where(svg) {
+  inline-size: var(--od-icon-size-md);
+  block-size: var(--od-icon-size-md);
+}
+
+.valueRow {
+  display: flex;
+  align-items: baseline;
+  gap: var(--od-space-4);
+}
+
+.value {
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-24);
+  font-weight: var(--od-weight-semibold);
+  font-variant-numeric: tabular-nums;
+  line-height: var(--od-line-height-tight);
+}
+
+.unit {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-14);
+}
+
+.deltaRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-6);
+}
+
+.delta {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--od-space-2);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-medium);
+}
+
+.good {
+  color: var(--od-color-success-text);
+}
+
+.bad {
+  color: var(--od-color-error-text);
+}
+
+.flat {
+  color: var(--od-color-text-secondary);
+}
+
+.caption {
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+}
+
+.footer {
+  margin-block-start: var(--od-space-8);
+}
+
+.tile {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  inline-size: 36px;
+  block-size: 36px;
+  border-radius: var(--od-radius-full);
+  line-height: 0;
+}
+
+.tile :where(svg) {
+  inline-size: var(--od-icon-size-lg);
+  block-size: var(--od-icon-size-lg);
+}
+
+.large {
+  inline-size: 48px;
+  block-size: 48px;
+}
+
+.large :where(svg) {
+  inline-size: var(--od-icon-size-xl);
+  block-size: var(--od-icon-size-xl);
+}
+
+.square {
+  border-radius: var(--od-radius-lg);
+}
+
+.tile-gray {
+  background: var(--od-cat-gray-bg);
+  color: var(--od-cat-gray-fg);
+}
+
+.tile-red {
+  background: var(--od-cat-red-bg);
+  color: var(--od-cat-red-fg);
+}
+
+.tile-gold {
+  background: var(--od-cat-gold-bg);
+  color: var(--od-cat-gold-fg);
+}
+
+.tile-green {
+  background: var(--od-cat-green-bg);
+  color: var(--od-cat-green-fg);
+}
+
+.tile-magenta {
+  background: var(--od-cat-magenta-bg);
+  color: var(--od-cat-magenta-fg);
+}
+
+.tile-volcano {
+  background: var(--od-cat-volcano-bg);
+  color: var(--od-cat-volcano-fg);
+}
+
+.tile-geekblue {
+  background: var(--od-cat-geekblue-bg);
+  color: var(--od-cat-geekblue-fg);
+}
+
+.link:hover .value {
+  color: var(--od-color-link);
+}

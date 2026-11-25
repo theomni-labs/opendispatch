@@ -1,0 +1,137 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The API and Webhooks screen. Tokens and logical properties only. */
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.cellMain {
+  display: block;
+  font-weight: var(--od-weight-medium);
+}
+
+.cellSub {
+  display: block;
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  font-weight: var(--od-weight-regular);
+  overflow-wrap: anywhere;
+}
+
+.muted {
+  color: var(--od-color-text-secondary);
+}
+
+.tags {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-4);
+}
+
+.inline {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.rowActions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--od-space-4);
+}
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  inline-size: 100%;
+}
+
+.push {
+  margin-inline-start: auto;
+}
+
+.fieldset {
+  margin: 0;
+  border: 0;
+  padding: 0;
+  min-inline-size: 0;
+}
+
+.legend {
+  margin-block-end: var(--od-space-8);
+  padding: 0;
+  color: var(--od-color-text-label);
+  font-size: var(--od-font-size-14);
+  font-weight: var(--od-weight-medium);
+}
+
+/* The key box and its Copy button on one line; the box keeps the width. */
+.keyRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+}
+
+.keyRow > :first-child {
+  flex: 1 1 14rem;
+  min-inline-size: 0;
+}
+
+/* --- rate limits: the table beside the retry policy ------------------------------------------- */
+.detailGrid {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: var(--od-space-16);
+  align-items: start;
+}
+
+@media (width <= 1023px) {
+  .detailGrid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+.col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-16);
+  min-inline-size: 0;
+}
+
+.limitInput {
+  inline-size: 7rem;
+  margin-inline-start: auto;
+}
+
+.cardFooter {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--od-space-8);
+  padding: var(--od-space-12) var(--od-space-16);
+  border-block-start: 1px solid var(--od-color-border-secondary);
+}
+
+.sectionTitle {
+  margin: 0;
+  color: var(--od-color-text-heading);
+  font-size: var(--od-font-size-16);
+  font-weight: var(--od-weight-semibold);
+}
+
+.headRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+}

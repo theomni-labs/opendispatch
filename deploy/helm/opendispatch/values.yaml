@@ -1,0 +1,178 @@
+# Defaults of the reference chart. The install-mode files next to it (values-shared, values-dedicated,
+# values-private) override them.
+
+global:
+  # shared, dedicated or private
+  installMode: private
+  # Public address of the web console, e.g. https://opendispatch.example.internal (required)
+  publicUrl: ""
+  # Prefix for every image, e.g. registry.example.internal/opendispatch (empty: as written)
+  imageRegistry: ""
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets: []
+  # data_source of records made in the app. SYNTHETIC (demo, test) or LIVE
+  recordDataSource: SYNTHETIC
+
+# Customers served by this install. Dedicated and private: exactly one.
+tenants: []
+#  - id: 00000000-0000-0000-0000-000000000000
+#    # shared tier only: Keycloak organisation alias, and optionally its id
+#    organization: acme
+#    organizationId: ""
+
+images:
+  api: { repository: opendispatch-api, tag: "", digest: "" }
+  worker: { repository: opendispatch-worker, tag: "", digest: "" }
+  web: { repository: opendispatch-web, tag: "", digest: "" }
+  engines: { repository: opendispatch-engines, tag: "", digest: "" }
+  # Official image; 26.8.0 index digest. Every
+  # entry other than the four above goes into the offline bundle.
+  keycloak:
+    repository: quay.io/keycloak/keycloak
+    tag: "26.8.0"
+    digest: "sha256:b0f60d489d51c5d113390bdf5461d4c06e6051be026c05549f2e1e10ec352bcc"
+
+# bring-your-own Postgres 16+ with TimescaleDB. Bundled Postgres is not offered yet.
+database:
+  mode: external
+  # Secret made by the customer; keys owner-url (migration job only) and app-url (api, worker)
+  existingSecret: ""
+  # Address ranges of the database, for the NetworkPolicy egress rule
+  cidrs: []
+  port: 5432
+
+# S3-compatible object storage the customer brings (bundled: SeaweedFS, later)
+objectStorage:
+  endpoint: ""
+  port: 9000
+  bucket: opendispatch-imports
+  useSSL: true
+  # Secret with keys access-key and secret-key
+  existingSecret: ""
+  cidrs: []
+
+auth:
+  # oidc only on installs; demo mode is never deployed
+  mode: oidc
+  clientId: opendispatch-web
+  # Issuer when keycloak.enabled is false (shared tier: our Keycloak)
+  issuer: ""
+  # Only for a throwaway test on plain http; never on an install
+  allowInsecureHttp: false
+
+# Keycloak in the install (dedicated and private)
+keycloak:
+  enabled: false
+  realm: opendispatch
+  # Served under publicUrl at this path (web owns /auth)
+  relativePath: /idp
+  database:
+    # Second database on the same server
+    jdbcUrl: ""
+    # Secret with keys username and password
+    existingSecret: ""
+  firstAdmin:
+    username: opendispatch-admin
+    email: ""
+    # Keycloak group mapped to Administrator by the first-run bootstrap
+    group: opendispatch-administrators
+  # service account for identity providers
+  idpAdmin:
+    clientId: opendispatch-idp-admin
+  theme:
+    # Login pages in Arabic and English
+    enabled: true
+  resources:
+    requests: { cpu: 250m, memory: 768Mi }
+    limits: { cpu: "1", memory: 1536Mi }
+
+api:
+  replicas: 1
+  dispatchSource: replay
+  env: {}
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+worker:
+  # One worker per customer; do not scale above 1
+  enabled: true
+  intervalSeconds: 300
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+web:
+  replicas: 1
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 1Gi }
+
+engines:
+  forecaster:
+    replicas: 1
+    resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: "1", memory: 2Gi } }
+  optimizer:
+    replicas: 1
+    resources: { requests: { cpu: 250m, memory: 512Mi }, limits: { cpu: "2", memory: 2Gi } }
+  simulator:
+    replicas: 1
+    resources: { requests: { cpu: 100m, memory: 256Mi }, limits: { cpu: "1", memory: 1Gi } }
+  assignment:
+    replicas: 1
+    resources: { requests: { cpu: 100m, memory: 256Mi }, limits: { cpu: "1", memory: 1Gi } }
+
+migrations:
+  # Seconds before the job is stopped
+  activeDeadlineSeconds: 1800
+  resources:
+    requests: { cpu: 50m, memory: 64Mi }
+    limits: { cpu: 500m, memory: 256Mi }
+
+firstRun:
+  # Realm import and first Administrator (needs keycloak.enabled)
+  enabled: true
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 512Mi }
+  # OpenDispatch group rule for the first Administrator (api image, application role;
+  bootstrap:
+    resources:
+      requests: { cpu: 50m, memory: 64Mi }
+      limits: { cpu: 500m, memory: 256Mi }
+
+# shared tier only. Our Keycloak: Organizations on, one per tenant,
+# the organization scope and claim on auth.clientId. Members are added by us.
+sharedRealm:
+  enabled: false
+  # Keycloak base URL reachable from the cluster, e.g. https://id.opendispatch.example
+  server: ""
+  realm: ""
+  # Secret with keys username and password (a master-realm administrator)
+  adminSecret: ""
+  resources:
+    requests: { cpu: 100m, memory: 256Mi }
+    limits: { cpu: "1", memory: 512Mi }
+
+# gateway (Gateway API HTTPRoute), ingress, route (OpenShift) or none
+routing:
+  type: none
+  tls:
+    # Secret with the certificate (customer's CA); ingress and route only
+    secretName: ""
+  gateway:
+    parentRefs: []
+  ingress:
+    className: ""
+    annotations: {}
+  route:
+    termination: edge
+
+networkPolicy:
+  enabled: true
+  # Peers allowed to reach web and Keycloak (the router); empty: any pod or namespace
+  routerPeers: []
+
+podDisruptionBudget:
+  # Written for a component with more than one replica
+  enabled: true

@@ -1,0 +1,760 @@
+{
+  "common": {
+    "illustrative": "Illustrative",
+    "retry": "Try again",
+    "goHome": "Go home",
+    "signOut": "Sign out",
+    "loading": "Loading",
+    "more": "More",
+    "search": "Search",
+    "filter": "Filter",
+    "export": "Export",
+    "viewAll": "View all",
+    "cancel": "Cancel",
+    "save": "Save",
+    "apply": "Apply",
+    "close": "Close",
+    "confirm": "Confirm",
+    "clear": "Clear",
+    "clearAll": "Clear all",
+    "selected": "selected",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "approve": "Approve",
+    "reject": "Reject",
+    "details": "Details",
+    "status": "Status",
+    "zone": "Zone",
+    "agent": "Agent",
+    "vehicle": "Vehicle",
+    "note": "Note",
+    "reason": "Reason",
+    "minShort": "min",
+    "all": "All",
+    "none": "None",
+    "on": "On",
+    "off": "Off",
+    "since": "Since"
+  },
+  "dataSource": {
+    "label": "Data source",
+    "mixed": "Mixed",
+    "none": "No data",
+    "SYNTHETIC": "Synthetic",
+    "IMPORTED": "Imported sample",
+    "LIVE": "Live data"
+  },
+  "roles": {
+    "administrator": "Administrator",
+    "dispatch_supervisor": "Dispatch Supervisor",
+    "dispatcher": "Dispatcher",
+    "planner": "Planner",
+    "remote_team_lead": "Remote Team Lead",
+    "viewer_auditor": "Viewer / Auditor",
+    "change_approver": "Change Approver"
+  },
+  "scopes": {
+    "whole_install": "Whole install",
+    "assigned_zones": "Assigned zones",
+    "remote_pool": "Remote pool"
+  },
+  "installModes": {
+    "private": "Private",
+    "dedicated": "Dedicated",
+    "shared": "Shared"
+  },
+  "nav": {
+    "ops": {
+      "group": {
+        "live": "Live",
+        "plan": "Plan",
+        "analyze": "Analyze"
+      },
+      "forecast_explorer": {
+        "title": "Forecast Explorer",
+        "menu": "Forecast Explorer"
+      },
+      "live_dispatch_board": {
+        "title": "Live Dispatch Board",
+        "menu": "Live Dispatch Board"
+      },
+      "remote_queue": {
+        "title": "Remote Queue and Scheduling",
+        "menu": "Remote Queue"
+      },
+      "field_planner": {
+        "title": "Field Planner Workbench",
+        "menu": "Field Planner"
+      },
+      "standby_coverage": {
+        "title": "Standby and Coverage Map",
+        "menu": "Standby and Coverage"
+      },
+      "gap_surplus": {
+        "title": "Gap and Surplus",
+        "menu": "Gap and Surplus"
+      },
+      "service_level_simulator": {
+        "title": "Service-Level Simulator",
+        "menu": "Service-Level Simulator"
+      },
+      "scenario_lab": {
+        "title": "Scenario Lab",
+        "menu": "Scenario Lab"
+      },
+      "leave_planner": {
+        "title": "Leave Planner",
+        "menu": "Leave Planner"
+      },
+      "break_planner": {
+        "title": "Break Planner",
+        "menu": "Break Planner"
+      },
+      "management_dashboards": {
+        "title": "Management Dashboards",
+        "menu": "Management Dashboards"
+      },
+      "productivity_metrics": {
+        "title": "Productivity and Metrics",
+        "menu": "Productivity and Metrics"
+      }
+    },
+    "admin": {
+      "group": {
+        "access": "Access",
+        "reference_data": "Reference data",
+        "operations": "Operations",
+        "system": "System"
+      },
+      "users_roles": {
+        "title": "Users and Roles",
+        "menu": "Users and Roles"
+      },
+      "sign_in_identity": {
+        "title": "Sign-in and Identity Providers",
+        "menu": "Identity Providers"
+      },
+      "locations": {
+        "title": "Locations",
+        "menu": "Locations"
+      },
+      "agents_vehicles": {
+        "title": "Agents and Vehicles",
+        "menu": "Agents and Vehicles"
+      },
+      "classification_rules": {
+        "title": "Classification Rules",
+        "menu": "Classification Rules"
+      },
+      "shift_break_policies": {
+        "title": "Shift and Break Policies",
+        "menu": "Shifts and Breaks"
+      },
+      "leave_policy_calendar": {
+        "title": "Leave Policy and Calendar",
+        "menu": "Leave and Calendar"
+      },
+      "forecast_model": {
+        "title": "Forecast and Model Admin",
+        "menu": "Model Admin"
+      },
+      "data_sources": {
+        "title": "Data Sources and Integrations",
+        "menu": "Data Sources"
+      },
+      "data_import_quality": {
+        "title": "Data Import and Quality",
+        "menu": "Import and Quality"
+      },
+      "audit_log": {
+        "title": "Audit Log",
+        "menu": "Audit Log"
+      },
+      "notifications_alerts": {
+        "title": "Notifications and Alerts",
+        "menu": "Notifications and Alerts"
+      },
+      "api_webhooks": {
+        "title": "API and Webhooks",
+        "menu": "API and Webhooks"
+      },
+      "security_compliance": {
+        "title": "Security and Compliance",
+        "menu": "Security and Compliance"
+      },
+      "system_health": {
+        "title": "System Health",
+        "menu": "System Health"
+      },
+      "updates": {
+        "title": "Updates",
+        "menu": "Updates"
+      },
+      "localization": {
+        "title": "Localization",
+        "menu": "Localization"
+      },
+      "ai_assistant": {
+        "title": "AI Assistant",
+        "menu": "AI Assistant"
+      }
+    }
+  },
+  "shell": {
+    "brand": "OpenDispatch",
+    "console": {
+      "ops": "Ops Console",
+      "admin": "Admin Console"
+    },
+    "access": {
+      "view": "View only",
+      "reduced": "Reduced"
+    },
+    "search": "Search modules"
+  },
+  "states": {
+    "empty": {
+      "title": "Nothing here yet"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "desc": "The data could not load."
+    },
+    "noAccess": {
+      "title": "No access",
+      "desc": "Ask an administrator for access."
+    },
+    "notFound": {
+      "title": "Page not found",
+      "desc": "This address does not match a screen."
+    }
+  },
+  "demo": {
+    "badge": "Demo",
+    "startTitle": "Choose a role",
+    "customer": "Customer",
+    "installMode": "Install",
+    "role": "Role",
+    "zones": "Zones",
+    "start": "Start demo",
+    "apply": "Apply",
+    "controls": "Demo controls",
+    "user": "Demo user",
+    "userInitials": "DU",
+    "errorInvalid": "Could not apply that.",
+    "errorZone": "Unknown zone.",
+    "errorUnavailable": "Demo unavailable."
+  },
+  "signIn": {
+    "title": "Sign in",
+    "screens": "Sign-in screens",
+    "email": "Email",
+    "continue": "Continue",
+    "or": "or",
+    "sso": "Sign in with SSO",
+    "emergencyLink": "Emergency administrator",
+    "mock": {
+      "badge": "Mock provider (demo only)",
+      "title": "Mock provider",
+      "subject": "Subject",
+      "groups": "Groups from the provider",
+      "groupsHint": "Separated by commas",
+      "outcome": "Outcome",
+      "signed": "Signs in",
+      "noRole": "No matching group",
+      "refused": "Provider refuses",
+      "error": "Provider fails",
+      "submit": "Sign in"
+    },
+    "refused": {
+      "title": "Sign-in refused",
+      "body": "Your organisation’s provider did not accept the sign-in."
+    },
+    "noRole": {
+      "title": "No role assigned",
+      "body": "You signed in, but no rule gives you access. Ask an administrator.",
+      "reason": "No matching rule means no access"
+    },
+    "error": {
+      "title": "Something went wrong",
+      "body": "Try again. If it continues, share this code with support."
+    },
+    "again": "Try again",
+    "back": "Back to sign-in",
+    "copy": "Copy",
+    "copied": "Code copied",
+    "emergency": {
+      "title": "Emergency sign-in",
+      "password": "Password",
+      "mfaTitle": "Authenticator code",
+      "code": "Code",
+      "codeHint": "From your authenticator app",
+      "locked": "Locked after 5 failed attempts",
+      "codeNeeded": "Enter a 6-digit code",
+      "invalid": "Invalid credentials"
+    },
+    "out": {
+      "title": "You have signed out",
+      "body": "Close this window or sign in again."
+    }
+  },
+  "language": {
+    "label": "Language",
+    "en": "English",
+    "ar": "العربية"
+  },
+  "ds": {
+    "combobox": {
+      "placeholder": "Select…",
+      "empty": "No matches",
+      "show": "Show options",
+      "hide": "Hide options"
+    },
+    "drawer": {
+      "close": "Close"
+    },
+    "modal": {
+      "close": "Close"
+    },
+    "tabs": {
+      "sections": "Sections"
+    },
+    "toast": {
+      "region": "Notifications",
+      "dismiss": "Dismiss notification",
+      "dismissTitle": "Dismiss"
+    },
+    "dataTable": {
+      "bulkActions": "Bulk actions",
+      "selectAllRows": "Select all rows on this page",
+      "deselectAllRows": "Deselect all rows on this page",
+      "selectedCount": "{n} selected",
+      "clearSelection": "Clear",
+      "selectRow": "Select row {id}",
+      "emptyTitle": "No records found",
+      "emptyDescription": "Try adjusting your search or filters."
+    },
+    "pagination": {
+      "label": "Pagination",
+      "range": "{from} to {to} of {total}",
+      "pageOf": "Page {page} of {pages}",
+      "compact": "{page} / {pages}",
+      "pageSize": "Rows per page",
+      "previous": "Previous page",
+      "next": "Next page",
+      "goToPage": "Page {page}"
+    },
+    "filterBar": {
+      "filteredBy": "Filtered by",
+      "removeFilter": "Remove filter {label}",
+      "clearAll": "Clear all",
+      "clearFilter": "Clear"
+    },
+    "fileDrop": {
+      "dropToUpload": "Drop to upload",
+      "promptOne": "Drag a file here or",
+      "promptMany": "Drag files here or",
+      "browse": "browse",
+      "selectedFiles": "Selected files",
+      "remove": "Remove {name}",
+      "sizeBytes": "{size} B",
+      "sizeKb": "{size} KB",
+      "sizeMb": "{size} MB",
+      "rejectType": "{name} is not an accepted file type.",
+      "rejectSize": "{name} is larger than {max}.",
+      "dismiss": "Dismiss message"
+    },
+    "quantityInput": {
+      "decrease": "Decrease",
+      "increase": "Increase"
+    },
+    "searchInput": {
+      "placeholder": "Search",
+      "clear": "Clear search"
+    },
+    "field": {
+      "optional": "(optional)"
+    },
+    "breadcrumbs": {
+      "label": "Breadcrumb"
+    },
+    "pageHeader": {
+      "back": "Back"
+    },
+    "alert": {
+      "dismiss": "Dismiss"
+    },
+    "avatar": {
+      "more": "{n} more"
+    },
+    "tag": {
+      "remove": "Remove {name}",
+      "removeGeneric": "Remove"
+    },
+    "stepper": {
+      "completed": "(completed)"
+    },
+    "skeleton": {
+      "loading": "Loading"
+    },
+    "descriptionList": {
+      "empty": "—"
+    },
+    "chart": {
+      "noData": "No data",
+      "titled": "{title}. {summary}",
+      "listSeparator": ", ",
+      "compactThousand": "{n}K",
+      "compactMillion": "{n}M"
+    },
+    "chartLegend": {
+      "label": "Legend"
+    },
+    "lineChart": {
+      "summary": "Line chart of {series} across {count, plural, one {{count} point} other {{count} points}} from {first} to {last}, values from {min} to {max}.",
+      "markers": "Markers: {markers}.",
+      "band": "Likely range",
+      "bandValue": "{low} to {high}"
+    },
+    "barChart": {
+      "summary": "{stacked, plural, =1 {Stacked} other {Grouped}}{horizontal, plural, =1 { horizontal} other {}} bar chart of {categories, plural, one {{categories} category} other {{categories} categories}}{seriesCount, plural, =0 { for {names}} =1 { for {names}} other { and {seriesCount} series ({names})}}, values from {min} to {max}.",
+      "total": "Total"
+    },
+    "donutChart": {
+      "summary": "Donut chart, total {total}: {items}.",
+      "item": "{label} {value} ({percent})",
+      "empty": "Donut chart, no data."
+    },
+    "sparkline": {
+      "summary": "Trend of {count, plural, one {{count} point} other {{count} points}}, low {min}, high {max}, latest {latest}."
+    },
+    "heatGrid": {
+      "summary": "Heat grid of {rows, plural, one {{rows} row} other {{rows} rows}} by {columns, plural, one {{columns} column} other {{columns} columns}}, values {min} to {max}.",
+      "cell": "{row}, {column}: {value}",
+      "cellKind": "{row}, {column}: {value}, {kind}",
+      "cellNoValue": "{row}, {column}: no value",
+      "kindGap": "Gap",
+      "kindSurplus": "Surplus",
+      "kindOk": "Balanced"
+    },
+    "railShell": {
+      "nav": "Main navigation",
+      "skip": "Skip to main content",
+      "menuOpen": "Open menu",
+      "notifications": "Notifications",
+      "notificationsUnread": "Notifications: {count} unread"
+    },
+    "commandPalette": {
+      "placeholder": "Search",
+      "results": "Search results",
+      "empty": "No results",
+      "count": "{count, plural, one {{count} result} other {{count} results}}"
+    },
+    "duration": {
+      "minuteShort": "min"
+    },
+    "dateInput": {
+      "hijriCaption": "Hijri: {date}"
+    },
+    "formFooter": {
+      "label": "Form actions",
+      "unsaved": "Unsaved changes",
+      "clean": "No unsaved changes"
+    }
+  },
+  "opendispatch": {
+    "stage": {
+      "shadow": "Shadow",
+      "recommend": "Recommend",
+      "automatic": "Automatic"
+    },
+    "status": {
+      "available": "Available",
+      "assigned": "Assigned",
+      "en_route": "En route",
+      "on_scene": "On scene",
+      "on_break": "On break",
+      "offline": "Offline"
+    },
+    "qualifier": {
+      "inferred": "inferred"
+    },
+    "reading": {
+      "primary": "Primary, a setting"
+    },
+    "fallback": {
+      "cases": "Fallback cases"
+    },
+    "gate": {
+      "viewOnly": "View only for this role",
+      "approve": "Your role cannot approve this"
+    },
+    "map": {
+      "label": "Schematic map",
+      "zoomIn": "Zoom in",
+      "zoomOut": "Zoom out",
+      "reset": "Reset view",
+      "empty": "Nothing to show on the map",
+      "outside": "{n} more in other cities, not shown",
+      "error": "The map could not be drawn",
+      "summary": "Zones: {zones}, points: {pins}",
+      "zones": "Zones",
+      "points": "Points",
+      "level": "Level {level} of 5",
+      "kind": {
+        "case": "Case",
+        "standby": "Standby point",
+        "spot": "Waiting spot (suggestion)"
+      },
+      "zone": {
+        "gap": "Gap",
+        "surplus": "Surplus"
+      }
+    },
+    "dispatch": {
+      "pickOpenDispatch": "OpenDispatch pick",
+      "pickWould": "OpenDispatch would pick",
+      "eta": "ETA",
+      "arrived": "Arrived",
+      "travel": "travel",
+      "waitingCustomer": "Waiting for {customer} dispatch",
+      "reassignedFrom": "Reassigned from",
+      "accept": "Accept",
+      "override": "Override",
+      "parties": "{count, plural, one {{count} party} other {{count} parties}}",
+      "source": {
+        "opendispatch": "OpenDispatch",
+        "customer": "{customer}",
+        "manual": "Manual",
+        "fallback": "Fallback"
+      },
+      "overReach": "Over 10 min",
+      "class": {
+        "field": "Field",
+        "remote": "Remote",
+        "rule": "rule:",
+        "default": "rule: default",
+        "feed": "from the feed"
+      },
+      "state": {
+        "waiting": "Waiting",
+        "recommended": "Recommended",
+        "assigned": "Assigned",
+        "enroute": "En route",
+        "onscene": "On scene"
+      },
+      "waitingMin": "Waiting {n} min",
+      "etaAt": "ETA {time}",
+      "arrivedAt": "Arrived {time}",
+      "travelMin": "{n} min travel",
+      "open": "Open case {case}",
+      "outsideScope": "Agent outside your zones"
+    },
+    "shadowComparison": {
+      "columnCase": "Case",
+      "columnOpenDispatch": "OpenDispatch choice",
+      "columnDefault": "{customer} actual",
+      "same": "Same",
+      "different": "Different",
+      "empty": "No cases compared yet",
+      "error": "The comparison could not be loaded"
+    },
+    "roster": {
+      "label": "Roster grid",
+      "empty": "No roster to show",
+      "error": "The roster could not be drawn",
+      "kind": {
+        "shift": "Shift",
+        "break": "Break",
+        "breakHolds": "Holds a prayer",
+        "breakConflict": "Cuts a prayer",
+        "prayer": "Prayer window",
+        "leave": "Leave",
+        "override": "Override",
+        "gap": "Gap"
+      }
+    },
+    "reasonCode": {
+      "agent_unavailable": "Agent unavailable",
+      "vehicle_unavailable": "Vehicle unavailable",
+      "closer_agent_known": "Closer agent known",
+      "skills_needed": "Skills needed",
+      "dispatcher_judgement": "Dispatcher judgement",
+      "other": "Other"
+    },
+    "assistant": {
+      "ask": "Ask",
+      "drawerTitle": "Ask the system",
+      "question": "Question",
+      "send": "Ask",
+      "suggestion": "Suggestion",
+      "meta": "{provider} · {model} · {seconds} s",
+      "lookups": "Lookups ({n} of {max})",
+      "refused": "Only questions about the planning data.",
+      "capped": "Stopped after {max} lookups.",
+      "off": "Assistant not configured",
+      "working": "Working",
+      "explainTitle": "Explain this",
+      "explain": "Explain",
+      "again": "Again",
+      "filtersGap": "Clear the city, cause and search filters to explain this view",
+      "filtersForecast": "Show the whole zone with the active rules to explain it",
+      "sent": "What was sent",
+      "draftLabel": "Describe the rule",
+      "draft": "Draft",
+      "draftApplied": "Draft placed in the builder. Check it before saving.",
+      "unmappedTitle": "Not in the draft",
+      "unmappedHint": "The builder has no field for these. Add them by hand or leave them out.",
+      "handoverTitle": "Shift handover",
+      "handoverOpen": "Open",
+      "handoverScope": "Your zones",
+      "handoverTab": "Handover",
+      "alertsTab": "Alerts",
+      "window": "Last",
+      "window4": "4 h",
+      "window8": "8 h",
+      "window12": "12 h",
+      "windowRange": "{from} – {to}",
+      "summarise": "Summarise",
+      "copy": "Copy",
+      "copied": "Copied",
+      "copyFailed": "Could not copy",
+      "figuresOnly": "Answer not verified; figures shown instead.",
+      "noAlerts": "No unread alerts",
+      "category": {
+        "model": "Model",
+        "rule": "Rule",
+        "roster": "Roster",
+        "leave": "Leave",
+        "import": "Import",
+        "integration": "Integration",
+        "fallback": "Fallback",
+        "security": "Security",
+        "update": "Update",
+        "system": "System",
+        "dispatch": "Dispatch"
+      },
+      "severity": {
+        "info": "Info",
+        "warning": "Warning",
+        "critical": "Critical"
+      }
+    },
+    "caseAi": {
+      "title": "Suggested by AI",
+      "suggest": "Suggest",
+      "again": "Again",
+      "working": "Reading the description",
+      "description": "Description",
+      "photos": "Photos",
+      "noPhotos": "No photos supplied",
+      "photosCount": "{n, plural, one {{n} photo} other {{n} photos}}",
+      "noDescription": "No description on this case",
+      "textOnly": "Local model reads text only",
+      "handling": "Handling",
+      "severity": "Severity",
+      "injury": "Injury",
+      "method": "Assessment",
+      "confidence": "Confidence",
+      "reason": "Why",
+      "rules": "Rules say",
+      "agrees": "Agrees",
+      "differs": "Differs",
+      "accept": "Accept",
+      "reject": "Reject",
+      "unchanged": "Handling unchanged",
+      "accepted": "Accepted by {name}",
+      "rejected": "Rejected by {name}",
+      "toastAccepted": "Suggestion accepted",
+      "toastRejected": "Suggestion rejected",
+      "toastDesc": "The case keeps its handling.",
+      "ruleDefault": "rule: default",
+      "rule": "rule: {name}",
+      "handlingField": "Field",
+      "handlingRemote": "Remote",
+      "sevMinor": "Minor",
+      "sevModerate": "Moderate",
+      "sevSevere": "Severe",
+      "yes": "Yes",
+      "no": "No",
+      "methodPhoto": "Photos",
+      "methodVideo": "Video",
+      "methodInPerson": "In person",
+      "open": "Suggested by AI",
+      "summary": "AI: {handling} · {pct}"
+    }
+  },
+  "patterns": {
+    "action": {
+      "saved": "Saved",
+      "error": {
+        "unauthenticated": "Your session has ended. Sign in again.",
+        "forbidden": "Your role cannot do that.",
+        "not_found": "That record no longer exists.",
+        "invalid": "Check the details and try again.",
+        "conflict": "That is not possible in its current state.",
+        "unexpected": "Something went wrong on our side.",
+        "network": "The server could not be reached. Try again."
+      },
+      "reference": "Reference {reference}",
+      "details": "Details",
+      "reason": {
+        "STORAGE_UNAVAILABLE": "File storage is not available. Ask the system administrator to check it.",
+        "FEED_OUTAGE_SIMULATION_OFF": "A simulated outage is off while the board reads the live feeds.",
+        "ASSISTANT_OFF": "Ask the system administrator to set it up.",
+        "ASSISTANT_UNAVAILABLE": "Try again in a moment.",
+        "ASSISTANT_INVALID_OUTPUT": "Rephrase it, or fill it in by hand."
+      },
+      "reasonTitle": {
+        "ASSISTANT_OFF": "The assistant is not switched on",
+        "ASSISTANT_UNAVAILABLE": "The assistant could not answer right now",
+        "ASSISTANT_INVALID_OUTPUT": "The assistant's draft did not pass the checks"
+      }
+    },
+    "toolbar": {
+      "search": "Search"
+    },
+    "list": {
+      "noMatch": "Nothing matches"
+    },
+    "notice": {
+      "recordNotFound": "That record could not be found."
+    },
+    "dialog": {
+      "needReason": "Write at least {min, plural, one {{min} character} other {{min} characters}}."
+    },
+    "zones": {
+      "chooseOne": "Choose at least one zone",
+      "chosen": "{count} chosen",
+      "wholeCity": "All zones of {city}",
+      "none": "No zones to choose from"
+    },
+    "stub": {
+      "demo": "Demo",
+      "notApplied": "Not applied",
+      "demoHint": "Scripted: nothing real happens.",
+      "notAppliedHint": "Saved and audited, but not applied yet.",
+      "export": "Export not built yet",
+      "exportHint": "Nothing was downloaded."
+    },
+    "copy": {
+      "copy": "Copy",
+      "copied": "Copied",
+      "failed": "Could not copy"
+    },
+    "audit": {
+      "system": "System",
+      "unknownActor": "Unknown user",
+      "outcome": {
+        "success": "Done",
+        "failure": "Failed",
+        "denied": "Denied"
+      },
+      "empty": "No events yet"
+    },
+    "export": {
+      "ready": "Export ready"
+    }
+  }
+}

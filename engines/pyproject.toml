@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "opendispatch_engines"
+version = "0.1.0"
+description = "OpenDispatch engines: forecaster, roster optimizer, dispatch simulator, assignment scorer"
+license = "AGPL-3.0-only"
+requires-python = ">=3.12"
+dependencies = ["numpy==2.5.3", "scipy==1.18.1", "lightgbm==4.7.0", "ortools==9.15.6755"]
+
+[project.optional-dependencies]
+dev = ["pytest", "jsonschema"]
+research = ["statsmodels==0.15.0", "prophet==1.4.0", "torch==2.14.1"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]

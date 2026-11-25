@@ -1,0 +1,58 @@
+/* SPDX-License-Identifier: AGPL-3.0-only */
+
+/* The kit's board: three columns of slim cards. */
+.board {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(240px, 1fr);
+  gap: var(--od-space-12);
+  overflow: auto hidden;
+  overscroll-behavior: contain auto;
+  padding-block-end: var(--od-space-4);
+}
+
+@media (width < 640px) {
+  .board {
+    grid-auto-flow: row;
+    grid-auto-columns: auto;
+    overflow: visible;
+  }
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  min-inline-size: 0;
+  border: 1px solid var(--od-color-border);
+  border-radius: var(--od-radius-lg);
+  background: var(--od-color-bg-subtle);
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--od-space-8);
+  padding: var(--od-space-12) var(--od-space-12) var(--od-space-4);
+}
+
+.title {
+  font-size: var(--od-font-size-13);
+  font-weight: var(--od-weight-semibold);
+  color: var(--od-color-text-heading);
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--od-space-8);
+  min-block-size: 96px;
+  padding: var(--od-space-8);
+}
+
+.empty {
+  padding: var(--od-space-16) var(--od-space-8);
+  color: var(--od-color-text-secondary);
+  font-size: var(--od-font-size-12);
+  text-align: center;
+}
