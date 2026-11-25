@@ -17,7 +17,7 @@
     "./styles.css": "./src/styles/base.css"
   },
   "dependencies": {
-    "@ant-design/icons": "5.6.1",
+    "@ant-design/icons": "6.3.4",
     "antd": "5.29.3",
     "echarts": "6.1.0",
     "@ant-design/v5-patch-for-react-19": "1.0.3"
