@@ -1,5 +1,5 @@
 # Production engine: exact pins, offline at runtime
-numpy==2.5.3
+numpy==2.5.5
 scipy==1.18.1
 lightgbm==4.7.0
 # cpsat-1 optimizer (approved 2 Oct 2026); pandas is a hard import of cp_model
