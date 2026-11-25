@@ -36,7 +36,7 @@ func forecastWeatherSource() weather.Source {
 			return
 		}
 		if c.Kind != "none" {
-			log.Print(c.String())
+			log.Print(weather.Describe(c.Kind, c.File != "", c.URL, c.ArchiveURL, c.APIKey != "", c.Timeout))
 		}
 		weatherSrc = c.Build()
 	})

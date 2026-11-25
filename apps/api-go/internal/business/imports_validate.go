@@ -303,6 +303,8 @@ func (v *importValidator) row(r importRow) {
 			}
 			if err != nil || float64(n) < minimum {
 				v.raise(ln, c.DefaultColumn, "other", "error", fmt.Sprintf("%s %q is not a whole number of %v or more.", c.DefaultColumn, raw, minimum))
+			} else if n > math.MaxInt32 {
+				v.raise(ln, c.DefaultColumn, "other", "error", fmt.Sprintf("%s %q is too large: use %d or less.", c.DefaultColumn, raw, math.MaxInt32))
 			} else if c.InternalField == "parties_involved" && n <= 1 {
 				party := "parties"
 				if n == 1 {

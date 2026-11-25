@@ -70,9 +70,12 @@ func rowCase(cells func(string) string, refs importReferences, source string, ex
 	}
 	lat, _ := strconv.ParseFloat(cells("latitude"), 64)
 	lon, _ := strconv.ParseFloat(cells("longitude"), 64)
-	parties, _ := strconv.Atoi(cells("parties_involved"))
+	parties, ok := partiesCount(cells("parties_involved"))
+	if !ok {
+		return nil
+	}
 	c := &incomingCase{externalID: ext, caseNumber: number, registered: *registered, cityID: city.ID, zoneID: zone.ID,
-		subZoneID: sub.ID, typeID: caseType.ID, lat: lat, lon: lon, parties: int32(parties),
+		subZoneID: sub.ID, typeID: caseType.ID, lat: lat, lon: lon, parties: parties,
 		assigned: parseIso(importToIso(cells("assigned_at"))), arrived: parseIso(importToIso(cells("arrived_at"))),
 		closed: parseIso(importToIso(cells("closed_at"))), handling: "field", dataSource: source}
 	if c.assigned == nil {
@@ -84,6 +87,18 @@ func rowCase(cells func(string) string, refs importReferences, source string, ex
 	}
 	c.extra = rowExtra(cells, extras)
 	return c
+}
+
+// partiesCount: blank is 0; otherwise a whole number that fits the int32 column.
+func partiesCount(raw string) (int32, bool) {
+	if raw == "" {
+		return 0, true
+	}
+	n, err := strconv.ParseInt(raw, 10, 32)
+	if err != nil || n < 0 {
+		return 0, false
+	}
+	return int32(n), true
 }
 
 // caseSeverities: mapping generic_csv_v1, to confirm.

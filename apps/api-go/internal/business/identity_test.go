@@ -646,3 +646,21 @@ func TestRequestIdentityProviderChange_AdministratorOnly(t *testing.T) {
 		}
 	}
 }
+
+func TestSameSecret(t *testing.T) {
+	for _, tc := range []struct {
+		given, expected string
+		want            bool
+	}{
+		{"s3cret-value", "s3cret-value", true},
+		{"s3cret-valuf", "s3cret-value", false},
+		{"s3cret", "s3cret-value", false},
+		{"", "s3cret-value", false},
+		{"", "", false},
+		{"replace-me", "replace-me", false},
+	} {
+		if got := sameSecret(tc.given, tc.expected); got != tc.want {
+			t.Errorf("sameSecret(%q, %q) = %t; want %t", tc.given, tc.expected, got, tc.want)
+		}
+	}
+}

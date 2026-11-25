@@ -212,3 +212,12 @@ func TestEffectsMultiplier(t *testing.T) {
 		t.Fatal("unknown weather must be 1")
 	}
 }
+
+func TestDescribeShowsOnlyWhetherAKeyIsSet(t *testing.T) {
+	if s := Describe("openmeteo", false, "https://a.example", "https://b.example", true, time.Second); !strings.Contains(s, "key=set") || !strings.Contains(s, "url=https://a.example") {
+		t.Fatalf("Describe: %s", s)
+	}
+	if s := Describe("none", false, "", "", false, time.Second); !strings.Contains(s, "key=unset") {
+		t.Fatalf("Describe: %s", s)
+	}
+}

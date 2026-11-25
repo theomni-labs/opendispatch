@@ -36,12 +36,17 @@ type Config struct {
 
 // String never shows the key.
 func (c Config) String() string {
+	return Describe(c.Kind, c.File != "", c.URL, c.ArchiveURL, c.APIKey != "", c.Timeout)
+}
+
+// Describe is the log line for a source. It takes only whether a key is set, never the key.
+func Describe(kind string, hasFile bool, forecastURL, archiveURL string, hasKey bool, timeout time.Duration) string {
 	key := "unset"
-	if c.APIKey != "" {
+	if hasKey {
 		key = "set"
 	}
 	return fmt.Sprintf("weather source=%s file=%t url=%s archive=%s key=%s timeout=%s",
-		c.Kind, c.File != "", c.URL, c.ArchiveURL, key, c.Timeout)
+		kind, hasFile, forecastURL, archiveURL, key, timeout)
 }
 
 // ParseConfig: none unless the source is set.

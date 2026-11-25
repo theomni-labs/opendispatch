@@ -6,8 +6,9 @@ package business
 
 import (
 	"context"
+	"crypto/hmac"
+	"crypto/rand"
 	"crypto/sha256"
-	"crypto/subtle"
 	"encoding/hex"
 	"fmt"
 	"os"
@@ -1420,13 +1421,21 @@ func isConfigured(secret string) bool {
 }
 
 // sameSecret: constant-time; false if unconfigured.
+// Both sides are keyed with a fresh random HMAC key, so the compare
+// leaks neither the secret's length nor anything reusable.
 func sameSecret(given, expected string) bool {
 	if !isConfigured(expected) {
 		return false
 	}
-	a := sha256.Sum256([]byte(given))
-	b := sha256.Sum256([]byte(expected))
-	return subtle.ConstantTimeCompare(a[:], b[:]) == 1
+	key := make([]byte, 32)
+	_, _ = rand.Read(key) // crypto/rand.Read never returns an error.
+	return hmac.Equal(keyedMAC(key, given), keyedMAC(key, expected))
+}
+
+func keyedMAC(key []byte, s string) []byte {
+	m := hmac.New(sha256.New, key)
+	_, _ = m.Write([]byte(s)) // hash.Hash.Write never returns an error.
+	return m.Sum(nil)
 }
 
 var totpPattern = regexp.MustCompile(`^[0-9]{6}$`)

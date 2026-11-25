@@ -149,11 +149,36 @@ describe('the loader stays on the server', () => {
     });
   }
 
+  // Skips leading comments with a scan, not a regex, so the check stays linear.
+  function startsWithUseClient(text: string): boolean {
+    let i = 0;
+    for (;;) {
+      while (i < text.length && /\s/.test(text.charAt(i))) i += 1;
+      if (text.startsWith('//', i)) {
+        const end = text.indexOf('\n', i);
+        if (end < 0) return false;
+        i = end + 1;
+      } else if (text.startsWith('/*', i)) {
+        const end = text.indexOf('*/', i + 2);
+        if (end < 0) return false;
+        i = end + 2;
+      } else {
+        return /^['"]use client['"]/.test(text.slice(i, i + 12));
+      }
+    }
+  }
+
+  it('spots "use client" after leading comments', () => {
+    expect(startsWithUseClient("'use client';")).toBe(true);
+    expect(startsWithUseClient('// a\n/* b */ /* c */\n"use client";')).toBe(true);
+    expect(startsWithUseClient('/* a */ import x;\n"use client";')).toBe(false);
+    expect(startsWithUseClient('/*' + '*//*'.repeat(50000))).toBe(false);
+  });
+
   it('is imported by no file that starts with "use client"', () => {
     const offenders = sourceFiles(SRC).filter((file) => {
       const text = readFileSync(file, 'utf8');
-      const isClient = /^\s*(?:\/\/[^\n]*\n|\/\*[\s\S]*?\*\/\s*)*['"]use client['"]/.test(text);
-      return isClient && /from\s+['"](?:@\/i18n\/messages|\.\/messages|\.\.\/i18n\/messages)['"]/.test(text);
+      return startsWithUseClient(text) && /from\s+['"](?:@\/i18n\/messages|\.\/messages|\.\.\/i18n\/messages)['"]/.test(text);
     });
     expect(offenders.map((file) => path.relative(SRC, file))).toEqual([]);
   });

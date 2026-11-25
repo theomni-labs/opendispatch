@@ -136,3 +136,35 @@ func TestStreamValidate_CatchesWhatTheCutOverWouldOtherwiseDropOrMislabel(t *tes
 		t.Errorf("error lines %v, want [6 7]", res.ErrorLines)
 	}
 }
+
+func TestPartiesCountTooLargeIsAnErrorNotATruncation(t *testing.T) {
+	row := validImportRow()
+	row[13] = "4294967298"
+	res := streamValidate(t, csvOf(validImportHeader(), row))
+	if res.Errors != 1 {
+		t.Fatalf("got %+v; want one error for a party count past int32", res)
+	}
+	found := false
+	for _, is := range res.Issues {
+		found = found || (is.Severity == "error" && strings.Contains(is.Message, "too large"))
+	}
+	if !found {
+		t.Fatalf("issues %+v; want a too-large error", res.Issues)
+	}
+}
+
+func TestPartiesCount(t *testing.T) {
+	for _, tc := range []struct {
+		raw  string
+		want int32
+		ok   bool
+	}{
+		{"", 0, true}, {"0", 0, true}, {"3", 3, true}, {"2147483647", 2147483647, true},
+		{"2147483648", 0, false}, {"4294967298", 0, false}, {"-1", 0, false}, {"two", 0, false},
+	} {
+		got, ok := partiesCount(tc.raw)
+		if got != tc.want || ok != tc.ok {
+			t.Errorf("partiesCount(%q) = %d, %t; want %d, %t", tc.raw, got, ok, tc.want, tc.ok)
+		}
+	}
+}
