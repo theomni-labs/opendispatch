@@ -21,6 +21,7 @@ const LINES: readonly (readonly [string, string | null])[] = [
   ['Latitude 247.0 is outside -90 to 90.', 'Latitude'],
   ['RegisteredTime "yesterday" is not a date and time: use YYYY-MM-DD HH:MM:SS (Riyadh time) or ISO 8601.', 'RegisteredTime'],
   ['PartiesInvolved "x" is not a whole number of 0 or more.', 'PartiesInvolved'],
+  ['PartiesInvolved "4294967298" is too large: use 2147483647 or less.', 'PartiesInvolved'],
   ['Only 1 party involved.', 'PartiesInvolved'],
   ['Only 0 parties involved.', 'PartiesInvolved'],
   ['1 parties involved. Meaning to be confirmed by the operator.', 'PartiesInvolved'],
@@ -96,6 +97,6 @@ describe('issueText', () => {
   it('covers every message format in the api source', () => {
     const go = fs.readFileSync(path.join(import.meta.dirname, '../../../../../api-go/internal/business/imports_validate.go'), 'utf8');
     const raised = [...go.matchAll(/v\.raise\(/g)].length;
-    expect(raised).toBe(28);
+    expect(raised).toBe(29);
   });
 });

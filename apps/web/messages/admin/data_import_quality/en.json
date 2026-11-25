@@ -232,6 +232,7 @@
     "outside": "{col} {value} is outside {min} to {max}.",
     "notDateTime": "{col} \"{value}\" is not a date and time: use {format} (Riyadh time) or {iso}.",
     "notWhole": "{col} \"{value}\" is not a whole number of {min} or more.",
+    "tooLarge": "{col} \"{value}\" is too large: use {limit} or less.",
     "parties": "Only {n, plural, one {# party} other {# parties}} involved.",
     "partiesToConfirm": "{n, plural, one {# party} other {# parties}} involved. Meaning to be confirmed by the {customer}.",
     "caseNumber": "CaseNumber \"{value}\" does not start with a two-letter city code.",

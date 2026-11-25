@@ -30,6 +30,7 @@ const RULES: readonly Rule[] = [
   ['outside', /^(\S+) (\S+) is outside (\S+) to (\S+)\.$/, ['col', 'value', 'min', 'max']],
   ['notDateTime', new RegExp(`^(\\S+) ${Q} is not a date and time: .+$`), ['col', 'value']],
   ['notWhole', new RegExp(`^(\\S+) ${Q} is not a whole number of (\\S+) or more\\.$`), ['col', 'value', 'min']],
+  ['tooLarge', new RegExp(`^(\\S+) ${Q} is too large: use (\\d+) or less\\.$`), ['col', 'value', 'limit']],
   ['parties', /^Only (\d+) part(?:y|ies) involved\.$/, ['n']],
   ['partiesToConfirm', /^(\d+) parties involved\. Meaning to be confirmed by (?:the operator|Customer)\.$/, ['n']],
   ['caseNumber', new RegExp(`^CaseNumber ${Q} does not start with a two-letter city code\\.$`), ['value']],

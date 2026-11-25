@@ -1317,6 +1317,7 @@
     "imsg.outsideArea": "draft",
     "imsg.parties": "draft",
     "imsg.partiesToConfirm": "draft",
+    "imsg.tooLarge": "draft",
     "imsg.unknownLocation": "draft",
     "imsg.unknownRef": "draft",
     "map.colRequired": "draft",

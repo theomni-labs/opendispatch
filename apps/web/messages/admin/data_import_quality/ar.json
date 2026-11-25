@@ -232,6 +232,7 @@
     "outside": "القيمة {value} في {col} خارج النطاق من {min} إلى {max}.",
     "notDateTime": "القيمة «{value}» في {col} ليست تاريخًا ووقتًا: استخدم {format} (بتوقيت الرياض) أو {iso}.",
     "notWhole": "القيمة «{value}» في {col} ليست عددًا صحيحًا يساوي {min} أو أكثر.",
+    "tooLarge": "القيمة «{value}» في {col} كبيرة جدًا: استخدم {limit} أو أقل.",
     "parties": "في الحادث {n, plural, zero {لا أطراف} one {طرف واحد} two {طرفان} few {# أطراف} many {# طرفًا} other {# طرف}} فقط.",
     "partiesToConfirm": "في الحادث {n, plural, zero {لا أطراف} one {طرف واحد} two {طرفان} few {# أطراف} many {# طرفًا} other {# طرف}}. المعنى بانتظار تأكيد {customer}.",
     "caseNumber": "رقم البلاغ «{value}» لا يبدأ برمز مدينة من حرفين.",
