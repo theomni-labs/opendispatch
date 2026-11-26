@@ -11,18 +11,12 @@ returns one JSON answer, and is defined by a pair of JSON Schemas in `contracts/
 | Assignment scorer | `POST /v1/assignment` | `assignment.{input,output}.schema.json` | A ranking of agents for one case |
 | Idle repositioning | `POST /v1/assignment/reposition` | `reposition.{input,output}.schema.json` | Advisory waiting spots for idle agents of a zone |
 
-```mermaid
-flowchart LR
-  api["api / worker"] -->|"forecaster.input"| fc["forecaster<br/>ensemble-4 champion,<br/>challengers by model_version"]
-  fc -->|"forecaster.output<br/>low, expected, high"| api
-  api -->|"optimizer.input<br/>demand from the forecast"| op["optimizer<br/>cpsat-1 or greedy-ls"]
-  op -->|"optimizer.output<br/>roster, gap cells"| api
-  api -->|"simulator.input<br/>cases + roster"| sim["simulator<br/>des-nearest, des-scorer,<br/>des-replay_actual"]
-  sim -->|"simulator.output<br/>10-minute readings"| api
-  sim -.->|"policy scorer, in process"| asg
-  api -->|"assignment.input<br/>one case + candidates"| asg["assignment<br/>scorer-0.3"]
-  asg -->|"assignment.output<br/>ranking, exclusions"| api
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/engines-1-dark.png">
+  <img alt="How the engines connect" src="diagrams/engines-1-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`diagrams/engines-1.mmd`](diagrams/engines-1.mmd)</sub>
 
 ## Common to every engine
 

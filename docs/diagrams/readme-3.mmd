@@ -1,0 +1,18 @@
+flowchart TB
+  subgraph Forecaster
+    f1[Calendar features<br/>Hijri, Ramadan, Eid, prayer, school, payday] --> f2[Champion model]
+    f1 --> f3[Challenger models]
+    f3 --> f4[Backtests and promotion]
+  end
+  subgraph Optimizer
+    o1[Required staffing per interval] --> o2[Greedy and local search]
+    o1 --> o3[CP-SAT]
+  end
+  subgraph Simulator
+    s1[Discrete-event model fitted to recorded days] --> s2[Policy comparison and replay]
+  end
+  subgraph Scorer
+    a1[Travel time, skills, workload] --> a2[Ranked agents per case]
+  end
+  Forecaster --> Optimizer --> Simulator
+  Optimizer --> Scorer

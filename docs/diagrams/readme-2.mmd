@@ -1,0 +1,8 @@
+flowchart LR
+  hist[Case history<br/>and calendar] --> fc[Forecast<br/>15-minute demand per zone]
+  fc --> opt[Roster<br/>agents and shifts to meet the target]
+  opt --> sim[Simulate<br/>expected service level]
+  sim -->|adjust| opt
+  opt --> live[Live day<br/>scorer recommends assignments]
+  live -->|actuals| hist
+  fc -.->|backtest| fc

@@ -1,0 +1,19 @@
+flowchart TD
+  hist[("Case history<br/>cases table")] --> fcreq["Forecast request<br/>history + Gulf calendar + weather + traffic"]
+  cal["Gulf calendar<br/>Hijri, prayer times, Ramadan, Eid,<br/>school terms, payday"] --> fcreq
+  fcreq --> fc["forecaster<br/>champion model"]
+  fc --> fv[("forecast_runs<br/>forecast_values")]
+  fv --> opreq["Roster request per zone and day<br/>demand + agents + shifts + leave + prayer times"]
+  opreq --> op["optimizer<br/>CP-SAT or greedy"]
+  op --> ros[("rosters<br/>roster_assignments")]
+  ros --> sim["simulator<br/>discrete-event"]
+  sim --> sl["Simulated service level<br/>both 10-minute readings"]
+  ros --> board["Live dispatch board"]
+  feed["Case and agent feeds<br/>or demo replay"] --> board
+  board --> asg["assignment scorer<br/>ranks candidates"]
+  asg --> reco["Recommendation<br/>shadow or recommend"]
+  reco --> cmp[("assignment_comparisons<br/>against the actual pick")]
+  hist --> acc["Rolling accuracy<br/>and backtests"]
+  fv --> acc
+  acc -->|"degradation or schedule"| retrain["Retrain, challenger run"]
+  retrain --> fc

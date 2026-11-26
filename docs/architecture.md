@@ -11,26 +11,12 @@ signs users in on an install; a demo role switcher does it in evaluation.
 
 ## Services and data flow
 
-```mermaid
-flowchart LR
-  subgraph eng["engines (Python, port 8080 each)"]
-    fc["forecaster"]
-    op["optimizer"]
-    sim["simulator"]
-    asg["assignment"]
-  end
-  browser["Browser"] --> web["web<br/>Next.js, port 3000"]
-  web -->|"/api/v1, OpenAPI contract"| api["api<br/>Go, port 8081"]
-  sources["Case source and<br/>agent-status source"] -->|"signed webhooks<br/>/feeds/v1"| api
-  api --> pg[("PostgreSQL 16<br/>row-level security")]
-  api --> s3[("S3-compatible store<br/>import files")]
-  api -->|"JSON over HTTP"| eng
-  worker["worker<br/>Go, one per tenant"] --> pg
-  worker -->|"JSON over HTTP"| eng
-  api -.->|"optional"| llm["Assistant model<br/>Ollama or OpenAI-compatible"]
-  api -.->|"OIDC"| idp["Keycloak or<br/>other OIDC provider"]
-  web -.->|"sign-in redirect"| idp
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/architecture-1-dark.png">
+  <img alt="Services and how they talk to each other" src="diagrams/architecture-1-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`diagrams/architecture-1.mmd`](diagrams/architecture-1.mmd)</sub>
 
 | Component | Code | Role |
 |---|---|---|
@@ -66,27 +52,12 @@ so the web app runs without Python.
 
 ## The planning loop
 
-```mermaid
-flowchart TD
-  hist[("Case history<br/>cases table")] --> fcreq["Forecast request<br/>history + Gulf calendar + weather + traffic"]
-  cal["Gulf calendar<br/>Hijri, prayer times, Ramadan, Eid,<br/>school terms, payday"] --> fcreq
-  fcreq --> fc["forecaster<br/>champion model"]
-  fc --> fv[("forecast_runs<br/>forecast_values")]
-  fv --> opreq["Roster request per zone and day<br/>demand + agents + shifts + leave + prayer times"]
-  opreq --> op["optimizer<br/>CP-SAT or greedy"]
-  op --> ros[("rosters<br/>roster_assignments")]
-  ros --> sim["simulator<br/>discrete-event"]
-  sim --> sl["Simulated service level<br/>both 10-minute readings"]
-  ros --> board["Live dispatch board"]
-  feed["Case and agent feeds<br/>or demo replay"] --> board
-  board --> asg["assignment scorer<br/>ranks candidates"]
-  asg --> reco["Recommendation<br/>shadow or recommend"]
-  reco --> cmp[("assignment_comparisons<br/>against the actual pick")]
-  hist --> acc["Rolling accuracy<br/>and backtests"]
-  fv --> acc
-  acc -->|"degradation or schedule"| retrain["Retrain, challenger run"]
-  retrain --> fc
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/architecture-2-dark.png">
+  <img alt="Data flow from case history to forecast, roster, simulation and live dispatch" src="diagrams/architecture-2-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`diagrams/architecture-2.mmd`](diagrams/architecture-2.mmd)</sub>
 
 1. **Forecast.** The worker (or a user in Forecast and Model Admin) asks the forecaster for the planning horizon,
    7 to 30 days in 15-minute intervals per sub-zone, in pieces of at most `forecast.horizon_chunk_days`. The request

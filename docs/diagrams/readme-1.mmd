@@ -1,0 +1,16 @@
+flowchart LR
+  user([Planner or dispatcher]) --> web[Web app<br/>Next.js, EN and AR]
+  web --> api[api<br/>Go]
+  feeds([Case feeds]) --> api
+  api --> pg[(PostgreSQL<br/>row-level security)]
+  api --> s3[(S3-compatible store<br/>import files)]
+  worker[worker<br/>Go, scheduled runs] --> pg
+  api --> engines
+  worker --> engines
+  subgraph engines[Engines in Python]
+    fc[Forecaster]
+    opt[Roster optimizer]
+    sim[Dispatch simulator]
+    asg[Assignment scorer]
+  end
+  idp[Keycloak, optional] -.-> api

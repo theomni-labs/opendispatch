@@ -80,3 +80,7 @@ fixtures: ## Regenerate the synthetic fixtures and check them
 .PHONY: map
 map: ## Fetch the basemap extract for local development (needs the pmtiles CLI)
 	sh scripts/fetch-map.sh
+
+.PHONY: diagrams
+diagrams: ## Render docs/diagrams/*.mmd to PNG
+	scripts/render-diagrams.sh

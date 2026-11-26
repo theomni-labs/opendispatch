@@ -44,24 +44,12 @@ weeks of past forecasts in the background. `docker compose down --volumes` remov
 
 ## How it fits together
 
-```mermaid
-flowchart LR
-  user([Planner or dispatcher]) --> web[Web app<br/>Next.js, EN and AR]
-  web --> api[api<br/>Go]
-  feeds([Case feeds]) --> api
-  api --> pg[(PostgreSQL<br/>row-level security)]
-  api --> s3[(S3-compatible store<br/>import files)]
-  worker[worker<br/>Go, scheduled runs] --> pg
-  api --> engines
-  worker --> engines
-  subgraph engines[Engines, Python, JSON Schema contracts]
-    fc[Forecaster]
-    opt[Roster optimizer]
-    sim[Dispatch simulator]
-    asg[Assignment scorer]
-  end
-  idp[Keycloak, optional] -.-> api
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/readme-1-dark.png">
+  <img alt="Architecture: web app, api, worker, engines, PostgreSQL and S3 storage" src="docs/diagrams/readme-1-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`docs/diagrams/readme-1.mmd`](docs/diagrams/readme-1.mmd)</sub>
 
 The web app talks only to the api. The api and the worker own all business logic and call the engines over
 HTTP with requests that match the schemas in [`contracts/engines`](contracts/engines). Each tenant's data is
@@ -69,39 +57,21 @@ isolated in PostgreSQL by row-level security, enforced on every transaction.
 
 ## The planning loop
 
-```mermaid
-flowchart LR
-  hist[Case history<br/>and calendar] --> fc[Forecast<br/>15-minute demand per zone]
-  fc --> opt[Roster<br/>agents and shifts to meet the target]
-  opt --> sim[Simulate<br/>expected service level]
-  sim -->|adjust| opt
-  opt --> live[Live day<br/>scorer recommends assignments]
-  live -->|actuals| hist
-  fc -.->|backtest| fc
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/readme-2-dark.png">
+  <img alt="The planning loop: forecast, roster, simulate, live day, back to history" src="docs/diagrams/readme-2-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`docs/diagrams/readme-2.mmd`](docs/diagrams/readme-2.mmd)</sub>
 
 ## The engines
 
-```mermaid
-flowchart TB
-  subgraph Forecaster
-    f1[Calendar features<br/>Hijri, Ramadan, Eid, prayer, school, payday] --> f2[Champion model]
-    f1 --> f3[Challenger models]
-    f3 --> f4[Backtests and promotion]
-  end
-  subgraph Optimizer
-    o1[Required staffing per interval] --> o2[Greedy and local search]
-    o1 --> o3[CP-SAT]
-  end
-  subgraph Simulator
-    s1[Discrete-event model fitted to recorded days] --> s2[Policy comparison and replay]
-  end
-  subgraph Scorer
-    a1[Travel time, skills, workload] --> a2[Ranked agents per case]
-  end
-  Forecaster --> Optimizer --> Simulator
-  Optimizer --> Scorer
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="docs/diagrams/readme-3-dark.png">
+  <img alt="The four engines: forecaster, roster optimizer, dispatch simulator, assignment scorer" src="docs/diagrams/readme-3-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`docs/diagrams/readme-3.mmd`](docs/diagrams/readme-3.mmd)</sub>
 
 Each engine is a small HTTP service with a JSON Schema for its input and output, so you can run and test it
 on its own. See [docs/engines.md](docs/engines.md).

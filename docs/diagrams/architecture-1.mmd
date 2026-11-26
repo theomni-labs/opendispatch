@@ -1,0 +1,18 @@
+flowchart LR
+  subgraph eng["Python engines"]
+    fc["forecaster"]
+    op["optimizer"]
+    sim["simulator"]
+    asg["assignment"]
+  end
+  browser["Browser"] --> web["web<br/>Next.js, port 3000"]
+  web -->|"/api/v1, OpenAPI contract"| api["api<br/>Go, port 8081"]
+  sources["Case source and<br/>agent-status source"] -->|"signed webhooks<br/>/feeds/v1"| api
+  api --> pg[("PostgreSQL 16<br/>row-level security")]
+  api --> s3[("S3-compatible store<br/>import files")]
+  api -->|"JSON over HTTP"| eng
+  worker["worker<br/>Go, one per tenant"] --> pg
+  worker -->|"JSON over HTTP"| eng
+  api -.->|"optional"| llm["Assistant model<br/>Ollama or OpenAI-compatible"]
+  api -.->|"OIDC"| idp["Keycloak or<br/>other OIDC provider"]
+  web -.->|"sign-in redirect"| idp

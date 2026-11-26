@@ -8,21 +8,12 @@ forecaster, which learns how much each one moves demand from the case history.
 
 The calendar says when things happen. How much they change demand is always estimated from history, never assumed.
 
-```mermaid
-flowchart LR
-  uq["Umm al-Qura Hijri date<br/>go-hijri"] --> fe["forecastcal<br/>per-day features"]
-  hm[("Hijri months<br/>reference data")] --> fe
-  hol[("holidays<br/>reference data")] --> fe
-  tset["Tenant settings<br/>school terms, season events,<br/>Umrah windows, notices, payday"] --> fe
-  pt[("prayer_times<br/>adhan, Umm al-Qura method")] --> fe
-  fe --> req["forecaster.input<br/>calendar[]"]
-  req --> cm["Calendar model<br/>day-level effects"]
-  req --> pm["Profile model<br/>prayer lull"]
-  cm --> blend["Blend and range"]
-  pm --> blend
-  blend --> dshape["Day-type shapes<br/>Ramadan, Eid, Arafah, national days"]
-  dshape --> out["Forecast per sub-zone<br/>and 15 minutes"]
-```
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="diagrams/gulf-calendar-1-dark.png">
+  <img alt="How the Gulf calendar feeds the forecast" src="diagrams/gulf-calendar-1-light.png" width="100%">
+</picture>
+
+<sub>Diagram source: [`diagrams/gulf-calendar-1.mmd`](diagrams/gulf-calendar-1.mmd)</sub>
 
 The code is in `apps/api-go/internal/forecastcal` (features), `apps/api-go/internal/business/engine_request_loaders.go`
 (building the request) and `apps/api-go/internal/backtest/daytype.go` (day-type shapes). All local times are
