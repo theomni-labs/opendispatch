@@ -4,6 +4,7 @@ import http.client
 import json
 import resource
 import threading
+from datetime import datetime
 
 import pytest
 
@@ -49,8 +50,11 @@ def test_gzip_matches_plain(running, load, name):
     s3, d3 = _post(port, name, plain, "identity")
     assert s1 == s2 == s3 == 200
     answers = [json.loads(d) for d in (d1, d2, d3)]
+    # run_seconds and generated_at are wall-clock: three requests can straddle a second.
     for a in answers:
         a.pop("run_seconds", None)
+        if "generated_at" in a:
+            datetime.fromisoformat(a.pop("generated_at"))
     assert answers[0] == answers[1] == answers[2]
 
 
